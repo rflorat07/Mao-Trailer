@@ -33,7 +33,7 @@ class SectionTableViewCell: UITableViewCell, UICollectionViewDelegate, UICollect
     
     func collectionView(_ collectionView: UICollectionView, cellForItemAt indexPath: IndexPath) -> UICollectionViewCell {
         
-        let cell = collectionView.dequeueReusableCell(withReuseIdentifier: "SectionCollectionViewCell", for: indexPath) as! SectionCollectionViewCell
+        let cell = collectionView.dequeueReusableCell(withReuseIdentifier: "SectionViewCell", for: indexPath) as! SectionCollectionViewCell
         
         cell.titleLabel.text = titleArray[indexPath.row].uppercased()
         cell.coverImageView.image = UIImage(named: imageArray[indexPath.row])

@@ -30,7 +30,7 @@ class HotTableViewCell: UITableViewCell, UICollectionViewDelegate, UICollectionV
     
     func collectionView(_ collectionView: UICollectionView, cellForItemAt indexPath: IndexPath) -> UICollectionViewCell {
         
-        let cell = collectionView.dequeueReusableCell(withReuseIdentifier: "HotCollectionViewCell", for: indexPath) as! HotCollectionViewCell
+        let cell = collectionView.dequeueReusableCell(withReuseIdentifier: "HotViewCell", for: indexPath) as! HotCollectionViewCell
         
         cell.coverImageView.image = UIImage(named: imageArray[indexPath.row])
         

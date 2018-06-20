@@ -17,10 +17,8 @@ class MoviesTableViewController: UITableViewController {
     }
     
     struct Storyboard {
-        static let hotTableViewCell = "HotTableViewCell"
-        static let hotCollectionViewCell = "HotCollectionViewCell"
-        static let sectionTableViewCell = "SectionTableViewCell"
-        static let sectionCollectionViewCell = "SectionCollectionViewCell"
+        static let hotViewCell = "HotViewCell"
+        static let sectionViewCell = "SectionViewCell"
     }
     
 }
@@ -55,14 +53,14 @@ extension MoviesTableViewController {
     override func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
         
         if indexPath.section == 0 {
-            let cell = tableView.dequeueReusableCell(withIdentifier: Storyboard.hotTableViewCell, for: indexPath) as! HotTableViewCell
+            let cell = tableView.dequeueReusableCell(withIdentifier: Storyboard.hotViewCell, for: indexPath) as! HotTableViewCell
             
             cell.selectionStyle = .none
             
             return cell
             
         } else {
-            let cell = tableView.dequeueReusableCell(withIdentifier: Storyboard.sectionTableViewCell, for: indexPath) as! SectionTableViewCell
+            let cell = tableView.dequeueReusableCell(withIdentifier: Storyboard.sectionViewCell, for: indexPath) as! SectionTableViewCell
             
             cell.selectionStyle = .none
             cell.sectionTitleLabel.text = self.sections[indexPath.row]
