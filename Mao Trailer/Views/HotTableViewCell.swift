@@ -13,6 +13,7 @@ class HotTableViewCell: UITableViewCell, UICollectionViewDelegate, UICollectionV
     @IBOutlet weak var hotCollectionView: UICollectionView!
     
     var imageArray = [String] ()
+    var hotMovies = [Movie] ()
  
     override func awakeFromNib() {
         super.awakeFromNib()
@@ -20,19 +21,17 @@ class HotTableViewCell: UITableViewCell, UICollectionViewDelegate, UICollectionV
         hotCollectionView.delegate = self
         hotCollectionView.dataSource = self
         
-        imageArray = ["HotView-Slide", "TopView-Slide", "TVPopular-Slide", "HotFlash-Slide"]
-        
     }
     
     func collectionView(_ collectionView: UICollectionView, numberOfItemsInSection section: Int) -> Int {
-        return imageArray.count
+        return hotMovies.count
     }
     
     func collectionView(_ collectionView: UICollectionView, cellForItemAt indexPath: IndexPath) -> UICollectionViewCell {
         
         let cell = collectionView.dequeueReusableCell(withReuseIdentifier: "HotViewCell", for: indexPath) as! HotCollectionViewCell
         
-        cell.coverImageView.image = UIImage(named: imageArray[indexPath.row])
+        cell.hotMovie = hotMovies[indexPath.row]
         
         return cell
         

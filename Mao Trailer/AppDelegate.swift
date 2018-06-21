@@ -20,9 +20,10 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
         let attrs = [
             NSAttributedStringKey.font: UIFont.systemFont(ofSize: 24, weight: .bold)
         ]
-        
+                
         UINavigationBar.appearance().shadowImage = UIImage()
         UINavigationBar.appearance().titleTextAttributes = attrs
+        UINavigationBar.appearance().barTintColor = UIColor.white
    
         return true
     }

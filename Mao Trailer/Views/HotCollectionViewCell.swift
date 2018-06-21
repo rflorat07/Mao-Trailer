@@ -12,18 +12,19 @@ class HotCollectionViewCell: UICollectionViewCell {
     
     @IBOutlet weak var coverImageView: UIImageView!
     
-    override func awakeFromNib() {
-        super.awakeFromNib()
-        
-        self.configure()
+    var hotMovie: Movie! {
+        didSet {
+            self.updateUI()
+        }
     }
     
-    func configure(){
+    func updateUI(){
         
         let cornerRadius: CGFloat = 6
         
         coverImageView.clipsToBounds = true
         coverImageView.layer.cornerRadius = cornerRadius
+        coverImageView.image = UIImage(named: hotMovie.imgUrl)
     
     }
     

@@ -15,28 +15,24 @@ class SectionTableViewCell: UITableViewCell, UICollectionViewDelegate, UICollect
     
     var imageArray = [String] ()
     var titleArray = [String] ()
+    var sectionMovies = [Movie] ()
     
     override func awakeFromNib() {
         super.awakeFromNib()
         
         sectionCollectionView.delegate = self
         sectionCollectionView.dataSource = self
-        
-        imageArray = ["TombRaider-Slide", "SpiderMan-Slide", "Arrival-Slide", "Narcos-Slide"]
-        
-        titleArray = ["Tomb Raider", "Spider-Man: Homecoming", "Arrival", "Narcos" ]
     }
     
     func collectionView(_ collectionView: UICollectionView, numberOfItemsInSection section: Int) -> Int {
-        return imageArray.count
+        return sectionMovies.count
     }
     
     func collectionView(_ collectionView: UICollectionView, cellForItemAt indexPath: IndexPath) -> UICollectionViewCell {
         
         let cell = collectionView.dequeueReusableCell(withReuseIdentifier: "SectionViewCell", for: indexPath) as! SectionCollectionViewCell
         
-        cell.titleLabel.text = titleArray[indexPath.row].uppercased()
-        cell.coverImageView.image = UIImage(named: imageArray[indexPath.row])
+        cell.sectionMovie = sectionMovies[indexPath.row]
         
         return cell
         

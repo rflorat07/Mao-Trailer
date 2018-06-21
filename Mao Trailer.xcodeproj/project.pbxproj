@@ -17,6 +17,7 @@
 		4FF5E62520D9473A00D088B5 /* MoviesTableViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4FF5E62420D9473A00D088B5 /* MoviesTableViewController.swift */; };
 		4FF5E62720D951FB00D088B5 /* HotTableViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4FF5E62620D951FB00D088B5 /* HotTableViewCell.swift */; };
 		4FF5E62920D954EA00D088B5 /* HotCollectionViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4FF5E62820D954EA00D088B5 /* HotCollectionViewCell.swift */; };
+		4FF628F520DB98A30002AA13 /* Movie.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4FF628F420DB98A30002AA13 /* Movie.swift */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
@@ -32,6 +33,7 @@
 		4FF5E62420D9473A00D088B5 /* MoviesTableViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MoviesTableViewController.swift; sourceTree = "<group>"; };
 		4FF5E62620D951FB00D088B5 /* HotTableViewCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = HotTableViewCell.swift; sourceTree = "<group>"; };
 		4FF5E62820D954EA00D088B5 /* HotCollectionViewCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = HotCollectionViewCell.swift; sourceTree = "<group>"; };
+		4FF628F420DB98A30002AA13 /* Movie.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Movie.swift; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -89,6 +91,7 @@
 		4FF5E61E20D92E6F00D088B5 /* Models */ = {
 			isa = PBXGroup;
 			children = (
+				4FF628F420DB98A30002AA13 /* Movie.swift */,
 			);
 			path = Models;
 			sourceTree = "<group>";
@@ -196,6 +199,7 @@
 				4FF5E60C20D92AB000D088B5 /* AppDelegate.swift in Sources */,
 				4F77BD2320DA44C100A51FE2 /* SectionTableViewCell.swift in Sources */,
 				4FF5E62320D93A2C00D088B5 /* GradientView.swift in Sources */,
+				4FF628F520DB98A30002AA13 /* Movie.swift in Sources */,
 				4FF5E62720D951FB00D088B5 /* HotTableViewCell.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;

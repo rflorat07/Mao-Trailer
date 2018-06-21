@@ -10,7 +10,7 @@ import UIKit
 
 class MoviesTableViewController: UITableViewController {
     
-    let sections = ["Now", "Popular"]
+    let dataMovies = DataMovies()
     
     override func viewDidLoad() {
         super.viewDidLoad()
@@ -41,12 +41,12 @@ extension MoviesTableViewController {
         // Section 0 - Hot Section
         // Section 1 - [Now, Popular]
         
-        return section == 0 ? 1 : self.sections.count
+        return section == 0 ? 1 : self.dataMovies.sectionMovies.count
     }
     
     //Height for each section
     override func tableView(_ tableView: UITableView, heightForRowAt indexPath: IndexPath) -> CGFloat {
-        return indexPath.section == 0 ? 200 : 309
+        return indexPath.section == 0 ? 180 : 310
     }
     
     //Deque Tableview cell for rows
@@ -55,6 +55,7 @@ extension MoviesTableViewController {
         if indexPath.section == 0 {
             let cell = tableView.dequeueReusableCell(withIdentifier: Storyboard.hotViewCell, for: indexPath) as! HotTableViewCell
             
+            cell.hotMovies = dataMovies.hotMovies
             cell.selectionStyle = .none
             
             return cell
@@ -62,8 +63,11 @@ extension MoviesTableViewController {
         } else {
             let cell = tableView.dequeueReusableCell(withIdentifier: Storyboard.sectionViewCell, for: indexPath) as! SectionTableViewCell
             
+            let section = dataMovies.sectionMovies[indexPath.row]
+            
             cell.selectionStyle = .none
-            cell.sectionTitleLabel.text = self.sections[indexPath.row]
+            cell.sectionMovies = section.movieArray
+            cell.sectionTitleLabel.text = section.sectionName
             
             return cell
         }
