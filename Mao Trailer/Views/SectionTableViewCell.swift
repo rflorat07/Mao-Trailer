@@ -13,9 +13,9 @@ class SectionTableViewCell: UITableViewCell, UICollectionViewDelegate, UICollect
     @IBOutlet weak var sectionTitleLabel: UILabel!
     @IBOutlet weak var sectionCollectionView: UICollectionView!
     
-    var imageArray = [String] ()
-    var titleArray = [String] ()
-    var sectionMovies = [Movie] ()
+    var imageArray = [String]()
+    var titleArray = [String]()
+    var sectionMovies = [Movie]()
     
     override func awakeFromNib() {
         super.awakeFromNib()

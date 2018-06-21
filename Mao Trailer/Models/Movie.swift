@@ -26,27 +26,36 @@ struct Section {
 class DataMovies {
     
     let hotMovies: [Movie] = [
-        Movie(id: 0, rate: 0.0, title: "Mao Trailer", imgUrl: "HotView-Slide", description: "Mao Trailer"),
-        Movie(id: 1, rate: 0.0, title: "TopView-Slide", imgUrl: "TopView-Slide", description: "TopView-Slide"),
-        Movie(id: 2, rate: 0.0, title: "TVPopular-Slide", imgUrl: "TVPopular-Slide", description: "TVPopular-Slide"),
-        Movie(id: 3, rate: 0.0, title: "Mao Trailer", imgUrl: "HotFlash-Slide", description: "HotFlash-Slider")
+        Movie(id: 0, rate: 8.9, title: "Stranger Things", imgUrl: "StrangerThings-Slide", description: "Stranger Things"),
+        Movie(id: 1, rate: 8.4, title: "The Walking Dead", imgUrl: "TheWalkingDead-Slide", description: "The Walking Dead"),
+        Movie(id: 2, rate: 8.0, title: "The Flash", imgUrl: "TheFlash-Slide", description: "The Flash"),
+        Movie(id: 3, rate: 9.5, title: "Game of Thrones", imgUrl: "GameofThrones-Slide", description: "Game of Thrones"),
+        Movie(id: 4, rate: 8.7, title: "Shameless", imgUrl: "Shameless-Slide", description: "Shameless")
     ]
     
     let nowMovies: [Movie] = [
-        Movie(id: 0, rate: 6.6, title: "Justice League", imgUrl: "JusticeLeague-Slide", description: "Justice League"),
-        Movie(id: 1, rate: 6.4, title: "Rampage", imgUrl: "Rampage-Slide", description: "Rampage"),
-        Movie(id: 2, rate: 7.5, title: "Spider-Man: Homecoming", imgUrl: "SpiderMan-Slide", description: "Spider-Man: Homecoming"),
-        Movie(id: 3, rate: 7.9, title: "Thor: Ragnarok", imgUrl: "ThorRagnarok-Slide", description: "Thor: Ragnarok"),
-        Movie(id: 4, rate: 8.1, title: "Hotel Transylvania 3: Summer Vacation", imgUrl: "HotelTransylvania-Slide", description: "Hotel Transylvania 3: Summer Vacation")
+        Movie(id: 0, rate: 8.9, title: "Narcos", imgUrl: "Narcos-Slide", description: "Narcos"),
+        
+        Movie(id: 1, rate: 7.6, title: "Top of the Lake", imgUrl: "TopLake-Slide", description: "Top of the Lake"),
+        
+        Movie(id: 2, rate: 8.5, title: "Outlander", imgUrl: "Outlander-Slide", description: "Outlander"),
+        
+        Movie(id: 3, rate: 8.9, title: "Lethal Weapon", imgUrl: "LethalWeapon-Slide", description: "Lethal Weapon"),
+        
+        Movie(id: 4, rate: 8.3, title: "Brooklyn Nine-Nine", imgUrl: "Brooklyn-Slide", description: "Brooklyn Nine-Nine"),
+        
     ]
     
-    let popularMovies: [Movie] =  [
-        Movie(id: 0, rate: 6.5, title: "Tomb Raider", imgUrl: "TombRaider-Slide", description: "Tomb Raider"),
-        Movie(id: 1, rate: 7.5, title: "Spider-Man: Homecoming", imgUrl: "SpiderMan-Slide", description: "Spider-Man: Homecoming"),
-        Movie(id: 2, rate: 7.9, title: "Arrival", imgUrl: "Arrival-Slide", description: "Arrival"),
-        Movie(id: 3, rate: 8.9, title: "Narcos", imgUrl: "Narcos-Slide", description: "Narcos")
+    let tvMovies : [Movie] = [
+        
+        Movie(id: 0, rate: 8.9, title: "Stranger Things", imgUrl: "StrangerThings-Slide", description: "Stranger Things"),
+        Movie(id: 1, rate: 8.4, title: "The Walking Dead", imgUrl: "TheWalkingDead-Slide", description: "The Walking Dead"),
+        Movie(id: 2, rate: 8.0, title: "The Flash", imgUrl: "TheFlash-Slide", description: "The Flash"),
+        Movie(id: 3, rate: 9.5, title: "Game of Thrones", imgUrl: "GameofThrones-Slide", description: "Game of Thrones"),
+        Movie(id: 4, rate: 8.7, title: "Shameless", imgUrl: "Shameless-Slide", description: "Shameless")
     ]
     
+
     let sectionMovies: [Section] = [
         Section(sectionName: "Now", movieArray: [
             Movie(id: 0, rate: 6.6, title: "Justice League", imgUrl: "JusticeLeague-Slide", description: "Justice League"),

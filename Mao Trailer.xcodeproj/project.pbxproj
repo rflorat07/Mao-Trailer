@@ -18,6 +18,11 @@
 		4FF5E62720D951FB00D088B5 /* HotTableViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4FF5E62620D951FB00D088B5 /* HotTableViewCell.swift */; };
 		4FF5E62920D954EA00D088B5 /* HotCollectionViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4FF5E62820D954EA00D088B5 /* HotCollectionViewCell.swift */; };
 		4FF628F520DB98A30002AA13 /* Movie.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4FF628F420DB98A30002AA13 /* Movie.swift */; };
+		4FF628F720DBB78E0002AA13 /* TVNowTableViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4FF628F620DBB78E0002AA13 /* TVNowTableViewCell.swift */; };
+		4FF628F920DBB7C20002AA13 /* TVNowCollectionViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4FF628F820DBB7C20002AA13 /* TVNowCollectionViewCell.swift */; };
+		4FF628FB20DBB7DE0002AA13 /* TVTableViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4FF628FA20DBB7DE0002AA13 /* TVTableViewController.swift */; };
+		4FF628FD20DBD4550002AA13 /* TVPopularTableViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4FF628FC20DBD4550002AA13 /* TVPopularTableViewCell.swift */; };
+		4FF6290120DBDE6B0002AA13 /* Constants.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4FF6290020DBDE6B0002AA13 /* Constants.swift */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
@@ -34,6 +39,11 @@
 		4FF5E62620D951FB00D088B5 /* HotTableViewCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = HotTableViewCell.swift; sourceTree = "<group>"; };
 		4FF5E62820D954EA00D088B5 /* HotCollectionViewCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = HotCollectionViewCell.swift; sourceTree = "<group>"; };
 		4FF628F420DB98A30002AA13 /* Movie.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Movie.swift; sourceTree = "<group>"; };
+		4FF628F620DBB78E0002AA13 /* TVNowTableViewCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TVNowTableViewCell.swift; sourceTree = "<group>"; };
+		4FF628F820DBB7C20002AA13 /* TVNowCollectionViewCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TVNowCollectionViewCell.swift; sourceTree = "<group>"; };
+		4FF628FA20DBB7DE0002AA13 /* TVTableViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TVTableViewController.swift; sourceTree = "<group>"; };
+		4FF628FC20DBD4550002AA13 /* TVPopularTableViewCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TVPopularTableViewCell.swift; sourceTree = "<group>"; };
+		4FF6290020DBDE6B0002AA13 /* Constants.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Constants.swift; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -84,6 +94,7 @@
 			isa = PBXGroup;
 			children = (
 				4FF5E62420D9473A00D088B5 /* MoviesTableViewController.swift */,
+				4FF628FA20DBB7DE0002AA13 /* TVTableViewController.swift */,
 			);
 			path = Controllers;
 			sourceTree = "<group>";
@@ -107,6 +118,7 @@
 			isa = PBXGroup;
 			children = (
 				4FF5E62220D93A2C00D088B5 /* GradientView.swift */,
+				4FF6290020DBDE6B0002AA13 /* Constants.swift */,
 			);
 			path = Utilities;
 			sourceTree = "<group>";
@@ -118,6 +130,9 @@
 				4FF5E62820D954EA00D088B5 /* HotCollectionViewCell.swift */,
 				4F77BD2220DA44C100A51FE2 /* SectionTableViewCell.swift */,
 				4F77BD2420DA44E000A51FE2 /* SectionCollectionViewCell.swift */,
+				4FF628F620DBB78E0002AA13 /* TVNowTableViewCell.swift */,
+				4FF628F820DBB7C20002AA13 /* TVNowCollectionViewCell.swift */,
+				4FF628FC20DBD4550002AA13 /* TVPopularTableViewCell.swift */,
 			);
 			path = Views;
 			sourceTree = "<group>";
@@ -193,14 +208,19 @@
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				4FF628F720DBB78E0002AA13 /* TVNowTableViewCell.swift in Sources */,
 				4FF5E62520D9473A00D088B5 /* MoviesTableViewController.swift in Sources */,
 				4F77BD2520DA44E000A51FE2 /* SectionCollectionViewCell.swift in Sources */,
+				4FF628FD20DBD4550002AA13 /* TVPopularTableViewCell.swift in Sources */,
+				4FF628F920DBB7C20002AA13 /* TVNowCollectionViewCell.swift in Sources */,
 				4FF5E62920D954EA00D088B5 /* HotCollectionViewCell.swift in Sources */,
 				4FF5E60C20D92AB000D088B5 /* AppDelegate.swift in Sources */,
 				4F77BD2320DA44C100A51FE2 /* SectionTableViewCell.swift in Sources */,
 				4FF5E62320D93A2C00D088B5 /* GradientView.swift in Sources */,
 				4FF628F520DB98A30002AA13 /* Movie.swift in Sources */,
 				4FF5E62720D951FB00D088B5 /* HotTableViewCell.swift in Sources */,
+				4FF6290120DBDE6B0002AA13 /* Constants.swift in Sources */,
+				4FF628FB20DBB7DE0002AA13 /* TVTableViewController.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};

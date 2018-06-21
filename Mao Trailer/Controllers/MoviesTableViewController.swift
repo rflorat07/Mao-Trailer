@@ -29,8 +29,8 @@ extension MoviesTableViewController {
     
     
     override func numberOfSections(in tableView: UITableView) -> Int {
-        // 0 - Hot Section
-        // 1 - Popular Section
+        // 0 - Hot [Movie]
+        // 1 - Popular [Section]
         
         return 2
     }
@@ -38,8 +38,8 @@ extension MoviesTableViewController {
     //Number of rows in section
     override func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
         
-        // Section 0 - Hot Section
-        // Section 1 - [Now, Popular]
+        // Section 0 - Hot [Movie]
+        // Section 1 - Section [Section]
         
         return section == 0 ? 1 : self.dataMovies.sectionMovies.count
     }

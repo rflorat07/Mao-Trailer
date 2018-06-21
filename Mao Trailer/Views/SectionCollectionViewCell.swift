@@ -24,14 +24,12 @@ class SectionCollectionViewCell: UICollectionViewCell {
     
     func updateUI() {
         
-        let cornerRadius: CGFloat = 6
-        
         
         titleLabel.text = sectionMovie.title?.uppercased()
         rateLabel.text = String(format:"%.1f", sectionMovie.rate!)
         
         coverImageView.clipsToBounds = true
-        coverImageView.layer.cornerRadius = cornerRadius
+        coverImageView.layer.cornerRadius = Constants.cornerRadius
         coverImageView.image = UIImage(named: sectionMovie.imgUrl)
         
         
