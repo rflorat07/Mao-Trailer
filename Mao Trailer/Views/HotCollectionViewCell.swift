@@ -23,7 +23,6 @@ class HotCollectionViewCell: UICollectionViewCell {
         coverImageView.clipsToBounds = true
         coverImageView.layer.cornerRadius = Constants.cornerRadius
         coverImageView.image = UIImage(named: hotMovie.imgUrl)
-    
     }
     
 }

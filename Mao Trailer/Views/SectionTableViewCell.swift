@@ -8,21 +8,22 @@
 
 import UIKit
 
-class SectionTableViewCell: UITableViewCell, UICollectionViewDelegate, UICollectionViewDataSource {
+class SectionTableViewCell: UITableViewCell {
     
     @IBOutlet weak var sectionTitleLabel: UILabel!
     @IBOutlet weak var sectionCollectionView: UICollectionView!
-    
-    var imageArray = [String]()
-    var titleArray = [String]()
+
     var sectionMovies = [Movie]()
     
     override func awakeFromNib() {
         super.awakeFromNib()
         
-        sectionCollectionView.delegate = self
-        sectionCollectionView.dataSource = self
+      sectionCollectionView.delegate = self
+      sectionCollectionView.dataSource = self
     }
+}
+
+extension SectionTableViewCell: UICollectionViewDelegate, UICollectionViewDataSource {
     
     func collectionView(_ collectionView: UICollectionView, numberOfItemsInSection section: Int) -> Int {
         return sectionMovies.count
@@ -37,5 +38,5 @@ class SectionTableViewCell: UITableViewCell, UICollectionViewDelegate, UICollect
         return cell
         
     }
-  
+    
 }

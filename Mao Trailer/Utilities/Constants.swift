@@ -16,10 +16,11 @@ struct Storyboard {
     static let hotViewCell = "HotViewCell"
     static let sectionViewCell = "SectionViewCell"
     static let movieListViewCell = "MovieListViewCell"
+    static let movieListReusableView = "MovieListReusableView"
     static let movieListCollectionView = "MovieListCollectionView"
     static let tvNowViewCell = "TVNowViewCell"
-    static let tvSectionLabelViewCell = "TVSectionLabelViewCell"
     static let tvPopularViewCell = "TVPopularViewCell"
+    static let tvSectionLabelViewCell = "TVSectionLabelViewCell"
 }
 
 struct Segue {

@@ -6,7 +6,6 @@
     <dependencies>
         <deployment identifier="iOS"/>
         <plugIn identifier="com.apple.InterfaceBuilder.IBCocoaTouchPlugin" version="14088"/>
-        <capability name="Constraints to layout margins" minToolsVersion="6.0"/>
         <capability name="documents saved in the Xcode 8 format" minToolsVersion="8.0"/>
     </dependencies>
     <scenes>
@@ -14,7 +13,7 @@
         <scene sceneID="yqa-Mm-O9h">
             <objects>
                 <tableViewController id="YR0-ee-ekU" customClass="MoviesTableViewController" customModule="Mao_Trailer" customModuleProvider="target" sceneMemberID="viewController">
-                    <tableView key="view" clipsSubviews="YES" contentMode="scaleToFill" alwaysBounceVertical="YES" showsHorizontalScrollIndicator="NO" showsVerticalScrollIndicator="NO" dataMode="prototypes" style="plain" separatorStyle="none" rowHeight="180" sectionHeaderHeight="28" sectionFooterHeight="28" id="Lwx-Wu-RB7" userLabel="Movies Table View">
+                    <tableView key="view" clipsSubviews="YES" contentMode="scaleToFill" alwaysBounceVertical="YES" showsHorizontalScrollIndicator="NO" showsVerticalScrollIndicator="NO" dataMode="prototypes" style="plain" separatorStyle="none" rowHeight="180" estimatedRowHeight="-1" sectionHeaderHeight="28" sectionFooterHeight="28" id="Lwx-Wu-RB7" userLabel="Movies Table View">
                         <rect key="frame" x="0.0" y="0.0" width="375" height="812"/>
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
                         <color key="backgroundColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
@@ -36,7 +35,7 @@
                                                 <inset key="sectionInset" minX="20" minY="0.0" maxX="20" maxY="0.0"/>
                                             </collectionViewFlowLayout>
                                             <cells>
-                                                <collectionViewCell opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center" reuseIdentifier="HotViewCell" id="HPO-W2-Xg8" userLabel="Hot Collection View Cell" customClass="HotCollectionViewCell" customModule="Mao_Trailer" customModuleProvider="target">
+                                                <collectionViewCell opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center" restorationIdentifier="HotViewCell" reuseIdentifier="HotViewCell" id="HPO-W2-Xg8" userLabel="Hot Collection View Cell" customClass="HotCollectionViewCell" customModule="Mao_Trailer" customModuleProvider="target">
                                                     <rect key="frame" x="20" y="5" width="320" height="160"/>
                                                     <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
                                                     <view key="contentView" opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center" insetsLayoutMarginsFromSafeArea="NO">
@@ -203,6 +202,9 @@
                     <navigationItem key="navigationItem" title="MOVIES" id="AF3-f0-Ucj">
                         <barButtonItem key="rightBarButtonItem" image="icon-search" id="RbX-wN-UX1"/>
                     </navigationItem>
+                    <connections>
+                        <segue destination="gNV-SY-Zy7" kind="show" identifier="segueToMovieList" id="34l-DW-oXO"/>
+                    </connections>
                 </tableViewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="YN2-oH-dfY" userLabel="First Responder" sceneMemberID="firstResponder"/>
             </objects>
@@ -216,15 +218,15 @@
                         <rect key="frame" x="0.0" y="0.0" width="375" height="812"/>
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
                         <color key="backgroundColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
-                        <collectionViewFlowLayout key="collectionViewLayout" scrollDirection="horizontal" minimumLineSpacing="20" minimumInteritemSpacing="20" id="Ogi-GZ-dxg">
-                            <size key="itemSize" width="217" height="386"/>
-                            <size key="headerReferenceSize" width="0.0" height="0.0"/>
+                        <collectionViewFlowLayout key="collectionViewLayout" minimumLineSpacing="20" minimumInteritemSpacing="0.0" id="Ogi-GZ-dxg">
+                            <size key="itemSize" width="158" height="283"/>
+                            <size key="headerReferenceSize" width="375" height="34"/>
                             <size key="footerReferenceSize" width="0.0" height="0.0"/>
                             <inset key="sectionInset" minX="20" minY="20" maxX="20" maxY="0.0"/>
                         </collectionViewFlowLayout>
                         <cells>
                             <collectionViewCell opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center" reuseIdentifier="MovieListViewCell" id="6uV-2x-Qra" userLabel="Movie List Collection View Cell" customClass="MovieListCollectionViewCell" customModule="Mao_Trailer" customModuleProvider="target">
-                                <rect key="frame" x="20" y="20" width="158" height="283"/>
+                                <rect key="frame" x="20" y="54" width="158" height="283"/>
                                 <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
                                 <view key="contentView" opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center" insetsLayoutMarginsFromSafeArea="NO">
                                     <rect key="frame" x="0.0" y="0.0" width="158" height="283"/>
@@ -233,7 +235,7 @@
                                         <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="YAa-CS-KYU" userLabel="Cover View">
                                             <rect key="frame" x="0.0" y="0.0" width="158" height="237"/>
                                             <subviews>
-                                                <imageView userInteractionEnabled="NO" contentMode="scaleAspectFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" image="JusticeLeague-Slide" translatesAutoresizingMaskIntoConstraints="NO" id="NQk-3f-z6k" userLabel="Cover Image View">
+                                                <imageView userInteractionEnabled="NO" contentMode="scaleAspectFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" image="Brooklyn-Slide" translatesAutoresizingMaskIntoConstraints="NO" id="NQk-3f-z6k" userLabel="Cover Image View">
                                                     <rect key="frame" x="0.0" y="0.0" width="158" height="237"/>
                                                 </imageView>
                                                 <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="UWe-EG-1ah" userLabel="Rate View">
@@ -273,8 +275,8 @@
                                                 <constraint firstAttribute="trailing" secondItem="NQk-3f-z6k" secondAttribute="trailing" id="vb9-oh-EoX"/>
                                             </constraints>
                                         </view>
-                                        <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="JUSTICE LEAGUE" textAlignment="center" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="LSb-zq-3hW">
-                                            <rect key="frame" x="8" y="247" width="142" height="28"/>
+                                        <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="BROOKLYN NINE-NINE" textAlignment="center" lineBreakMode="tailTruncation" numberOfLines="2" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="LSb-zq-3hW">
+                                            <rect key="frame" x="0.0" y="247" width="158" height="36"/>
                                             <fontDescription key="fontDescription" type="boldSystem" pointSize="15"/>
                                             <color key="textColor" red="0.13333333333333333" green="0.13333333333333333" blue="0.13333333333333333" alpha="1" colorSpace="calibratedRGB"/>
                                             <nil key="highlightedColor"/>
@@ -282,22 +284,46 @@
                                     </subviews>
                                 </view>
                                 <constraints>
-                                    <constraint firstAttribute="trailingMargin" secondItem="LSb-zq-3hW" secondAttribute="trailing" id="BeJ-cz-98y"/>
+                                    <constraint firstItem="LSb-zq-3hW" firstAttribute="leading" secondItem="6uV-2x-Qra" secondAttribute="leading" id="7hB-Kd-Vm2"/>
                                     <constraint firstItem="YAa-CS-KYU" firstAttribute="leading" secondItem="6uV-2x-Qra" secondAttribute="leading" id="Bqg-wb-ksf"/>
+                                    <constraint firstAttribute="trailing" secondItem="LSb-zq-3hW" secondAttribute="trailing" id="Fdr-hY-ViB"/>
+                                    <constraint firstAttribute="bottom" secondItem="LSb-zq-3hW" secondAttribute="bottom" id="T4C-9B-N7w"/>
                                     <constraint firstItem="LSb-zq-3hW" firstAttribute="top" secondItem="YAa-CS-KYU" secondAttribute="bottom" constant="10" id="Wfj-zg-fEY"/>
-                                    <constraint firstAttribute="bottomMargin" secondItem="LSb-zq-3hW" secondAttribute="bottom" id="e5Y-8W-iQR"/>
                                     <constraint firstItem="YAa-CS-KYU" firstAttribute="top" secondItem="6uV-2x-Qra" secondAttribute="top" id="iFk-t7-no9"/>
                                     <constraint firstAttribute="trailing" secondItem="YAa-CS-KYU" secondAttribute="trailing" id="kCA-fz-l0P"/>
-                                    <constraint firstItem="LSb-zq-3hW" firstAttribute="leading" secondItem="6uV-2x-Qra" secondAttribute="leadingMargin" id="oMv-Wv-2Um"/>
                                 </constraints>
                                 <size key="customSize" width="158" height="283"/>
                                 <connections>
                                     <outlet property="coverImageView" destination="NQk-3f-z6k" id="hFA-Gq-yO9"/>
                                     <outlet property="rateLabel" destination="Oaq-lq-kcj" id="kKN-dr-9F2"/>
+                                    <outlet property="rateView" destination="UWe-EG-1ah" id="OAV-zU-F2v"/>
                                     <outlet property="titleLabel" destination="LSb-zq-3hW" id="dGR-J9-8Rg"/>
                                 </connections>
                             </collectionViewCell>
                         </cells>
+                        <collectionReusableView key="sectionHeaderView" opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center" insetsLayoutMarginsFromSafeArea="NO" reuseIdentifier="MovieListReusableView" id="klO-06-TdP" customClass="MovieListSectionHeaderCollectionReusableView" customModule="Mao_Trailer" customModuleProvider="target">
+                            <rect key="frame" x="0.0" y="0.0" width="375" height="34"/>
+                            <autoresizingMask key="autoresizingMask"/>
+                            <subviews>
+                                <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Now list" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="x49-H4-zn5">
+                                    <rect key="frame" x="20" y="10" width="335" height="24"/>
+                                    <constraints>
+                                        <constraint firstAttribute="height" constant="24" id="nfv-Qb-wFf"/>
+                                    </constraints>
+                                    <fontDescription key="fontDescription" type="system" weight="semibold" pointSize="20"/>
+                                    <color key="textColor" red="0.40000000000000002" green="0.40000000000000002" blue="0.40000000000000002" alpha="1" colorSpace="calibratedRGB"/>
+                                    <nil key="highlightedColor"/>
+                                </label>
+                            </subviews>
+                            <constraints>
+                                <constraint firstItem="x49-H4-zn5" firstAttribute="top" secondItem="klO-06-TdP" secondAttribute="top" constant="10" id="1Sa-A2-aae"/>
+                                <constraint firstAttribute="trailing" secondItem="x49-H4-zn5" secondAttribute="trailing" constant="20" id="PBw-Yh-tX7"/>
+                                <constraint firstItem="x49-H4-zn5" firstAttribute="leading" secondItem="klO-06-TdP" secondAttribute="leading" constant="20" id="mSV-da-ADD"/>
+                            </constraints>
+                            <connections>
+                                <outlet property="sectionTitleLabel" destination="x49-H4-zn5" id="66j-no-vMA"/>
+                            </connections>
+                        </collectionReusableView>
                         <connections>
                             <outlet property="dataSource" destination="gNV-SY-Zy7" id="eU2-ku-mDP"/>
                             <outlet property="delegate" destination="gNV-SY-Zy7" id="iO2-0d-K2q"/>
@@ -667,6 +693,7 @@
         </scene>
     </scenes>
     <resources>
+        <image name="Brooklyn-Slide" width="140" height="210"/>
         <image name="JusticeLeague-Slide" width="140" height="210"/>
         <image name="Narcos-Slide" width="140" height="210"/>
         <image name="StrangerThings-Slide" width="335" height="160"/>
