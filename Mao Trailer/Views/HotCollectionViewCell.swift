@@ -20,10 +20,8 @@ class HotCollectionViewCell: UICollectionViewCell {
     
     func updateUI(){
         
-        let cornerRadius: CGFloat = 6
-        
         coverImageView.clipsToBounds = true
-        coverImageView.layer.cornerRadius = cornerRadius
+        coverImageView.layer.cornerRadius = Constants.cornerRadius
         coverImageView.image = UIImage(named: hotMovie.imgUrl)
     
     }

@@ -24,13 +24,11 @@ class TVNowCollectionViewCell: UICollectionViewCell {
     
     func updateUI() {
         
-        let cornerRadius: CGFloat = 6
-        
         rateView.isHidden = true
         titleLabel.text = nowMovie.title?.uppercased()
         
         coverImageView.clipsToBounds = true
-        coverImageView.layer.cornerRadius = cornerRadius
+        coverImageView.layer.cornerRadius = Constants.cornerRadius
         coverImageView.image = UIImage(named: nowMovie.imgUrl)
     }
     

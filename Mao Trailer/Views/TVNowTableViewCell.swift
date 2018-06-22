@@ -30,7 +30,7 @@ class TVNowTableViewCell: UITableViewCell,UICollectionViewDelegate, UICollection
     
     func collectionView(_ collectionView: UICollectionView, cellForItemAt indexPath: IndexPath) -> UICollectionViewCell {
         
-        let cell = collectionView.dequeueReusableCell(withReuseIdentifier: "TVNowViewCell", for: indexPath) as! TVNowCollectionViewCell
+        let cell = collectionView.dequeueReusableCell(withReuseIdentifier: Storyboard.tvNowViewCell, for: indexPath) as! TVNowCollectionViewCell
         
         cell.nowMovie = nowMovies[indexPath.row]
         

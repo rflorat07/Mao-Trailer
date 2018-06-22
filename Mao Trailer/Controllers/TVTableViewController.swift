@@ -16,13 +16,6 @@ class TVTableViewController: UITableViewController {
         super.viewDidLoad()
 
     }
-    
-    struct Storyboard {
-        static let tvNowViewCell = "TVNowViewCell"
-        static let tvSectionLabelViewCell = "TVSectionLabelViewCell"
-        static let tvPopularViewCell = "TVPopularViewCell"
-    }
-
 }
 
 extension TVTableViewController {

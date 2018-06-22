@@ -15,12 +15,6 @@ class MoviesTableViewController: UITableViewController {
     override func viewDidLoad() {
         super.viewDidLoad()
     }
-    
-    struct Storyboard {
-        static let hotViewCell = "HotViewCell"
-        static let sectionViewCell = "SectionViewCell"
-    }
-    
 }
 
 extension MoviesTableViewController {
@@ -56,7 +50,10 @@ extension MoviesTableViewController {
             let cell = tableView.dequeueReusableCell(withIdentifier: Storyboard.hotViewCell, for: indexPath) as! HotTableViewCell
             
             cell.hotMovies = dataMovies.hotMovies
-            cell.selectionStyle = .none
+       
+            cell.didSelectAction = {
+                print("didSelectItemAt")
+            }
             
             return cell
             
@@ -65,7 +62,6 @@ extension MoviesTableViewController {
             
             let section = dataMovies.sectionMovies[indexPath.row]
             
-            cell.selectionStyle = .none
             cell.sectionMovies = section.movieArray
             cell.sectionTitleLabel.text = section.sectionName
             

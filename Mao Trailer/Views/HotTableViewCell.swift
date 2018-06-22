@@ -8,20 +8,23 @@
 
 import UIKit
 
-class HotTableViewCell: UITableViewCell, UICollectionViewDelegate, UICollectionViewDataSource {
+class HotTableViewCell: UITableViewCell {
     
     @IBOutlet weak var hotCollectionView: UICollectionView!
     
-    var imageArray = [String] ()
     var hotMovies = [Movie] ()
+    var didSelectAction: () -> Void = {}
  
     override func awakeFromNib() {
         super.awakeFromNib()
         
         hotCollectionView.delegate = self
         hotCollectionView.dataSource = self
-        
     }
+}
+
+extension HotTableViewCell: UICollectionViewDelegate, UICollectionViewDataSource {
+    
     
     func collectionView(_ collectionView: UICollectionView, numberOfItemsInSection section: Int) -> Int {
         return hotMovies.count
@@ -29,12 +32,15 @@ class HotTableViewCell: UITableViewCell, UICollectionViewDelegate, UICollectionV
     
     func collectionView(_ collectionView: UICollectionView, cellForItemAt indexPath: IndexPath) -> UICollectionViewCell {
         
-        let cell = collectionView.dequeueReusableCell(withReuseIdentifier: "HotViewCell", for: indexPath) as! HotCollectionViewCell
+        let cell = collectionView.dequeueReusableCell(withReuseIdentifier: Storyboard.hotViewCell, for: indexPath) as! HotCollectionViewCell
         
         cell.hotMovie = hotMovies[indexPath.row]
         
         return cell
-        
+    }
+    
+    func collectionView(_ collectionView: UICollectionView, didSelectItemAt indexPath: IndexPath) {
+          didSelectAction()
     }
     
 }

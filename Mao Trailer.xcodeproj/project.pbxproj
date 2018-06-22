@@ -23,6 +23,8 @@
 		4FF628FB20DBB7DE0002AA13 /* TVTableViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4FF628FA20DBB7DE0002AA13 /* TVTableViewController.swift */; };
 		4FF628FD20DBD4550002AA13 /* TVPopularTableViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4FF628FC20DBD4550002AA13 /* TVPopularTableViewCell.swift */; };
 		4FF6290120DBDE6B0002AA13 /* Constants.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4FF6290020DBDE6B0002AA13 /* Constants.swift */; };
+		4FF6290320DBFE9D0002AA13 /* MovieListCollectionViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4FF6290220DBFE9D0002AA13 /* MovieListCollectionViewCell.swift */; };
+		4FF6290520DBFFF60002AA13 /* MovieListCollectionViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4FF6290420DBFFF60002AA13 /* MovieListCollectionViewController.swift */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
@@ -44,6 +46,8 @@
 		4FF628FA20DBB7DE0002AA13 /* TVTableViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TVTableViewController.swift; sourceTree = "<group>"; };
 		4FF628FC20DBD4550002AA13 /* TVPopularTableViewCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TVPopularTableViewCell.swift; sourceTree = "<group>"; };
 		4FF6290020DBDE6B0002AA13 /* Constants.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Constants.swift; sourceTree = "<group>"; };
+		4FF6290220DBFE9D0002AA13 /* MovieListCollectionViewCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MovieListCollectionViewCell.swift; sourceTree = "<group>"; };
+		4FF6290420DBFFF60002AA13 /* MovieListCollectionViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MovieListCollectionViewController.swift; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -95,6 +99,7 @@
 			children = (
 				4FF5E62420D9473A00D088B5 /* MoviesTableViewController.swift */,
 				4FF628FA20DBB7DE0002AA13 /* TVTableViewController.swift */,
+				4FF6290420DBFFF60002AA13 /* MovieListCollectionViewController.swift */,
 			);
 			path = Controllers;
 			sourceTree = "<group>";
@@ -133,6 +138,7 @@
 				4FF628F620DBB78E0002AA13 /* TVNowTableViewCell.swift */,
 				4FF628F820DBB7C20002AA13 /* TVNowCollectionViewCell.swift */,
 				4FF628FC20DBD4550002AA13 /* TVPopularTableViewCell.swift */,
+				4FF6290220DBFE9D0002AA13 /* MovieListCollectionViewCell.swift */,
 			);
 			path = Views;
 			sourceTree = "<group>";
@@ -215,11 +221,13 @@
 				4FF628F920DBB7C20002AA13 /* TVNowCollectionViewCell.swift in Sources */,
 				4FF5E62920D954EA00D088B5 /* HotCollectionViewCell.swift in Sources */,
 				4FF5E60C20D92AB000D088B5 /* AppDelegate.swift in Sources */,
+				4FF6290320DBFE9D0002AA13 /* MovieListCollectionViewCell.swift in Sources */,
 				4F77BD2320DA44C100A51FE2 /* SectionTableViewCell.swift in Sources */,
 				4FF5E62320D93A2C00D088B5 /* GradientView.swift in Sources */,
 				4FF628F520DB98A30002AA13 /* Movie.swift in Sources */,
 				4FF5E62720D951FB00D088B5 /* HotTableViewCell.swift in Sources */,
 				4FF6290120DBDE6B0002AA13 /* Constants.swift in Sources */,
+				4FF6290520DBFFF60002AA13 /* MovieListCollectionViewController.swift in Sources */,
 				4FF628FB20DBB7DE0002AA13 /* TVTableViewController.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;

@@ -15,7 +15,6 @@ class SectionCollectionViewCell: UICollectionViewCell {
     @IBOutlet weak var coverView: UIView!
     @IBOutlet weak var rateLabel: UILabel!
     
-    
     var sectionMovie: Movie! {
         didSet {
             self.updateUI()
@@ -23,7 +22,6 @@ class SectionCollectionViewCell: UICollectionViewCell {
     }
     
     func updateUI() {
-        
         
         titleLabel.text = sectionMovie.title?.uppercased()
         rateLabel.text = String(format:"%.1f", sectionMovie.rate!)
