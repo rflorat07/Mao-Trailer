@@ -14,6 +14,7 @@ class SectionCollectionViewCell: UICollectionViewCell {
     @IBOutlet weak var titleLabel: UILabel!
     @IBOutlet weak var coverView: UIView!
     @IBOutlet weak var rateLabel: UILabel!
+    @IBOutlet weak var rateView: UIView!
     
     var sectionMovie: Movie! {
         didSet {
@@ -23,8 +24,17 @@ class SectionCollectionViewCell: UICollectionViewCell {
     
     func updateUI() {
         
-        titleLabel.text = sectionMovie.title?.uppercased()
-        rateLabel.text = String(format:"%.1f", sectionMovie.rate!)
+        if sectionMovie.title != "More" {
+            
+            titleLabel.text = sectionMovie.title?.uppercased()
+            rateLabel.text = String(format:"%.1f", sectionMovie.rate!)
+            
+        } else {
+            
+            titleLabel.text = ""
+            rateView.isHidden = true
+            
+        }
         
         coverImageView.clipsToBounds = true
         coverImageView.layer.cornerRadius = Constants.cornerRadius

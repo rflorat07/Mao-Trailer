@@ -14,6 +14,7 @@ class SectionTableViewCell: UITableViewCell {
     @IBOutlet weak var sectionCollectionView: UICollectionView!
 
     var sectionMovies = [Movie]()
+    var didSelectAction: (Movie) -> Void = { arg in }
     
     override func awakeFromNib() {
         super.awakeFromNib()
@@ -39,4 +40,7 @@ extension SectionTableViewCell: UICollectionViewDelegate, UICollectionViewDataSo
         
     }
     
+    func collectionView(_ collectionView: UICollectionView, didSelectItemAt indexPath: IndexPath) {
+        didSelectAction(sectionMovies[indexPath.row])
+    }
 }

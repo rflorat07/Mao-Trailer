@@ -10,11 +10,22 @@ import UIKit
 
 class MovieListCollectionViewController: UICollectionViewController {
     
-    var movies: [Movie]!
-    var sectionTitle: String = ""
+    var movieList: Section!
 
     override func viewDidLoad() {
         super.viewDidLoad()
+        
+    }
+    
+    override func prepare(for segue: UIStoryboardSegue, sender: Any?) {
+        
+        if segue.identifier == Segue.toMovieDetail {
+            
+            let toViewController = segue.destination as! MovieDetailTableViewController
+            
+            toViewController.movie = sender as! Movie
+            
+        }
     }
 
     // MARK: UICollectionViewDataSource
@@ -23,7 +34,7 @@ class MovieListCollectionViewController: UICollectionViewController {
         
         if let sectionHeader = collectionView.dequeueReusableSupplementaryView(ofKind: kind, withReuseIdentifier: Storyboard.movieListReusableView, for: indexPath) as? MovieListSectionHeaderCollectionReusableView {
             
-            sectionHeader.sectionTitleLabel.text = sectionTitle
+            sectionHeader.sectionTitleLabel.text = movieList.sectionName
             
             return sectionHeader
         }
@@ -39,15 +50,20 @@ class MovieListCollectionViewController: UICollectionViewController {
 
     override func collectionView(_ collectionView: UICollectionView, numberOfItemsInSection section: Int) -> Int {
         
-        return movies.count
+        return movieList.movieArray.count - 1
     }
 
     override func collectionView(_ collectionView: UICollectionView, cellForItemAt indexPath: IndexPath) -> UICollectionViewCell {
         
         let cell = collectionView.dequeueReusableCell(withReuseIdentifier: Storyboard.movieListViewCell, for: indexPath) as! MovieListCollectionViewCell
     
-         cell.movie = movies[indexPath.row]
+         cell.movie = movieList.movieArray[indexPath.row]
     
         return cell
+    }
+    
+    override func collectionView(_ collectionView: UICollectionView, didSelectItemAt indexPath: IndexPath) {
+        
+        performSegue(withIdentifier: Segue.toMovieDetail, sender: movieList.movieArray[indexPath.row])
     }
 }

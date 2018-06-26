@@ -22,8 +22,14 @@ class MoviesTableViewController: UITableViewController {
             
             let toViewController = segue.destination as! MovieListCollectionViewController
             
-            toViewController.sectionTitle = "Hot list"
-            toViewController.movies = dataMovies.nowMovies
+            toViewController.movieList = sender as! Section
+            
+        } else if  segue.identifier == Segue.toMovieDetail {
+            
+            let toViewController = segue.destination as! MovieDetailTableViewController
+            
+            toViewController.movie = sender as! Movie
+            
         }
     }
 }
@@ -61,10 +67,19 @@ extension MoviesTableViewController {
             let cell = tableView.dequeueReusableCell(withIdentifier: Storyboard.hotViewCell, for: indexPath) as! HotTableViewCell
             
             cell.hotMovies = dataMovies.hotMovies
-       
-            cell.didSelectAction = {
             
-                self.performSegue(withIdentifier: Segue.toMovieList, sender: nil)
+            cell.didSelectAction = { (movie) in
+                
+                if movie.title == "More" {
+                    let data: Section = Section(sectionName: "Hot list", movieArray: self.dataMovies.hotMovies)
+                    
+                    self.performSegue(withIdentifier: Segue.toMovieList, sender: data)
+                    
+                } else {
+                    
+                    self.performSegue(withIdentifier: Segue.toMovieDetail, sender: movie)
+                }
+                
             }
             
             return cell
@@ -73,9 +88,24 @@ extension MoviesTableViewController {
             let cell = tableView.dequeueReusableCell(withIdentifier: Storyboard.sectionViewCell, for: indexPath) as! SectionTableViewCell
             
             let section = dataMovies.sectionMovies[indexPath.row]
-        
+            
             cell.sectionMovies = section.movieArray
             cell.sectionTitleLabel.text = section.sectionName
+            
+            cell.didSelectAction = { (movie) in
+                
+                if movie.title == "More" {
+                    
+                    let data: Section = Section(sectionName: "\(section.sectionName) list" , movieArray: section.movieArray)
+                    
+                    self.performSegue(withIdentifier: Segue.toMovieList, sender: data)
+                    
+                } else {
+                    
+                    self.performSegue(withIdentifier: Segue.toMovieDetail, sender: movie)
+                }
+                
+            }
             
             return cell
         }

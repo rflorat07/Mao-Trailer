@@ -57,36 +57,35 @@ extension TVTableViewController {
     
         if indexPath.section == 0 {
             
-            let cell = tableView.dequeueReusableCell(withIdentifier: Storyboard.tvNowViewCell, for: indexPath) as! TVNowTableViewCell
+            if let cell = tableView.dequeueReusableCell(withIdentifier: Storyboard.tvNowViewCell, for: indexPath) as? TVNowTableViewCell {
+                
+                cell.selectionStyle = .none
+                cell.nowMovies = dataMovies.nowMovies
+                
+                return cell
+            }
             
-            cell.selectionStyle = .none
-            
-            cell.nowMovies = dataMovies.nowMovies
-            
-            return cell
-            
+        
         } else if indexPath.section == 1 {
             
-            let cell = tableView.dequeueReusableCell(withIdentifier: Storyboard.tvSectionLabelViewCell, for: indexPath)
-            
-            cell.selectionStyle = .none
-            
-            return cell
-            
+             let cell = tableView.dequeueReusableCell(withIdentifier: Storyboard.tvSectionLabelViewCell, for: indexPath)
+                
+                cell.selectionStyle = .none
+                return cell
+    
+
         } else if indexPath.section == 2 {
             
-            let cell = tableView.dequeueReusableCell(withIdentifier: Storyboard.tvPopularViewCell, for: indexPath) as! TVPopularTableViewCell
-            
-            cell.tvShows = dataMovies.tvMovies[indexPath.row]
-            
-            cell.selectionStyle = .none
-            
-            return cell
-            
+            if let cell = tableView.dequeueReusableCell(withIdentifier: Storyboard.tvPopularViewCell, for: indexPath) as? TVPopularTableViewCell {
+                
+                cell.tvShows = dataMovies.tvMovies[indexPath.row]
+                
+                cell.selectionStyle = .none
+                
+                return cell
+            }
         }
         
         return UITableViewCell()
-        
-    }
-    
+    }    
 }
