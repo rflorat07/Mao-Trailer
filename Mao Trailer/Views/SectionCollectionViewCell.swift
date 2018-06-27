@@ -30,7 +30,6 @@ class SectionCollectionViewCell: UICollectionViewCell {
             rateLabel.text = String(format:"%.1f", sectionMovie.rate!)
             
         } else {
-            
             titleLabel.text = ""
             rateView.isHidden = true
             

@@ -16,6 +16,17 @@ class TVTableViewController: UITableViewController {
         super.viewDidLoad()
 
     }
+    
+    override func prepare(for segue: UIStoryboardSegue, sender: Any?) {
+        
+        if segue.identifier == Segue.toMovieList {
+            
+            let toViewController = segue.destination as! MovieListCollectionViewController
+            
+            toViewController.movieList = sender as! Section
+            
+        } 
+    }
 }
 
 extension TVTableViewController {
@@ -62,6 +73,28 @@ extension TVTableViewController {
                 cell.selectionStyle = .none
                 cell.nowMovies = dataMovies.nowMovies
                 
+                cell.didSelectAction = { (movie) in
+                    
+                    if movie.title == "More" {
+                        
+                        let data: Section = Section(sectionName: "Now list", movieArray: self.dataMovies.nowMovies)
+                        
+                        self.performSegue(withIdentifier: Segue.toMovieList, sender: data)
+                        
+                    } else {
+                        
+                        if let movieDetail = self.storyboard?.instantiateViewController(withIdentifier: Storyboard.movieDetailViewController) as? MovieDetailViewController {
+                            
+                            movieDetail.modalPresentationStyle = .overFullScreen
+                            movieDetail.modalTransitionStyle = .crossDissolve
+                            
+                            movieDetail.movie = movie
+                            
+                            self.present(movieDetail, animated: true, completion: nil)
+                        }
+                    }
+                }
+                
                 return cell
             }
             
@@ -87,5 +120,34 @@ extension TVTableViewController {
         }
         
         return UITableViewCell()
-    }    
+    }
+    
+    
+    override func tableView(_ tableView: UITableView, didSelectRowAt indexPath: IndexPath) {
+        
+        if indexPath.section == 2 {
+            
+             let movie: Movie = dataMovies.tvMovies[indexPath.row]
+            
+            if movie.title == "More" {
+                
+                let data: Section = Section(sectionName: "Popular list", movieArray: self.dataMovies.tvMovies)
+                
+                self.performSegue(withIdentifier: Segue.toMovieList, sender: data)
+                
+            } else {
+                
+                if let movieDetail = self.storyboard?.instantiateViewController(withIdentifier: Storyboard.movieDetailViewController) as? MovieDetailViewController {
+                    
+                    movieDetail.modalPresentationStyle = .overFullScreen
+                    movieDetail.modalTransitionStyle = .crossDissolve
+                    
+                    movieDetail.movie = movie
+                    
+                    self.present(movieDetail, animated: true, completion: nil)
+                }
+            }
+        }
+    }
+    
 }

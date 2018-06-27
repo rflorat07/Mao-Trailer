@@ -13,6 +13,7 @@ class TVNowTableViewCell: UITableViewCell,UICollectionViewDelegate, UICollection
     @IBOutlet weak var nowCollectionView: UICollectionView!
     
     var nowMovies = [Movie]()
+    var didSelectAction: (Movie) -> Void = { arg in }
     
     
     override func awakeFromNib() {
@@ -35,6 +36,11 @@ class TVNowTableViewCell: UITableViewCell,UICollectionViewDelegate, UICollection
         cell.nowMovie = nowMovies[indexPath.row]
         
         return cell
+    }
+    
+    func collectionView(_ collectionView: UICollectionView, didSelectItemAt indexPath: IndexPath) {
+        
+        didSelectAction(nowMovies[indexPath.row])
     }
 
 }

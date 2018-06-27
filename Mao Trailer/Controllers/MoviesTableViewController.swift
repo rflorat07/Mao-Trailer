@@ -23,13 +23,6 @@ class MoviesTableViewController: UITableViewController {
             let toViewController = segue.destination as! MovieListCollectionViewController
             
             toViewController.movieList = sender as! Section
-            
-        } else if  segue.identifier == Segue.toMovieDetail {
-            
-            let toViewController = segue.destination as! MovieDetailTableViewController
-            
-            toViewController.movie = sender as! Movie
-            
         }
     }
 }
@@ -77,9 +70,16 @@ extension MoviesTableViewController {
                     
                 } else {
                     
-                    self.performSegue(withIdentifier: Segue.toMovieDetail, sender: movie)
+                    if let movieDetail = self.storyboard?.instantiateViewController(withIdentifier: Storyboard.movieDetailViewController) as? MovieDetailViewController {
+                        
+                        movieDetail.modalPresentationStyle = .overFullScreen
+                        movieDetail.modalTransitionStyle = .crossDissolve
+                        
+                        movieDetail.movie = movie
+                        
+                        self.present(movieDetail, animated: true, completion: nil)
+                    }
                 }
-                
             }
             
             return cell
@@ -102,7 +102,15 @@ extension MoviesTableViewController {
                     
                 } else {
                     
-                    self.performSegue(withIdentifier: Segue.toMovieDetail, sender: movie)
+                    if let movieDetail = self.storyboard?.instantiateViewController(withIdentifier: Storyboard.movieDetailViewController) as? MovieDetailViewController {
+                        
+                        movieDetail.modalPresentationStyle = .overFullScreen
+                        movieDetail.modalTransitionStyle = .crossDissolve
+                        
+                        movieDetail.movie = movie
+                        
+                        self.present(movieDetail, animated: true, completion: nil)
+                    }
                 }
                 
             }

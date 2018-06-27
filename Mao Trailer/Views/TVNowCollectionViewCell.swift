@@ -24,8 +24,15 @@ class TVNowCollectionViewCell: UICollectionViewCell {
     
     func updateUI() {
         
-        rateView.isHidden = true
-        titleLabel.text = nowMovie.title?.uppercased()
+        if nowMovie.title != "More" {
+            
+            rateView.isHidden = true
+            titleLabel.text = nowMovie.title?.uppercased()
+            
+        } else {
+            titleLabel.text = ""
+            rateView.isHidden = true
+        }
         
         coverImageView.clipsToBounds = true
         coverImageView.layer.cornerRadius = Constants.cornerRadius

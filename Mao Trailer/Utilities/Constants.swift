@@ -25,10 +25,11 @@ struct Storyboard {
     static let tvPopularViewCell = "TVPopularViewCell"
     static let tvSectionLabelViewCell = "TVSectionLabelViewCell"
     
-    static let movieDetailDescriptionViewCell = "MovieDetailDescriptionViewCell"
-    static let movieDetailFullCastViewCell = "MovieDetailFullCastViewCell"
-
+    static let profileListViewCell = "ProfileListViewCell"
+    static let profileHeaderReusableView = "ProfileHeaderReusableView"
     
+    static let movieDetailViewController = "MovieDetailViewController"
+        
 }
 
 struct Segue {
