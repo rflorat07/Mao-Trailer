@@ -35,4 +35,5 @@ struct Storyboard {
 struct Segue {
     static let toMovieList = "segueToMovieList"
     static let toMovieDetail = "segueToMovieDetail"
+    static let toProfileSetting = "segueToProfileSetting"
 }

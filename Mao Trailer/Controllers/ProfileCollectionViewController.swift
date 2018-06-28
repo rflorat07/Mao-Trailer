@@ -21,6 +21,11 @@ class ProfileCollectionViewController: UICollectionViewController {
         super.didReceiveMemoryWarning()
     }
 
+    @IBAction func settingButton(_ sender: UIBarButtonItem) {
+        
+        performSegue(withIdentifier: Segue.toProfileSetting, sender: nil)
+    }
+        
    
     override func collectionView(_ collectionView: UICollectionView, viewForSupplementaryElementOfKind kind: String, at indexPath: IndexPath) -> UICollectionReusableView {
     

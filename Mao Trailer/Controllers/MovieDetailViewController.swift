@@ -8,7 +8,7 @@
 
 import UIKit
 
-class MovieDetailViewController: UIViewController {
+class MovieDetailViewController: UIViewController, UIScrollViewDelegate {
     
     @IBOutlet weak var coverImageView: UIImageView!
     @IBOutlet weak var titleLabel: UILabel!
@@ -16,7 +16,7 @@ class MovieDetailViewController: UIViewController {
     @IBOutlet weak var descriptionLabel: UILabel!
     @IBOutlet weak var collectionView: UICollectionView!
     @IBOutlet weak var ratingValueLabel: UILabel!
-    
+
     var movie: Movie!
     var dataCast = DataMovies()
     
@@ -26,24 +26,19 @@ class MovieDetailViewController: UIViewController {
         collectionView.delegate = self
         collectionView.dataSource = self
         
-        updateUI()
-    }
-    
-    override func viewDidAppear(_ animated: Bool) {
-        super.viewDidAppear(animated)
-        
         // StatusBar Style
         UIApplication.shared.statusBarStyle = .lightContent
         
+        updateUI()
     }
-    
+        
     override func viewWillDisappear(_ animated: Bool) {
         super.viewWillDisappear(animated)
         
         // StatusBar Style
         UIApplication.shared.statusBarStyle = .default
     }
-    
+        
     func updateUI() {
         
         descriptionLabel.text = movie.description
