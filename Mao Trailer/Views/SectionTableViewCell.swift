@@ -34,6 +34,7 @@ extension SectionTableViewCell: UICollectionViewDelegate, UICollectionViewDataSo
         
         let cell = collectionView.dequeueReusableCell(withReuseIdentifier: Storyboard.sectionViewCell, for: indexPath) as! SectionCollectionViewCell
         
+        cell.posterCoverView.dropShadow(radius: 6)
         cell.sectionMovie = sectionMovies[indexPath.row]
         
         return cell

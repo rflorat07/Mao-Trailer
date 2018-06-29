@@ -10,7 +10,11 @@ import UIKit
 
 class HotCollectionViewCell: UICollectionViewCell {
     
+    
+    @IBOutlet weak var posterCoverView: UIView!
     @IBOutlet weak var coverImageView: UIImageView!
+    
+    let cornerRadius: CGFloat = Constants.cornerRadius
     
     var hotMovie: Movie! {
         didSet {
@@ -21,8 +25,10 @@ class HotCollectionViewCell: UICollectionViewCell {
     func updateUI(){
         
         coverImageView.clipsToBounds = true
-        coverImageView.layer.cornerRadius = Constants.cornerRadius
         coverImageView.image = UIImage(named: hotMovie.imgUrl)
+        coverImageView.layer.cornerRadius = Constants.cornerRadius
+        
+        posterCoverView.dropShadow(radius: Constants.cornerRadius)
     }
     
 }

@@ -1,0 +1,119 @@
+//
+//  WalkthroughViewController.swift
+//  Mao Trailer
+//
+//  Created by Roger Florat on 29/06/18.
+//  Copyright © 2018 Roger Florat. All rights reserved.
+//
+
+import UIKit
+
+class WalkthroughViewController: UIViewController {
+    
+    @IBOutlet weak var collectionView: UICollectionView!
+    @IBOutlet weak var pageControl: UIPageControl!
+    
+    var walkthroughData = DataMovies()
+    
+    override func viewDidLoad() {
+        super.viewDidLoad()
+        
+        collectionView.delegate = self
+        collectionView.dataSource = self
+        
+        configurePageControl()
+        
+        // StatusBar Style
+        UIApplication.shared.statusBarStyle = .lightContent
+    }
+    
+    
+    override func viewWillDisappear(_ animated: Bool) {
+        super.viewWillDisappear(animated)
+        
+        // StatusBar Style
+        UIApplication.shared.statusBarStyle = .default
+    }
+    
+    
+    func configurePageControl() {
+        
+        self.pageControl.currentPage = 0
+        self.pageControl.isEnabled = false
+        self.pageControl.numberOfPages = walkthroughData.walkthrough.count
+    }
+    
+    func scrollViewDidEndDecelerating(_ scrollView: UIScrollView) {
+        
+        let pageNumber = round(scrollView.contentOffset.x / scrollView.frame.size.width)
+        pageControl.currentPage = Int(pageNumber)
+    }
+    
+    @objc func goToMovieTab() {
+      
+        performSegue(withIdentifier: Segue.ToMovieTab, sender: nil)
+        
+    }
+    
+    @objc func scrollToNextCell(){
+        
+        //get cell size
+        let cellSize = view.frame.size
+        
+        //get current content Offset of the Collection view
+        let contentOffset = collectionView.contentOffset
+        
+        if collectionView.contentSize.width <= contentOffset.x + cellSize.width
+        {
+            let r = CGRect(x: 0, y: contentOffset.y, width: cellSize.width, height: cellSize.height)
+            collectionView.scrollRectToVisible(r, animated: true)
+            
+            pageControl.currentPage = 0
+            
+            
+        } else {
+            let r = CGRect(x: contentOffset.x + cellSize.width, y: contentOffset.y, width: cellSize.width, height: cellSize.height)
+            collectionView.scrollRectToVisible(r, animated: true);
+            
+            pageControl.currentPage = Int(round((contentOffset.x + cellSize.width) / cellSize.width))
+        }
+        
+    }
+    
+}
+
+extension WalkthroughViewController: UICollectionViewDelegate, UICollectionViewDataSource {
+    
+    func collectionView(_ collectionView: UICollectionView, numberOfItemsInSection section: Int) -> Int {
+        
+        return walkthroughData.walkthrough.count
+    }
+    
+    func collectionView(_ collectionView: UICollectionView, cellForItemAt indexPath: IndexPath) -> UICollectionViewCell {
+        
+        if let cell = collectionView.dequeueReusableCell(withReuseIdentifier: Storyboard.walkthroughViewCell, for: indexPath) as? WalkthroughCollectionViewCell {
+            
+            cell.getStaredButtonView.isHidden = true
+            
+            cell.walkthroughData = walkthroughData.walkthrough[indexPath.row]
+            
+            if indexPath.row == walkthroughData.walkthrough.count - 1 {
+                cell.nextButtonView.isHidden = true
+                cell.getStaredButtonView.isHidden = false
+            }
+            
+            cell.nextButton.addTarget(self, action: #selector(WalkthroughViewController.scrollToNextCell), for: .touchUpInside)
+            
+            
+            cell.getStaredButton.addTarget(self, action: #selector(WalkthroughViewController.goToMovieTab), for: .touchUpInside)
+            
+            return cell
+        }
+        
+        return UICollectionViewCell()
+    }
+    
+    
+    
+    
+}

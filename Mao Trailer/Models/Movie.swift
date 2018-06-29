@@ -28,7 +28,19 @@ struct Cast {
     var character: String?
 }
 
+struct Walkthrough {
+    var title: String
+    var imgUrl: String
+    var description: String
+}
+
 class DataMovies {
+    
+    let walkthrough: [Walkthrough] = [
+        Walkthrough(title: "Get the first", imgUrl: "Walkthrough-1", description: "Movie &TV information"),
+        Walkthrough(title: "Know the movie", imgUrl: "Walkthrough-2", description: "is not worth Watching"),
+        Walkthrough(title: "Real-time", imgUrl: "Walkthrough-3", description: "updates movie Trailer")
+        ]
     
     let hotMovies: [Movie] = [
         Movie(id: 0, rate: 8.9, title: "Stranger Things", imgUrl: "StrangerThings-Slide", description: "Stranger Things"),
@@ -59,7 +71,7 @@ class DataMovies {
         Movie(id: 5, rate: 0.0, title: "More", imgUrl: "land-more", description: "More")
     ]
     
-
+    
     let sectionMovies: [Section] = [
         Section(sectionName: "Now", movieArray: [
             Movie(id: 0, rate: 6.6, title: "Justice League", imgUrl: "JusticeLeague-Slide", description: "Fueled by his restored faith in humanity and inspired by Superman's selfless act, Bruce Wayne enlists the help of his newfound ally, Diana Prince, to face an even greater enemy."),

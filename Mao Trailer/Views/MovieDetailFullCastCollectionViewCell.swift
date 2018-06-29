@@ -10,9 +10,12 @@ import UIKit
 
 class MovieDetailFullCastCollectionViewCell: UICollectionViewCell {
     
+    @IBOutlet weak var coverCastView: UIView!
     @IBOutlet weak var coverImageView: UIImageView!
     @IBOutlet weak var nameLabel: UILabel!
     @IBOutlet weak var creditLabel: UILabel!
+    
+    let cornerRadius: CGFloat = 3.0
     
     var cast: Cast! {
         didSet{
@@ -26,8 +29,10 @@ class MovieDetailFullCastCollectionViewCell: UICollectionViewCell {
         creditLabel.text = cast.character
         
         coverImageView.clipsToBounds = true
-        coverImageView.layer.cornerRadius = 3.0
+        coverImageView.layer.cornerRadius = cornerRadius
         coverImageView.image = UIImage(named: cast.imgUrl)
+        
+        coverCastView.dropShadow(radius: cornerRadius)
         
     }
     

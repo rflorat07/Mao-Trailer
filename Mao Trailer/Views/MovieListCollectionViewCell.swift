@@ -10,6 +10,7 @@ import UIKit
 
 class MovieListCollectionViewCell: UICollectionViewCell {
     
+    @IBOutlet weak var posterCoverView: UIView!
     @IBOutlet weak var rateLabel: UILabel!
     @IBOutlet weak var titleLabel: UILabel!
     @IBOutlet weak var coverImageView: UIImageView!
@@ -27,7 +28,10 @@ class MovieListCollectionViewCell: UICollectionViewCell {
         titleLabel.text = movie.title?.uppercased()
         
         coverImageView.clipsToBounds = true
-        coverImageView.layer.cornerRadius = Constants.cornerRadius
         coverImageView.image = UIImage(named: movie.imgUrl)
+        coverImageView.layer.cornerRadius = Constants.cornerRadius
+        
+        
+        posterCoverView.dropShadow(radius: Constants.cornerRadius)
     }
 }

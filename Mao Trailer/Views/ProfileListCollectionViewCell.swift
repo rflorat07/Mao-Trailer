@@ -13,6 +13,8 @@ class ProfileListCollectionViewCell: UICollectionViewCell {
     @IBOutlet weak var posterView: UIView!
     @IBOutlet weak var coverImageView: UIImageView!
     
+    let cornerRadius: CGFloat = Constants.cornerRadius
+    
     var posterImage: String! {
         didSet {
             self.updateUI()
@@ -22,7 +24,9 @@ class ProfileListCollectionViewCell: UICollectionViewCell {
     func updateUI() {
         
         coverImageView.clipsToBounds = true
-        coverImageView.layer.cornerRadius = Constants.cornerRadius
+        coverImageView.layer.cornerRadius = cornerRadius
         coverImageView.image = UIImage(named: posterImage)
+        
+        posterView.dropShadow(radius: cornerRadius)
     }
 }

@@ -8,7 +8,7 @@
 
 import UIKit
 
-class MovieDetailViewController: UIViewController, UIScrollViewDelegate {
+class MovieDetailViewController: UIViewController {
     
     @IBOutlet weak var coverImageView: UIImageView!
     @IBOutlet weak var titleLabel: UILabel!
@@ -16,7 +16,10 @@ class MovieDetailViewController: UIViewController, UIScrollViewDelegate {
     @IBOutlet weak var descriptionLabel: UILabel!
     @IBOutlet weak var collectionView: UICollectionView!
     @IBOutlet weak var ratingValueLabel: UILabel!
-
+    @IBOutlet weak var posterCoverView: UIView!
+    
+    let cornerRadius: CGFloat = Constants.cornerRadius
+    
     var movie: Movie!
     var dataCast = DataMovies()
     
@@ -31,7 +34,7 @@ class MovieDetailViewController: UIViewController, UIScrollViewDelegate {
         
         updateUI()
     }
-        
+    
     override func viewWillDisappear(_ animated: Bool) {
         super.viewWillDisappear(animated)
         
@@ -46,10 +49,14 @@ class MovieDetailViewController: UIViewController, UIScrollViewDelegate {
         coverImageView.image = UIImage(named: movie.imgUrl)
         ratingValueLabel.text = String(format:"%.1f", movie.rate!)
         
+        
         posterImageView.clipsToBounds = true
         posterImageView.image = UIImage(named: movie.imgUrl)
-        posterImageView.layer.cornerRadius = Constants.cornerRadius
+        posterImageView.layer.cornerRadius = cornerRadius
+        
+        posterCoverView.dropShadow(radius: cornerRadius)
     }
+    
     
     @IBAction func backButtonTapped(_ sender: UIButton) {
         dismiss(animated: true, completion: nil)

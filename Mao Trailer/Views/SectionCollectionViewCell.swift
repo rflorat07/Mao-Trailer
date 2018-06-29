@@ -10,11 +10,14 @@ import UIKit
 
 class SectionCollectionViewCell: UICollectionViewCell {
     
+    @IBOutlet weak var posterCoverView: UIView!
     @IBOutlet weak var coverImageView: UIImageView!
     @IBOutlet weak var titleLabel: UILabel!
     @IBOutlet weak var coverView: UIView!
     @IBOutlet weak var rateLabel: UILabel!
     @IBOutlet weak var rateView: UIView!
+    
+    let cornerRadius: CGFloat = Constants.cornerRadius
     
     var sectionMovie: Movie! {
         didSet {
@@ -36,15 +39,10 @@ class SectionCollectionViewCell: UICollectionViewCell {
         }
         
         coverImageView.clipsToBounds = true
-        coverImageView.layer.cornerRadius = Constants.cornerRadius
+        coverImageView.layer.cornerRadius = cornerRadius
         coverImageView.image = UIImage(named: sectionMovie.imgUrl)
         
+      //  posterCoverView.dropShadow(radius: cornerRadius)
         
-        // Shadow
-        /* coverView.layer.shadowRadius = 5
-         coverView.layer.shadowOpacity = 1
-         coverView.layer.masksToBounds = false
-         coverView.layer.shadowColor = UIColor.black.cgColor
-         coverView.layer.shadowOffset = CGSize(width: 0, height: 3.0) */
     }
 }
