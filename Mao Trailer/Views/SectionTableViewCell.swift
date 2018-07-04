@@ -13,7 +13,12 @@ class SectionTableViewCell: UITableViewCell {
     @IBOutlet weak var sectionTitleLabel: UILabel!
     @IBOutlet weak var sectionCollectionView: UICollectionView!
 
-    var sectionMovies = [Movie]()
+    var sectionMovies: [Movie]! {
+        didSet{
+            sectionCollectionView.reloadData()
+        }
+    }
+    
     var didSelectAction: (Movie) -> Void = { arg in }
     
     override func awakeFromNib() {
@@ -34,7 +39,6 @@ extension SectionTableViewCell: UICollectionViewDelegate, UICollectionViewDataSo
         
         let cell = collectionView.dequeueReusableCell(withReuseIdentifier: Storyboard.sectionViewCell, for: indexPath) as! SectionCollectionViewCell
         
-        cell.posterCoverView.dropShadow(radius: 6)
         cell.sectionMovie = sectionMovies[indexPath.row]
         
         return cell

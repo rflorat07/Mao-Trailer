@@ -11,9 +11,16 @@ import UIKit
 class MoviesTableViewController: UITableViewController {
     
     let dataMovies = DataMovies()
-    
+    var movieList: [Movie] = [Movie]()
+   
     override func viewDidLoad() {
         super.viewDidLoad()
+        
+        // StatusBar Style
+        UIApplication.shared.statusBarStyle = .default
+        
+        // Load Movies Data
+        loadData()
     }
     
     override func prepare(for segue: UIStoryboardSegue, sender: Any?) {
@@ -23,6 +30,20 @@ class MoviesTableViewController: UITableViewController {
             let toViewController = segue.destination as! MovieListCollectionViewController
             
             toViewController.movieList = sender as! Section
+        }
+    }
+    
+    func loadData() {
+        
+        QueryService.intance.getDiscoverMovie(queryString: EndPoint.Movie, withStructType: StructType.Movie) { (movies)  in
+            
+            if let movies = movies {
+                self.movieList = movies
+            
+                DispatchQueue.main.async {
+                    self.tableView.reloadData()
+                }
+            }
         }
     }
 }
@@ -44,7 +65,7 @@ extension MoviesTableViewController {
         // Section 0 - Hot [Movie]
         // Section 1 - Section [Section]
         
-        return section == 0 ? 1 : self.dataMovies.sectionMovies.count
+        return section == 0 ? 1 : 2
     }
     
     //Height for each section
@@ -59,12 +80,12 @@ extension MoviesTableViewController {
         if indexPath.section == 0 {
             let cell = tableView.dequeueReusableCell(withIdentifier: Storyboard.hotViewCell, for: indexPath) as! HotTableViewCell
             
-            cell.hotMovies = dataMovies.hotMovies
+            cell.hotMovies = movieList
             
             cell.didSelectAction = { (movie) in
                 
                 if movie.title == "More" {
-                    let data: Section = Section(sectionName: "Hot list", movieArray: self.dataMovies.hotMovies)
+                    let data: Section = Section(sectionName: "Hot list", movieArray: self.movieList)
                     
                     self.performSegue(withIdentifier: Segue.toMovieList, sender: data)
                     
@@ -89,14 +110,14 @@ extension MoviesTableViewController {
             
             let section = dataMovies.sectionMovies[indexPath.row]
             
-            cell.sectionMovies = section.movieArray
+            cell.sectionMovies = movieList
             cell.sectionTitleLabel.text = section.sectionName
             
             cell.didSelectAction = { (movie) in
                 
                 if movie.title == "More" {
                     
-                    let data: Section = Section(sectionName: "\(section.sectionName) list" , movieArray: section.movieArray)
+                    let data: Section = Section(sectionName: "\(section.sectionName) list" , movieArray: self.movieList)
                     
                     self.performSegue(withIdentifier: Segue.toMovieList, sender: data)
                     

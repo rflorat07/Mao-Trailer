@@ -12,7 +12,12 @@ class HotTableViewCell: UITableViewCell {
     
     @IBOutlet weak var hotCollectionView: UICollectionView!
     
-    var hotMovies = [Movie] ()
+    var hotMovies: [Movie]! {
+        didSet{
+            hotCollectionView.reloadData()
+        }
+    }
+    
     var didSelectAction: (Movie) -> Void = { arg in }
  
     override func awakeFromNib() {

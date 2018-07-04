@@ -27,15 +27,6 @@ class WalkthroughViewController: UIViewController {
         UIApplication.shared.statusBarStyle = .lightContent
     }
     
-    
-    override func viewWillDisappear(_ animated: Bool) {
-        super.viewWillDisappear(animated)
-        
-        // StatusBar Style
-        UIApplication.shared.statusBarStyle = .default
-    }
-    
-    
     func configurePageControl() {
         
         self.pageControl.currentPage = 0
@@ -49,10 +40,8 @@ class WalkthroughViewController: UIViewController {
         pageControl.currentPage = Int(pageNumber)
     }
     
-    @objc func goToMovieTab() {
-      
+    @objc func goToMovieTab() {        
         performSegue(withIdentifier: Segue.ToMovieTab, sender: nil)
-        
     }
     
     @objc func scrollToNextCell(){

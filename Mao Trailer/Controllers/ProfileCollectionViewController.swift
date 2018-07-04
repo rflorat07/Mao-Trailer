@@ -54,7 +54,7 @@ class ProfileCollectionViewController: UICollectionViewController {
       
         if  let cell = collectionView.dequeueReusableCell(withReuseIdentifier: Storyboard.profileListViewCell, for: indexPath) as? ProfileListCollectionViewCell {
             
-            cell.posterImage = movieData.profileList[indexPath.row].imgUrl
+            cell.posterImage = movieData.profileList[indexPath.row].poster_path
             
             return cell
         }

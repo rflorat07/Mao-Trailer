@@ -25,12 +25,11 @@ class MovieListCollectionViewCell: UICollectionViewCell {
     func updateUI() {
         
         rateView.isHidden = true
-        titleLabel.text = movie.title?.uppercased()
+        titleLabel.text = movie.title.uppercased()
         
         coverImageView.clipsToBounds = true
-        coverImageView.image = UIImage(named: movie.imgUrl)
+        coverImageView.image = UIImage(named: movie.poster_path)
         coverImageView.layer.cornerRadius = Constants.cornerRadius
-        
         
         posterCoverView.dropShadow(radius: Constants.cornerRadius)
     }

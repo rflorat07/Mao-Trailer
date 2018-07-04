@@ -15,6 +15,9 @@ class TVPopularTableViewCell: UITableViewCell {
     @IBOutlet weak var coverView: UIView!
     @IBOutlet weak var rateLabel: UILabel!
     @IBOutlet weak var rateView: UIView!
+    @IBOutlet weak var posterCoverView: UIView!
+    
+    let cornerRadius: CGFloat = Constants.cornerRadius
     
     var tvShows: Movie! {
         didSet{
@@ -26,8 +29,8 @@ class TVPopularTableViewCell: UITableViewCell {
         
         if tvShows.title != "More" {
             
-            titleLabel.text = tvShows.title?.uppercased()
-            rateLabel.text = String(format: "%.1f", tvShows.rate!)
+            titleLabel.text = tvShows.title.uppercased()
+            rateLabel.text = String(format: "%.1f", tvShows.vote_average)
             
         } else {
             
@@ -36,8 +39,10 @@ class TVPopularTableViewCell: UITableViewCell {
         }
         
         coverImageView.clipsToBounds = true
-        coverImageView.layer.cornerRadius = Constants.cornerRadius
-        coverImageView.image = UIImage(named: tvShows.imgUrl)
+        coverImageView.layer.cornerRadius = cornerRadius
+        coverImageView.image = UIImage(named: tvShows.poster_path)
+        
+        posterCoverView.dropShadow(radius: cornerRadius)
     }
     
 }

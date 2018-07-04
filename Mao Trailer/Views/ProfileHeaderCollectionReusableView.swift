@@ -28,8 +28,10 @@ class ProfileHeaderCollectionReusableView: UICollectionReusableView {
     func updateUI() {
         
         avatarImageView.clipsToBounds = true
+        avatarImageView.layer.borderWidth = 3
         avatarImageView.layer.cornerRadius = cornerRadius
         avatarImageView.image = UIImage(named: avatarImage)
+        avatarImageView.layer.borderColor = UIColor.white.cgColor
 
     }
 }

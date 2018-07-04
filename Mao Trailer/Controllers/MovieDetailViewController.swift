@@ -44,14 +44,16 @@ class MovieDetailViewController: UIViewController {
         
     func updateUI() {
         
-        descriptionLabel.text = movie.description
-        titleLabel.text = movie.title?.uppercased()
-        coverImageView.image = UIImage(named: movie.imgUrl)
-        ratingValueLabel.text = String(format:"%.1f", movie.rate!)
+        descriptionLabel.text = movie.overview
+        titleLabel.text = movie.title.uppercased()
+        
+        self.loadImage(withPath: movie)
+        
+        ratingValueLabel.text = String(format:"%.1f", movie.vote_average)
         
         
         posterImageView.clipsToBounds = true
-        posterImageView.image = UIImage(named: movie.imgUrl)
+        posterImageView.image = UIImage(named: movie.poster_path)
         posterImageView.layer.cornerRadius = cornerRadius
         
         posterCoverView.dropShadow(radius: cornerRadius)
@@ -60,6 +62,24 @@ class MovieDetailViewController: UIViewController {
     
     @IBAction func backButtonTapped(_ sender: UIButton) {
         dismiss(animated: true, completion: nil)
+    }
+    
+    func loadImage(withPath: Movie) {
+        
+        var downloadImage = UIImage()
+        
+        //Download Image
+        let imageString = "https://image.tmdb.org/t/p/w500\(withPath.backdrop_path)"
+        guard let imageUrl = URL(string: imageString) else { return }
+        let imageProcessor = QueryService()
+        imageProcessor.downloadImage(withPath: imageUrl) { (data, response, error) in
+            
+            DispatchQueue.main.async {
+                guard let imageData = data else { return }
+                downloadImage = UIImage(data: imageData)!
+                self.coverImageView.image = downloadImage
+            }
+        }
     }
 }
 

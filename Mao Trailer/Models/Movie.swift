@@ -8,14 +8,21 @@
 
 import Foundation
 
-struct Movie {
-    var id: Int
-    var rate: Double?
-    var title:String?
-    var imgUrl: String
-    var description: String?
+
+struct Movie: Decodable {
+    let id: Int
+    let title: String
+    let overview: String
+    let poster_path: String
+    let vote_average: Double
+    let release_date: String
+    let backdrop_path : String
+    let original_title : String
 }
 
+struct MovieList: Decodable {
+    let results: [Movie]
+}
 
 struct Section {
     var sectionName: String
@@ -40,54 +47,41 @@ class DataMovies {
         Walkthrough(title: "Get the first", imgUrl: "Walkthrough-1", description: "Movie &TV information"),
         Walkthrough(title: "Know the movie", imgUrl: "Walkthrough-2", description: "is not worth Watching"),
         Walkthrough(title: "Real-time", imgUrl: "Walkthrough-3", description: "updates movie Trailer")
-        ]
+    ]
     
     let hotMovies: [Movie] = [
-        Movie(id: 0, rate: 8.9, title: "Stranger Things", imgUrl: "StrangerThings-Slide", description: "Stranger Things"),
-        Movie(id: 1, rate: 8.4, title: "The Walking Dead", imgUrl: "TheWalkingDead-Slide", description: "The Walking Dead"),
-        Movie(id: 2, rate: 8.0, title: "The Flash", imgUrl: "TheFlash-Slide", description: "The Flash"),
-        Movie(id: 3, rate: 9.5, title: "Game of Thrones", imgUrl: "GameofThrones-Slide", description: "Game of Thrones"),
-        Movie(id: 4, rate: 8.7, title: "Shameless", imgUrl: "Shameless-Slide", description: "Shameless"),
-        Movie(id: 5, rate: 0.0, title: "More", imgUrl: "land-more", description: "More")
+        
+        Movie(id: 0, title: "Stranger Things", overview: "Stranger Things", poster_path: "StrangerThings-Slide", vote_average: 8.9, release_date: "2018-06-06",backdrop_path : "", original_title: "Stranger Things"),
+        
+        Movie(id: 1, title: "More", overview: "Stranger Things", poster_path: "land-more", vote_average: 0.0, release_date: "2018-06-06",backdrop_path : "", original_title: "More")
+        
     ]
     
     let nowMovies: [Movie] = [
-        Movie(id: 0, rate: 8.9, title: "Narcos", imgUrl: "Narcos-Slide", description: "Narcos"),
-        Movie(id: 1, rate: 7.6, title: "Top of the Lake", imgUrl: "TopLake-Slide", description: "Top of the Lake"),
-        Movie(id: 2, rate: 8.5, title: "Outlander", imgUrl: "Outlander-Slide", description: "Outlander"),
-        Movie(id: 3, rate: 8.9, title: "Lethal Weapon", imgUrl: "LethalWeapon-Slide", description: "Lethal Weapon"),
-        Movie(id: 4, rate: 8.3, title: "Brooklyn Nine-Nine", imgUrl: "Brooklyn-Slide", description: "Brooklyn Nine-Nine"),
-        Movie(id: 5, rate: 0.0, title: "More", imgUrl: "port-more", description: "More")
+        Movie(id: 0, title: "Stranger Things", overview: "Stranger Things", poster_path: "StrangerThings-Slide", vote_average: 8.9, release_date: "2018-06-06",backdrop_path : "", original_title: "Stranger Things"),
         
+        Movie(id: 1, title: "More", overview: "Stranger Things", poster_path: "port-more", vote_average: 0.0, release_date: "2018-06-06",backdrop_path : "", original_title: "More")
     ]
     
     let tvMovies : [Movie] = [
         
-        Movie(id: 0, rate: 8.9, title: "Stranger Things", imgUrl: "StrangerThings-Slide", description: "Stranger Things"),
-        Movie(id: 1, rate: 8.4, title: "The Walking Dead", imgUrl: "TheWalkingDead-Slide", description: "The Walking Dead"),
-        Movie(id: 2, rate: 8.0, title: "The Flash", imgUrl: "TheFlash-Slide", description: "The Flash"),
-        Movie(id: 3, rate: 9.5, title: "Game of Thrones", imgUrl: "GameofThrones-Slide", description: "Game of Thrones"),
-        Movie(id: 4, rate: 8.7, title: "Shameless", imgUrl: "Shameless-Slide", description: "Shameless"),
-        Movie(id: 5, rate: 0.0, title: "More", imgUrl: "land-more", description: "More")
+        Movie(id: 0, title: "Stranger Things", overview: "Stranger Things", poster_path: "StrangerThings-Slide", vote_average: 8.9, release_date: "2018-06-06",backdrop_path : "", original_title: "Stranger Things"),
+        
+        Movie(id: 1, title: "More", overview: "Stranger Things", poster_path: "land-more", vote_average: 0.0, release_date: "2018-06-06", backdrop_path : "",original_title: "More")
+        
     ]
-    
     
     let sectionMovies: [Section] = [
         Section(sectionName: "Now", movieArray: [
-            Movie(id: 0, rate: 6.6, title: "Justice League", imgUrl: "JusticeLeague-Slide", description: "Fueled by his restored faith in humanity and inspired by Superman's selfless act, Bruce Wayne enlists the help of his newfound ally, Diana Prince, to face an even greater enemy."),
-            Movie(id: 1, rate: 6.4, title: "Rampage", imgUrl: "Rampage-Slide", description: "When three different animals become infected with a dangerous pathogen, a primatologist and a geneticist team up to stop them from destroying Chicago."),
-            Movie(id: 2, rate: 7.5, title: "Spider-Man: Homecoming", imgUrl: "SpiderMan-Slide", description: "Peter Parker balances his life as an ordinary high school student in Queens with his superhero alter-ego Spider-Man, and finds himself on the trail of a new menace prowling the skies of New York City."),
-            Movie(id: 3, rate: 7.9, title: "Thor: Ragnarok", imgUrl: "ThorRagnarok-Slide", description: "Thor is imprisoned on the planet Sakaar, and must race against time to return to Asgard and stop Ragnarök, the destruction of his world, at the hands of the powerful and ruthless villain Hela."),
-            Movie(id: 4, rate: 8.1, title: "Hotel Transylvania 3: Summer Vacation", imgUrl: "HotelTransylvania-Slide", description: "Mavis surprises Dracula with a family voyage on a luxury Monster Cruise Ship so he can take a vacation from providing everyone else's vacation at the hotel. The rest of Drac's Pack cannot resist going along. But once they leave port, romance arises when Dracula meets the mysterious ship Captain, Ericka. "),
-            Movie(id: 5, rate: 0.0, title: "More", imgUrl: "port-more", description: "More")
+            Movie(id: 0, title: "Stranger Things", overview: "Stranger Things", poster_path: "StrangerThings-Slide", vote_average: 8.9, release_date: "2018-06-06", backdrop_path : "", original_title: "Stranger Things"),
+            
+            Movie(id: 1, title: "More", overview: "Stranger Things", poster_path: "port-more", vote_average: 0.0, release_date: "2018-06-06",backdrop_path : "", original_title: "More")
+            
+            
             ]),
         Section(sectionName: "Popular", movieArray: [
-            Movie(id: 0, rate: 6.5, title: "Tomb Raider", imgUrl: "TombRaider-Slide", description: "Tomb Raider"),
-            Movie(id: 1, rate: 7.5, title: "Spider-Man: Homecoming", imgUrl: "SpiderMan-Slide", description: "Spider-Man: Homecoming"),
-            Movie(id: 2, rate: 7.5, title: "Wonder Woman", imgUrl: "WonderWoman-Slide", description: "Wonder Woman"),
-            Movie(id: 2, rate: 7.9, title: "Arrival", imgUrl: "Arrival-Slide", description: "Arrival"),
-            Movie(id: 3, rate: 8.9, title: "Narcos", imgUrl: "Narcos-Slide", description: "Narcos"),
-            Movie(id: 5, rate: 0.0, title: "More", imgUrl: "port-more", description: "More")
+            Movie(id: 0, title: "Stranger Things", overview: "Stranger Things", poster_path: "StrangerThings-Slide", vote_average: 8.9, release_date: "2018-06-06",backdrop_path : "", original_title: "Stranger Things"),
+            Movie(id: 1, title: "More", overview: "Stranger Things", poster_path: "port-more", vote_average: 0.0, release_date: "2018-06-06", backdrop_path : "",original_title: "More")
             ])
     ]
     
@@ -102,21 +96,7 @@ class DataMovies {
         ]
     
     let profileList: [Movie] = [
-        Movie(id: 0, rate: 6.6, title: "Justice League", imgUrl: "JusticeLeague-Slide", description: "Fueled by his restored faith in humanity and inspired by Superman's selfless act, Bruce Wayne enlists the help of his newfound ally, Diana Prince, to face an even greater enemy."),
-        Movie(id: 1, rate: 6.4, title: "Rampage", imgUrl: "Rampage-Slide", description: "When three different animals become infected with a dangerous pathogen, a primatologist and a geneticist team up to stop them from destroying Chicago."),
-        Movie(id: 2, rate: 7.5, title: "Spider-Man: Homecoming", imgUrl: "SpiderMan-Slide", description: "Peter Parker balances his life as an ordinary high school student in Queens with his superhero alter-ego Spider-Man, and finds himself on the trail of a new menace prowling the skies of New York City."),
-        Movie(id: 3, rate: 7.9, title: "Thor: Ragnarok", imgUrl: "ThorRagnarok-Slide", description: "Thor is imprisoned on the planet Sakaar, and must race against time to return to Asgard and stop Ragnarök, the destruction of his world, at the hands of the powerful and ruthless villain Hela."),
-        Movie(id: 4, rate: 8.1, title: "Hotel Transylvania 3: Summer Vacation", imgUrl: "HotelTransylvania-Slide", description: "Mavis surprises Dracula with a family voyage on a luxury Monster Cruise Ship so he can take a vacation from providing everyone else's vacation at the hotel. The rest of Drac's Pack cannot resist going along. But once they leave port, romance arises when Dracula meets the mysterious ship Captain, Ericka. "),
-        Movie(id: 0, rate: 6.5, title: "Tomb Raider", imgUrl: "TombRaider-Slide", description: "Tomb Raider"),
-        Movie(id: 1, rate: 7.5, title: "Spider-Man: Homecoming", imgUrl: "SpiderMan-Slide", description: "Spider-Man: Homecoming"),
-        Movie(id: 2, rate: 7.5, title: "Wonder Woman", imgUrl: "WonderWoman-Slide", description: "Wonder Woman"),
-        Movie(id: 2, rate: 7.9, title: "Arrival", imgUrl: "Arrival-Slide", description: "Arrival"),
-        Movie(id: 3, rate: 8.9, title: "Narcos", imgUrl: "Narcos-Slide", description: "Narcos"),
-        Movie(id: 0, rate: 8.9, title: "Stranger Things", imgUrl: "StrangerThings-Slide", description: "Stranger Things"),
-        Movie(id: 1, rate: 8.4, title: "The Walking Dead", imgUrl: "TheWalkingDead-Slide", description: "The Walking Dead"),
-        Movie(id: 2, rate: 8.0, title: "The Flash", imgUrl: "TheFlash-Slide", description: "The Flash"),
-        Movie(id: 3, rate: 9.5, title: "Game of Thrones", imgUrl: "GameofThrones-Slide", description: "Game of Thrones"),
-        Movie(id: 4, rate: 8.7, title: "Shameless", imgUrl: "Shameless-Slide", description: "Shameless")
+        Movie(id: 0, title: "Stranger Things", overview: "Stranger Things", poster_path: "StrangerThings-Slide", vote_average: 8.9, release_date: "2018-06-06",backdrop_path : "", original_title: "Stranger Things")
     ]
     
     

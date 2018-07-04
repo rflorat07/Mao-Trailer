@@ -16,11 +16,11 @@ extension UIView {
         self.layer.masksToBounds = false
         self.layer.cornerRadius = radius
         
-        self.layer.shadowOpacity = 1.0
+        self.layer.shadowOpacity = 0.5
         self.layer.shadowRadius = radius
         self.layer.shadowColor = UIColor.black.cgColor
         self.layer.backgroundColor = UIColor.clear.cgColor
-        self.layer.shadowOffset = CGSize(width: 0, height: 1.0)
+        self.layer.shadowOffset = CGSize(width: 3.0, height: 4.0)
         self.layer.shadowPath = UIBezierPath(roundedRect: self.bounds, cornerRadius: radius).cgPath
     }
 }
