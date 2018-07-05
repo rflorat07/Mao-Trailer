@@ -10,10 +10,12 @@ import UIKit
 
 class TVTableViewController: UITableViewController {
 
-    let dataMovies = DataMovies()
+    var tvShowList: [TVShow] = [TVShow]()
     
     override func viewDidLoad() {
         super.viewDidLoad()
+        
+        loadTVShowListData()
 
     }
     
@@ -23,9 +25,20 @@ class TVTableViewController: UITableViewController {
             
             let toViewController = segue.destination as! MovieListCollectionViewController
             
-            toViewController.movieList = sender as! Section
+            toViewController.movieList = sender as! SectionMovie
             
         } 
+    }
+    
+    func loadTVShowListData() {
+        
+        QueryServiceTVShow.intance.getDiscoverTVShow(queryString: EndPoint.NowTVShows) { (tvShow)  in
+            
+            if let tvShow = tvShow {
+                self.tvShowList = tvShow
+                self.tableView.reloadData()
+            }
+        }
     }
 }
 
@@ -48,7 +61,7 @@ extension TVTableViewController {
         // 1 - SectionLabel
         // 2 - Popular [Section]
         
-        return section < 2 ? 1 : dataMovies.tvMovies.count
+        return section < 2 ? 1 : tvShowList.count
     }
     
     override func tableView(_ tableView: UITableView, heightForRowAt indexPath: IndexPath) -> CGFloat {
@@ -71,13 +84,13 @@ extension TVTableViewController {
             if let cell = tableView.dequeueReusableCell(withIdentifier: Storyboard.tvNowViewCell, for: indexPath) as? TVNowTableViewCell {
                 
                 cell.selectionStyle = .none
-                cell.nowMovies = dataMovies.nowMovies
+                cell.nowTVShows = tvShowList
                 
-                cell.didSelectAction = { (movie) in
-                    
-                    if movie.title == "More" {
+               cell.didSelectAction = { (tvShow) in
+                
+                    if tvShow.title == "More" {
                         
-                        let data: Section = Section(sectionName: "Now list", movieArray: self.dataMovies.nowMovies)
+                        let data: SectionMovie = SectionMovie(sectionName: "Now list", movieArray: self.tvShowList)
                         
                         self.performSegue(withIdentifier: Segue.toMovieList, sender: data)
                         
@@ -88,7 +101,7 @@ extension TVTableViewController {
                             movieDetail.modalPresentationStyle = .overFullScreen
                             movieDetail.modalTransitionStyle = .crossDissolve
                             
-                            movieDetail.movie = movie
+                            movieDetail.movie = tvShow
                             
                             self.present(movieDetail, animated: true, completion: nil)
                         }
@@ -111,7 +124,7 @@ extension TVTableViewController {
             
             if let cell = tableView.dequeueReusableCell(withIdentifier: Storyboard.tvPopularViewCell, for: indexPath) as? TVPopularTableViewCell {
                 
-                cell.tvShows = dataMovies.tvMovies[indexPath.row]
+                cell.tvShows = tvShowList[indexPath.row]
                 
                 cell.selectionStyle = .none
                 
@@ -127,11 +140,11 @@ extension TVTableViewController {
         
         if indexPath.section == 2 {
             
-             let movie: Movie = dataMovies.tvMovies[indexPath.row]
+             let tvShow: TVShow = tvShowList[indexPath.row]
             
-            if movie.title == "More" {
+            if tvShow.title == "More" {
                 
-                let data: Section = Section(sectionName: "Popular list", movieArray: self.dataMovies.tvMovies)
+                let data: SectionMovie = SectionMovie(sectionName: "Popular list", movieArray: tvShowList)
                 
                 self.performSegue(withIdentifier: Segue.toMovieList, sender: data)
                 
@@ -142,7 +155,7 @@ extension TVTableViewController {
                     movieDetail.modalPresentationStyle = .overFullScreen
                     movieDetail.modalTransitionStyle = .crossDissolve
                     
-                    movieDetail.movie = movie
+                    movieDetail.movie = tvShow
                     
                     self.present(movieDetail, animated: true, completion: nil)
                 }

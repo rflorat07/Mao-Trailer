@@ -16,7 +16,7 @@ class MovieListCollectionViewCell: UICollectionViewCell {
     @IBOutlet weak var coverImageView: UIImageView!
     @IBOutlet weak var rateView: UIView!
     
-    var movie: Movie! {
+    var movie: TVFilm! {
         didSet {
             self.updateUI()
         }
@@ -28,8 +28,8 @@ class MovieListCollectionViewCell: UICollectionViewCell {
         titleLabel.text = movie.title.uppercased()
         
         coverImageView.clipsToBounds = true
-        coverImageView.image = UIImage(named: movie.poster_path)
         coverImageView.layer.cornerRadius = Constants.cornerRadius
+        coverImageView.downloadedFrom(urlString: movie.poster_path)
         
         posterCoverView.dropShadow(radius: Constants.cornerRadius)
     }

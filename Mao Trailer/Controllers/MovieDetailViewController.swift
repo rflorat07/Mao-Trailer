@@ -20,8 +20,7 @@ class MovieDetailViewController: UIViewController {
     
     let cornerRadius: CGFloat = Constants.cornerRadius
     
-    var movie: Movie!
-    var dataCast = DataMovies()
+    var movie: TVFilm!
     
     override func viewDidLoad() {
         super.viewDidLoad()
@@ -47,14 +46,13 @@ class MovieDetailViewController: UIViewController {
         descriptionLabel.text = movie.overview
         titleLabel.text = movie.title.uppercased()
         
-        self.loadImage(withPath: movie)
+        coverImageView.downloadedFrom(urlString: movie.backdrop_path)
         
         ratingValueLabel.text = String(format:"%.1f", movie.vote_average)
         
-        
         posterImageView.clipsToBounds = true
-        posterImageView.image = UIImage(named: movie.poster_path)
         posterImageView.layer.cornerRadius = cornerRadius
+        posterImageView.downloadedFrom(urlString: movie.poster_path)
         
         posterCoverView.dropShadow(radius: cornerRadius)
     }
@@ -63,24 +61,7 @@ class MovieDetailViewController: UIViewController {
     @IBAction func backButtonTapped(_ sender: UIButton) {
         dismiss(animated: true, completion: nil)
     }
-    
-    func loadImage(withPath: Movie) {
-        
-        var downloadImage = UIImage()
-        
-        //Download Image
-        let imageString = "https://image.tmdb.org/t/p/w500\(withPath.backdrop_path)"
-        guard let imageUrl = URL(string: imageString) else { return }
-        let imageProcessor = QueryService()
-        imageProcessor.downloadImage(withPath: imageUrl) { (data, response, error) in
-            
-            DispatchQueue.main.async {
-                guard let imageData = data else { return }
-                downloadImage = UIImage(data: imageData)!
-                self.coverImageView.image = downloadImage
-            }
-        }
-    }
+
 }
 
 extension MovieDetailViewController: UICollectionViewDelegate, UICollectionViewDataSource {
@@ -88,7 +69,7 @@ extension MovieDetailViewController: UICollectionViewDelegate, UICollectionViewD
 
     func collectionView(_ collectionView: UICollectionView, numberOfItemsInSection section: Int) -> Int {
         
-        return dataCast.fullCast.count
+        return FullCastList.count
         
     }
 
@@ -96,7 +77,7 @@ extension MovieDetailViewController: UICollectionViewDelegate, UICollectionViewD
         
         if let cell = collectionView.dequeueReusableCell(withReuseIdentifier: Storyboard.fullCastCollectionViewCell, for: indexPath) as? MovieDetailFullCastCollectionViewCell {
             
-            cell.cast = dataCast.fullCast[indexPath.row]
+            cell.cast = FullCastList[indexPath.row]
             
             return cell
         }

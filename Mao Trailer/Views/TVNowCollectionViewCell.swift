@@ -10,15 +10,15 @@ import UIKit
 
 class TVNowCollectionViewCell: UICollectionViewCell {
     
+    @IBOutlet weak var posterCoverView: UIView!
     @IBOutlet weak var coverImageView: UIImageView!
     @IBOutlet weak var titleLabel: UILabel!
-    @IBOutlet weak var posterCoverView: UIView!
     @IBOutlet weak var rateLabel: UILabel!
     @IBOutlet weak var rateView: UIView!
     
     let cornerRadius: CGFloat = Constants.cornerRadius
     
-    var nowMovie: Movie!{
+    var nowTVShow: TVShow!{
         didSet{
             self.updateUI()
         }
@@ -26,22 +26,23 @@ class TVNowCollectionViewCell: UICollectionViewCell {
     
     func updateUI() {
         
-        if nowMovie.title != "More" {
+        if nowTVShow.title != "More" {
             
             rateView.isHidden = true
-            titleLabel.text = nowMovie.title.uppercased()
+            titleLabel.text = nowTVShow.title.uppercased()
+            
+            coverImageView.downloadedFrom(urlString: nowTVShow.poster_path)
             
         } else {
             titleLabel.text = ""
             rateView.isHidden = true
+            coverImageView.image = UIImage(named: "port-more")
         }
         
         coverImageView.clipsToBounds = true
         coverImageView.layer.cornerRadius = cornerRadius
-        coverImageView.image = UIImage(named: nowMovie.poster_path)
         
         posterCoverView.dropShadow(radius: cornerRadius)
-        
         
     }
     

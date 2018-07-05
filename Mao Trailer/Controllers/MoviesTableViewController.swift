@@ -10,9 +10,8 @@ import UIKit
 
 class MoviesTableViewController: UITableViewController {
     
-    let dataMovies = DataMovies()
     var movieList: [Movie] = [Movie]()
-   
+    
     override func viewDidLoad() {
         super.viewDidLoad()
         
@@ -20,7 +19,7 @@ class MoviesTableViewController: UITableViewController {
         UIApplication.shared.statusBarStyle = .default
         
         // Load Movies Data
-        loadData()
+        loadMovieListData()
     }
     
     override func prepare(for segue: UIStoryboardSegue, sender: Any?) {
@@ -29,20 +28,17 @@ class MoviesTableViewController: UITableViewController {
             
             let toViewController = segue.destination as! MovieListCollectionViewController
             
-            toViewController.movieList = sender as! Section
+            toViewController.movieList = sender as! SectionMovie
         }
     }
     
-    func loadData() {
+    func loadMovieListData() {
         
-        QueryService.intance.getDiscoverMovie(queryString: EndPoint.Movie, withStructType: StructType.Movie) { (movies)  in
+        QueryServiceMovie.intance.getDiscoverMovie(queryString: EndPoint.NowMovies) { (movies)  in
             
             if let movies = movies {
                 self.movieList = movies
-            
-                DispatchQueue.main.async {
-                    self.tableView.reloadData()
-                }
+                self.tableView.reloadData()
             }
         }
     }
@@ -85,7 +81,7 @@ extension MoviesTableViewController {
             cell.didSelectAction = { (movie) in
                 
                 if movie.title == "More" {
-                    let data: Section = Section(sectionName: "Hot list", movieArray: self.movieList)
+                    let data: SectionMovie = SectionMovie(sectionName: "Hot list", movieArray: self.movieList)
                     
                     self.performSegue(withIdentifier: Segue.toMovieList, sender: data)
                     
@@ -108,7 +104,7 @@ extension MoviesTableViewController {
         } else {
             let cell = tableView.dequeueReusableCell(withIdentifier: Storyboard.sectionViewCell, for: indexPath) as! SectionTableViewCell
             
-            let section = dataMovies.sectionMovies[indexPath.row]
+            let section = SectionMoviesList[indexPath.row]
             
             cell.sectionMovies = movieList
             cell.sectionTitleLabel.text = section.sectionName
@@ -117,7 +113,7 @@ extension MoviesTableViewController {
                 
                 if movie.title == "More" {
                     
-                    let data: Section = Section(sectionName: "\(section.sectionName) list" , movieArray: self.movieList)
+                    let data: SectionMovie = SectionMovie(sectionName: "\(section.sectionName) list" , movieArray: self.movieList)
                     
                     self.performSegue(withIdentifier: Segue.toMovieList, sender: data)
                     

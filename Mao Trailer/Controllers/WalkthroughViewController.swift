@@ -13,8 +13,6 @@ class WalkthroughViewController: UIViewController {
     @IBOutlet weak var collectionView: UICollectionView!
     @IBOutlet weak var pageControl: UIPageControl!
     
-    var walkthroughData = DataMovies()
-    
     override func viewDidLoad() {
         super.viewDidLoad()
         
@@ -31,7 +29,7 @@ class WalkthroughViewController: UIViewController {
         
         self.pageControl.currentPage = 0
         self.pageControl.isEnabled = false
-        self.pageControl.numberOfPages = walkthroughData.walkthrough.count
+        self.pageControl.numberOfPages = WalkthroughList.count
     }
     
     func scrollViewDidEndDecelerating(_ scrollView: UIScrollView) {
@@ -75,7 +73,7 @@ extension WalkthroughViewController: UICollectionViewDelegate, UICollectionViewD
     
     func collectionView(_ collectionView: UICollectionView, numberOfItemsInSection section: Int) -> Int {
         
-        return walkthroughData.walkthrough.count
+        return WalkthroughList.count
     }
     
     func collectionView(_ collectionView: UICollectionView, cellForItemAt indexPath: IndexPath) -> UICollectionViewCell {
@@ -84,9 +82,9 @@ extension WalkthroughViewController: UICollectionViewDelegate, UICollectionViewD
             
             cell.getStaredButtonView.isHidden = true
             
-            cell.walkthroughData = walkthroughData.walkthrough[indexPath.row]
+            cell.walkthroughData = WalkthroughList[indexPath.row]
             
-            if indexPath.row == walkthroughData.walkthrough.count - 1 {
+            if indexPath.row == WalkthroughList.count - 1 {
                 cell.nextButtonView.isHidden = true
                 cell.getStaredButtonView.isHidden = false
             }

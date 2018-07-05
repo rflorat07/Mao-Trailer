@@ -24,30 +24,15 @@ class HotCollectionViewCell: UICollectionViewCell {
     
     func updateUI(){
         
-        loadImage(withPath: hotMovie)
+        if hotMovie.title == "More" {
+           coverImageView.image = UIImage(named: "land-more")
+        } else {
+            coverImageView.downloadedFrom(urlString: hotMovie.backdrop_path)
+        }
+        
         coverImageView.clipsToBounds = true
         coverImageView.layer.cornerRadius = Constants.cornerRadius
         
         posterCoverView.dropShadow(radius: Constants.cornerRadius)
     }
-    
-    func loadImage(withPath: Movie) {
-        
-        var downloadImage = UIImage()
-        
-        //Download Image
-        let imageString = "https://image.tmdb.org/t/p/w500\(withPath.backdrop_path)"
-        guard let imageUrl = URL(string: imageString) else { return }
-        let imageProcessor = QueryService()
-        imageProcessor.downloadImage(withPath: imageUrl) { (data, response, error) in
-            
-            DispatchQueue.main.async {
-                guard let imageData = data else { return }
-                downloadImage = UIImage(data: imageData)!
-                self.coverImageView.image = downloadImage
-            }
-            
-        }
-    }
-    
 }

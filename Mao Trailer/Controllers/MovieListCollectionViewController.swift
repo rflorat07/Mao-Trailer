@@ -10,7 +10,7 @@ import UIKit
 
 class MovieListCollectionViewController: UICollectionViewController {
     
-    var movieList: Section!
+    var movieList: SectionMovie!
     
     override func viewDidLoad() {
         super.viewDidLoad()

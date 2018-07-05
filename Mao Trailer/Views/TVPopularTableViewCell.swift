@@ -19,7 +19,7 @@ class TVPopularTableViewCell: UITableViewCell {
     
     let cornerRadius: CGFloat = Constants.cornerRadius
     
-    var tvShows: Movie! {
+    var tvShows: TVShow! {
         didSet{
             self.updateUI()
         }
@@ -31,17 +31,19 @@ class TVPopularTableViewCell: UITableViewCell {
             
             titleLabel.text = tvShows.title.uppercased()
             rateLabel.text = String(format: "%.1f", tvShows.vote_average)
+            coverImageView.downloadedFrom(urlString: tvShows.backdrop_path)
             
         } else {
             
             titleLabel.text = ""
             rateView.isHidden = true
+            coverImageView.image = UIImage(named: "land-more")
         }
         
         coverImageView.clipsToBounds = true
         coverImageView.layer.cornerRadius = cornerRadius
-        coverImageView.image = UIImage(named: tvShows.poster_path)
-        
+
+     
         posterCoverView.dropShadow(radius: cornerRadius)
     }
     

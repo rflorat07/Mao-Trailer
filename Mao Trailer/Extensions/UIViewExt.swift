@@ -13,6 +13,7 @@ extension UIView {
     // Set the shadow of the view's layer
     func dropShadow(radius: CGFloat) {
         
+        self.clipsToBounds = true
         self.layer.masksToBounds = false
         self.layer.cornerRadius = radius
         

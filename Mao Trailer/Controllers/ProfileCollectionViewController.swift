@@ -10,8 +10,6 @@ import UIKit
 
 class ProfileCollectionViewController: UICollectionViewController {
     
-    var movieData = DataMovies()
-
     override func viewDidLoad() {
         super.viewDidLoad()
 
@@ -47,14 +45,14 @@ class ProfileCollectionViewController: UICollectionViewController {
 
     override func collectionView(_ collectionView: UICollectionView, numberOfItemsInSection section: Int) -> Int {
         
-        return movieData.profileList.count
+        return ProfileList.count
     }
 
     override func collectionView(_ collectionView: UICollectionView, cellForItemAt indexPath: IndexPath) -> UICollectionViewCell {
       
         if  let cell = collectionView.dequeueReusableCell(withReuseIdentifier: Storyboard.profileListViewCell, for: indexPath) as? ProfileListCollectionViewCell {
             
-            cell.posterImage = movieData.profileList[indexPath.row].poster_path
+            cell.posterImage = ProfileList[indexPath.row].poster_path
             
             return cell
         }
@@ -69,7 +67,7 @@ class ProfileCollectionViewController: UICollectionViewController {
             movieDetail.modalPresentationStyle = .overFullScreen
             movieDetail.modalTransitionStyle = .crossDissolve
             
-            movieDetail.movie = movieData.profileList[indexPath.row]
+            movieDetail.movie = ProfileList[indexPath.row]
             
             self.present(movieDetail, animated: true, completion: nil)
         }

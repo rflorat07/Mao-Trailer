@@ -12,8 +12,13 @@ class TVNowTableViewCell: UITableViewCell,UICollectionViewDelegate, UICollection
     
     @IBOutlet weak var nowCollectionView: UICollectionView!
     
-    var nowMovies = [Movie]()
-    var didSelectAction: (Movie) -> Void = { arg in }
+    var nowTVShows: [TVShow]! {
+        didSet{
+            nowCollectionView.reloadData()
+        }
+    }
+    
+    var didSelectAction: (TVShow) -> Void = { arg in }
     
     
     override func awakeFromNib() {
@@ -26,21 +31,21 @@ class TVNowTableViewCell: UITableViewCell,UICollectionViewDelegate, UICollection
     
     func collectionView(_ collectionView: UICollectionView, numberOfItemsInSection section: Int) -> Int {
         
-        return nowMovies.count
+        return nowTVShows.count
     }
     
     func collectionView(_ collectionView: UICollectionView, cellForItemAt indexPath: IndexPath) -> UICollectionViewCell {
         
         let cell = collectionView.dequeueReusableCell(withReuseIdentifier: Storyboard.tvNowViewCell, for: indexPath) as! TVNowCollectionViewCell
         
-        cell.nowMovie = nowMovies[indexPath.row]
+        cell.nowTVShow = nowTVShows[indexPath.row]
         
         return cell
     }
     
     func collectionView(_ collectionView: UICollectionView, didSelectItemAt indexPath: IndexPath) {
         
-        didSelectAction(nowMovies[indexPath.row])
+        didSelectAction(nowTVShows[indexPath.row])
     }
 
 }

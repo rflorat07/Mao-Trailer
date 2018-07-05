@@ -8,22 +8,29 @@
 
 import Foundation
 
-struct TVShow: Decodable {
+struct TVShow: Decodable, TVFilm {
     let id: Int
-    let name: String
+    let title: String
     let overview: String
     let poster_path: String
     let vote_average: Double
-    let first_air_date: String
+    let release_date: String
     let backdrop_path : String
-    let original_name : String
+    let original_title : String
     
-    
-    /* enum CodingKeys: String, CodingKey {
-     case title = "name"
-     } */
+     enum CodingKeys: String, CodingKey {
+        case id
+        case title = "name"
+        case overview
+        case poster_path
+        case vote_average
+        case release_date = "first_air_date"
+        case backdrop_path
+        case original_title = "original_name"
+    }
 }
 
 struct TVShowList: Decodable {
     let results: [TVShow]
 }
+
