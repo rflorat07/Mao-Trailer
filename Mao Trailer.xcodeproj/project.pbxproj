@@ -21,6 +21,7 @@
 		4F77BD2320DA44C100A51FE2 /* SectionTableViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4F77BD2220DA44C100A51FE2 /* SectionTableViewCell.swift */; };
 		4F77BD2520DA44E000A51FE2 /* SectionCollectionViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4F77BD2420DA44E000A51FE2 /* SectionCollectionViewCell.swift */; };
 		4F892A5620DD2958005C8E19 /* MovieListSectionHeaderCollectionReusableView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4F892A5520DD2958005C8E19 /* MovieListSectionHeaderCollectionReusableView.swift */; };
+		4F963D1620EF77C600A318CF /* LoadingIndicatorView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4F963D1520EF77C500A318CF /* LoadingIndicatorView.swift */; };
 		4FC87E9820E4EFEF00653671 /* ProfileSettingViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4FC87E9720E4EFEF00653671 /* ProfileSettingViewController.swift */; };
 		4FC87E9B20E50A8C00653671 /* UIViewExt.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4FC87E9A20E50A8C00653671 /* UIViewExt.swift */; };
 		4FEDD5E520ECCDD000E0D4BA /* UIImageViewExt.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4FEDD5E420ECCDD000E0D4BA /* UIImageViewExt.swift */; };
@@ -59,6 +60,7 @@
 		4F77BD2220DA44C100A51FE2 /* SectionTableViewCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SectionTableViewCell.swift; sourceTree = "<group>"; };
 		4F77BD2420DA44E000A51FE2 /* SectionCollectionViewCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SectionCollectionViewCell.swift; sourceTree = "<group>"; };
 		4F892A5520DD2958005C8E19 /* MovieListSectionHeaderCollectionReusableView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MovieListSectionHeaderCollectionReusableView.swift; sourceTree = "<group>"; };
+		4F963D1520EF77C500A318CF /* LoadingIndicatorView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = LoadingIndicatorView.swift; sourceTree = "<group>"; };
 		4FC87E9720E4EFEF00653671 /* ProfileSettingViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ProfileSettingViewController.swift; sourceTree = "<group>"; };
 		4FC87E9A20E50A8C00653671 /* UIViewExt.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = UIViewExt.swift; sourceTree = "<group>"; };
 		4FEDD5E420ECCDD000E0D4BA /* UIImageViewExt.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = UIImageViewExt.swift; sourceTree = "<group>"; };
@@ -178,6 +180,7 @@
 			children = (
 				4FF5E62220D93A2C00D088B5 /* GradientView.swift */,
 				4FF6290020DBDE6B0002AA13 /* Constants.swift */,
+				4F963D1520EF77C500A318CF /* LoadingIndicatorView.swift */,
 			);
 			path = Utilities;
 			sourceTree = "<group>";
@@ -297,6 +300,7 @@
 				4FF5E62320D93A2C00D088B5 /* GradientView.swift in Sources */,
 				4FF628F520DB98A30002AA13 /* Movie.swift in Sources */,
 				4F195BB120E3A3EB005816F5 /* MovieDetailFullCastCollectionViewCell.swift in Sources */,
+				4F963D1620EF77C600A318CF /* LoadingIndicatorView.swift in Sources */,
 				4FEDD5E920ED13CF00E0D4BA /* Cast.swift in Sources */,
 				4F1E6B3220EBC6AD005CEA65 /* TV.swift in Sources */,
 				4FF5E62720D951FB00D088B5 /* HotTableViewCell.swift in Sources */,

@@ -34,9 +34,9 @@ extension UIImageView {
                 else { return }
             DispatchQueue.main.async() {
                 self.image = imageToCache
-                 imageCache.setObject(imageToCache, forKey: urlString as NSString)
+                imageCache.setObject(imageToCache, forKey: urlString as NSString)
             }
-        }.resume()
+            }.resume()
     }
 }
 

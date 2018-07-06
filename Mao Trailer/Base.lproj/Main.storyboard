@@ -123,7 +123,7 @@
                                                         <autoresizingMask key="autoresizingMask"/>
                                                         <subviews>
                                                             <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="JUSTICE LEAGUE" textAlignment="center" lineBreakMode="tailTruncation" numberOfLines="2" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="6ih-H1-8r5" userLabel="Title Label">
-                                                                <rect key="frame" x="0.0" y="220" width="140" height="36"/>
+                                                                <rect key="frame" x="0.0" y="220" width="140" height="18"/>
                                                                 <fontDescription key="fontDescription" type="boldSystem" pointSize="15"/>
                                                                 <color key="textColor" red="0.13333333333333333" green="0.13333333333333333" blue="0.13333333333333333" alpha="1" colorSpace="calibratedRGB"/>
                                                                 <nil key="highlightedColor"/>
@@ -193,7 +193,6 @@
                                                         <constraint firstAttribute="trailing" secondItem="vsv-WA-NB6" secondAttribute="trailing" id="6Mp-fj-c1N"/>
                                                         <constraint firstItem="6ih-H1-8r5" firstAttribute="leading" secondItem="kdD-1M-WPG" secondAttribute="leading" id="BbI-p3-5Vo"/>
                                                         <constraint firstAttribute="trailing" secondItem="6ih-H1-8r5" secondAttribute="trailing" id="Cjy-gC-9Zf"/>
-                                                        <constraint firstAttribute="bottom" secondItem="6ih-H1-8r5" secondAttribute="bottom" id="Pnc-Ub-JiQ"/>
                                                         <constraint firstItem="vsv-WA-NB6" firstAttribute="leading" secondItem="kdD-1M-WPG" secondAttribute="leading" id="fG3-hh-pG4"/>
                                                         <constraint firstItem="6ih-H1-8r5" firstAttribute="top" secondItem="vsv-WA-NB6" secondAttribute="bottom" constant="10" id="ocW-JI-gJl"/>
                                                         <constraint firstItem="vsv-WA-NB6" firstAttribute="top" secondItem="kdD-1M-WPG" secondAttribute="top" id="urZ-sd-s6F"/>
@@ -254,7 +253,7 @@
                             <size key="itemSize" width="158" height="283"/>
                             <size key="headerReferenceSize" width="375" height="34"/>
                             <size key="footerReferenceSize" width="0.0" height="0.0"/>
-                            <inset key="sectionInset" minX="20" minY="20" maxX="20" maxY="0.0"/>
+                            <inset key="sectionInset" minX="20" minY="20" maxX="20" maxY="20"/>
                         </collectionViewFlowLayout>
                         <cells>
                             <collectionViewCell opaque="NO" multipleTouchEnabled="YES" contentMode="center" reuseIdentifier="MovieListViewCell" id="6uV-2x-Qra" userLabel="Movie List Collection View Cell" customClass="MovieListCollectionViewCell" customModule="Mao_Trailer" customModuleProvider="target">
@@ -331,7 +330,6 @@
                                     <constraint firstItem="LSb-zq-3hW" firstAttribute="leading" secondItem="6uV-2x-Qra" secondAttribute="leading" id="7hB-Kd-Vm2"/>
                                     <constraint firstItem="YAa-CS-KYU" firstAttribute="leading" secondItem="6uV-2x-Qra" secondAttribute="leading" id="Bqg-wb-ksf"/>
                                     <constraint firstAttribute="trailing" secondItem="LSb-zq-3hW" secondAttribute="trailing" id="Fdr-hY-ViB"/>
-                                    <constraint firstAttribute="bottom" secondItem="LSb-zq-3hW" secondAttribute="bottom" id="T4C-9B-N7w"/>
                                     <constraint firstItem="LSb-zq-3hW" firstAttribute="top" secondItem="YAa-CS-KYU" secondAttribute="bottom" constant="10" id="Wfj-zg-fEY"/>
                                     <constraint firstItem="YAa-CS-KYU" firstAttribute="top" secondItem="6uV-2x-Qra" secondAttribute="top" id="iFk-t7-no9"/>
                                     <constraint firstAttribute="trailing" secondItem="YAa-CS-KYU" secondAttribute="trailing" id="kCA-fz-l0P"/>
@@ -387,7 +385,7 @@
                         <rect key="frame" x="0.0" y="0.0" width="375" height="932"/>
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
                         <subviews>
-                            <scrollView multipleTouchEnabled="YES" contentMode="scaleToFill" contentInsetAdjustmentBehavior="never" translatesAutoresizingMaskIntoConstraints="NO" id="Mpz-kN-Mvo" userLabel="Movie Detail Scroll View">
+                            <scrollView multipleTouchEnabled="YES" contentMode="scaleToFill" showsHorizontalScrollIndicator="NO" showsVerticalScrollIndicator="NO" contentInsetAdjustmentBehavior="never" translatesAutoresizingMaskIntoConstraints="NO" id="Mpz-kN-Mvo" userLabel="Movie Detail Scroll View">
                                 <rect key="frame" x="0.0" y="0.0" width="375" height="932"/>
                                 <subviews>
                                     <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="Bs7-Mc-h6G" userLabel="Movie Detail View">
@@ -910,7 +908,7 @@
                                                 <inset key="sectionInset" minX="20" minY="0.0" maxX="20" maxY="0.0"/>
                                             </collectionViewFlowLayout>
                                             <cells>
-                                                <collectionViewCell opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center" reuseIdentifier="TVNowViewCell" id="eDh-Gt-0y3" userLabel="TV Now Collection View Cell" customClass="TVNowCollectionViewCell" customModule="Mao_Trailer" customModuleProvider="target">
+                                                <collectionViewCell opaque="NO" multipleTouchEnabled="YES" contentMode="center" reuseIdentifier="TVNowViewCell" id="eDh-Gt-0y3" userLabel="TV Now Collection View Cell" customClass="TVNowCollectionViewCell" customModule="Mao_Trailer" customModuleProvider="target">
                                                     <rect key="frame" x="20" y="7" width="140" height="256"/>
                                                     <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
                                                     <view key="contentView" opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center" insetsLayoutMarginsFromSafeArea="NO">
@@ -918,15 +916,15 @@
                                                         <autoresizingMask key="autoresizingMask"/>
                                                         <subviews>
                                                             <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="NARCOS" textAlignment="center" lineBreakMode="tailTruncation" numberOfLines="2" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="ehh-0P-G0e" userLabel="Title Label">
-                                                                <rect key="frame" x="0.0" y="220" width="140" height="36"/>
+                                                                <rect key="frame" x="0.0" y="220" width="140" height="18"/>
                                                                 <fontDescription key="fontDescription" type="boldSystem" pointSize="15"/>
                                                                 <color key="textColor" red="0.1333333333" green="0.1333333333" blue="0.1333333333" alpha="1" colorSpace="calibratedRGB"/>
                                                                 <nil key="highlightedColor"/>
                                                             </label>
-                                                            <view clipsSubviews="YES" contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="4Ei-qn-St6" userLabel="Poster Cover View">
+                                                            <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="4Ei-qn-St6" userLabel="Poster Cover View">
                                                                 <rect key="frame" x="0.0" y="0.0" width="140" height="210"/>
                                                                 <subviews>
-                                                                    <imageView userInteractionEnabled="NO" contentMode="scaleAspectFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" image="Narcos-Slide" translatesAutoresizingMaskIntoConstraints="NO" id="mqx-Wg-Kav" userLabel="Cover Image View">
+                                                                    <imageView clipsSubviews="YES" userInteractionEnabled="NO" contentMode="scaleAspectFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" image="Narcos-Slide" translatesAutoresizingMaskIntoConstraints="NO" id="mqx-Wg-Kav" userLabel="Cover Image View">
                                                                         <rect key="frame" x="0.0" y="0.0" width="140" height="210"/>
                                                                         <constraints>
                                                                             <constraint firstAttribute="height" constant="210" id="fqX-cp-8C8"/>
@@ -960,22 +958,24 @@
                                                                 </subviews>
                                                                 <color key="backgroundColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
                                                                 <constraints>
-                                                                    <constraint firstItem="wyT-iS-bBJ" firstAttribute="top" secondItem="4Ei-qn-St6" secondAttribute="top" constant="10" id="5At-Ld-7vr"/>
-                                                                    <constraint firstItem="mqx-Wg-Kav" firstAttribute="leading" secondItem="4Ei-qn-St6" secondAttribute="leading" id="8BE-xY-tg5"/>
-                                                                    <constraint firstItem="mqx-Wg-Kav" firstAttribute="top" secondItem="4Ei-qn-St6" secondAttribute="top" id="B6n-sn-0f1"/>
-                                                                    <constraint firstAttribute="height" constant="210" id="dLv-LG-RBC"/>
-                                                                    <constraint firstAttribute="trailing" secondItem="wyT-iS-bBJ" secondAttribute="trailing" constant="10" id="es4-eV-b1c"/>
+                                                                    <constraint firstAttribute="trailing" secondItem="mqx-Wg-Kav" secondAttribute="trailing" id="1IR-tx-Vk1"/>
+                                                                    <constraint firstItem="mqx-Wg-Kav" firstAttribute="top" secondItem="4Ei-qn-St6" secondAttribute="top" id="7KF-St-epc"/>
+                                                                    <constraint firstAttribute="height" constant="210" id="IQs-Xe-ePO"/>
+                                                                    <constraint firstAttribute="bottom" secondItem="mqx-Wg-Kav" secondAttribute="bottom" id="Ir6-3Q-1lz"/>
+                                                                    <constraint firstAttribute="width" constant="140" id="M0e-M7-n7g"/>
+                                                                    <constraint firstItem="mqx-Wg-Kav" firstAttribute="leading" secondItem="4Ei-qn-St6" secondAttribute="leading" id="VRQ-TI-z7n"/>
+                                                                    <constraint firstAttribute="trailing" secondItem="wyT-iS-bBJ" secondAttribute="trailing" constant="10" id="ud8-n1-xag"/>
+                                                                    <constraint firstItem="wyT-iS-bBJ" firstAttribute="top" secondItem="4Ei-qn-St6" secondAttribute="top" constant="10" id="zg2-mn-Sat"/>
                                                                 </constraints>
                                                             </view>
                                                         </subviews>
                                                     </view>
                                                     <constraints>
-                                                        <constraint firstItem="4Ei-qn-St6" firstAttribute="leading" secondItem="eDh-Gt-0y3" secondAttribute="leading" id="HgZ-Uk-GM1"/>
-                                                        <constraint firstItem="4Ei-qn-St6" firstAttribute="top" secondItem="eDh-Gt-0y3" secondAttribute="top" id="Wpz-C2-ylu"/>
-                                                        <constraint firstAttribute="trailing" secondItem="4Ei-qn-St6" secondAttribute="trailing" id="eBR-g7-ZYd"/>
-                                                        <constraint firstAttribute="bottom" secondItem="ehh-0P-G0e" secondAttribute="bottom" id="jdF-zf-BRj"/>
-                                                        <constraint firstItem="ehh-0P-G0e" firstAttribute="top" secondItem="4Ei-qn-St6" secondAttribute="bottom" constant="10" id="m2u-Re-b4V"/>
+                                                        <constraint firstItem="4Ei-qn-St6" firstAttribute="top" secondItem="eDh-Gt-0y3" secondAttribute="top" id="AS4-r4-fBg"/>
+                                                        <constraint firstItem="ehh-0P-G0e" firstAttribute="top" secondItem="4Ei-qn-St6" secondAttribute="bottom" constant="10" id="iDl-qB-NyX"/>
                                                         <constraint firstItem="ehh-0P-G0e" firstAttribute="leading" secondItem="eDh-Gt-0y3" secondAttribute="leading" id="noA-9W-jC9"/>
+                                                        <constraint firstItem="4Ei-qn-St6" firstAttribute="leading" secondItem="eDh-Gt-0y3" secondAttribute="leading" id="uWx-sW-o6s"/>
+                                                        <constraint firstAttribute="trailing" secondItem="4Ei-qn-St6" secondAttribute="trailing" id="wfR-ga-hbn"/>
                                                         <constraint firstAttribute="trailing" secondItem="ehh-0P-G0e" secondAttribute="trailing" id="ykr-Um-LyO"/>
                                                     </constraints>
                                                     <connections>
@@ -1725,6 +1725,6 @@
         <image name="tab-tv-light" width="26" height="23"/>
     </resources>
     <inferredMetricsTieBreakers>
-        <segue reference="Vfq-1Z-68d"/>
+        <segue reference="34l-DW-oXO"/>
     </inferredMetricsTieBreakers>
 </document>

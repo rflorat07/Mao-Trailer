@@ -16,28 +16,65 @@ class QueryServiceTVShow {
     lazy var configuration = URLSessionConfiguration.default
     lazy var session = URLSession(configuration: configuration)
     
-    var tvShowList: [TVShow] = []
     
     typealias QueryResultTVShow = ([TVShow]?)-> Void
+    typealias QueryResultList  = ([SectionTVShow]?)-> Void
     
-    func getDiscoverTVShow(queryString: String, _ completion : @escaping QueryResultTVShow) {
+    func fetchAllTVShowsLists( _ completion : @escaping QueryResultList) {
         
-        guard let url = URL(string: queryString) else  { return }
+        var tvShowArray: [SectionTVShow] = [SectionTVShow]()
         
-        let dataTask = session.dataTask(with: url) { (data, response, error) in
+        let group = DispatchGroup()
+        
+        // Now TVShow
+        group.enter()
+        
+        fetchTVShowsList(queryString: EndPoint.NowTVShows) { (tvShows) in
+            
+            if let tvShows = tvShows {
+                tvShowArray.append(SectionTVShow(sectionName: "Now", tvShowsArray: tvShows))
+            }
+            
+            group.leave()
+        }
+        
+        // Popular TVShow
+        group.enter()
+        
+        fetchTVShowsList(queryString: EndPoint.PopularTVshows) { (tvShows) in
+            
+            if let tvShows = tvShows {
+                tvShowArray.append(SectionTVShow(sectionName: "Popular", tvShowsArray: tvShows))
+            }
+            
+            group.leave()
+        }
+        
+        group.notify(queue: DispatchQueue.main, execute: {
+            completion(tvShowArray)
+        })
+    }
+    
+    
+    func fetchTVShowsList(queryString: String, _ completion : @escaping QueryResultTVShow) {
+        
+        guard let query = URL(string: queryString) else { return }
+        
+        let dataTask = session.dataTask(with: query) {
+            (data, response, error) in
             
             if let error = error {
                 print("DataTask error: \(error.localizedDescription) \n")
                 
-            } else if let data = data, let response = response as? HTTPURLResponse, response.statusCode == 200 {
-                
-                self.updateTVShowList(data)
+            } else if
+                let data = data,
+                let response = response as? HTTPURLResponse,
+                response.statusCode == 200 {
                 
                 DispatchQueue.main.async {
-                    
-                    self.tvShowList.append(TVShowMore)
-                    
-                    completion(self.tvShowList)
+                    self.getTVShowList(data, { (movieList) in
+                        completion(movieList)
+                    })
                 }
             }
         }
@@ -45,20 +82,15 @@ class QueryServiceTVShow {
         dataTask.resume()
     }
     
-    
     // MARK: - Helper methods
-    
-    fileprivate func updateTVShowList(_ data: Data) {
-        
-        self.tvShowList.removeAll()
+    fileprivate func getTVShowList(_ data: Data, _ completion : @escaping QueryResultTVShow) {
         
         do {
             let list = try JSONDecoder().decode(TVShowList.self, from: data)
-            self.tvShowList = list.results
+            completion(list.results)
             
         } catch let decodeError as NSError {
             print("Decoder error: \(decodeError.localizedDescription) \n")
         }
     }
-    
 }

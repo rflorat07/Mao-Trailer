@@ -34,3 +34,8 @@ struct TVShowList: Decodable {
     let results: [TVShow]
 }
 
+struct SectionTVShow {
+    var sectionName: String
+    var tvShowsArray: [TVFilm]
+}
+

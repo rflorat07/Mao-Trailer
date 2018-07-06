@@ -16,28 +16,76 @@ class QueryServiceMovie {
     lazy var configuration = URLSessionConfiguration.default
     lazy var session = URLSession(configuration: configuration)
     
-    var movieList: [Movie] = []
-   
     typealias QueryResultMovie  = ([Movie]?)-> Void
-
-    func getDiscoverMovie(queryString: String, _ completion : @escaping QueryResultMovie) {
+    typealias QueryResultList  = ([SectionMovie]?)-> Void
+    
+    func fetchAllMoviesLists( _ completion : @escaping QueryResultList) {
         
-        guard let url = URL(string: queryString) else  { return }
+        var movieArray: [SectionMovie] = [SectionMovie]()
         
-        let dataTask = session.dataTask(with: url) { (data, response, error) in
+        let group = DispatchGroup()
+        
+        // Upcoming Movies
+        group.enter()
+        
+        fetchMovieList(queryString: EndPoint.UpcomingMovies) { (movies) in
+            
+            if let movies = movies {
+                movieArray.append(SectionMovie(sectionName: "Upcoming", movieArray: movies))
+            }
+            
+            group.leave()
+        }
+        
+        // Now Movies
+        group.enter()
+        
+        fetchMovieList(queryString: EndPoint.NowMovies) { (movies) in
+            
+            if let movies = movies {
+                movieArray.append(SectionMovie(sectionName: "Now", movieArray: movies))
+            }
+            
+            group.leave()
+        }
+        
+        // Popular Movies
+        group.enter()
+        
+        fetchMovieList(queryString: EndPoint.PopularMovies) { (movies) in
+            
+            if let movies = movies {
+                movieArray.append(SectionMovie(sectionName: "Popular", movieArray: movies))
+            }
+            
+            group.leave()
+        }
+        
+        group.notify(queue: DispatchQueue.main, execute: {
+            completion(movieArray)
+        })
+    }
+    
+    
+    func fetchMovieList(queryString: String, _ completion : @escaping QueryResultMovie) {
+        
+        guard let query = URL(string: queryString) else { return }
+        
+        let dataTask = session.dataTask(with: query) {
+            (data, response, error) in
             
             if let error = error {
                 print("DataTask error: \(error.localizedDescription) \n")
                 
-            } else if let data = data, let response = response as? HTTPURLResponse, response.statusCode == 200 {
-                
-                self.updateMovieList(data)
+            } else if
+                let data = data,
+                let response = response as? HTTPURLResponse,
+                response.statusCode == 200 {
                 
                 DispatchQueue.main.async {
-                    
-                    self.movieList.append(MoreMovie)
-                    
-                    completion(self.movieList)
+                    self.getMovieList(data, { (movieList) in
+                        completion(movieList)
+                    })
                 }
             }
         }
@@ -46,17 +94,14 @@ class QueryServiceMovie {
     }
     
     // MARK: - Helper methods
-    fileprivate func updateMovieList(_ data: Data) {
-        
-        self.movieList.removeAll()
+    fileprivate func getMovieList(_ data: Data, _ completion : @escaping QueryResultMovie) {
         
         do {
             let list = try JSONDecoder().decode(MovieList.self, from: data)
-            self.movieList = list.results
+            completion(list.results)
             
         } catch let decodeError as NSError {
             print("Decoder error: \(decodeError.localizedDescription) \n")
         }
     }
-        
 }
