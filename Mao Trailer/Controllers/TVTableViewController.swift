@@ -23,9 +23,9 @@ class TVTableViewController: UITableViewController {
         
         if segue.identifier == Segue.toMovieList {
             
-            let toViewController = segue.destination as! MovieListCollectionViewController
+            let toViewController = segue.destination as! TVMovieListCollectionViewController
             
-            toViewController.movieList = sender as! SectionMovie
+            toViewController.sectionData = sender as! SectionTVShow
             
         } 
     }
@@ -39,6 +39,8 @@ class TVTableViewController: UITableViewController {
             if let sectionArray = sectionArray {
                 
                 self.sectionTVShowArray = sectionArray
+                self.sectionTVShowArray[1].sectionArray.append(MoreTVShow)
+                
                 self.tableView.reloadData()
                 
                 LoadingIndicatorView.hide()
@@ -69,7 +71,7 @@ extension TVTableViewController {
         // Section 1 - SectionLabel
         // Section 2 - Popular [TVShow]
         
-        return section != 2 ? 1 : sectionTVShowArray[1].tvShowsArray.count
+        return section != 2 ? 1 : sectionTVShowArray[1].sectionArray.count
         
     }
     
@@ -93,15 +95,18 @@ extension TVTableViewController {
                 var section = sectionTVShowArray[indexPath.section]
                 
                 // Add More TVShow row
-                if section.tvShowsArray.count > 10 {
-                    section.tvShowsArray.append(TVShowMore)
+                if section.sectionArray.count > 10 {
+                    section.sectionArray.append(MoreTVShow)
                 }
                 
                 cell.selectionStyle = .none
                 
-                cell.nowTVShows = section.tvShowsArray as! [TVShow]
+                cell.nowTVShows = section.sectionArray as! [TVShow]
                 
                 cell.didSelectAction = { (tvShow) in
+                    
+                    // Remove More TVShow row
+                    section.sectionArray.removeLast()
                     
                     self.showTVShowListOrTVShowDetail(tvShow: tvShow, indexPath: indexPath, section: section)
                 }
@@ -125,14 +130,9 @@ extension TVTableViewController {
                 
                 var section = sectionTVShowArray[indexPath.section - 1]
                 
-                // Add More TVShow row
-                if section.tvShowsArray.count > 10 {
-                    section.tvShowsArray.append(TVShowMore)
-                }
-                
                 cell.selectionStyle = .none
                 
-                cell.tvShows = section.tvShowsArray[indexPath.row] as! TVShow
+                cell.tvShow = section.sectionArray[indexPath.row] as! TVShow
                 
                 return cell
             }
@@ -146,8 +146,11 @@ extension TVTableViewController {
         
         if indexPath.section == 2 {
             
-            let section = sectionTVShowArray[indexPath.section - 1]
-            let tvShow  = section.tvShowsArray[indexPath.row] as! TVShow
+            var section = sectionTVShowArray[indexPath.section - 1]
+            let tvShow  = section.sectionArray[indexPath.row] as! TVShow
+            
+            // Remove More TVShow row
+            section.sectionArray.removeLast()
             
             showTVShowListOrTVShowDetail(tvShow: tvShow, indexPath: indexPath, section: section)
             
@@ -159,20 +162,20 @@ extension TVTableViewController {
         
         if tvShow.title == "More" {
             
-            let data: SectionTVShow = SectionTVShow(sectionName: "\(section.sectionName) list", tvShowsArray: section.tvShowsArray)
+            let data: SectionTVShow = SectionTVShow(sectionName: "\(section.sectionName) list", sectionArray: section.sectionArray)
             
             self.performSegue(withIdentifier: Segue.toMovieList, sender: data)
             
         } else {
             
-            if let movieDetail = self.storyboard?.instantiateViewController(withIdentifier: Storyboard.movieDetailViewController) as? MovieDetailViewController {
+            if let tvShowDetail = self.storyboard?.instantiateViewController(withIdentifier: Storyboard.movieDetailViewController) as? TVMovieDetailViewController {
                 
-                movieDetail.modalPresentationStyle = .overFullScreen
-                movieDetail.modalTransitionStyle = .crossDissolve
+                tvShowDetail.modalPresentationStyle = .overFullScreen
+                tvShowDetail.modalTransitionStyle = .crossDissolve
                 
-                movieDetail.movie = tvShow
+                tvShowDetail.detail = tvShow
                 
-                self.present(movieDetail, animated: true, completion: nil)
+                self.present(tvShowDetail, animated: true, completion: nil)
             }
         }
     }

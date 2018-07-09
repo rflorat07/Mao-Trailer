@@ -30,7 +30,10 @@ class MovieDetailFullCastCollectionViewCell: UICollectionViewCell {
         
         coverImageView.clipsToBounds = true
         coverImageView.layer.cornerRadius = cornerRadius
-        coverImageView.image = UIImage(named: cast.imgUrl)
+        
+        if let profile_path = cast.profile_path {
+            coverImageView.downloadedFrom(urlString: profile_path)
+        }
         
         coverCastView.dropShadow(radius: cornerRadius)
         

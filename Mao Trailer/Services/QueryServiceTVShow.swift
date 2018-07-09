@@ -32,7 +32,7 @@ class QueryServiceTVShow {
         fetchTVShowsList(queryString: EndPoint.NowTVShows) { (tvShows) in
             
             if let tvShows = tvShows {
-                tvShowArray.append(SectionTVShow(sectionName: "Now", tvShowsArray: tvShows))
+                tvShowArray.append(SectionTVShow(sectionName: "Now", sectionArray: tvShows))
             }
             
             group.leave()
@@ -44,7 +44,7 @@ class QueryServiceTVShow {
         fetchTVShowsList(queryString: EndPoint.PopularTVshows) { (tvShows) in
             
             if let tvShows = tvShows {
-                tvShowArray.append(SectionTVShow(sectionName: "Popular", tvShowsArray: tvShows))
+                tvShowArray.append(SectionTVShow(sectionName: "Popular", sectionArray: tvShows))
             }
             
             group.leave()

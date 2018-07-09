@@ -52,6 +52,8 @@ struct QueryString {
     static let region = "IT"
     static let language = "it-IT"
     static let api_key = "3b122cc1b16808da5a679c3c1c11cd07"
+    static let baseUrl = "https://api.themoviedb.org"
+    static let append_to_response = "videos,credits"
 }
 
 struct EndPoint {

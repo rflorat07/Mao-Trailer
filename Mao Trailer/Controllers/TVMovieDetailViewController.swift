@@ -8,7 +8,7 @@
 
 import UIKit
 
-class MovieDetailViewController: UIViewController {
+class TVMovieDetailViewController: UIViewController {
     
     @IBOutlet weak var coverImageView: UIImageView!
     @IBOutlet weak var titleLabel: UILabel!
@@ -17,14 +17,16 @@ class MovieDetailViewController: UIViewController {
     @IBOutlet weak var collectionView: UICollectionView!
     @IBOutlet weak var ratingValueLabel: UILabel!
     @IBOutlet weak var posterCoverView: UIView!
+    @IBOutlet weak var genreLabel: UILabel!
     
     let cornerRadius: CGFloat = Constants.cornerRadius
     
-    var movie: TVFilm!
+    var detail: TVFilm!
+    var cast: [Cast] = [Cast]()
     
     override func viewDidLoad() {
         super.viewDidLoad()
-
+        
         collectionView.delegate = self
         collectionView.dataSource = self
         
@@ -40,44 +42,58 @@ class MovieDetailViewController: UIViewController {
         // StatusBar Style
         UIApplication.shared.statusBarStyle = .default
     }
-        
+    
     func updateUI() {
         
-        descriptionLabel.text = movie.overview
-        titleLabel.text = movie.title.uppercased()
+        descriptionLabel.text = detail.overview
+        titleLabel.text = detail.title.uppercased()
         
-        coverImageView.downloadedFrom(urlString: movie.backdrop_path)
+        coverImageView.downloadedFrom(urlString: detail.backdrop_path)
         
-        ratingValueLabel.text = String(format:"%.1f", movie.vote_average)
+        ratingValueLabel.text = String(format:"%.1f", detail.vote_average)
         
         posterImageView.clipsToBounds = true
         posterImageView.layer.cornerRadius = cornerRadius
-        posterImageView.downloadedFrom(urlString: movie.poster_path)
+        posterImageView.downloadedFrom(urlString: detail.poster_path)
         
         posterCoverView.dropShadow(radius: cornerRadius)
+        
+        LoadingIndicatorView.show("Loading")
+        
+        QueryServiceMovie.intance.fetchMovieInformation(movieID: detail.id) { (detail) in
+            
+            if let detail = detail {
+                
+                self.cast = detail.credits.cast
+                self.genreLabel.text = detail.getGenre()
+                
+                self.collectionView.reloadData()
+                
+                LoadingIndicatorView.hide()
+            }
+        }
     }
     
     
     @IBAction func backButtonTapped(_ sender: UIButton) {
         dismiss(animated: true, completion: nil)
     }
-
+    
 }
 
-extension MovieDetailViewController: UICollectionViewDelegate, UICollectionViewDataSource {
+extension TVMovieDetailViewController: UICollectionViewDelegate, UICollectionViewDataSource {
     
-
+    
     func collectionView(_ collectionView: UICollectionView, numberOfItemsInSection section: Int) -> Int {
         
-        return FullCastList.count
-        
+        return cast.count
     }
-
+    
     func collectionView(_ collectionView: UICollectionView, cellForItemAt indexPath: IndexPath) -> UICollectionViewCell {
         
         if let cell = collectionView.dequeueReusableCell(withReuseIdentifier: Storyboard.fullCastCollectionViewCell, for: indexPath) as? MovieDetailFullCastCollectionViewCell {
             
-            cell.cast = FullCastList[indexPath.row]
+            cell.cast = cast[indexPath.row]
             
             return cell
         }

@@ -62,12 +62,12 @@ class ProfileCollectionViewController: UICollectionViewController {
     
     override func collectionView(_ collectionView: UICollectionView, didSelectItemAt indexPath: IndexPath) {
         
-        if let movieDetail = self.storyboard?.instantiateViewController(withIdentifier: Storyboard.movieDetailViewController) as? MovieDetailViewController {
+        if let movieDetail = self.storyboard?.instantiateViewController(withIdentifier: Storyboard.movieDetailViewController) as? TVMovieDetailViewController {
             
             movieDetail.modalPresentationStyle = .overFullScreen
             movieDetail.modalTransitionStyle = .crossDissolve
             
-            movieDetail.movie = ProfileList[indexPath.row]
+            movieDetail.detail = ProfileList[indexPath.row]
             
             self.present(movieDetail, animated: true, completion: nil)
         }

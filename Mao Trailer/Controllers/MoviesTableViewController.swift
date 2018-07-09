@@ -11,7 +11,7 @@ import UIKit
 class MoviesTableViewController: UITableViewController {
     
     var sectionMovieArray: [SectionMovie] = [SectionMovie]()
-    
+  
     override func viewDidLoad() {
         super.viewDidLoad()
         
@@ -26,9 +26,9 @@ class MoviesTableViewController: UITableViewController {
         
         if segue.identifier == Segue.toMovieList {
             
-            let toViewController = segue.destination as! MovieListCollectionViewController
+            let toViewController = segue.destination as! TVMovieListCollectionViewController
             
-            toViewController.movieList = sender as! SectionMovie
+            toViewController.sectionData = sender as! SectionMovie
         }
     }
     
@@ -91,15 +91,15 @@ extension MoviesTableViewController {
             var section = sectionMovieArray[indexPath.section]
             
             // Add More Movie row
-            if section.movieArray.count > 10 {
-                section.movieArray.append(MoreMovie)
+            if section.sectionArray.count > 10 {
+                section.sectionArray.append(MoreMovie)
             }
             
-            cell.hotMovies = section.movieArray as! [Movie]
+            cell.hotMovies = section.sectionArray as! [Movie]
             
             cell.didSelectAction = { (movie) in
                 
-                self.showMovieListOrMovieDetail(movie: movie, indexPath: indexPath, sectionName: section.sectionName)
+                self.showMovieListOrMovieDetail(movie: movie, indexPath: indexPath, section: section)
             }
             
             return cell
@@ -110,16 +110,16 @@ extension MoviesTableViewController {
             var section = sectionMovieArray[indexPath.section]
             
             // Add More Movie row
-            if section.movieArray.count > 10 {
-                section.movieArray.append(MoreMovie)
+            if section.sectionArray.count > 10 {
+                section.sectionArray.append(MoreMovie)
             }
             
             cell.sectionTitleLabel.text = section.sectionName
-            cell.sectionMovies = section.movieArray as! [Movie]
+            cell.sectionMovies = section.sectionArray as! [Movie]
             
             cell.didSelectAction = { (movie) in
                 
-                self.showMovieListOrMovieDetail(movie: movie, indexPath: indexPath, sectionName: section.sectionName)
+                self.showMovieListOrMovieDetail(movie: movie, indexPath: indexPath, section: section)
             }
             
             return cell
@@ -127,24 +127,22 @@ extension MoviesTableViewController {
     }
     
     // MARK: - Helper methods
-    fileprivate func showMovieListOrMovieDetail(movie: Movie, indexPath: IndexPath, sectionName: String) {
+    fileprivate func showMovieListOrMovieDetail(movie: Movie, indexPath: IndexPath, section: SectionMovie) {
         
         if movie.title == "More" {
             
-            let section = self.sectionMovieArray[indexPath.section]
-            
-            let data: SectionMovie = SectionMovie(sectionName: "\(sectionName) list" , movieArray: section.movieArray)
+            let data: SectionMovie = SectionMovie(sectionName: "\(section.sectionName) list", sectionArray: section.sectionArray)
             
             self.performSegue(withIdentifier: Segue.toMovieList, sender: data)
             
         } else {
             
-            if let movieDetail = self.storyboard?.instantiateViewController(withIdentifier: Storyboard.movieDetailViewController) as? MovieDetailViewController {
+            if let movieDetail = self.storyboard?.instantiateViewController(withIdentifier: Storyboard.movieDetailViewController) as? TVMovieDetailViewController {
                 
                 movieDetail.modalPresentationStyle = .overFullScreen
                 movieDetail.modalTransitionStyle = .crossDissolve
                 
-                movieDetail.movie = movie
+                movieDetail.detail = movie
                 
                 self.present(movieDetail, animated: true, completion: nil)
             }

@@ -19,7 +19,7 @@ class TVPopularTableViewCell: UITableViewCell {
     
     let cornerRadius: CGFloat = Constants.cornerRadius
     
-    var tvShows: TVShow! {
+    var tvShow: TVShow! {
         didSet{
             self.updateUI()
         }
@@ -27,11 +27,11 @@ class TVPopularTableViewCell: UITableViewCell {
     
     func updateUI() {
         
-        if tvShows.title != "More" {
+        if tvShow.title != "More" {
             
-            titleLabel.text = tvShows.title.uppercased()
-            rateLabel.text = String(format: "%.1f", tvShows.vote_average)
-            coverImageView.downloadedFrom(urlString: tvShows.backdrop_path)
+            titleLabel.text = tvShow.title.uppercased()
+            rateLabel.text = String(format: "%.1f", tvShow.vote_average)
+            coverImageView.downloadedFrom(urlString: tvShow.backdrop_path)
             
         } else {
             

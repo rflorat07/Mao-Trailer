@@ -244,7 +244,7 @@
         <!--Movie List Collection View Controller-->
         <scene sceneID="9DP-dn-gyd">
             <objects>
-                <collectionViewController storyboardIdentifier="MovieListCollectionView" id="gNV-SY-Zy7" userLabel="Movie List Collection View Controller" customClass="MovieListCollectionViewController" customModule="Mao_Trailer" customModuleProvider="target" sceneMemberID="viewController">
+                <collectionViewController storyboardIdentifier="MovieListCollectionView" id="gNV-SY-Zy7" userLabel="Movie List Collection View Controller" customClass="TVMovieListCollectionViewController" customModule="Mao_Trailer" customModuleProvider="target" sceneMemberID="viewController">
                     <collectionView key="view" multipleTouchEnabled="YES" contentMode="scaleToFill" showsHorizontalScrollIndicator="NO" showsVerticalScrollIndicator="NO" dataMode="prototypes" id="k5o-Pm-5j8" userLabel="Movie List Collection View">
                         <rect key="frame" x="0.0" y="0.0" width="375" height="667"/>
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
@@ -380,7 +380,7 @@
         <!--Movie Detail View Controller-->
         <scene sceneID="86d-Rb-0dM">
             <objects>
-                <viewController storyboardIdentifier="MovieDetailViewController" id="Dfc-Lx-gDU" userLabel="Movie Detail View Controller" customClass="MovieDetailViewController" customModule="Mao_Trailer" customModuleProvider="target" sceneMemberID="viewController">
+                <viewController storyboardIdentifier="MovieDetailViewController" id="Dfc-Lx-gDU" userLabel="Movie Detail View Controller" customClass="TVMovieDetailViewController" customModule="Mao_Trailer" customModuleProvider="target" sceneMemberID="viewController">
                     <view key="view" contentMode="scaleToFill" id="ih1-xA-4Os" userLabel="Movie Detail View">
                         <rect key="frame" x="0.0" y="0.0" width="375" height="932"/>
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
@@ -449,7 +449,7 @@
                                                     </label>
                                                 </subviews>
                                             </stackView>
-                                            <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" textAlignment="justified" lineBreakMode="wordWrap" numberOfLines="6" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="9rO-tG-LkZ" userLabel="Description Label">
+                                            <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" textAlignment="justified" lineBreakMode="tailTruncation" numberOfLines="6" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="9rO-tG-LkZ" userLabel="Description Label">
                                                 <rect key="frame" x="20" y="400" width="335" height="140"/>
                                                 <constraints>
                                                     <constraint firstAttribute="height" relation="lessThanOrEqual" constant="140" id="fCh-ef-RhM"/>
@@ -459,8 +459,8 @@
                                                 <color key="textColor" red="0.40000000000000002" green="0.40000000000000002" blue="0.40000000000000002" alpha="1" colorSpace="calibratedRGB"/>
                                                 <nil key="highlightedColor"/>
                                             </label>
-                                            <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Action, Adventure, Fantasy " textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="QEr-a9-gfg" userLabel="Genre Label">
-                                                <rect key="frame" x="155.5" y="323" width="184.5" height="18"/>
+                                            <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Azione, Avventura, Animazione" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="QEr-a9-gfg" userLabel="Genre Label">
+                                                <rect key="frame" x="155" y="323" width="200" height="18"/>
                                                 <constraints>
                                                     <constraint firstAttribute="height" constant="18" id="6dY-g5-wIz"/>
                                                 </constraints>
@@ -469,7 +469,7 @@
                                                 <nil key="highlightedColor"/>
                                             </label>
                                             <stackView opaque="NO" contentMode="scaleToFill" spacing="10" translatesAutoresizingMaskIntoConstraints="NO" id="3LW-b5-WdN" userLabel="Rate Start Stack View">
-                                                <rect key="frame" x="155.5" y="356" width="147" height="15"/>
+                                                <rect key="frame" x="155" y="356" width="147" height="15"/>
                                                 <subviews>
                                                     <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="9.8" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="ufK-xf-l94" userLabel="Rating Value Lavel">
                                                         <rect key="frame" x="0.0" y="0.0" width="31" height="15"/>
@@ -497,18 +497,19 @@
                                             <constraint firstItem="9rO-tG-LkZ" firstAttribute="top" secondItem="nfr-Wv-EkB" secondAttribute="bottom" constant="15" id="5Nc-qN-R3r"/>
                                             <constraint firstItem="u04-Dr-iei" firstAttribute="leading" secondItem="P3o-Bp-xiT" secondAttribute="leading" id="BTX-4L-Muy"/>
                                             <constraint firstAttribute="trailing" secondItem="u04-Dr-iei" secondAttribute="trailing" constant="20" id="ByJ-Ac-tiW"/>
+                                            <constraint firstItem="3LW-b5-WdN" firstAttribute="top" secondItem="QEr-a9-gfg" secondAttribute="bottom" constant="15" id="Ut2-TI-YQC"/>
                                             <constraint firstItem="nfr-Wv-EkB" firstAttribute="top" secondItem="Bs7-Mc-h6G" secondAttribute="top" constant="205" id="Xsz-Fv-mih"/>
                                             <constraint firstAttribute="height" constant="560" id="b7N-rd-Xvj"/>
                                             <constraint firstItem="Jl8-5d-xUb" firstAttribute="top" secondItem="Bs7-Mc-h6G" secondAttribute="top" id="cIy-EI-Tuj"/>
-                                            <constraint firstItem="3LW-b5-WdN" firstAttribute="top" secondItem="QEr-a9-gfg" secondAttribute="bottom" constant="15" id="dHI-Wo-lPa"/>
                                             <constraint firstAttribute="trailing" secondItem="9rO-tG-LkZ" secondAttribute="trailing" constant="20" id="eP0-Vf-Zse"/>
+                                            <constraint firstItem="3LW-b5-WdN" firstAttribute="leading" secondItem="nfr-Wv-EkB" secondAttribute="trailing" constant="15" id="eYZ-Yz-uEU"/>
                                             <constraint firstItem="N4N-dS-a2s" firstAttribute="leading" secondItem="nfr-Wv-EkB" secondAttribute="trailing" constant="15" id="gAg-ms-DHE"/>
                                             <constraint firstItem="P3o-Bp-xiT" firstAttribute="centerX" secondItem="Jl8-5d-xUb" secondAttribute="centerX" id="jk4-TX-pwR"/>
                                             <constraint firstItem="nfr-Wv-EkB" firstAttribute="leading" secondItem="Bs7-Mc-h6G" secondAttribute="leading" constant="20" id="kP4-Dl-ugS"/>
                                             <constraint firstAttribute="trailing" secondItem="Jl8-5d-xUb" secondAttribute="trailing" id="oL1-y7-cj0"/>
                                             <constraint firstItem="P3o-Bp-xiT" firstAttribute="centerY" secondItem="Jl8-5d-xUb" secondAttribute="centerY" id="qOu-vP-OyC"/>
-                                            <constraint firstAttribute="trailing" secondItem="QEr-a9-gfg" secondAttribute="trailing" constant="35.333333333333371" id="qsX-Aj-h0j"/>
-                                            <constraint firstItem="3LW-b5-WdN" firstAttribute="leading" secondItem="QEr-a9-gfg" secondAttribute="leading" id="vl6-sU-dRA"/>
+                                            <constraint firstItem="QEr-a9-gfg" firstAttribute="leading" secondItem="nfr-Wv-EkB" secondAttribute="trailing" constant="15" id="qgf-GS-wii"/>
+                                            <constraint firstAttribute="trailing" secondItem="QEr-a9-gfg" secondAttribute="trailing" constant="20" id="qsX-Aj-h0j"/>
                                             <constraint firstItem="N4N-dS-a2s" firstAttribute="top" secondItem="Jl8-5d-xUb" secondAttribute="bottom" constant="15" id="wvM-jS-ue3"/>
                                             <constraint firstItem="u04-Dr-iei" firstAttribute="top" secondItem="P3o-Bp-xiT" secondAttribute="bottom" constant="74" id="xIX-U7-ZgU"/>
                                             <constraint firstItem="Jl8-5d-xUb" firstAttribute="leading" secondItem="Bs7-Mc-h6G" secondAttribute="leading" id="xxp-Xm-MF3"/>
@@ -586,13 +587,13 @@
                                                         </view>
                                                         <constraints>
                                                             <constraint firstAttribute="trailing" secondItem="725-Qz-WTm" secondAttribute="trailing" id="6Gd-Wm-GjQ"/>
-                                                            <constraint firstItem="Ddv-G0-tjL" firstAttribute="top" secondItem="J44-LM-8mN" secondAttribute="bottom" constant="5" id="9iE-DM-VCr"/>
                                                             <constraint firstItem="725-Qz-WTm" firstAttribute="top" secondItem="GC8-ax-lJh" secondAttribute="top" id="LZq-w6-r7h"/>
                                                             <constraint firstAttribute="trailing" secondItem="J44-LM-8mN" secondAttribute="trailing" id="O9V-dX-h2e"/>
                                                             <constraint firstItem="Ddv-G0-tjL" firstAttribute="leading" secondItem="GC8-ax-lJh" secondAttribute="leading" id="X92-CO-oEz"/>
                                                             <constraint firstAttribute="trailing" secondItem="Ddv-G0-tjL" secondAttribute="trailing" id="gkm-wh-Sw2"/>
                                                             <constraint firstItem="725-Qz-WTm" firstAttribute="leading" secondItem="GC8-ax-lJh" secondAttribute="leading" id="h9l-JF-azj"/>
                                                             <constraint firstAttribute="bottom" secondItem="Ddv-G0-tjL" secondAttribute="bottom" id="ngV-VK-33Q"/>
+                                                            <constraint firstItem="J44-LM-8mN" firstAttribute="top" secondItem="725-Qz-WTm" secondAttribute="bottom" constant="5" id="sau-yr-V0J"/>
                                                             <constraint firstItem="J44-LM-8mN" firstAttribute="leading" secondItem="GC8-ax-lJh" secondAttribute="leading" id="tFS-Nq-EeM"/>
                                                         </constraints>
                                                         <size key="customSize" width="70" height="140"/>
@@ -679,6 +680,7 @@
                         <outlet property="collectionView" destination="Bh5-Tf-X3w" id="aFy-Zo-7Vx"/>
                         <outlet property="coverImageView" destination="Jl8-5d-xUb" id="7tU-aP-ajX"/>
                         <outlet property="descriptionLabel" destination="9rO-tG-LkZ" id="TmF-zw-15T"/>
+                        <outlet property="genreLabel" destination="QEr-a9-gfg" id="6v8-YS-Wvy"/>
                         <outlet property="posterCoverView" destination="nfr-Wv-EkB" id="nyJ-u3-NMY"/>
                         <outlet property="posterImageView" destination="Tdz-CD-hwS" id="Ddc-Dz-r68"/>
                         <outlet property="ratingValueLabel" destination="ufK-xf-l94" id="k6y-9Y-8tV"/>
@@ -855,7 +857,7 @@
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="nWU-th-E2U" userLabel="First Responder" sceneMemberID="firstResponder"/>
             </objects>
-            <point key="canvasLocation" x="785" y="-1544"/>
+            <point key="canvasLocation" x="784.79999999999995" y="-1544.0779610194904"/>
         </scene>
         <!--MOVIES-->
         <scene sceneID="9je-nK-f30">

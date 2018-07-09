@@ -1,5 +1,5 @@
 //
-//  MovieListCollectionViewController.swift
+//  TVMovieListCollectionViewController.swift
 //  Mao Trailer
 //
 //  Created by Roger Florat on 21/06/18.
@@ -10,7 +10,7 @@ import UIKit
 
 class TVMovieListCollectionViewController: UICollectionViewController {
     
-    var movieList: SectionMovie!
+    var sectionData: SectionTVMovie!
     
     override func viewDidLoad() {
         super.viewDidLoad()
@@ -21,7 +21,7 @@ class TVMovieListCollectionViewController: UICollectionViewController {
         
         if let sectionHeader = collectionView.dequeueReusableSupplementaryView(ofKind: kind, withReuseIdentifier: Storyboard.movieListReusableView, for: indexPath) as? MovieListSectionHeaderCollectionReusableView {
             
-            sectionHeader.sectionTitleLabel.text = movieList.sectionName
+            sectionHeader.sectionTitleLabel.text = sectionData.sectionName
             
             return sectionHeader
         }
@@ -37,28 +37,28 @@ class TVMovieListCollectionViewController: UICollectionViewController {
     
     override func collectionView(_ collectionView: UICollectionView, numberOfItemsInSection section: Int) -> Int {
         
-        return movieList.movieArray.count
+        return sectionData.sectionArray.count
     }
     
     override func collectionView(_ collectionView: UICollectionView, cellForItemAt indexPath: IndexPath) -> UICollectionViewCell {
         
         let cell = collectionView.dequeueReusableCell(withReuseIdentifier: Storyboard.movieListViewCell, for: indexPath) as! MovieListCollectionViewCell
         
-        cell.movie = movieList.movieArray[indexPath.row]
+        cell.movie = sectionData.sectionArray[indexPath.row]
         
         return cell
     }
     
     override func collectionView(_ collectionView: UICollectionView, didSelectItemAt indexPath: IndexPath) {
         
-        if let movieDetail = self.storyboard?.instantiateViewController(withIdentifier: Storyboard.movieDetailViewController) as? MovieDetailViewController {
+        if let tvMovieDetail = self.storyboard?.instantiateViewController(withIdentifier: Storyboard.movieDetailViewController) as? TVMovieDetailViewController {
             
-            movieDetail.modalPresentationStyle = .overFullScreen
-            movieDetail.modalTransitionStyle = .crossDissolve
+            tvMovieDetail.modalPresentationStyle = .overFullScreen
+            tvMovieDetail.modalTransitionStyle = .crossDissolve
             
-            movieDetail.movie = movieList.movieArray[indexPath.row]
+            tvMovieDetail.detail = sectionData.sectionArray[indexPath.row]
             
-            self.present(movieDetail, animated: true, completion: nil)
+            self.present(tvMovieDetail, animated: true, completion: nil)
         }
         
     }

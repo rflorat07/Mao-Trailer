@@ -9,7 +9,7 @@
 /* Begin PBXBuildFile section */
 		4F0508DC20EE455D00D5B778 /* ModelData.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4F0508DB20EE455D00D5B778 /* ModelData.swift */; };
 		4F0508DE20EE64E300D5B778 /* QueryServiceTVShow.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4F0508DD20EE64E300D5B778 /* QueryServiceTVShow.swift */; };
-		4F195BAF20E3A1B4005816F5 /* MovieDetailViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4F195BAE20E3A1B4005816F5 /* MovieDetailViewController.swift */; };
+		4F195BAF20E3A1B4005816F5 /* TVMovieDetailViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4F195BAE20E3A1B4005816F5 /* TVMovieDetailViewController.swift */; };
 		4F195BB120E3A3EB005816F5 /* MovieDetailFullCastCollectionViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4F195BB020E3A3EB005816F5 /* MovieDetailFullCastCollectionViewCell.swift */; };
 		4F195BB520E3DE0A005816F5 /* ProfileCollectionViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4F195BB420E3DE0A005816F5 /* ProfileCollectionViewController.swift */; };
 		4F195BB720E3DE5D005816F5 /* ProfileHeaderCollectionReusableView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4F195BB620E3DE5D005816F5 /* ProfileHeaderCollectionReusableView.swift */; };
@@ -22,11 +22,12 @@
 		4F77BD2520DA44E000A51FE2 /* SectionCollectionViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4F77BD2420DA44E000A51FE2 /* SectionCollectionViewCell.swift */; };
 		4F892A5620DD2958005C8E19 /* MovieListSectionHeaderCollectionReusableView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4F892A5520DD2958005C8E19 /* MovieListSectionHeaderCollectionReusableView.swift */; };
 		4F963D1620EF77C600A318CF /* LoadingIndicatorView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4F963D1520EF77C500A318CF /* LoadingIndicatorView.swift */; };
+		4F963D1820EF804F00A318CF /* TVFilm.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4F963D1720EF804F00A318CF /* TVFilm.swift */; };
 		4FC87E9820E4EFEF00653671 /* ProfileSettingViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4FC87E9720E4EFEF00653671 /* ProfileSettingViewController.swift */; };
 		4FC87E9B20E50A8C00653671 /* UIViewExt.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4FC87E9A20E50A8C00653671 /* UIViewExt.swift */; };
 		4FEDD5E520ECCDD000E0D4BA /* UIImageViewExt.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4FEDD5E420ECCDD000E0D4BA /* UIImageViewExt.swift */; };
 		4FEDD5E720ED136500E0D4BA /* Walkthrough.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4FEDD5E620ED136400E0D4BA /* Walkthrough.swift */; };
-		4FEDD5E920ED13CF00E0D4BA /* Cast.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4FEDD5E820ED13CF00E0D4BA /* Cast.swift */; };
+		4FEDD5E920ED13CF00E0D4BA /* MovieInfo.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4FEDD5E820ED13CF00E0D4BA /* MovieInfo.swift */; };
 		4FF5E60C20D92AB000D088B5 /* AppDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4FF5E60B20D92AAF00D088B5 /* AppDelegate.swift */; };
 		4FF5E61120D92AB000D088B5 /* Main.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 4FF5E60F20D92AB000D088B5 /* Main.storyboard */; };
 		4FF5E61320D92B0200D088B5 /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = 4FF5E61220D92B0200D088B5 /* Assets.xcassets */; };
@@ -42,13 +43,13 @@
 		4FF628FD20DBD4550002AA13 /* TVPopularTableViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4FF628FC20DBD4550002AA13 /* TVPopularTableViewCell.swift */; };
 		4FF6290120DBDE6B0002AA13 /* Constants.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4FF6290020DBDE6B0002AA13 /* Constants.swift */; };
 		4FF6290320DBFE9D0002AA13 /* MovieListCollectionViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4FF6290220DBFE9D0002AA13 /* MovieListCollectionViewCell.swift */; };
-		4FF6290520DBFFF60002AA13 /* MovieListCollectionViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4FF6290420DBFFF60002AA13 /* MovieListCollectionViewController.swift */; };
+		4FF6290520DBFFF60002AA13 /* TVMovieListCollectionViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4FF6290420DBFFF60002AA13 /* TVMovieListCollectionViewController.swift */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
 		4F0508DB20EE455D00D5B778 /* ModelData.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ModelData.swift; sourceTree = "<group>"; };
 		4F0508DD20EE64E300D5B778 /* QueryServiceTVShow.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = QueryServiceTVShow.swift; sourceTree = "<group>"; };
-		4F195BAE20E3A1B4005816F5 /* MovieDetailViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MovieDetailViewController.swift; sourceTree = "<group>"; };
+		4F195BAE20E3A1B4005816F5 /* TVMovieDetailViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TVMovieDetailViewController.swift; sourceTree = "<group>"; };
 		4F195BB020E3A3EB005816F5 /* MovieDetailFullCastCollectionViewCell.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = MovieDetailFullCastCollectionViewCell.swift; sourceTree = "<group>"; };
 		4F195BB420E3DE0A005816F5 /* ProfileCollectionViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ProfileCollectionViewController.swift; sourceTree = "<group>"; };
 		4F195BB620E3DE5D005816F5 /* ProfileHeaderCollectionReusableView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ProfileHeaderCollectionReusableView.swift; sourceTree = "<group>"; };
@@ -61,11 +62,12 @@
 		4F77BD2420DA44E000A51FE2 /* SectionCollectionViewCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SectionCollectionViewCell.swift; sourceTree = "<group>"; };
 		4F892A5520DD2958005C8E19 /* MovieListSectionHeaderCollectionReusableView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MovieListSectionHeaderCollectionReusableView.swift; sourceTree = "<group>"; };
 		4F963D1520EF77C500A318CF /* LoadingIndicatorView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = LoadingIndicatorView.swift; sourceTree = "<group>"; };
+		4F963D1720EF804F00A318CF /* TVFilm.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TVFilm.swift; sourceTree = "<group>"; };
 		4FC87E9720E4EFEF00653671 /* ProfileSettingViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ProfileSettingViewController.swift; sourceTree = "<group>"; };
 		4FC87E9A20E50A8C00653671 /* UIViewExt.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = UIViewExt.swift; sourceTree = "<group>"; };
 		4FEDD5E420ECCDD000E0D4BA /* UIImageViewExt.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = UIImageViewExt.swift; sourceTree = "<group>"; };
 		4FEDD5E620ED136400E0D4BA /* Walkthrough.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Walkthrough.swift; sourceTree = "<group>"; };
-		4FEDD5E820ED13CF00E0D4BA /* Cast.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Cast.swift; sourceTree = "<group>"; };
+		4FEDD5E820ED13CF00E0D4BA /* MovieInfo.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MovieInfo.swift; sourceTree = "<group>"; };
 		4FF5E60820D92AAF00D088B5 /* Mao Trailer.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = "Mao Trailer.app"; sourceTree = BUILT_PRODUCTS_DIR; };
 		4FF5E60B20D92AAF00D088B5 /* AppDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppDelegate.swift; sourceTree = "<group>"; };
 		4FF5E61020D92AB000D088B5 /* Base */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; name = Base; path = Base.lproj/Main.storyboard; sourceTree = "<group>"; };
@@ -83,7 +85,7 @@
 		4FF628FC20DBD4550002AA13 /* TVPopularTableViewCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TVPopularTableViewCell.swift; sourceTree = "<group>"; };
 		4FF6290020DBDE6B0002AA13 /* Constants.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Constants.swift; sourceTree = "<group>"; };
 		4FF6290220DBFE9D0002AA13 /* MovieListCollectionViewCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MovieListCollectionViewCell.swift; sourceTree = "<group>"; };
-		4FF6290420DBFFF60002AA13 /* MovieListCollectionViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MovieListCollectionViewController.swift; sourceTree = "<group>"; };
+		4FF6290420DBFFF60002AA13 /* TVMovieListCollectionViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TVMovieListCollectionViewController.swift; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -145,8 +147,8 @@
 			children = (
 				4FF5E62420D9473A00D088B5 /* MoviesTableViewController.swift */,
 				4FF628FA20DBB7DE0002AA13 /* TVTableViewController.swift */,
-				4FF6290420DBFFF60002AA13 /* MovieListCollectionViewController.swift */,
-				4F195BAE20E3A1B4005816F5 /* MovieDetailViewController.swift */,
+				4FF6290420DBFFF60002AA13 /* TVMovieListCollectionViewController.swift */,
+				4F195BAE20E3A1B4005816F5 /* TVMovieDetailViewController.swift */,
 				4F195BB420E3DE0A005816F5 /* ProfileCollectionViewController.swift */,
 				4FC87E9720E4EFEF00653671 /* ProfileSettingViewController.swift */,
 				4F526BC120E62C2600EB36EA /* WalkthroughViewController.swift */,
@@ -157,10 +159,11 @@
 		4FF5E61E20D92E6F00D088B5 /* Models */ = {
 			isa = PBXGroup;
 			children = (
-				4FF628F420DB98A30002AA13 /* Movie.swift */,
 				4F1E6B3120EBC6AD005CEA65 /* TV.swift */,
+				4FF628F420DB98A30002AA13 /* Movie.swift */,
+				4F963D1720EF804F00A318CF /* TVFilm.swift */,
+				4FEDD5E820ED13CF00E0D4BA /* MovieInfo.swift */,
 				4FEDD5E620ED136400E0D4BA /* Walkthrough.swift */,
-				4FEDD5E820ED13CF00E0D4BA /* Cast.swift */,
 				4F0508DB20EE455D00D5B778 /* ModelData.swift */,
 			);
 			path = Models;
@@ -277,13 +280,14 @@
 			buildActionMask = 2147483647;
 			files = (
 				4F0508DE20EE64E300D5B778 /* QueryServiceTVShow.swift in Sources */,
+				4F963D1820EF804F00A318CF /* TVFilm.swift in Sources */,
 				4FEDD5E520ECCDD000E0D4BA /* UIImageViewExt.swift in Sources */,
 				4FF628F720DBB78E0002AA13 /* TVNowTableViewCell.swift in Sources */,
 				4F1E6B3020EB7498005CEA65 /* QueryServiceMovie.swift in Sources */,
 				4F892A5620DD2958005C8E19 /* MovieListSectionHeaderCollectionReusableView.swift in Sources */,
 				4FF5E62520D9473A00D088B5 /* MoviesTableViewController.swift in Sources */,
 				4FC87E9820E4EFEF00653671 /* ProfileSettingViewController.swift in Sources */,
-				4F195BAF20E3A1B4005816F5 /* MovieDetailViewController.swift in Sources */,
+				4F195BAF20E3A1B4005816F5 /* TVMovieDetailViewController.swift in Sources */,
 				4F77BD2520DA44E000A51FE2 /* SectionCollectionViewCell.swift in Sources */,
 				4FC87E9B20E50A8C00653671 /* UIViewExt.swift in Sources */,
 				4FF628FD20DBD4550002AA13 /* TVPopularTableViewCell.swift in Sources */,
@@ -301,11 +305,11 @@
 				4FF628F520DB98A30002AA13 /* Movie.swift in Sources */,
 				4F195BB120E3A3EB005816F5 /* MovieDetailFullCastCollectionViewCell.swift in Sources */,
 				4F963D1620EF77C600A318CF /* LoadingIndicatorView.swift in Sources */,
-				4FEDD5E920ED13CF00E0D4BA /* Cast.swift in Sources */,
+				4FEDD5E920ED13CF00E0D4BA /* MovieInfo.swift in Sources */,
 				4F1E6B3220EBC6AD005CEA65 /* TV.swift in Sources */,
 				4FF5E62720D951FB00D088B5 /* HotTableViewCell.swift in Sources */,
 				4FF6290120DBDE6B0002AA13 /* Constants.swift in Sources */,
-				4FF6290520DBFFF60002AA13 /* MovieListCollectionViewController.swift in Sources */,
+				4FF6290520DBFFF60002AA13 /* TVMovieListCollectionViewController.swift in Sources */,
 				4F526BC420E62CBC00EB36EA /* WalkthroughCollectionViewCell.swift in Sources */,
 				4F195BB920E3DF55005816F5 /* ProfileListCollectionViewCell.swift in Sources */,
 				4FF628FB20DBB7DE0002AA13 /* TVTableViewController.swift in Sources */,

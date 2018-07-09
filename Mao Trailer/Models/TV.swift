@@ -9,9 +9,11 @@
 import Foundation
 
 struct TVShow: Decodable, TVFilm {
+    
     let id: Int
     let title: String
     let overview: String
+    let popularity: Double
     let poster_path: String
     let vote_average: Double
     let release_date: String
@@ -22,6 +24,7 @@ struct TVShow: Decodable, TVFilm {
         case id
         case title = "name"
         case overview
+        case popularity
         case poster_path
         case vote_average
         case release_date = "first_air_date"
@@ -34,8 +37,11 @@ struct TVShowList: Decodable {
     let results: [TVShow]
 }
 
-struct SectionTVShow {
+struct SectionTVShow: SectionTVMovie {
     var sectionName: String
-    var tvShowsArray: [TVFilm]
+    var sectionArray: [TVFilm]
 }
+
+let MoreTVShow: TVShow = TVShow(id: 0, title: "More", overview: "More",popularity: 0.0, poster_path: "land-more", vote_average: 0.0, release_date: "0000-00-00",backdrop_path : "land-more", original_title: "More")
+
 
