@@ -132,11 +132,34 @@ class QueryServiceMovie {
         
     }
     
+    func searchMovieFromWord(searchText: String, _ completion : @escaping QueryResultMovieArray) {
+        
+        var urlInfo = URLComponents(string: QueryString.baseUrl)!
+        
+        urlInfo.path = "/3/search/movie"
+        urlInfo.queryItems = [
+            URLQueryItem(name: "api_key", value: QueryString.api_key),
+            URLQueryItem(name: "language", value: QueryString.language),
+            URLQueryItem(name: "query", value: searchText),
+            URLQueryItem(name: "page", value: QueryString.page),
+            URLQueryItem(name: "include_adult", value: "false"),
+            URLQueryItem(name: "region", value: QueryString.region)
+        ]
+        
+        fetchMovieList(queryString: urlInfo.string!) { (movieList) in
+            
+            let itemlist = movieList?.filter{ $0.backdrop_path != nil && $0.poster_path != nil}
+            
+            completion(itemlist)
+        }
+    }
+    
     // MARK: - Helper methods
     fileprivate func getMovieList(_ data: Data, _ completion : @escaping QueryResultMovieArray) {
         
         do {
             let list = try JSONDecoder().decode(MovieList.self, from: data)
+            
             completion(list.results)
             
         } catch let decodeError as NSError {

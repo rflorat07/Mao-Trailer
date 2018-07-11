@@ -30,7 +30,7 @@ class SectionCollectionViewCell: UICollectionViewCell {
         if sectionMovie.title != "More" {
             
             titleLabel.text = sectionMovie.title.uppercased()
-            coverImageView.downloadedFrom(urlString: sectionMovie.poster_path)
+            coverImageView.downloadedFrom(urlString: sectionMovie.poster_path!)
             rateLabel.text = String(format:"%.1f", sectionMovie.vote_average)
             
         } else {

@@ -41,7 +41,7 @@ class QueryServiceTVShow {
         // Popular TVShow
         group.enter()
         
-        fetchTVShowsList(queryString: EndPoint.PopularTVshows) { (tvShows) in
+        fetchTVShowsList(queryString: EndPoint.PopularTVShows) { (tvShows) in
             
             if let tvShows = tvShows {
                 tvShowArray.append(SectionTVShow(sectionName: "Popular", sectionArray: tvShows))

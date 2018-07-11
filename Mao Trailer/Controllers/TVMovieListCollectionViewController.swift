@@ -15,6 +15,20 @@ class TVMovieListCollectionViewController: UICollectionViewController {
     override func viewDidLoad() {
         super.viewDidLoad()
         
+        insertRefreshControl()
+    }
+    
+    func insertRefreshControl() {
+        let refresh = UIRefreshControl()
+        
+        refresh.addTarget(self, action: #selector(self.refreshCollectionView), for: UIControlEvents.valueChanged)
+        
+        collectionView?.refreshControl = refresh
+    }
+    
+    @objc func refreshCollectionView() {
+        print("Refresh Collection View")
+        collectionView?.refreshControl?.endRefreshing()
     }
         
     override func collectionView(_ collectionView: UICollectionView, viewForSupplementaryElementOfKind kind: String, at indexPath: IndexPath) -> UICollectionReusableView {

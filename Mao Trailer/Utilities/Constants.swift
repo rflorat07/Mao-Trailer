@@ -11,6 +11,7 @@ import UIKit
 struct Constants {
     static let cornerRadius : CGFloat = 6.0
     static let numberOfItems: Int = 10
+    static let placeholderImage = "placeholder"
 }
 
 struct Storyboard {
@@ -32,6 +33,8 @@ struct Storyboard {
     static let movieDetailViewController = "MovieDetailViewController"
     
     static let walkthroughViewCell = "WalkthroughViewCell"
+    
+    static let searchListViewCell = "SearchListViewCell"
         
 }
 
@@ -40,6 +43,7 @@ struct Segue {
     static let toMovieList = "segueToMovieList"
     static let toMovieDetail = "segueToMovieDetail"
     static let toProfileSetting = "segueToProfileSetting"
+    static let toSearchList = "segueToSearchList"
 }
 
 struct StructType {
@@ -68,6 +72,7 @@ struct EndPoint {
     
     static let UpcomingMovies = "https://api.themoviedb.org/3/movie/upcoming?api_key=3b122cc1b16808da5a679c3c1c11cd07&language=it-IT&page=1&region=IT"
     
+    static let SearchMovie = "https://api.themoviedb.org/3/search/movie?api_key=3b122cc1b16808da5a679c3c1c11cd07&language=it-IT&query=mario&page=1&include_adult=false&region=IT"
 
     // The TV Database API - https://developers.themoviedb.org/3/tv/get-tv-details
     
@@ -75,10 +80,11 @@ struct EndPoint {
     
     static let NowTVShows = "https://api.themoviedb.org/3/tv/on_the_air?api_key=3b122cc1b16808da5a679c3c1c11cd07&language=it-IT&page=1"
     
-    static let PopularTVshows = "https://api.themoviedb.org/3/tv/popular?api_key=3b122cc1b16808da5a679c3c1c11cd07&language=it-IT&page=1"
+    static let PopularTVShows = "https://api.themoviedb.org/3/tv/popular?api_key=3b122cc1b16808da5a679c3c1c11cd07&language=it-IT&page=1"
     
-    static let AiringTodayTVshows = "https://api.themoviedb.org/3/tv/airing_today?api_key=3b122cc1b16808da5a679c3c1c11cd07&language=it-IT&page=1"
+    static let AiringTodayTVShows = "https://api.themoviedb.org/3/tv/airing_today?api_key=3b122cc1b16808da5a679c3c1c11cd07&language=it-IT&page=1"
     
+    static let SearchTVShows = "https://api.themoviedb.org/3/search/tv?api_key=3b122cc1b16808da5a679c3c1c11cd07&language=it-IT&query=Mario&page=1"
     
     // The Genre Database API - https://developers.themoviedb.org/3/genres/get-movie-list
     

@@ -18,6 +18,11 @@ struct MovieInfo: Decodable {
     func getGenre() -> String {
         return self.genres.compactMap { $0.name }.joined(separator: ", ")
     }
+    
+    func getCast() -> [Cast] {
+        
+        return self.credits.cast.filter{ $0.profile_path != nil }
+    }
 }
 
 struct Genre: Decodable {

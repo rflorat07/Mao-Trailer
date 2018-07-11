@@ -10,14 +10,14 @@ import Foundation
 
 struct TVShow: Decodable, TVFilm {
     
-    let id: Int
-    let title: String
-    let overview: String
-    let popularity: Double
-    let poster_path: String
-    let vote_average: Double
-    let release_date: String
-    let backdrop_path : String
+    var id: Int
+    var title: String
+    var overview: String
+    var popularity: Double
+    var poster_path: String? 
+    var vote_average: Double
+    var release_date: String
+    var backdrop_path : String?
     let original_title : String
     
      enum CodingKeys: String, CodingKey {

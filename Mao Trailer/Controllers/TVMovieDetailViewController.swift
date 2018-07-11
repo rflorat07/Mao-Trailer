@@ -7,6 +7,7 @@
 //
 
 import UIKit
+import AVKit
 
 class TVMovieDetailViewController: UIViewController {
     
@@ -22,6 +23,7 @@ class TVMovieDetailViewController: UIViewController {
     let cornerRadius: CGFloat = Constants.cornerRadius
     
     var detail: TVFilm!
+    var videoKey: String = ""
     var cast: [Cast] = [Cast]()
     
     override func viewDidLoad() {
@@ -41,6 +43,7 @@ class TVMovieDetailViewController: UIViewController {
         
         // StatusBar Style
         UIApplication.shared.statusBarStyle = .default
+        
     }
     
     func updateUI() {
@@ -48,35 +51,50 @@ class TVMovieDetailViewController: UIViewController {
         descriptionLabel.text = detail.overview
         titleLabel.text = detail.title.uppercased()
         
-        coverImageView.downloadedFrom(urlString: detail.backdrop_path)
+        coverImageView.downloadedFrom(urlString: detail.backdrop_path!)
         
         ratingValueLabel.text = String(format:"%.1f", detail.vote_average)
         
         posterImageView.clipsToBounds = true
         posterImageView.layer.cornerRadius = cornerRadius
-        posterImageView.downloadedFrom(urlString: detail.poster_path)
+        posterImageView.downloadedFrom(urlString: detail.poster_path!)
         
         posterCoverView.dropShadow(radius: cornerRadius)
         
-        LoadingIndicatorView.show("Loading")
+       // LoadingIndicatorView.show("Loading")
         
         QueryServiceMovie.intance.fetchMovieInformation(movieID: detail.id) { (detail) in
             
             if let detail = detail {
                 
-                self.cast = detail.credits.cast
+                self.cast = detail.getCast()
+                self.videoKey = "xoGgcdpIQ3I"
                 self.genreLabel.text = detail.getGenre()
                 
                 self.collectionView.reloadData()
                 
-                LoadingIndicatorView.hide()
+              //  LoadingIndicatorView.hide()
             }
         }
     }
     
-    
     @IBAction func backButtonTapped(_ sender: UIButton) {
         dismiss(animated: true, completion: nil)
+    }
+    
+    
+    @IBAction func playButtonTapped(_ sender: UIButton) {
+        
+        let urlString = "https://www.youtube.com/watch?v=\(self.videoKey)"
+        let url = URL(string: urlString)
+        let player = AVPlayer(url: url!)
+        let playerController = AVPlayerViewController()
+        playerController.player = player
+        present(playerController, animated: true) {
+            player.play()
+        }
+        
+        print(urlString)
     }
     
 }
