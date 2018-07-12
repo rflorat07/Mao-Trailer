@@ -384,7 +384,7 @@
         <!--Movie Detail View Controller-->
         <scene sceneID="86d-Rb-0dM">
             <objects>
-                <viewController storyboardIdentifier="MovieDetailViewController" id="Dfc-Lx-gDU" userLabel="Movie Detail View Controller" customClass="TVMovieDetailViewController" customModule="Mao_Trailer" customModuleProvider="target" sceneMemberID="viewController">
+                <viewController storyboardIdentifier="MovieDetailsViewController" id="Dfc-Lx-gDU" userLabel="Movie Detail View Controller" customClass="TVMovieDetailsViewController" customModule="Mao_Trailer" customModuleProvider="target" sceneMemberID="viewController">
                     <view key="view" contentMode="scaleToFill" id="ih1-xA-4Os" userLabel="Movie Detail View">
                         <rect key="frame" x="0.0" y="0.0" width="375" height="800"/>
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
@@ -696,7 +696,7 @@
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="cnw-qP-z7g" userLabel="First Responder" sceneMemberID="firstResponder"/>
             </objects>
-            <point key="canvasLocation" x="1614" y="958"/>
+            <point key="canvasLocation" x="1614" y="898"/>
         </scene>
         <!--Walkthrough View Controller-->
         <scene sceneID="DM0-Rk-CnA">

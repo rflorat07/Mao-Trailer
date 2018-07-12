@@ -10,7 +10,7 @@ import UIKit
 
 class SearchListCollectionViewController: UICollectionViewController, UISearchBarDelegate {
     
-    var itemList = [TVFilm]()
+    var itemList = [TVMovie]()
     let searchBar = UISearchBar()
     
 
@@ -37,12 +37,12 @@ class SearchListCollectionViewController: UICollectionViewController, UISearchBa
        
         searchBar.endEditing(true)
         
-        QueryServiceMovie.intance.searchMovieFromWord(searchText: searchBar.text!) { (movieList) in
+      /*  QueryServiceMovie.intance.searchMovieFromWord(searchText: searchBar.text!) { (movieList) in
             if let movieList = movieList {
-                self.itemList = movieList
+                self.itemList = movieList.getMovieList()
                 self.collectionView?.reloadData()
             }
-        }
+        } */
     }
     
     override func scrollViewWillBeginDragging(_ scrollView: UIScrollView) {
@@ -50,8 +50,6 @@ class SearchListCollectionViewController: UICollectionViewController, UISearchBa
     }
 
     
-    // MARK: - Navigation
- 
     // MARK: UICollectionViewDataSource
 
     override func numberOfSections(in collectionView: UICollectionView) -> Int {
@@ -75,12 +73,12 @@ class SearchListCollectionViewController: UICollectionViewController, UISearchBa
     
     override func collectionView(_ collectionView: UICollectionView, didSelectItemAt indexPath: IndexPath) {
         
-        if let tvMovieDetail = self.storyboard?.instantiateViewController(withIdentifier: Storyboard.movieDetailViewController) as? TVMovieDetailViewController {
+        if let tvMovieDetail = self.storyboard?.instantiateViewController(withIdentifier: Storyboard.movieDetailsViewController) as? TVMovieDetailsViewController {
             
             tvMovieDetail.modalPresentationStyle = .overFullScreen
             tvMovieDetail.modalTransitionStyle = .crossDissolve
             
-            tvMovieDetail.detail = itemList[indexPath.row]
+            tvMovieDetail.information = itemList[indexPath.row]
             
             self.present(tvMovieDetail, animated: true, completion: nil)
         }

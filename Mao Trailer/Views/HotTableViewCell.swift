@@ -12,13 +12,13 @@ class HotTableViewCell: UITableViewCell {
     
     @IBOutlet weak var hotCollectionView: UICollectionView!
     
-    var hotMovies: [Movie]! {
+    var hotMovies: [TVMovie]! {
         didSet{
             hotCollectionView.reloadData()
         }
     }
     
-    var didSelectAction: (Movie) -> Void = { arg in }
+    var didSelectAction: (IndexPath) -> Void = { arg in }
  
     override func awakeFromNib() {
         super.awakeFromNib()
@@ -45,7 +45,7 @@ extension HotTableViewCell: UICollectionViewDelegate, UICollectionViewDataSource
     }
     
     func collectionView(_ collectionView: UICollectionView, didSelectItemAt indexPath: IndexPath) {
-          didSelectAction(hotMovies[indexPath.row])
+          didSelectAction(indexPath)
     }
     
 }

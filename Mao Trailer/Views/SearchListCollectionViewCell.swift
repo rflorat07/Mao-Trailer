@@ -18,7 +18,7 @@ class SearchListCollectionViewCell: UICollectionViewCell {
     
     let cornerRadius: CGFloat = Constants.cornerRadius
     
-    var searchTVMovie: TVFilm! {
+    var searchTVMovie: TVMovie! {
         didSet {
             self.updateUI()
         }

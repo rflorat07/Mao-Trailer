@@ -30,7 +30,7 @@ struct Storyboard {
     static let profileListViewCell = "ProfileListViewCell"
     static let profileHeaderReusableView = "ProfileHeaderReusableView"
     
-    static let movieDetailViewController = "MovieDetailViewController"
+    static let movieDetailsViewController = "MovieDetailsViewController"
     
     static let walkthroughViewCell = "WalkthroughViewCell"
     
@@ -66,13 +66,13 @@ struct EndPoint {
     
     static let  MovieDetails = "https://api.themoviedb.org/3/movie/351286?api_key=3b122cc1b16808da5a679c3c1c11cd07&language=it-IT&append_to_response=videos%2Ccredits"
     
-    static let NowMovies = "https://api.themoviedb.org/3/movie/now_playing?api_key=3b122cc1b16808da5a679c3c1c11cd07&language=it-IT&page=1&region=IT"
+    static let NowMovies = "https://api.themoviedb.org/3/movie/now_playing?api_key=3b122cc1b16808da5a679c3c1c11cd07&language=it-IT&region=IT&page=1"
     
-    static let PopularMovies = "https://api.themoviedb.org/3/movie/popular?api_key=3b122cc1b16808da5a679c3c1c11cd07&language=it-IT&page=1&region=IT"
+    static let PopularMovies = "https://api.themoviedb.org/3/movie/popular?api_key=3b122cc1b16808da5a679c3c1c11cd07&language=it-IT&region=IT&page=1"
     
-    static let UpcomingMovies = "https://api.themoviedb.org/3/movie/upcoming?api_key=3b122cc1b16808da5a679c3c1c11cd07&language=it-IT&page=1&region=IT"
+    static let UpcomingMovies = "https://api.themoviedb.org/3/movie/upcoming?api_key=3b122cc1b16808da5a679c3c1c11cd07&language=it-IT&region=IT&page=1"
     
-    static let SearchMovie = "https://api.themoviedb.org/3/search/movie?api_key=3b122cc1b16808da5a679c3c1c11cd07&language=it-IT&query=mario&page=1&include_adult=false&region=IT"
+    static let SearchMovie = "https://api.themoviedb.org/3/search/movie?api_key=3b122cc1b16808da5a679c3c1c11cd07&language=it-IT&query=mario&include_adult=false&region=IT&page=1"
 
     // The TV Database API - https://developers.themoviedb.org/3/tv/get-tv-details
     

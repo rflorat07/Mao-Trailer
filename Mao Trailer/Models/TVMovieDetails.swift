@@ -1,5 +1,5 @@
 //
-//  MovieInfo.swift
+//  TVMovieDetails.swift
 //  Mao Trailer
 //
 //  Created by Roger Florat on 04/07/18.
@@ -8,12 +8,12 @@
 
 import Foundation
 
-struct MovieInfo: Decodable {
+struct Details: Decodable {
     let id: Int
     let imdb_id: String
     let genres: [Genre]
-    let videos: VideoList
-    let credits: CastList
+    let videos: VideoArray
+    let credits: CastArray
     
     func getGenre() -> String {
         return self.genres.compactMap { $0.name }.joined(separator: ", ")
@@ -30,7 +30,7 @@ struct Genre: Decodable {
     var name: String
 }
 
-struct VideoList: Decodable {
+struct VideoArray: Decodable {
     let results: [Video]
 }
 
@@ -43,7 +43,7 @@ struct Video: Decodable {
     let type:String
 }
 
-struct CastList: Decodable {
+struct CastArray: Decodable {
     let cast: [Cast]
     // let crew: [Crew]
 }

@@ -18,7 +18,7 @@ class TVNowCollectionViewCell: UICollectionViewCell {
     
     let cornerRadius: CGFloat = Constants.cornerRadius
     
-    var nowTVShow: TVShow!{
+    var nowTVShow: TVMovie!{
         didSet{
             self.updateUI()
         }

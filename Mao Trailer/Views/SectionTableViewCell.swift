@@ -13,13 +13,13 @@ class SectionTableViewCell: UITableViewCell {
     @IBOutlet weak var sectionTitleLabel: UILabel!
     @IBOutlet weak var sectionCollectionView: UICollectionView!
 
-    var sectionMovies: [Movie]! {
+    var sectionMovies: [TVMovie]! {
         didSet{
             sectionCollectionView.reloadData()
         }
     }
     
-    var didSelectAction: (Movie) -> Void = { arg in }
+    var didSelectAction: (IndexPath) -> Void = { arg in }
     
     override func awakeFromNib() {
         super.awakeFromNib()
@@ -46,6 +46,6 @@ extension SectionTableViewCell: UICollectionViewDelegate, UICollectionViewDataSo
     }
     
     func collectionView(_ collectionView: UICollectionView, didSelectItemAt indexPath: IndexPath) {
-        didSelectAction(sectionMovies[indexPath.row])
+        didSelectAction(indexPath)
     }
 }

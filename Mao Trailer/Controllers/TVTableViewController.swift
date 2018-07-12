@@ -10,7 +10,12 @@ import UIKit
 
 class TVTableViewController: UITableViewController {
     
-    var sectionTVShowArray: [SectionTVShow] = [SectionTVShow]()
+    let sectionTVInfo = [
+        SectionInfo(page: 1, type: .TV, sectionName: "Now", endPoint: .NowTV),
+        SectionInfo(page: 1, type: .TV, sectionName: "Popular", endPoint: .Popular)
+    ]
+    
+    var sectionTVShowArray: [SectionData] = [SectionData]()
     
     override func viewDidLoad() {
         super.viewDidLoad()
@@ -25,7 +30,7 @@ class TVTableViewController: UITableViewController {
             
             let toViewController = segue.destination as! TVMovieListCollectionViewController
             
-            toViewController.sectionData = sender as! SectionTVShow
+            toViewController.sectionData = sender as! SectionData
             
         } 
     }
@@ -34,20 +39,15 @@ class TVTableViewController: UITableViewController {
         
         LoadingIndicatorView.show("Loading")
         
-        QueryServiceTVShow.intance.fetchAllTVShowsLists { (sectionArray) in
+        QueryService.intance.fetchAllSection(sectionArray: sectionTVInfo) { (sectionArray) in
             
             if let sectionArray = sectionArray {
-                
                 self.sectionTVShowArray = sectionArray
-                self.sectionTVShowArray[1].sectionArray.append(MoreTVShow)
-                
                 self.tableView.reloadData()
-                
-                LoadingIndicatorView.hide()
-                
             }
+            
+            LoadingIndicatorView.hide()
         }
-        
     }
 }
 
@@ -91,24 +91,17 @@ extension TVTableViewController {
         if indexPath.section == 0 {
             
             if let cell = tableView.dequeueReusableCell(withIdentifier: Storyboard.tvNowViewCell, for: indexPath) as? TVNowTableViewCell {
-                                
-                var section = sectionTVShowArray[indexPath.section]
                 
-                // Add More TVShow row
-                if section.sectionArray.count > 10 {
-                    section.sectionArray.append(MoreTVShow)
-                }
+                let section = sectionTVShowArray[indexPath.section]
                 
                 cell.selectionStyle = .none
                 
-                cell.nowTVShows = section.sectionArray as! [TVShow]
+                cell.nowTVShows = section.sectionArray
                 
-                cell.didSelectAction = { (tvShow) in
+                cell.didSelectAction = { (indexPath) in
                     
-                    // Remove More TVShow row
-                    section.sectionArray.removeLast()
+                    self.showTVShowDetails(indexPath: indexPath, section: section)
                     
-                    self.showTVShowListOrTVShowDetail(tvShow: tvShow, indexPath: indexPath, section: section)
                 }
                 
                 return cell
@@ -146,38 +139,39 @@ extension TVTableViewController {
         
         if indexPath.section == 2 {
             
-            var section = sectionTVShowArray[indexPath.section - 1]
-            let tvShow  = section.sectionArray[indexPath.row] as! TVShow
+            let section = sectionTVShowArray[indexPath.section - 1]
             
-            // Remove More TVShow row
-            section.sectionArray.removeLast()
-            
-            showTVShowListOrTVShowDetail(tvShow: tvShow, indexPath: indexPath, section: section)
+            self.showTVShowDetails(indexPath: indexPath, section: section)
             
         }
     }
     
     // MARK: - Helper methods
-    fileprivate func showTVShowListOrTVShowDetail(tvShow: TVShow, indexPath: IndexPath, section: SectionTVShow) {
+    
+    fileprivate func showTVShowDetails(indexPath: IndexPath, section: SectionData) {
         
-        if tvShow.title == "More" {
+        
+        if let showDetails = self.storyboard?.instantiateViewController(withIdentifier: Storyboard.movieDetailsViewController) as? TVMovieDetailsViewController {
             
-            let data: SectionTVShow = SectionTVShow(sectionName: "\(section.sectionName) list", sectionArray: section.sectionArray)
+            showDetails.modalPresentationStyle = .overFullScreen
+            showDetails.modalTransitionStyle = .crossDissolve
             
-            self.performSegue(withIdentifier: Segue.toMovieList, sender: data)
+            showDetails.information = section.sectionArray[indexPath.row]
             
-        } else {
-            
-            if let tvShowDetail = self.storyboard?.instantiateViewController(withIdentifier: Storyboard.movieDetailViewController) as? TVMovieDetailViewController {
-                
-                tvShowDetail.modalPresentationStyle = .overFullScreen
-                tvShowDetail.modalTransitionStyle = .crossDissolve
-                
-                tvShowDetail.detail = tvShow
-                
-                self.present(tvShowDetail, animated: true, completion: nil)
-            }
+            self.present(showDetails, animated: true, completion: nil)
         }
+        
+        /* if movie.title == "More" {
+         
+         // Remove More TVShow row
+         section.sectionArray.removeLast()
+         
+         let data: SectionMovie = SectionMovie(page: section.page, total_results: section.total_results, total_pages: section.total_pages, sectionName: "\(section.sectionName) list", sectionArray: section.sectionArray)
+         
+         self.performSegue(withIdentifier: Segue.toMovieList, sender: data)
+         
+         } else { } */
+        
     }
     
 }

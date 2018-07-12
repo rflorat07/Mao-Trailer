@@ -12,13 +12,13 @@ class TVNowTableViewCell: UITableViewCell,UICollectionViewDelegate, UICollection
     
     @IBOutlet weak var nowCollectionView: UICollectionView!
     
-    var nowTVShows: [TVShow]! {
+    var nowTVShows: [TVMovie]! {
         didSet{
             nowCollectionView.reloadData()
         }
     }
     
-    var didSelectAction: (TVShow) -> Void = { arg in }
+    var didSelectAction: (IndexPath) -> Void = { arg in }
     
     
     override func awakeFromNib() {
@@ -45,7 +45,7 @@ class TVNowTableViewCell: UITableViewCell,UICollectionViewDelegate, UICollection
     
     func collectionView(_ collectionView: UICollectionView, didSelectItemAt indexPath: IndexPath) {
         
-        didSelectAction(nowTVShows[indexPath.row])
+        didSelectAction(indexPath)
     }
 
 }

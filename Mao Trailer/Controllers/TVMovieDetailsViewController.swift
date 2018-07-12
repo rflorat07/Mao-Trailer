@@ -1,5 +1,5 @@
 //
-//  MovieDetailViewController.swift
+//  TVMovieDetailsViewController.swift
 //  Mao Trailer
 //
 //  Created by Roger Florat on 27/06/18.
@@ -9,7 +9,7 @@
 import UIKit
 import AVKit
 
-class TVMovieDetailViewController: UIViewController {
+class TVMovieDetailsViewController: UIViewController {
     
     @IBOutlet weak var coverImageView: UIImageView!
     @IBOutlet weak var titleLabel: UILabel!
@@ -22,8 +22,8 @@ class TVMovieDetailViewController: UIViewController {
     
     let cornerRadius: CGFloat = Constants.cornerRadius
     
-    var detail: TVFilm!
     var videoKey: String = ""
+    var information: TVMovie!
     var cast: [Cast] = [Cast]()
     
     override func viewDidLoad() {
@@ -48,33 +48,32 @@ class TVMovieDetailViewController: UIViewController {
     
     func updateUI() {
         
-        descriptionLabel.text = detail.overview
-        titleLabel.text = detail.title.uppercased()
+        descriptionLabel.text = information.overview
+        titleLabel.text = information.title.uppercased()
         
-        coverImageView.downloadedFrom(urlString: detail.backdrop_path!)
+        coverImageView.downloadedFrom(urlString: information.backdrop_path!)
         
-        ratingValueLabel.text = String(format:"%.1f", detail.vote_average)
+        ratingValueLabel.text = String(format:"%.1f", information.vote_average)
         
         posterImageView.clipsToBounds = true
         posterImageView.layer.cornerRadius = cornerRadius
-        posterImageView.downloadedFrom(urlString: detail.poster_path!)
+        posterImageView.downloadedFrom(urlString: information.poster_path!)
         
         posterCoverView.dropShadow(radius: cornerRadius)
         
-       // LoadingIndicatorView.show("Loading")
+        LoadingIndicatorView.show("Loading")
         
-        QueryServiceMovie.intance.fetchMovieInformation(movieID: detail.id) { (detail) in
+        QueryService.intance.fetchPrimaryInformation(id: information.id, type: .Movie) { (details) in
             
-            if let detail = detail {
-                
-                self.cast = detail.getCast()
+            if let details = details {
+                self.cast = details.getCast()
                 self.videoKey = "xoGgcdpIQ3I"
-                self.genreLabel.text = detail.getGenre()
+                self.genreLabel.text = details.getGenre()
                 
                 self.collectionView.reloadData()
-                
-              //  LoadingIndicatorView.hide()
             }
+            
+            LoadingIndicatorView.hide()
         }
     }
     
@@ -99,7 +98,7 @@ class TVMovieDetailViewController: UIViewController {
     
 }
 
-extension TVMovieDetailViewController: UICollectionViewDelegate, UICollectionViewDataSource {
+extension TVMovieDetailsViewController: UICollectionViewDelegate, UICollectionViewDataSource {
     
     
     func collectionView(_ collectionView: UICollectionView, numberOfItemsInSection section: Int) -> Int {

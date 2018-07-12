@@ -16,7 +16,7 @@ class HotCollectionViewCell: UICollectionViewCell {
     
     let cornerRadius: CGFloat = Constants.cornerRadius
     
-    var hotMovie: Movie! {
+    var hotMovie: TVMovie! {
         didSet {
             self.updateUI()
         }

@@ -16,7 +16,7 @@ class MovieListCollectionViewCell: UICollectionViewCell {
     @IBOutlet weak var coverImageView: UIImageView!
     @IBOutlet weak var rateView: UIView!
     
-    var movie: TVFilm! {
+    var movie: TVMovie! {
         didSet {
             self.updateUI()
         }

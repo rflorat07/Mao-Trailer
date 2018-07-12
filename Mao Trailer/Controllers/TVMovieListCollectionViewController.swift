@@ -10,27 +10,36 @@ import UIKit
 
 class TVMovieListCollectionViewController: UICollectionViewController {
     
-    var sectionData: SectionTVMovie!
+    var page = 2
+    var fetchingMore = false
+    var sectionData: SectionData!
+    var queryService = QueryService.intance
     
     override func viewDidLoad() {
         super.viewDidLoad()
         
-        insertRefreshControl()
     }
     
-    func insertRefreshControl() {
-        let refresh = UIRefreshControl()
-        
-        refresh.addTarget(self, action: #selector(self.refreshCollectionView), for: UIControlEvents.valueChanged)
-        
-        collectionView?.refreshControl = refresh
-    }
+    func fetchMoreMovies() {
     
-    @objc func refreshCollectionView() {
-        print("Refresh Collection View")
-        collectionView?.refreshControl?.endRefreshing()
+        self.collectionView?.performBatchUpdates({
+            
+            
+         /*   queryService.fetchMovieList(page: page, listString: sectionData.sectionName, { (movieList) in
+                
+                let newMovieList: [TVFilm] = movieList!.getMovieList()
+                self.sectionData.sectionArray.append(contentsOf: newMovieList)
+                self.fetchingMore = false
+                self.collectionView?.reloadData()
+                
+                (movieList?.page)! > self.page ? (self.page + 1) : self.page 
+                
+            }) */
+            
+        }, completion: nil)
+    
     }
-        
+
     override func collectionView(_ collectionView: UICollectionView, viewForSupplementaryElementOfKind kind: String, at indexPath: IndexPath) -> UICollectionReusableView {
         
         if let sectionHeader = collectionView.dequeueReusableSupplementaryView(ofKind: kind, withReuseIdentifier: Storyboard.movieListReusableView, for: indexPath) as? MovieListSectionHeaderCollectionReusableView {
@@ -63,14 +72,22 @@ class TVMovieListCollectionViewController: UICollectionViewController {
         return cell
     }
     
+    override func collectionView(_ collectionView: UICollectionView, willDisplay cell: UICollectionViewCell, forItemAt indexPath: IndexPath) {
+        
+        if indexPath.row == self.sectionData.sectionArray.count - 1 && !fetchingMore {
+            fetchingMore = true
+            self.fetchMoreMovies()
+        }
+    }
+    
     override func collectionView(_ collectionView: UICollectionView, didSelectItemAt indexPath: IndexPath) {
         
-        if let tvMovieDetail = self.storyboard?.instantiateViewController(withIdentifier: Storyboard.movieDetailViewController) as? TVMovieDetailViewController {
+        if let tvMovieDetail = self.storyboard?.instantiateViewController(withIdentifier: Storyboard.movieDetailsViewController) as? TVMovieDetailsViewController {
             
             tvMovieDetail.modalPresentationStyle = .overFullScreen
             tvMovieDetail.modalTransitionStyle = .crossDissolve
             
-            tvMovieDetail.detail = sectionData.sectionArray[indexPath.row]
+            tvMovieDetail.information = sectionData.sectionArray[indexPath.row]
             
             self.present(tvMovieDetail, animated: true, completion: nil)
         }

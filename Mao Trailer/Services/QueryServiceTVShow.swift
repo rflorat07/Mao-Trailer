@@ -9,7 +9,7 @@
 import Foundation
 
 // Runs query data task, and stores results in array
-class QueryServiceTVShow {
+ /* class QueryServiceTVShow {
     
     static let intance = QueryServiceTVShow()
     
@@ -17,7 +17,7 @@ class QueryServiceTVShow {
     lazy var session = URLSession(configuration: configuration)
     
     
-    typealias QueryResultTVShow = ([TVShow]?)-> Void
+    typealias QueryResultTVShow = (TVShowList?)-> Void
     typealias QueryResultList  = ([SectionTVShow]?)-> Void
     
     func fetchAllTVShowsLists( _ completion : @escaping QueryResultList) {
@@ -32,7 +32,7 @@ class QueryServiceTVShow {
         fetchTVShowsList(queryString: EndPoint.NowTVShows) { (tvShows) in
             
             if let tvShows = tvShows {
-                tvShowArray.append(SectionTVShow(sectionName: "Now", sectionArray: tvShows))
+                tvShowArray.append(SectionTVShow(page: tvShows.page, total_results: tvShows.total_results, total_pages: tvShows.total_pages, sectionName: "Now", sectionArray: tvShows.getTVShowList()))
             }
             
             group.leave()
@@ -44,7 +44,7 @@ class QueryServiceTVShow {
         fetchTVShowsList(queryString: EndPoint.PopularTVShows) { (tvShows) in
             
             if let tvShows = tvShows {
-                tvShowArray.append(SectionTVShow(sectionName: "Popular", sectionArray: tvShows))
+                tvShowArray.append(SectionTVShow(page: tvShows.page, total_results: tvShows.total_results, total_pages: tvShows.total_pages, sectionName: "Popular", sectionArray: tvShows.getTVShowList()))
             }
             
             group.leave()
@@ -87,10 +87,10 @@ class QueryServiceTVShow {
         
         do {
             let list = try JSONDecoder().decode(TVShowList.self, from: data)
-            completion(list.results)
+            completion(list)
             
         } catch let decodeError as NSError {
             print("Decoder error: \(decodeError.localizedDescription) \n")
         }
     }
-}
+} */

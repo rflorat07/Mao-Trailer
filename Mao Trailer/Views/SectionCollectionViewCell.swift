@@ -19,7 +19,7 @@ class SectionCollectionViewCell: UICollectionViewCell {
     
     let cornerRadius: CGFloat = Constants.cornerRadius
     
-    var sectionMovie: Movie! {
+    var sectionMovie: TVMovie! {
         didSet {
             self.updateUI()
         }
