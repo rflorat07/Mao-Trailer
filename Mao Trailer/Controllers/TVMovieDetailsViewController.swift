@@ -64,7 +64,7 @@ class TVMovieDetailsViewController: UIViewController {
         
         LoadingIndicatorView.show("Loading")
         
-        QueryService.intance.fetchPrimaryInformation(id: information.id, type: queryType) { (details) in
+        QueryService.instance.fetchPrimaryInformation(id: information.id, type: queryType) { (details) in
             
             if let details = details {
                 self.cast = details.getCast()
@@ -117,10 +117,7 @@ class TVMovieDetailsViewController: UIViewController {
         present(playerController, animated: true) {
             player.play()
         }
-        
-        print(urlString)
     }
-    
 }
 
 extension TVMovieDetailsViewController: UICollectionViewDelegate, UICollectionViewDataSource {

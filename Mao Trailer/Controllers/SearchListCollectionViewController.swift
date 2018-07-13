@@ -13,7 +13,7 @@ class SearchListCollectionViewController: UICollectionViewController, UISearchBa
     var searchText: String = ""
     var fetchingMore: Bool = false
     var queryType: QueryType!
-    var searchData: SectionData = SectionData()
+    var searchData: SectionData!
     
     let searchBar = UISearchBar()
     
@@ -89,13 +89,19 @@ class SearchListCollectionViewController: UICollectionViewController, UISearchBa
         
         self.fetchingMore = true
         
-        QueryService.intance.search(searchText: searchText, page: page!, type: type) { (sectionData) in
+        QueryService.instance.search(searchText: searchText, page: page!, type: type) { (sectionData) in
             
             if let sectionData = sectionData {
                 
                 self.searchData.page = sectionData.page
                 self.searchData.total_pages = sectionData.total_pages
                 self.searchData.sectionName = sectionData.sectionName
+                
+                // Remove More Item
+                if self.searchData.sectionArray.count > 10 {
+                   self.searchData.sectionArray.removeLast()
+                }
+                
                 self.searchData.sectionArray.append(contentsOf: sectionData.getSectionArray())
                 
                 self.fetchingMore = false

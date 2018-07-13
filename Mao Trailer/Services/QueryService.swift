@@ -23,7 +23,7 @@ enum EndPointType: String {
 
 class QueryService {
     
-    static let intance = QueryService()
+    static let instance = QueryService()
     
     lazy var configuration = URLSessionConfiguration.default
     lazy var session = URLSession(configuration: configuration)
@@ -49,7 +49,7 @@ class QueryService {
             
             group.enter()
             
-            fetchSection(_sectionName: element.sectionName, _type: element.type, _endPoint: element.endPoint, _page: element.page) { (sectionData) in
+            fetchSection(sectionName: element.sectionName, type: element.type, endPoint: element.endPoint, page: element.page) { (sectionData) in
                 
                 if let sectionData = sectionData {
                     
@@ -67,9 +67,9 @@ class QueryService {
     
     // MARK: - Fetch Section
     
-    func fetchSection( _sectionName: String, _type: QueryType, _endPoint: EndPointType, _page: Int, _ completion : @escaping QuerySectionResult) {
+    func fetchSection( sectionName: String, type: QueryType, endPoint: EndPointType, page: Int, _ completion : @escaping QuerySectionResult) {
         
-        let queryString = getUrlSection(page: _page, type: _type, endPoint: _endPoint)
+        let queryString = getUrlSection(page: page, type: type, endPoint: endPoint)
         
         guard let query = URL(string: queryString) else { return }
         
@@ -83,8 +83,7 @@ class QueryService {
                 response.statusCode == 200 {
                 
                 DispatchQueue.main.async {
-                    self.decodeData(sectionName: _sectionName, type: _type, data: data, { (sectionResult) in
-                        
+                    self.decodeData(sectionName: sectionName, type: type, data: data, { (sectionResult) in
                         completion(sectionResult)
                     })
                 }
@@ -223,7 +222,12 @@ class QueryService {
             
             decodeMovieList(data) { ( dataResult) in
                 
-                let sectionResult: SectionData = SectionData(page: dataResult!.page, total_pages: dataResult!.total_pages, sectionName: sectionName, sectionArray: dataResult!.results)
+                var sectionResult: SectionData = SectionData(page: dataResult!.page, total_pages: dataResult!.total_pages, sectionName: sectionName, sectionArray: dataResult!.results)
+                
+                if sectionResult.sectionArray.count > 10 {
+                    
+                    sectionResult.sectionArray.append(MoreMovie)
+                }
                 
                 completion(sectionResult)
             }
@@ -232,9 +236,14 @@ class QueryService {
             
             decodeTVList(data) { ( dataResult) in
                 
-                let sessionResult: SectionData = SectionData(page: dataResult!.page, total_pages: dataResult!.total_pages, sectionName: sectionName, sectionArray: dataResult!.results)
+                var sectionResult: SectionData = SectionData(page: dataResult!.page, total_pages: dataResult!.total_pages, sectionName: sectionName, sectionArray: dataResult!.results)
                 
-                completion(sessionResult)
+                if sectionResult.sectionArray.count > 10 {
+                    
+                    sectionResult.sectionArray.append(MoreTVShow)
+                }
+                
+                completion(sectionResult)
             }
             
         default:

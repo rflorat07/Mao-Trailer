@@ -10,34 +10,43 @@ import UIKit
 
 class TVMovieListCollectionViewController: UICollectionViewController {
     
-    var page = 2
-    var fetchingMore = false
-    var sectionData: SectionData!
-    var queryService = QueryService.intance
+    var queryType: QueryType!
+    var fetchingMore: Bool = false
+    
+    var sectionData: SectionData! {
+        didSet{
+            // Remove More Item
+            if sectionData.sectionArray.count > 10 {
+                sectionData.sectionArray.removeLast()
+            }
+        }
+    }
     
     override func viewDidLoad() {
         super.viewDidLoad()
         
     }
     
-    func fetchMoreMovies() {
+    func fetchMoreMovies(page: Int) {
     
+        self.fetchingMore = true
+        
         self.collectionView?.performBatchUpdates({
             
-            
-         /*   queryService.fetchMovieList(page: page, listString: sectionData.sectionName, { (movieList) in
+            QueryService.instance.fetchSection(sectionName: sectionData.sectionName, type: queryType, endPoint: .Popular, page: page, { (sectionData) in
                 
-                let newMovieList: [TVFilm] = movieList!.getMovieList()
-                self.sectionData.sectionArray.append(contentsOf: newMovieList)
                 self.fetchingMore = false
-                self.collectionView?.reloadData()
                 
-                (movieList?.page)! > self.page ? (self.page + 1) : self.page 
-                
-            }) */
-            
+                if let sectionData = sectionData {
+        
+                    self.sectionData.page = sectionData.page
+                    self.sectionData.sectionArray.append(contentsOf: sectionData.getSectionArray())
+                    
+                    self.collectionView?.reloadData()
+                }
+            })
+        
         }, completion: nil)
-    
     }
 
     override func collectionView(_ collectionView: UICollectionView, viewForSupplementaryElementOfKind kind: String, at indexPath: IndexPath) -> UICollectionReusableView {
@@ -74,22 +83,23 @@ class TVMovieListCollectionViewController: UICollectionViewController {
     
     override func collectionView(_ collectionView: UICollectionView, willDisplay cell: UICollectionViewCell, forItemAt indexPath: IndexPath) {
         
-        if indexPath.row == self.sectionData.sectionArray.count - 1 && !fetchingMore {
-            fetchingMore = true
-            self.fetchMoreMovies()
+        if indexPath.row == sectionData.sectionArray.count - 1 && sectionData.page < sectionData.total_pages && !fetchingMore {
+         
+            self.fetchMoreMovies(page: sectionData.page + 1)
         }
     }
     
     override func collectionView(_ collectionView: UICollectionView, didSelectItemAt indexPath: IndexPath) {
         
-        if let tvMovieDetail = self.storyboard?.instantiateViewController(withIdentifier: Storyboard.movieDetailsViewController) as? TVMovieDetailsViewController {
+        if let sectionDetail = self.storyboard?.instantiateViewController(withIdentifier: Storyboard.movieDetailsViewController) as? TVMovieDetailsViewController {
             
-            tvMovieDetail.modalPresentationStyle = .overFullScreen
-            tvMovieDetail.modalTransitionStyle = .crossDissolve
+            sectionDetail.modalPresentationStyle = .overFullScreen
+            sectionDetail.modalTransitionStyle = .crossDissolve
             
-            tvMovieDetail.information = sectionData.sectionArray[indexPath.row]
+            sectionDetail.queryType = queryType
+            sectionDetail.information = sectionData.sectionArray[indexPath.row]
             
-            self.present(tvMovieDetail, animated: true, completion: nil)
+            self.present(sectionDetail, animated: true, completion: nil)
         }
         
     }

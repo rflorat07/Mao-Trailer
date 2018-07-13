@@ -33,7 +33,8 @@ class MoviesTableViewController: UITableViewController {
             
             let toViewController = segue.destination as! TVMovieListCollectionViewController
             
-            toViewController.sectionData = (sender as? SectionData)
+            toViewController.queryType = .Movie
+            toViewController.sectionData = sender as? SectionData
         }
         
         if segue.identifier == Segue.toSearchList {
@@ -41,6 +42,7 @@ class MoviesTableViewController: UITableViewController {
             let toViewController = segue.destination as! SearchListCollectionViewController
             
             toViewController.queryType = .Movie
+            toViewController.searchData = SectionData()
         }
     }
     
@@ -48,7 +50,7 @@ class MoviesTableViewController: UITableViewController {
         
         LoadingIndicatorView.show("Loading")
         
-        QueryService.intance.fetchAllSection(sectionArray: sectionMovieInfo) {
+        QueryService.instance.fetchAllSection(sectionArray: sectionMovieInfo) {
             (sectionArray) in
             
             if let sectionArray = sectionArray {
@@ -137,29 +139,27 @@ extension MoviesTableViewController {
     
     fileprivate func showMovieDetails(indexPath: IndexPath, section: SectionData) {
         
+        let movieSelected = section.sectionArray[indexPath.row]
         
-        if let showDetails = self.storyboard?.instantiateViewController(withIdentifier: Storyboard.movieDetailsViewController) as? TVMovieDetailsViewController {
+        if movieSelected.title == "More" {
             
-            showDetails.modalPresentationStyle = .overFullScreen
-            showDetails.modalTransitionStyle = .crossDissolve
-            
-            showDetails.queryType = .Movie
-            showDetails.information = section.sectionArray[indexPath.row]
-            
-            self.present(showDetails, animated: true, completion: nil)
-        }
-        
-       /* if movie.title == "More" {
-            
-            // Remove More TVShow row
-            section.sectionArray.removeLast()
-            
-            let data: SectionMovie = SectionMovie(page: section.page, total_results: section.total_results, total_pages: section.total_pages, sectionName: "\(section.sectionName) list", sectionArray: section.sectionArray)
+            let data: SectionData = SectionData(page: section.page, total_pages: section.total_pages, sectionName: "\(section.sectionName) list", sectionArray: section.sectionArray)
             
             self.performSegue(withIdentifier: Segue.toMovieList, sender: data)
             
-        } else { } */
-        
+        } else {
+            
+            if let showDetails = self.storyboard?.instantiateViewController(withIdentifier: Storyboard.movieDetailsViewController) as? TVMovieDetailsViewController {
+                
+                showDetails.modalPresentationStyle = .overFullScreen
+                showDetails.modalTransitionStyle = .crossDissolve
+                
+                showDetails.queryType = .Movie
+                showDetails.information = movieSelected
+                
+                self.present(showDetails, animated: true, completion: nil)
+            }
+        }
     }
 }
 
