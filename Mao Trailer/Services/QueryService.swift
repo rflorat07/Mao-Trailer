@@ -43,7 +43,7 @@ class QueryService {
     func fetchAllSection( sectionArray: [SectionInfo] ,_ completion : @escaping QuerySectionArray) {
         
         let group = DispatchGroup()
-        var sectionDataArray = [SectionData]()
+        var sectionDataArray = Array(repeating: SectionData(), count: sectionArray.count)
         
         sectionArray.enumerated().forEach { (index, element) in
             
@@ -53,11 +53,8 @@ class QueryService {
                 
                 if let sectionData = sectionData {
                     
-                    sectionDataArray.append(sectionData)
-                    //sectionDataArray.insert(sectionData, at: index)
-                    
+                    sectionDataArray[index] = sectionData
                 }
-                
                 group.leave()
             }
         }
@@ -115,10 +112,43 @@ class QueryService {
                     completion(details)
                 })
             } else {
-                completion(nil)
+                DispatchQueue.main.async {
+                    self.decodeError(data!, {
+                        completion(nil)
+                    })
+                }
             }
         }
     }
+    
+    // MARK: - Search
+    func search(searchText: String, page: Int, type: QueryType, _ completion : @escaping QuerySectionResult) {
+     
+        var urlQuery = URLComponents(string: QueryString.baseUrl)!
+        
+        urlQuery.path = "/3/search/\(type.rawValue)"
+        urlQuery.queryItems = [
+            URLQueryItem(name: "api_key", value: QueryString.api_key),
+            URLQueryItem(name: "language", value: QueryString.language),
+            URLQueryItem(name: "query", value: searchText),
+            URLQueryItem(name: "include_adult", value: "false"),
+            URLQueryItem(name: "region", value: QueryString.region),
+            URLQueryItem(name: "page", value: String(page))
+        ]
+        
+        getDataFromUrl(queryString: urlQuery.string!) { (data) in
+            if let data = data {
+                DispatchQueue.main.async {
+                    self.decodeData(sectionName: "Search", type: type, data: data, { (sectiondata) in
+                        completion(sectiondata)
+                    })
+                }
+            }
+        }
+        
+    }
+    
+    // ===========================================
     
     // MARK: - Get the data from a URL
     

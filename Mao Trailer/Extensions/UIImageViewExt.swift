@@ -13,12 +13,12 @@ let imageCache = NSCache<NSString, UIImage>()
 extension UIImageView {
     
     func downloadedFrom(urlString: String, contentMode mode: UIViewContentMode = .scaleAspectFill) {
-                        
+        
         contentMode = mode
         image = UIImage(named: Constants.placeholderImage)
         
         if urlString != Constants.placeholderImage {
-           
+            
             let imagePath = "\(ImageURL.filePath)\(urlString)"
             
             guard let url = URL(string: imagePath) else { return }
@@ -38,7 +38,7 @@ extension UIImageView {
                     self.image = imageToCache
                     imageCache.setObject(imageToCache, forKey: urlString as NSString)
                 }
-                }.resume()
+            }.resume()
         }
     }
 }

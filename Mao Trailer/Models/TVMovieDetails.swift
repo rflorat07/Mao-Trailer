@@ -10,7 +10,6 @@ import Foundation
 
 struct Details: Decodable {
     let id: Int
-    let imdb_id: String
     let genres: [Genre]
     let videos: VideoArray
     let credits: CastArray

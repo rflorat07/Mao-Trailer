@@ -33,7 +33,14 @@ class MoviesTableViewController: UITableViewController {
             
             let toViewController = segue.destination as! TVMovieListCollectionViewController
             
-            toViewController.sectionData = sender as! SectionData
+            toViewController.sectionData = (sender as? SectionData)
+        }
+        
+        if segue.identifier == Segue.toSearchList {
+            
+            let toViewController = segue.destination as! SearchListCollectionViewController
+            
+            toViewController.queryType = .Movie
         }
     }
     
@@ -52,6 +59,12 @@ class MoviesTableViewController: UITableViewController {
             LoadingIndicatorView.hide()
         }
     }
+    
+    @IBAction func searchButtonTapped(_ sender: UIBarButtonItem) {
+        
+        performSegue(withIdentifier: Segue.toSearchList, sender: nil)
+    }
+    
 }
 
 extension MoviesTableViewController {
@@ -130,6 +143,7 @@ extension MoviesTableViewController {
             showDetails.modalPresentationStyle = .overFullScreen
             showDetails.modalTransitionStyle = .crossDissolve
             
+            showDetails.queryType = .Movie
             showDetails.information = section.sectionArray[indexPath.row]
             
             self.present(showDetails, animated: true, completion: nil)

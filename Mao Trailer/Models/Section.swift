@@ -10,18 +10,30 @@ import Foundation
 
 // MARK: - Section
 
-protocol Section  {
-    var page: Int { get }
-    var total_pages: Int { get }
-    var sectionName: String { get }
-    var sectionArray: [TVMovie] { get set}
-}
-
 struct SectionData: Section {
+    
     var page: Int
     var total_pages: Int
     var sectionName: String
     var sectionArray: [TVMovie]
+    
+    init() {
+        page = 0
+        total_pages = 0
+        sectionName = ""
+        sectionArray = [TVMovie]()
+    }
+    
+    init(page: Int, total_pages: Int, sectionName: String, sectionArray: [TVMovie]) {
+        self.page   = page
+        self.total_pages = total_pages
+        self.sectionName  = sectionName
+        self.sectionArray = sectionArray
+    }
+
+    func getSectionArray() -> [TVMovie] {
+        return self.sectionArray.filter{ $0.poster_path != nil }
+    }
 }
 
 struct SectionInfo {
@@ -49,18 +61,28 @@ struct SectionError: Decodable {
     var status_message: String?
 }
 
-// MARK: - TV Movie Info
+// MARK: - Protocol
+
+protocol Section  {
+    var page: Int { get }
+    var total_pages: Int { get }
+    var sectionName: String { get }
+    var sectionArray: [TVMovie] { get set}
+    
+    func getSectionArray() -> [TVMovie]
+}
 
 protocol TVMovie {
     var id: Int { get }
     var title: String { get }
     var overview: String { get }
     var popularity: Double { get }
-    var poster_path: String? { get }
+    var poster_path: String? { get set}
     var vote_average: Double { get }
     var release_date: String { get }
-    var backdrop_path : String? { get }
+    var backdrop_path : String? { get set}
     var original_title : String { get }
+    
 }
 
 

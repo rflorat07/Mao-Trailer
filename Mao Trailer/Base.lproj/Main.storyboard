@@ -1,11 +1,11 @@
 <?xml version="1.0" encoding="UTF-8"?>
-<document type="com.apple.InterfaceBuilder3.CocoaTouch.Storyboard.XIB" version="3.0" toolsVersion="14113" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" useAutolayout="YES" useTraitCollections="YES" useSafeAreas="YES" colorMatched="YES" initialViewController="3dc-Jb-9jV">
+<document type="com.apple.InterfaceBuilder3.CocoaTouch.Storyboard.XIB" version="3.0" toolsVersion="14295.6" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" useAutolayout="YES" useTraitCollections="YES" useSafeAreas="YES" colorMatched="YES" initialViewController="3dc-Jb-9jV">
     <device id="retina4_7" orientation="portrait">
         <adaptation id="fullscreen"/>
     </device>
     <dependencies>
         <deployment identifier="iOS"/>
-        <plugIn identifier="com.apple.InterfaceBuilder.IBCocoaTouchPlugin" version="14088"/>
+        <plugIn identifier="com.apple.InterfaceBuilder.IBCocoaTouchPlugin" version="14270.1"/>
         <capability name="Safe area layout guides" minToolsVersion="9.0"/>
         <capability name="documents saved in the Xcode 8 format" minToolsVersion="8.0"/>
     </dependencies>
@@ -158,7 +158,7 @@
                                                                                 <rect key="frame" x="0.0" y="0.0" width="30" height="30"/>
                                                                             </imageView>
                                                                             <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="6.6" textAlignment="center" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="k5Z-Fj-cTA" userLabel="Rate Label">
-                                                                                <rect key="frame" x="4.5" y="6.5" width="22.5" height="17"/>
+                                                                                <rect key="frame" x="4" y="6.5" width="22.5" height="17"/>
                                                                                 <fontDescription key="fontDescription" type="boldSystem" pointSize="14"/>
                                                                                 <color key="textColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
                                                                                 <nil key="highlightedColor"/>
@@ -233,12 +233,13 @@
                         <barButtonItem key="backBarButtonItem" title="  Back" id="1JA-Q8-Zu3"/>
                         <barButtonItem key="rightBarButtonItem" image="icon-search" id="RbX-wN-UX1">
                             <connections>
-                                <segue destination="f8p-aJ-e00" kind="show" identifier="segueToSearchList" id="KDj-UJ-xb2"/>
+                                <action selector="searchButtonTapped:" destination="YR0-ee-ekU" id="JBJ-Dp-JKu"/>
                             </connections>
                         </barButtonItem>
                     </navigationItem>
                     <connections>
                         <segue destination="gNV-SY-Zy7" kind="show" identifier="segueToMovieList" id="34l-DW-oXO"/>
+                        <segue destination="f8p-aJ-e00" kind="show" identifier="segueToSearchList" animates="NO" id="2JL-8i-Swq"/>
                     </connections>
                 </tableViewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="YN2-oH-dfY" userLabel="First Responder" sceneMemberID="firstResponder"/>
@@ -293,7 +294,7 @@
                                                             <rect key="frame" x="0.0" y="0.0" width="30" height="30"/>
                                                         </imageView>
                                                         <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="6.6" textAlignment="center" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="Oaq-lq-kcj" userLabel="Rate Label">
-                                                            <rect key="frame" x="4.5" y="6.5" width="22.5" height="17"/>
+                                                            <rect key="frame" x="4" y="6.5" width="22.5" height="17"/>
                                                             <fontDescription key="fontDescription" type="boldSystem" pointSize="14"/>
                                                             <color key="textColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
                                                             <nil key="highlightedColor"/>
@@ -379,7 +380,7 @@
                 </collectionViewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="x6I-dW-pA5" userLabel="First Responder" sceneMemberID="firstResponder"/>
             </objects>
-            <point key="canvasLocation" x="697" y="838"/>
+            <point key="canvasLocation" x="730" y="838"/>
         </scene>
         <!--Movie Detail View Controller-->
         <scene sceneID="86d-Rb-0dM">
@@ -402,7 +403,7 @@
                                                 </constraints>
                                             </imageView>
                                             <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="P3o-Bp-xiT" userLabel="Play Button">
-                                                <rect key="frame" x="160" y="113" width="54" height="54"/>
+                                                <rect key="frame" x="160.5" y="113" width="54" height="54"/>
                                                 <constraints>
                                                     <constraint firstAttribute="width" constant="54" id="IQk-1Y-yQC"/>
                                                     <constraint firstAttribute="height" constant="54" id="KJR-hC-vT3"/>
@@ -413,7 +414,7 @@
                                                 </connections>
                                             </button>
                                             <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="JUSTICE LEAGUE" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="u04-Dr-iei" userLabel="Title Label">
-                                                <rect key="frame" x="160" y="241" width="195" height="24"/>
+                                                <rect key="frame" x="160.5" y="241" width="194.5" height="24"/>
                                                 <fontDescription key="fontDescription" type="boldSystem" pointSize="20"/>
                                                 <color key="textColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
                                                 <nil key="highlightedColor"/>
@@ -778,7 +779,7 @@
                                                             </constraints>
                                                         </view>
                                                         <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="Fi1-li-9pc" userLabel="Get Stared Button View">
-                                                            <rect key="frame" x="91" y="658" width="192" height="54"/>
+                                                            <rect key="frame" x="91.5" y="658" width="192" height="54"/>
                                                             <subviews>
                                                                 <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="1fY-ss-rF6" userLabel="Get Stared Button">
                                                                     <rect key="frame" x="0.0" y="0.0" width="192" height="54"/>
@@ -946,7 +947,7 @@
                                                                                 <rect key="frame" x="0.0" y="0.0" width="30" height="30"/>
                                                                             </imageView>
                                                                             <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="8.9" textAlignment="center" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="FRK-VR-eFx" userLabel="Rate Label">
-                                                                                <rect key="frame" x="4" y="6.5" width="23" height="17"/>
+                                                                                <rect key="frame" x="3.5" y="6.5" width="23" height="17"/>
                                                                                 <fontDescription key="fontDescription" type="boldSystem" pointSize="14"/>
                                                                                 <color key="textColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
                                                                                 <nil key="highlightedColor"/>
@@ -1070,7 +1071,7 @@
                                                             <rect key="frame" x="0.0" y="0.0" width="30" height="30"/>
                                                         </imageView>
                                                         <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="9.8" textAlignment="center" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="ho6-jC-uBm" userLabel="Rate Label">
-                                                            <rect key="frame" x="4" y="7" width="22" height="17"/>
+                                                            <rect key="frame" x="4" y="6.5" width="22" height="17"/>
                                                             <fontDescription key="fontDescription" type="boldSystem" pointSize="14"/>
                                                             <color key="textColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
                                                             <nil key="highlightedColor"/>
@@ -1137,12 +1138,13 @@
                         <barButtonItem key="backBarButtonItem" title="  Back" id="dDp-xp-ARY"/>
                         <barButtonItem key="rightBarButtonItem" image="icon-search" id="JJT-s8-rHW">
                             <connections>
-                                <segue destination="f8p-aJ-e00" kind="show" identifier="segueToSearchList" id="fa8-XL-zrH"/>
+                                <action selector="searchButtonTapped:" destination="NA0-Fw-1pv" id="WpU-Vz-LQG"/>
                             </connections>
                         </barButtonItem>
                     </navigationItem>
                     <connections>
                         <segue destination="gNV-SY-Zy7" kind="show" identifier="segueToMovieList" id="Vfq-1Z-68d"/>
+                        <segue destination="f8p-aJ-e00" kind="show" identifier="segueToSearchList" animates="NO" id="q8I-r6-MVa"/>
                     </connections>
                 </tableViewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="YBr-bQ-T4K" userLabel="First Responder" sceneMemberID="firstResponder"/>
@@ -1273,10 +1275,10 @@
                                                     </userDefinedRuntimeAttributes>
                                                 </view>
                                                 <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="aij-fB-eHm" userLabel="Like View">
-                                                    <rect key="frame" x="115" y="0.0" width="106" height="90.5"/>
+                                                    <rect key="frame" x="115" y="0.0" width="105" height="90.5"/>
                                                     <subviews>
                                                         <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="1232" textAlignment="center" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="udK-vq-4rK" userLabel="Value Label">
-                                                            <rect key="frame" x="5" y="15" width="96" height="30"/>
+                                                            <rect key="frame" x="5" y="15" width="95" height="30"/>
                                                             <constraints>
                                                                 <constraint firstAttribute="height" constant="30" id="792-mC-3G0"/>
                                                             </constraints>
@@ -1285,7 +1287,7 @@
                                                             <nil key="highlightedColor"/>
                                                         </label>
                                                         <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Watching" textAlignment="center" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="ItJ-Dl-KYv" userLabel="Title Label">
-                                                            <rect key="frame" x="5" y="50" width="96" height="18"/>
+                                                            <rect key="frame" x="5" y="50" width="95" height="18"/>
                                                             <fontDescription key="fontDescription" type="system" pointSize="15"/>
                                                             <color key="textColor" red="0.59999999999999998" green="0.59999999999999998" blue="0.59999999999999998" alpha="1" colorSpace="calibratedRGB"/>
                                                             <nil key="highlightedColor"/>
@@ -1309,10 +1311,10 @@
                                                     </userDefinedRuntimeAttributes>
                                                 </view>
                                                 <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="0dx-9j-9Nl" userLabel="Comments View">
-                                                    <rect key="frame" x="230" y="0.0" width="105" height="90.5"/>
+                                                    <rect key="frame" x="229" y="0.0" width="106" height="90.5"/>
                                                     <subviews>
                                                         <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="44" textAlignment="center" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="6gH-pT-HSA" userLabel="Value Label">
-                                                            <rect key="frame" x="5" y="15" width="95" height="30"/>
+                                                            <rect key="frame" x="5" y="15" width="96" height="30"/>
                                                             <constraints>
                                                                 <constraint firstAttribute="height" constant="30" id="Mf6-59-5bd"/>
                                                             </constraints>
@@ -1321,7 +1323,7 @@
                                                             <nil key="highlightedColor"/>
                                                         </label>
                                                         <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Comments" textAlignment="center" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="4iL-Nv-SVr" userLabel="Title Label">
-                                                            <rect key="frame" x="5" y="50" width="95" height="18"/>
+                                                            <rect key="frame" x="5" y="50" width="96" height="18"/>
                                                             <fontDescription key="fontDescription" type="system" pointSize="15"/>
                                                             <color key="textColor" red="0.59999999999999998" green="0.59999999999999998" blue="0.59999999999999998" alpha="1" colorSpace="calibratedRGB"/>
                                                             <nil key="highlightedColor"/>
@@ -1448,7 +1450,7 @@
                                                             <rect key="frame" x="0.0" y="0.0" width="30" height="30"/>
                                                         </imageView>
                                                         <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="6.6" textAlignment="center" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="Sgt-wQ-af5" userLabel="Rate Label">
-                                                            <rect key="frame" x="3.5" y="7" width="23" height="17"/>
+                                                            <rect key="frame" x="3.5" y="6.5" width="23" height="17"/>
                                                             <fontDescription key="fontDescription" type="boldSystem" pointSize="14"/>
                                                             <color key="textColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
                                                             <nil key="highlightedColor"/>
@@ -1557,7 +1559,7 @@
                                                 <nil key="highlightedColor"/>
                                             </label>
                                             <imageView userInteractionEnabled="NO" contentMode="scaleAspectFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" image="icon-back-right" translatesAutoresizingMaskIntoConstraints="NO" id="qle-bl-Hwf">
-                                                <rect key="frame" x="338" y="24" width="12" height="21"/>
+                                                <rect key="frame" x="338" y="23.5" width="12" height="21"/>
                                                 <constraints>
                                                     <constraint firstAttribute="height" constant="21" id="TGC-5B-zAn"/>
                                                     <constraint firstAttribute="width" constant="12" id="WRU-5m-M4q"/>
@@ -1601,7 +1603,7 @@
                                                 <nil key="highlightedColor"/>
                                             </label>
                                             <imageView userInteractionEnabled="NO" contentMode="scaleAspectFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" image="icon-back-right" translatesAutoresizingMaskIntoConstraints="NO" id="Emi-lM-jPD">
-                                                <rect key="frame" x="338" y="24" width="12" height="21"/>
+                                                <rect key="frame" x="338" y="23.5" width="12" height="21"/>
                                                 <constraints>
                                                     <constraint firstAttribute="width" constant="12" id="Ebc-YF-vfP"/>
                                                     <constraint firstAttribute="height" constant="21" id="vr6-q7-Kjh"/>
@@ -1646,7 +1648,7 @@
                                                 <nil key="highlightedColor"/>
                                             </label>
                                             <imageView userInteractionEnabled="NO" contentMode="scaleAspectFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" image="icon-back-right" translatesAutoresizingMaskIntoConstraints="NO" id="8BE-MX-NJE">
-                                                <rect key="frame" x="338" y="24" width="12" height="21"/>
+                                                <rect key="frame" x="338" y="23.5" width="12" height="21"/>
                                                 <constraints>
                                                     <constraint firstAttribute="height" constant="21" id="6Ek-pI-lkv"/>
                                                     <constraint firstAttribute="width" constant="12" id="P3u-Uk-9QM"/>
@@ -1690,7 +1692,7 @@
                                                 <nil key="highlightedColor"/>
                                             </label>
                                             <imageView userInteractionEnabled="NO" contentMode="scaleAspectFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" image="icon-back-right" translatesAutoresizingMaskIntoConstraints="NO" id="Mzs-NC-pRV">
-                                                <rect key="frame" x="338" y="24" width="12" height="21"/>
+                                                <rect key="frame" x="338" y="23.5" width="12" height="21"/>
                                                 <constraints>
                                                     <constraint firstAttribute="width" constant="12" id="uSI-IT-Wjt"/>
                                                     <constraint firstAttribute="height" constant="21" id="vf8-H4-ruy"/>
@@ -1862,7 +1864,7 @@
         <image name="tab-tv-light" width="26" height="23"/>
     </resources>
     <inferredMetricsTieBreakers>
-        <segue reference="KDj-UJ-xb2"/>
-        <segue reference="34l-DW-oXO"/>
+        <segue reference="q8I-r6-MVa"/>
+        <segue reference="Vfq-1Z-68d"/>
     </inferredMetricsTieBreakers>
 </document>

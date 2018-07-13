@@ -25,6 +25,7 @@ class TVMovieDetailsViewController: UIViewController {
     var videoKey: String = ""
     var information: TVMovie!
     var cast: [Cast] = [Cast]()
+    var queryType: QueryType!
     
     override func viewDidLoad() {
         super.viewDidLoad()
@@ -35,7 +36,11 @@ class TVMovieDetailsViewController: UIViewController {
         // StatusBar Style
         UIApplication.shared.statusBarStyle = .lightContent
         
-        updateUI()
+        self.updateUI()
+    }
+    
+    override var preferredStatusBarStyle : UIStatusBarStyle {
+        return .lightContent
     }
     
     override func viewWillDisappear(_ animated: Bool) {
@@ -43,27 +48,23 @@ class TVMovieDetailsViewController: UIViewController {
         
         // StatusBar Style
         UIApplication.shared.statusBarStyle = .default
-        
     }
     
     func updateUI() {
         
         descriptionLabel.text = information.overview
         titleLabel.text = information.title.uppercased()
-        
-        coverImageView.downloadedFrom(urlString: information.backdrop_path!)
-        
         ratingValueLabel.text = String(format:"%.1f", information.vote_average)
         
-        posterImageView.clipsToBounds = true
-        posterImageView.layer.cornerRadius = cornerRadius
-        posterImageView.downloadedFrom(urlString: information.poster_path!)
-        
-        posterCoverView.dropShadow(radius: cornerRadius)
+        self.fetchPrimaryInformation()
+        self.setBackdropOrPosterPathImage()
+    }
+    
+    func fetchPrimaryInformation() {
         
         LoadingIndicatorView.show("Loading")
         
-        QueryService.intance.fetchPrimaryInformation(id: information.id, type: .Movie) { (details) in
+        QueryService.intance.fetchPrimaryInformation(id: information.id, type: queryType) { (details) in
             
             if let details = details {
                 self.cast = details.getCast()
@@ -76,6 +77,30 @@ class TVMovieDetailsViewController: UIViewController {
             LoadingIndicatorView.hide()
         }
     }
+    
+    func setBackdropOrPosterPathImage() {
+        
+        if information.backdrop_path == nil && information.poster_path != nil {
+            information.backdrop_path = information.poster_path
+            
+        } else if information.backdrop_path != nil && information.poster_path == nil {
+            information.poster_path = information.backdrop_path
+            
+        } else if information.backdrop_path == nil && information.poster_path == nil {
+            information.poster_path = "placeholder"
+            information.backdrop_path = "placeholder"
+        }
+        
+        posterImageView.clipsToBounds = true
+        posterImageView.layer.cornerRadius = cornerRadius
+        posterImageView.downloadedFrom(urlString: information.poster_path!)
+        
+        posterCoverView.dropShadow(radius: cornerRadius)
+        
+        coverImageView.downloadedFrom(urlString: information.backdrop_path!)
+        
+    }
+    
     
     @IBAction func backButtonTapped(_ sender: UIButton) {
         dismiss(animated: true, completion: nil)

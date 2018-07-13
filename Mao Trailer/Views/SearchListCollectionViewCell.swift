@@ -29,7 +29,7 @@ class SearchListCollectionViewCell: UICollectionViewCell {
         if searchTVMovie.title != "More" {
             
             titleLabel.text = searchTVMovie.title.uppercased()
-            coverImageView.downloadedFrom(urlString: searchTVMovie.poster_path!)
+            coverImageView.downloadedFrom(urlString: searchTVMovie.poster_path ?? "placeholder")
             rateLabel.text = String(format:"%.1f", searchTVMovie.vote_average)
             
         } else {

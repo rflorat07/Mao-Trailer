@@ -30,9 +30,15 @@ class TVTableViewController: UITableViewController {
             
             let toViewController = segue.destination as! TVMovieListCollectionViewController
             
-            toViewController.sectionData = sender as! SectionData
+            toViewController.sectionData = (sender as? SectionData)
+        }
+        
+        if segue.identifier == Segue.toSearchList {
             
-        } 
+            let toViewController = segue.destination as! SearchListCollectionViewController
+            
+            toViewController.queryType = .TV
+        }
     }
     
     func loadTVShowListData() {
@@ -49,6 +55,13 @@ class TVTableViewController: UITableViewController {
             LoadingIndicatorView.hide()
         }
     }
+    
+    @IBAction func searchButtonTapped(_ sender: UIBarButtonItem) {
+        
+        performSegue(withIdentifier: Segue.toSearchList, sender: nil)
+        
+    }
+    
 }
 
 extension TVTableViewController {
@@ -125,7 +138,7 @@ extension TVTableViewController {
                 
                 cell.selectionStyle = .none
                 
-                cell.tvShow = section.sectionArray[indexPath.row] as! TVShow
+                cell.tvShow = (section.sectionArray[indexPath.row] as! TVShow)
                 
                 return cell
             }
@@ -156,6 +169,7 @@ extension TVTableViewController {
             showDetails.modalPresentationStyle = .overFullScreen
             showDetails.modalTransitionStyle = .crossDissolve
             
+            showDetails.queryType = .TV
             showDetails.information = section.sectionArray[indexPath.row]
             
             self.present(showDetails, animated: true, completion: nil)
