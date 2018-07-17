@@ -10,7 +10,7 @@ import UIKit
 
 class TVMovieListCollectionViewController: UICollectionViewController {
     
-    var queryType: QueryType!
+    var queryType: MediaType!
     var fetchingMore: Bool = false
     
     var sectionData: SectionData! {
@@ -24,9 +24,9 @@ class TVMovieListCollectionViewController: UICollectionViewController {
     
     override func viewDidLoad() {
         super.viewDidLoad()
-        
+            
     }
-    
+        
     func fetchMoreMovies(page: Int) {
     
         self.fetchingMore = true

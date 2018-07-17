@@ -11,32 +11,49 @@ import AVKit
 
 class TVMovieDetailsViewController: UIViewController {
     
-    @IBOutlet weak var coverImageView: UIImageView!
     @IBOutlet weak var titleLabel: UILabel!
-    @IBOutlet weak var posterImageView: UIImageView!
-    @IBOutlet weak var descriptionLabel: UILabel!
-    @IBOutlet weak var collectionView: UICollectionView!
-    @IBOutlet weak var ratingValueLabel: UILabel!
-    @IBOutlet weak var posterCoverView: UIView!
     @IBOutlet weak var genreLabel: UILabel!
+    @IBOutlet weak var posterCoverView: UIView!
+    @IBOutlet weak var descriptionLabel: UILabel!
+    @IBOutlet weak var ratingValueLabel: UILabel!
+    @IBOutlet weak var coverImageView: UIImageView!
+    @IBOutlet weak var posterImageView: UIImageView!
+    @IBOutlet weak var castCollectionView: UICollectionView!
+    @IBOutlet weak var imagesCollectionView: UICollectionView!
     
     let cornerRadius: CGFloat = Constants.cornerRadius
     
     var videoKey: String = ""
     var information: TVMovie!
     var cast: [Cast] = [Cast]()
-    var queryType: QueryType!
+    var images: [Image] = [Image]()
+    var queryType: MediaType!
     
     override func viewDidLoad() {
         super.viewDidLoad()
         
-        collectionView.delegate = self
-        collectionView.dataSource = self
+        castCollectionView.delegate = self
+        castCollectionView.dataSource = self
+        
+        imagesCollectionView.delegate = self
+        imagesCollectionView.dataSource = self
         
         // StatusBar Style
         UIApplication.shared.statusBarStyle = .lightContent
         
         self.updateUI()
+    }
+    
+    override func prepare(for segue: UIStoryboardSegue, sender: Any?) {
+        
+        if segue.identifier == Segue.toImagePreview {
+         
+            let toViewController = segue.destination as! ImagePreviewViewController
+            
+            toViewController.imgArray = images
+            toViewController.indexPath = sender as! IndexPath
+    
+        }
     }
     
     override var preferredStatusBarStyle : UIStatusBarStyle {
@@ -71,11 +88,21 @@ class TVMovieDetailsViewController: UIViewController {
                 self.videoKey = "xoGgcdpIQ3I"
                 self.genreLabel.text = details.getGenre()
                 
-                self.collectionView.reloadData()
+                self.castCollectionView.reloadData()
             }
             
             LoadingIndicatorView.hide()
         }
+        
+        
+        QueryService.instance.fetchImagesInformation(id: information.id, type: queryType) { (images) in
+            
+            if let images = images {
+                self.images = images.backdrops!
+                self.imagesCollectionView.reloadData()
+            }
+        }
+        
     }
     
     func setBackdropOrPosterPathImage() {
@@ -125,19 +152,41 @@ extension TVMovieDetailsViewController: UICollectionViewDelegate, UICollectionVi
     
     func collectionView(_ collectionView: UICollectionView, numberOfItemsInSection section: Int) -> Int {
         
-        return cast.count
+        if collectionView == self.castCollectionView {
+            return cast.count
+        } else {
+            return images.count
+        }
     }
     
     func collectionView(_ collectionView: UICollectionView, cellForItemAt indexPath: IndexPath) -> UICollectionViewCell {
         
-        if let cell = collectionView.dequeueReusableCell(withReuseIdentifier: Storyboard.fullCastCollectionViewCell, for: indexPath) as? MovieDetailFullCastCollectionViewCell {
+        if collectionView == self.castCollectionView {
             
-            cell.cast = cast[indexPath.row]
+            if let cell = collectionView.dequeueReusableCell(withReuseIdentifier: Storyboard.fullCastCollectionViewCell, for: indexPath) as? DetailFullCastCollectionViewCell {
+                
+                cell.cast = cast[indexPath.row]
+                
+                return cell
+            }
+        } else  if collectionView == self.imagesCollectionView {
             
-            return cell
+            if let cell = collectionView.dequeueReusableCell(withReuseIdentifier: Storyboard.imagesCollectionViewCell, for: indexPath) as? DetailImagesCollectionViewCell {
+                
+                cell.backdropImage = images[indexPath.row]
+                
+                return cell
+            }
         }
         
         return UICollectionViewCell()
+    }
+    
+    func collectionView(_ collectionView: UICollectionView, didSelectItemAt indexPath: IndexPath) {
+        
+        if collectionView == self.imagesCollectionView {
+            performSegue(withIdentifier: Segue.toImagePreview, sender: indexPath)
+        }
     }
     
 }

@@ -1,21 +1,21 @@
 //
-//  ProfileListCollectionViewCell.swift
+//  DetailImagesCollectionViewCell.swift
 //  Mao Trailer
 //
-//  Created by Roger Florat on 27/06/18.
+//  Created by Roger Florat on 16/07/18.
 //  Copyright © 2018 Roger Florat. All rights reserved.
 //
 
 import UIKit
 
-class ProfileListCollectionViewCell: UICollectionViewCell {
+class DetailImagesCollectionViewCell: UICollectionViewCell {
     
-    @IBOutlet weak var posterView: UIView!
+    @IBOutlet weak var coverBackdropsView: UIView!
     @IBOutlet weak var coverImageView: UIImageView!
     
     let cornerRadius: CGFloat = Constants.cornerRadius
     
-    var posterImage: String! {
+    var backdropImage: Image! {
         didSet {
             self.updateUI()
         }
@@ -25,12 +25,13 @@ class ProfileListCollectionViewCell: UICollectionViewCell {
         
         coverImageView.clipsToBounds = true
         coverImageView.layer.cornerRadius = cornerRadius
-        coverImageView.image = UIImage(named: posterImage)
+        coverImageView.downloadedFrom(urlString: backdropImage.file_path)
         
-        posterView.dropShadow(radius: cornerRadius)
+        coverBackdropsView.dropShadow(radius: cornerRadius)
     }
     
     override func prepareForReuse() {
         coverImageView.image = nil
     }
+    
 }

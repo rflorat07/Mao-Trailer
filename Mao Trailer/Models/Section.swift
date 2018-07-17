@@ -38,7 +38,7 @@ struct SectionData: Section {
 
 struct SectionInfo {
     var page: Int
-    var type: QueryType
+    var type: MediaType
     var sectionName: String
     var endPoint: EndPointType
 }

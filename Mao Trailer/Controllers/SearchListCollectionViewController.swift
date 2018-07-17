@@ -12,7 +12,7 @@ class SearchListCollectionViewController: UICollectionViewController, UISearchBa
     
     var searchText: String = ""
     var fetchingMore: Bool = false
-    var queryType: QueryType!
+    var queryType: MediaType!
     var searchData: SectionData!
     
     let searchBar = UISearchBar()
@@ -85,7 +85,7 @@ class SearchListCollectionViewController: UICollectionViewController, UISearchBa
     
     // MARK: Search Text
     
-    func searchMovieOrTVShowWithText(searchText: String, page: Int? = 1, type: QueryType) {
+    func searchMovieOrTVShowWithText(searchText: String, page: Int? = 1, type: MediaType) {
         
         self.fetchingMore = true
         

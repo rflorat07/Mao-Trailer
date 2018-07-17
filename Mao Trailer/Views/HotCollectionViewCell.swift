@@ -35,4 +35,8 @@ class HotCollectionViewCell: UICollectionViewCell {
         
         posterCoverView.dropShadow(radius: Constants.cornerRadius)
     }
+    
+    override func prepareForReuse() {
+        coverImageView.image = nil
+    }
 }

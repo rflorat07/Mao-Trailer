@@ -46,4 +46,8 @@ class TVNowCollectionViewCell: UICollectionViewCell {
         
     }
     
+    override func prepareForReuse() {
+        coverImageView.image = nil
+    }
+    
 }

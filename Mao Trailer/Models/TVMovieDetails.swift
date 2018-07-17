@@ -58,3 +58,12 @@ struct Crew: Decodable {
     let name: String
     let profile_path: String?
 }
+
+struct Images: Decodable {
+    let backdrops: [Image]?
+    let posters: [Image]?
+}
+
+struct Image: Decodable {
+    let file_path: String
+}

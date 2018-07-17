@@ -44,4 +44,8 @@ class WalkthroughCollectionViewCell: UICollectionViewCell {
         imageView.image = UIImage(named: walkthroughData.imgUrl)
     }
     
+    override func prepareForReuse() {
+        imageView.image = nil
+    }
+    
 }

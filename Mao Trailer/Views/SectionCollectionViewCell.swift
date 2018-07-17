@@ -45,6 +45,11 @@ class SectionCollectionViewCell: UICollectionViewCell {
         
         posterCoverView.dropShadow(radius: cornerRadius)
     }
+    
+    override func prepareForReuse() {
+        coverImageView.image = nil
+    }
+    
 }
 
 

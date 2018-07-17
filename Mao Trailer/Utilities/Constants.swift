@@ -17,7 +17,9 @@ struct Constants {
 struct Storyboard {
     static let hotViewCell = "HotViewCell"
     static let sectionViewCell = "SectionViewCell"
+    static let imagesCollectionViewCell = "ImagesCollectionViewCell"
     static let fullCastCollectionViewCell = "FullCastCollectionViewCell"
+    static let imagePreviewCollectionViewCell =  "ImagePreviewCollectionViewCell"
 
     static let movieListViewCell = "MovieListViewCell"
     static let movieListReusableView = "MovieListReusableView"
@@ -39,11 +41,12 @@ struct Storyboard {
 }
 
 struct Segue {
-    static let ToMovieTab = "segueToMovieTab"
+    static let toMovieTab = "segueToMovieTab"
     static let toMovieList = "segueToMovieList"
     static let toMovieDetail = "segueToMovieDetail"
     static let toProfileSetting = "segueToProfileSetting"
     static let toSearchList = "segueToSearchList"
+    static let toImagePreview = "segueToImagePreview"
 }
 
 struct StructType {

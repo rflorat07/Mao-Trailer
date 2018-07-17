@@ -18,6 +18,7 @@ class WalkthroughViewController: UIViewController {
         
         collectionView.delegate = self
         collectionView.dataSource = self
+        collectionView.contentInsetAdjustmentBehavior = .never
         
         configurePageControl()
         
@@ -39,7 +40,7 @@ class WalkthroughViewController: UIViewController {
     }
     
     @objc func goToMovieTab() {        
-        performSegue(withIdentifier: Segue.ToMovieTab, sender: nil)
+        performSegue(withIdentifier: Segue.toMovieTab, sender: nil)
     }
     
     @objc func scrollToNextCell(){

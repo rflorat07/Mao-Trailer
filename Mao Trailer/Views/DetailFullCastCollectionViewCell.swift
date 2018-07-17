@@ -1,5 +1,5 @@
 //
-//  MovieDetailFullCastCollectionViewCell.swift
+//  DetailFullCastCollectionViewCell.swift
 //  Mao Trailer
 //
 //  Created by Roger Florat on 26/06/18.
@@ -8,7 +8,7 @@
 
 import UIKit
 
-class MovieDetailFullCastCollectionViewCell: UICollectionViewCell {
+class DetailFullCastCollectionViewCell: UICollectionViewCell {
     
     @IBOutlet weak var coverCastView: UIView!
     @IBOutlet weak var coverImageView: UIImageView!

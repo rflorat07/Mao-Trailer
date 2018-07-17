@@ -8,7 +8,7 @@
 
 import Foundation
 
-enum QueryType: String {
+enum MediaType: String {
     case TV = "tv"
     case Movie = "movie"
     case Person = "person"
@@ -29,10 +29,13 @@ class QueryService {
     lazy var session = URLSession(configuration: configuration)
     
     typealias QueryError         = ()-> Void
+    
     typealias QueryDetails       = (Details?)-> Void
+    typealias QueryDetailsImages = (Images?)-> Void
+    
     typealias QuerySectionTV     = (SectionTVArray?)-> Void
     typealias QuerySectionMovie  = (SectionMovieArray?)-> Void
-    
+
     typealias QuerySectionData   = (Data?)-> Void
     typealias QuerySectionResult = (SectionData?)-> Void
     typealias QuerySectionArray  = ([SectionData]?)-> Void
@@ -67,7 +70,7 @@ class QueryService {
     
     // MARK: - Fetch Section
     
-    func fetchSection( sectionName: String, type: QueryType, endPoint: EndPointType, page: Int, _ completion : @escaping QuerySectionResult) {
+    func fetchSection( sectionName: String, type: MediaType, endPoint: EndPointType, page: Int, _ completion : @escaping QuerySectionResult) {
         
         let queryString = getUrlSection(page: page, type: type, endPoint: endPoint)
         
@@ -100,7 +103,7 @@ class QueryService {
     }
     
     // MARK: - Fetch primary information
-    func fetchPrimaryInformation(id: Int,  type: QueryType, _ completion : @escaping QueryDetails) {
+    func fetchPrimaryInformation(id: Int,  type: MediaType, _ completion : @escaping QueryDetails) {
         
         let queryString = getUrlDetails(id: id, type: type)
         
@@ -120,8 +123,31 @@ class QueryService {
         }
     }
     
+    
+    // MARK: - Fetch images information
+    func fetchImagesInformation(id: Int,  type: MediaType, _ completion : @escaping QueryDetailsImages) {
+        
+        let queryString = getUrlImages(id: id, type: type)
+        
+        getDataFromUrl(queryString: queryString) { (data) in
+            
+            if let data = data {
+                self.decodeImagesInformation(data, { (details) in
+                    completion(details)
+                })
+            } else {
+                DispatchQueue.main.async {
+                    self.decodeError(data!, {
+                        completion(nil)
+                    })
+                }
+            }
+        }
+    }
+    
+    
     // MARK: - Search
-    func search(searchText: String, page: Int, type: QueryType, _ completion : @escaping QuerySectionResult) {
+    func search(searchText: String, page: Int, type: MediaType, _ completion : @escaping QuerySectionResult) {
      
         var urlQuery = URLComponents(string: QueryString.baseUrl)!
         
@@ -180,7 +206,7 @@ class QueryService {
     
     // MARK: - URL section
     
-    fileprivate func getUrlSection(page: Int, type: QueryType, endPoint: EndPointType) -> String {
+    fileprivate func getUrlSection(page: Int, type: MediaType, endPoint: EndPointType) -> String {
         
         var urlQuery = URLComponents(string: QueryString.baseUrl)!
         
@@ -189,6 +215,7 @@ class QueryService {
         urlQuery.queryItems = [
             URLQueryItem(name: "api_key", value: QueryString.api_key),
             URLQueryItem(name: "language", value: QueryString.language),
+            URLQueryItem(name: "region", value: QueryString.region),
             URLQueryItem(name: "page", value: "\(page)")
         ]
         
@@ -197,7 +224,7 @@ class QueryService {
     
     // MARK: - URL details
     
-    fileprivate func getUrlDetails(id: Int,  type: QueryType) -> String {
+    fileprivate func getUrlDetails(id: Int,  type: MediaType) -> String {
         
         var urlQuery = URLComponents(string: QueryString.baseUrl)!
         
@@ -213,9 +240,22 @@ class QueryService {
         
     }
     
+    // MARK: - URL Images
+    fileprivate func getUrlImages(id: Int,  type: MediaType) -> String {
+        
+        var urlQuery = URLComponents(string: QueryString.baseUrl)!
+        
+        urlQuery.path = "/3/\(type.rawValue)/\(id)/images"
+        urlQuery.queryItems = [
+            URLQueryItem(name: "api_key", value: QueryString.api_key),
+        ]
+
+        return urlQuery.string!
+    }
+    
     // MARK: - Decode Data
     
-    fileprivate func decodeData(sectionName: String, type: QueryType ,data: Data, _ completion : @escaping  QuerySectionResult) {
+    fileprivate func decodeData(sectionName: String, type: MediaType ,data: Data, _ completion : @escaping  QuerySectionResult) {
         
         switch type {
         case .Movie:
@@ -287,6 +327,21 @@ class QueryService {
         
         do {
             let list = try JSONDecoder().decode(Details.self, from: data)
+            
+            completion(list)
+            
+        } catch let decodeError as NSError {
+            print("Decoder error: \(decodeError.localizedDescription) \n")
+        }
+    }
+    
+    
+    // MARK: - Decode images information
+    
+    fileprivate func decodeImagesInformation(_ data: Data, _ completion : @escaping QueryDetailsImages) {
+        
+        do {
+            let list = try JSONDecoder().decode(Images.self, from: data)
             
             completion(list)
             
