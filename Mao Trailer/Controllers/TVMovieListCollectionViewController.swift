@@ -12,19 +12,10 @@ class TVMovieListCollectionViewController: UICollectionViewController {
     
     var queryType: MediaType!
     var fetchingMore: Bool = false
-    
-    var sectionData: SectionData! {
-        didSet{
-            // Remove More Item
-            if sectionData.sectionArray.count > 10 {
-                sectionData.sectionArray.removeLast()
-            }
-        }
-    }
+    var sectionData: SectionData = SectionData()
     
     override func viewDidLoad() {
         super.viewDidLoad()
-            
     }
         
     func fetchMoreMovies(page: Int) {

@@ -26,20 +26,11 @@ class SearchListCollectionViewCell: UICollectionViewCell {
     
     func updateUI() {
         
-        if searchTVMovie.title != "More" {
-            
-            titleLabel.text = searchTVMovie.title.uppercased()
-            coverImageView.downloadedFrom(urlString: searchTVMovie.poster_path ?? "placeholder")
-            rateLabel.text = String(format:"%.1f", searchTVMovie.vote_average)
-            
-        } else {
-            
-            titleLabel.text = ""
-            rateView.isHidden = true
-            coverImageView.image = UIImage(named: "port-more")
-        }
+        titleLabel.text = searchTVMovie.title.uppercased()
+        rateLabel.text = String(format:"%.1f", searchTVMovie.vote_average)
         
         coverImageView.clipsToBounds = true
+        coverImageView.downloadedFrom(urlString: searchTVMovie.poster_path!)
         coverImageView.layer.cornerRadius = cornerRadius
         
         posterCoverView.dropShadow(radius: cornerRadius)

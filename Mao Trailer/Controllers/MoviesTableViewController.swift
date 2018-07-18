@@ -34,7 +34,7 @@ class MoviesTableViewController: UITableViewController {
             let toViewController = segue.destination as! TVMovieListCollectionViewController
             
             toViewController.queryType = .Movie
-            toViewController.sectionData = sender as? SectionData
+            toViewController.sectionData = sender as! SectionData
         }
         
         if segue.identifier == Segue.toSearchList {
@@ -55,6 +55,7 @@ class MoviesTableViewController: UITableViewController {
             
             if let sectionArray = sectionArray {
                 self.sectionMovieArray = sectionArray
+                self.appendMoreMovieItem()
                 self.tableView.reloadData()
             }
             
@@ -62,10 +63,25 @@ class MoviesTableViewController: UITableViewController {
         }
     }
     
+    func appendMoreMovieItem() {
+        
+        self.sectionMovieArray = self.sectionMovieArray.map({ (section)  in
+            
+            var _section = section
+            
+            if _section.sectionArray.count > 10 {
+                _section.sectionArray.append(MoreMovie)
+            }
+            return _section
+        })
+    }
+    
     @IBAction func searchButtonTapped(_ sender: UIBarButtonItem) {
         
         performSegue(withIdentifier: Segue.toSearchList, sender: nil)
     }
+    
+    
     
 }
 
@@ -143,7 +159,10 @@ extension MoviesTableViewController {
         
         if movieSelected.title == "More" {
             
-            let data: SectionData = SectionData(page: section.page, total_pages: section.total_pages, sectionName: "\(section.sectionName) list", sectionArray: section.sectionArray)
+            var _section = section
+            _section.sectionArray.removeLast()
+            
+            let data: SectionData = SectionData(page: section.page, total_pages: section.total_pages, sectionName: "\(section.sectionName) list", sectionArray: _section.sectionArray)
             
             self.performSegue(withIdentifier: Segue.toMovieList, sender: data)
             

@@ -16,7 +16,7 @@ extension UIImageView {
         
         contentMode = mode
         image = UIImage(named: Constants.placeholderImage)
-        
+                
         if urlString != Constants.placeholderImage {
             
             let imagePath = "\(ImageURL.filePath)\(urlString)"

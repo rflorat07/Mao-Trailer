@@ -262,12 +262,7 @@ class QueryService {
             
             decodeMovieList(data) { ( dataResult) in
                 
-                var sectionResult: SectionData = SectionData(page: dataResult!.page, total_pages: dataResult!.total_pages, sectionName: sectionName, sectionArray: dataResult!.results)
-                
-                if sectionResult.sectionArray.count > 10 {
-                    
-                    sectionResult.sectionArray.append(MoreMovie)
-                }
+                let sectionResult: SectionData = SectionData(page: dataResult!.page, total_pages: dataResult!.total_pages, sectionName: sectionName, sectionArray: dataResult!.results)
                 
                 completion(sectionResult)
             }
@@ -276,12 +271,7 @@ class QueryService {
             
             decodeTVList(data) { ( dataResult) in
                 
-                var sectionResult: SectionData = SectionData(page: dataResult!.page, total_pages: dataResult!.total_pages, sectionName: sectionName, sectionArray: dataResult!.results)
-                
-                if sectionResult.sectionArray.count > 10 {
-                    
-                    sectionResult.sectionArray.append(MoreTVShow)
-                }
+                let sectionResult: SectionData = SectionData(page: dataResult!.page, total_pages: dataResult!.total_pages, sectionName: sectionName, sectionArray: dataResult!.results)
                 
                 completion(sectionResult)
             }

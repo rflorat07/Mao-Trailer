@@ -31,7 +31,7 @@ class TVTableViewController: UITableViewController {
             let toViewController = segue.destination as! TVMovieListCollectionViewController
             
             toViewController.queryType = .TV
-            toViewController.sectionData = sender as? SectionData
+            toViewController.sectionData = sender as! SectionData
         }
         
         if segue.identifier == Segue.toSearchList {
@@ -51,11 +51,25 @@ class TVTableViewController: UITableViewController {
             
             if let sectionArray = sectionArray {
                 self.sectionTVShowArray = sectionArray
+                self.appendMoreTVShowItem()
                 self.tableView.reloadData()
             }
             
             LoadingIndicatorView.hide()
         }
+    }
+    
+    func appendMoreTVShowItem() {
+        
+        self.sectionTVShowArray = self.sectionTVShowArray.map({ (section)  in
+            
+            var _section = section
+            
+            if _section.sectionArray.count > 10 {
+                _section.sectionArray.append(MoreTVShow)
+            }
+            return _section
+        })
     }
     
     @IBAction func searchButtonTapped(_ sender: UIBarButtonItem) {
@@ -169,7 +183,10 @@ extension TVTableViewController {
         
          if tvShowSelected.title == "More" {
             
-         let data: SectionData = SectionData(page: section.page, total_pages: section.total_pages, sectionName: "\(section.sectionName) list", sectionArray: section.sectionArray)
+            var _section = section
+            _section.sectionArray.removeLast()
+            
+         let data: SectionData = SectionData(page: section.page, total_pages: section.total_pages, sectionName: "\(section.sectionName) list", sectionArray: _section.sectionArray)
          
          self.performSegue(withIdentifier: Segue.toMovieList, sender: data)
          
