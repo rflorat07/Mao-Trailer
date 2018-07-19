@@ -82,15 +82,17 @@ class TVMovieListCollectionViewController: UICollectionViewController {
     
     override func collectionView(_ collectionView: UICollectionView, didSelectItemAt indexPath: IndexPath) {
         
-        if let sectionDetail = self.storyboard?.instantiateViewController(withIdentifier: Storyboard.movieDetailsViewController) as? TVMovieDetailsViewController {
+        if let navigationContoller = self.storyboard?.instantiateViewController(withIdentifier: Storyboard.movieDetailsViewController) as? UINavigationController {
             
-            sectionDetail.modalPresentationStyle = .overFullScreen
-            sectionDetail.modalTransitionStyle = .crossDissolve
+            navigationContoller.modalPresentationStyle = .overFullScreen
+            navigationContoller.modalTransitionStyle = .crossDissolve
             
-            sectionDetail.queryType = queryType
-            sectionDetail.information = sectionData.sectionArray[indexPath.row]
+             let receiverViewController = navigationContoller.topViewController as! TVMovieDetailsViewController
             
-            self.present(sectionDetail, animated: true, completion: nil)
+            receiverViewController.queryType = queryType
+            receiverViewController.information = sectionData.sectionArray[indexPath.row]
+            
+            self.present(navigationContoller, animated: true, completion: nil)
         }
         
     }

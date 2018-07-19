@@ -192,16 +192,19 @@ extension TVTableViewController {
          
          } else {
             
-            if let showDetails = self.storyboard?.instantiateViewController(withIdentifier: Storyboard.movieDetailsViewController) as? TVMovieDetailsViewController {
+            if let navigationContoller = self.storyboard?.instantiateViewController(withIdentifier: Storyboard.movieDetailsViewController) as? UINavigationController {
                 
-                showDetails.modalPresentationStyle = .overFullScreen
-                showDetails.modalTransitionStyle = .crossDissolve
+                navigationContoller.modalPresentationStyle = .overFullScreen
+                navigationContoller.modalTransitionStyle = .crossDissolve
                 
-                showDetails.queryType = .TV
-                showDetails.information = section.sectionArray[indexPath.row]
+                let receiverViewController = navigationContoller.topViewController as! TVMovieDetailsViewController
                 
-                self.present(showDetails, animated: true, completion: nil)
+                receiverViewController.queryType = .TV
+                receiverViewController.information = section.sectionArray[indexPath.row]
+                
+                self.present(navigationContoller, animated: true, completion: nil)
             }
         }
     }
 }
+

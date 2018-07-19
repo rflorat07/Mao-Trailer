@@ -9,7 +9,7 @@
 import UIKit
 import AVKit
 
-class TVMovieDetailsViewController: UIViewController {
+class TVMovieDetailsViewController: UIViewController, UIScrollViewDelegate {
     
     @IBOutlet weak var titleLabel: UILabel!
     @IBOutlet weak var genreLabel: UILabel!
@@ -20,6 +20,13 @@ class TVMovieDetailsViewController: UIViewController {
     @IBOutlet weak var posterImageView: UIImageView!
     @IBOutlet weak var castCollectionView: UICollectionView!
     @IBOutlet weak var imagesCollectionView: UICollectionView!
+    @IBOutlet weak var scrollView: UIScrollView!
+    
+    @IBOutlet weak var coverImageViewHeight: NSLayoutConstraint!
+    @IBOutlet weak var coverImageViewTop: NSLayoutConstraint!
+
+    var originalHeight: CGFloat!
+    var originalNavBarHeight: CGFloat!
     
     let cornerRadius: CGFloat = Constants.cornerRadius
     
@@ -32,16 +39,16 @@ class TVMovieDetailsViewController: UIViewController {
     override func viewDidLoad() {
         super.viewDidLoad()
         
+        scrollView.delegate = self
+        
         castCollectionView.delegate = self
         castCollectionView.dataSource = self
         
         imagesCollectionView.delegate = self
         imagesCollectionView.dataSource = self
         
-        // StatusBar Style
-        UIApplication.shared.statusBarStyle = .lightContent
-        
         self.updateUI()
+        
     }
     
     override func prepare(for segue: UIStoryboardSegue, sender: Any?) {
@@ -69,12 +76,78 @@ class TVMovieDetailsViewController: UIViewController {
     
     func updateUI() {
         
+        // StatusBar Style
+        UIApplication.shared.statusBarStyle = .lightContent
+        
+        // Navigation Bar
+        self.navigationController?.navigationBar.tintColor = .white
+        self.navigationController?.navigationBar.shadowImage = UIImage()
+        self.navigationController?.navigationBar.setBackgroundImage(UIImage(), for: .default)
+        
+        // Header
+        
+        originalHeight = coverImageViewHeight.constant
+        originalNavBarHeight = self.navigationController?.navigationBar.frame.height
+        
+        
+        // Information
         descriptionLabel.text = information.overview
         titleLabel.text = information.title.uppercased()
         ratingValueLabel.text = String(format:"%.1f", information.vote_average)
         
         self.fetchPrimaryInformation()
         self.setBackdropOrPosterPathImage()
+    }
+    
+    
+    func  UpdateView(scrollView: UIScrollView) {
+        let offset = scrollView.contentOffset.y
+        let originalTop  = -originalNavBarHeight
+        
+        if offset < originalTop {
+            coverImageViewTop.constant = offset
+            coverImageViewHeight.constant = originalHeight + abs(originalTop - offset)
+        } else {
+            coverImageViewTop.constant = originalTop
+            coverImageViewHeight.constant = originalHeight
+        }
+    
+    }
+    
+    func scrollViewDidScroll(_ scrollView: UIScrollView) {
+        self.UpdateView(scrollView: scrollView)
+        
+        var offset = scrollView.contentOffset.y / 150
+        
+        if offset > 0.5
+        {
+            UIView.animate(withDuration: 0.2, animations: {
+                offset = min(1,offset)
+                let color = UIColor.init(red: 1, green: 1, blue: 1, alpha: offset)
+                let navigationcolor = UIColor.init(hue: 1, saturation: 0, brightness: 0, alpha: offset)
+                
+                UIApplication.shared.statusBarStyle = .default
+                
+                self.navigationController?.navigationBar.tintColor = navigationcolor
+                self.navigationController?.navigationBar.backgroundColor = color
+                UIApplication.shared.statusBarView?.backgroundColor = color
+                
+            })
+        }
+        else
+        {
+            UIView.animate(withDuration: 0.2, animations: {
+                let color = UIColor.init(red: 1, green: 1, blue: 1, alpha: offset)
+                self.navigationController?.navigationBar.tintColor = UIColor.white
+                self.navigationController?.navigationBar.backgroundColor = color
+                UIApplication.shared.statusBarView?.backgroundColor = color
+                
+                UIApplication.shared.statusBarStyle = .lightContent
+                
+                
+            })
+        }
+        
     }
     
     func fetchPrimaryInformation() {
@@ -128,10 +201,11 @@ class TVMovieDetailsViewController: UIViewController {
         
     }
     
-    
-    @IBAction func backButtonTapped(_ sender: UIButton) {
+    @IBAction func backButtonTapped(_ sender: UIBarButtonItem) {
         dismiss(animated: true, completion: nil)
     }
+    
+
     
     
     @IBAction func playButtonTapped(_ sender: UIButton) {

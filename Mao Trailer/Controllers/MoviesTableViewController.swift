@@ -168,15 +168,18 @@ extension MoviesTableViewController {
             
         } else {
             
-            if let showDetails = self.storyboard?.instantiateViewController(withIdentifier: Storyboard.movieDetailsViewController) as? TVMovieDetailsViewController {
+            if let navigationContoller = self.storyboard?.instantiateViewController(withIdentifier: Storyboard.movieDetailsViewController) as? UINavigationController {
                 
-                showDetails.modalPresentationStyle = .overFullScreen
-                showDetails.modalTransitionStyle = .crossDissolve
+                navigationContoller.modalPresentationStyle = .overFullScreen
+                navigationContoller.modalTransitionStyle = .crossDissolve
                 
-                showDetails.queryType = .Movie
-                showDetails.information = movieSelected
+                let receiverViewController = navigationContoller.topViewController as! TVMovieDetailsViewController
                 
-                self.present(showDetails, animated: true, completion: nil)
+                
+                receiverViewController.queryType = .Movie
+                receiverViewController.information = movieSelected
+                
+                self.present(navigationContoller, animated: true, completion: nil)
             }
         }
     }

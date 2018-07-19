@@ -142,16 +142,17 @@ class SearchListCollectionViewController: UICollectionViewController, UISearchBa
     
     override func collectionView(_ collectionView: UICollectionView, didSelectItemAt indexPath: IndexPath) {
         
-        if let tvMovieDetail = self.storyboard?.instantiateViewController(withIdentifier: Storyboard.movieDetailsViewController) as? TVMovieDetailsViewController {
+        if let navigationContoller = self.storyboard?.instantiateViewController(withIdentifier: Storyboard.movieDetailsViewController) as? UINavigationController {
             
-            tvMovieDetail.modalPresentationStyle = .overFullScreen
-            tvMovieDetail.modalTransitionStyle = .crossDissolve
+            navigationContoller.modalPresentationStyle = .overFullScreen
+            navigationContoller.modalTransitionStyle = .crossDissolve
             
-            tvMovieDetail.queryType = queryType
-            tvMovieDetail.information = self.searchData.sectionArray[indexPath.row]
+            let receiverViewController = navigationContoller.topViewController as! TVMovieDetailsViewController
             
-            self.present(tvMovieDetail, animated: true, completion: nil)
+            receiverViewController.queryType = queryType
+            receiverViewController.information = self.searchData.sectionArray[indexPath.row]
+            
+            self.present(navigationContoller, animated: true, completion: nil)
         }
     }
-    
 }

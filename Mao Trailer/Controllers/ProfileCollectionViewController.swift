@@ -62,16 +62,19 @@ class ProfileCollectionViewController: UICollectionViewController {
     
     override func collectionView(_ collectionView: UICollectionView, didSelectItemAt indexPath: IndexPath) {
         
-        if let movieDetail = self.storyboard?.instantiateViewController(withIdentifier: Storyboard.movieDetailsViewController) as? TVMovieDetailsViewController {
+        if let navigationContoller = self.storyboard?.instantiateViewController(withIdentifier: Storyboard.movieDetailsViewController) as? UINavigationController {
             
-            movieDetail.modalPresentationStyle = .overFullScreen
-            movieDetail.modalTransitionStyle = .crossDissolve
+            navigationContoller.modalPresentationStyle = .overFullScreen
+            navigationContoller.modalTransitionStyle = .crossDissolve
             
-            movieDetail.information = ProfileList[indexPath.row]
+            let receiverViewController = navigationContoller.topViewController as! TVMovieDetailsViewController
             
-            self.present(movieDetail, animated: true, completion: nil)
+            receiverViewController.information = ProfileList[indexPath.row]
+            
+            self.present(navigationContoller, animated: true, completion: nil)
         }
         
     }
 
 }
+
