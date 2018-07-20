@@ -14,6 +14,15 @@ struct Constants {
     static let placeholderImage = "placeholder"
 }
 
+struct Colors {
+    static let rateColor = UIColor(netHex: 0xD6182A)
+    static let titleColor = UIColor(netHex: 0x222222)
+    static let headerColor = UIColor(netHex: 0x212121)
+    static let subtitleColor = UIColor(netHex: 0x666666)
+    static let navigationColor = UIColor(netHex: 0xFFFFFF)
+    static let backgroundColor = UIColor(netHex: 0xF8F8F8)
+}
+
 struct Storyboard {
     static let hotViewCell = "HotViewCell"
     static let sectionViewCell = "SectionViewCell"
@@ -43,9 +52,18 @@ struct Storyboard {
 struct Segue {
     static let toMovieTab = "segueToMovieTab"
     static let toMovieList = "segueToMovieList"
-    static let toMovieDetail = "segueToMovieDetail"
-    static let toProfileSetting = "segueToProfileSetting"
+    static let toMovieDetail = "segueMovieToMovieDetail"
+    
+    static let toTVList = "segueTVToTVList"
+    static let toTVDetail = "segueTVToTVDetail"
+    
+    static let toListDetail = "segueListToListDetail"
+
     static let toSearchList = "segueToSearchList"
+    static let toSearchDetail = "segueSearchToSearchDetail"
+    
+    static let toProfileSetting = "segueToProfileSetting"
+    
     static let toImagePreview = "segueToImagePreview"
 }
 

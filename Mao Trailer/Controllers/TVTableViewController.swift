@@ -41,6 +41,15 @@ class TVTableViewController: UITableViewController {
             toViewController.queryType = .TV
             toViewController.searchData = SectionData()
         }
+        
+        if segue.identifier == Segue.toTVDetail {
+            
+            let toViewController = segue.destination as! TVMovieDetailsViewController
+            
+            toViewController.queryType = .TV
+            toViewController.information = sender as? TVShow
+            
+        }
     }
     
     func loadTVShowListData() {
@@ -61,14 +70,14 @@ class TVTableViewController: UITableViewController {
     
     func appendMoreTVShowItem() {
         
-        self.sectionTVShowArray = self.sectionTVShowArray.map({ (section)  in
+        self.sectionTVShowArray = self.sectionTVShowArray.map({ (sectionData)  in
             
-            var _section = section
+            var section = sectionData
             
-            if _section.sectionArray.count > 10 {
-                _section.sectionArray.append(MoreTVShow)
+            if section.sectionArray.count > 10 {
+                section.sectionArray.append(MoreTVShow)
             }
-            return _section
+            return section
         })
     }
     
@@ -121,7 +130,7 @@ extension TVTableViewController {
             
             if let cell = tableView.dequeueReusableCell(withIdentifier: Storyboard.tvNowViewCell, for: indexPath) as? TVNowTableViewCell {
                 
-                let section = sectionTVShowArray[indexPath.section]
+                var section = sectionTVShowArray[indexPath.section]
                 
                 cell.selectionStyle = .none
                 
@@ -129,7 +138,7 @@ extension TVTableViewController {
                 
                 cell.didSelectAction = { (indexPath) in
                     
-                    self.showTVShowDetails(indexPath: indexPath, section: section)
+                    self.showTVShowDetails(indexPath: indexPath, section: &section)
                     
                 }
                 
@@ -168,42 +177,31 @@ extension TVTableViewController {
         
         if indexPath.section == 2 {
             
-            let section = sectionTVShowArray[indexPath.section - 1]
+            var section = sectionTVShowArray[indexPath.section - 1]
             
-            self.showTVShowDetails(indexPath: indexPath, section: section)
+            self.showTVShowDetails(indexPath: indexPath, section: &section)
             
         }
     }
     
     // MARK: - Helper methods
     
-    fileprivate func showTVShowDetails(indexPath: IndexPath, section: SectionData) {
+    fileprivate func showTVShowDetails(indexPath: IndexPath, section: inout SectionData) {
         
         let tvShowSelected = section.sectionArray[indexPath.row]
         
          if tvShowSelected.title == "More" {
             
-            var _section = section
-            _section.sectionArray.removeLast()
+            // Remove more item
+            section.sectionArray.removeLast()
             
-         let data: SectionData = SectionData(page: section.page, total_pages: section.total_pages, sectionName: "\(section.sectionName) list", sectionArray: _section.sectionArray)
+         let data: SectionData = SectionData(page: section.page, total_pages: section.total_pages, sectionName: "\(section.sectionName) list", sectionArray: section.sectionArray)
          
          self.performSegue(withIdentifier: Segue.toMovieList, sender: data)
          
          } else {
             
-            if let navigationContoller = self.storyboard?.instantiateViewController(withIdentifier: Storyboard.movieDetailsViewController) as? UINavigationController {
-                
-                navigationContoller.modalPresentationStyle = .overFullScreen
-                navigationContoller.modalTransitionStyle = .crossDissolve
-                
-                let receiverViewController = navigationContoller.topViewController as! TVMovieDetailsViewController
-                
-                receiverViewController.queryType = .TV
-                receiverViewController.information = section.sectionArray[indexPath.row]
-                
-                self.present(navigationContoller, animated: true, completion: nil)
-            }
+           self.performSegue(withIdentifier: Segue.toTVDetail, sender: tvShowSelected)
         }
     }
 }

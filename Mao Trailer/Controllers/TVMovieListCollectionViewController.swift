@@ -17,7 +17,25 @@ class TVMovieListCollectionViewController: UICollectionViewController {
     override func viewDidLoad() {
         super.viewDidLoad()
     }
-        
+    
+    override func prepare(for segue: UIStoryboardSegue, sender: Any?) {
+ 
+        if segue.identifier == Segue.toListDetail {
+            
+            let toViewController = segue.destination as! TVMovieDetailsViewController
+            
+            toViewController.queryType = queryType
+            
+            switch queryType.rawValue {
+            case "movie":
+                toViewController.information = sender as? Movie
+            default:
+                toViewController.information = sender as? TVShow
+            }
+        }
+    }
+    
+    
     func fetchMoreMovies(page: Int) {
     
         self.fetchingMore = true
@@ -82,18 +100,8 @@ class TVMovieListCollectionViewController: UICollectionViewController {
     
     override func collectionView(_ collectionView: UICollectionView, didSelectItemAt indexPath: IndexPath) {
         
-        if let navigationContoller = self.storyboard?.instantiateViewController(withIdentifier: Storyboard.movieDetailsViewController) as? UINavigationController {
-            
-            navigationContoller.modalPresentationStyle = .overFullScreen
-            navigationContoller.modalTransitionStyle = .crossDissolve
-            
-             let receiverViewController = navigationContoller.topViewController as! TVMovieDetailsViewController
-            
-            receiverViewController.queryType = queryType
-            receiverViewController.information = sectionData.sectionArray[indexPath.row]
-            
-            self.present(navigationContoller, animated: true, completion: nil)
-        }
+        let selected = sectionData.sectionArray[indexPath.row]
         
+        self.performSegue(withIdentifier: Segue.toListDetail, sender: selected)
     }
 }

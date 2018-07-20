@@ -21,7 +21,6 @@ class SearchListCollectionViewController: UICollectionViewController, UISearchBa
         super.viewDidLoad()
         
         self.createSearchBar()
-        
     }
     
     override func viewWillAppear(_ animated: Bool) {
@@ -35,6 +34,23 @@ class SearchListCollectionViewController: UICollectionViewController, UISearchBa
         self.changeNavigationBarColor(whiteColor: true)
     }
     
+    override func prepare(for segue: UIStoryboardSegue, sender: Any?) {
+        
+        if segue.identifier == Segue.toSearchDetail {
+            
+            let toViewController = segue.destination as! TVMovieDetailsViewController
+            
+            toViewController.queryType = queryType
+            
+            switch queryType.rawValue {
+            case "movie":
+                toViewController.information = sender as? Movie
+            default:
+                toViewController.information = sender as? TVShow
+            }
+        }
+    }
+    
     // MARK: Create SearchBar
     
     func createSearchBar() {
@@ -43,6 +59,8 @@ class SearchListCollectionViewController: UICollectionViewController, UISearchBa
         searchBar.becomeFirstResponder()
         searchBar.showsCancelButton = true
         searchBar.placeholder = "Enter you search here!"
+        searchBar.tintColor = Colors.headerColor
+        searchBar.barTintColor = Colors.backgroundColor
         
         self.navigationItem.titleView = searchBar
         self.navigationItem.hidesBackButton = true
@@ -142,17 +160,8 @@ class SearchListCollectionViewController: UICollectionViewController, UISearchBa
     
     override func collectionView(_ collectionView: UICollectionView, didSelectItemAt indexPath: IndexPath) {
         
-        if let navigationContoller = self.storyboard?.instantiateViewController(withIdentifier: Storyboard.movieDetailsViewController) as? UINavigationController {
-            
-            navigationContoller.modalPresentationStyle = .overFullScreen
-            navigationContoller.modalTransitionStyle = .crossDissolve
-            
-            let receiverViewController = navigationContoller.topViewController as! TVMovieDetailsViewController
-            
-            receiverViewController.queryType = queryType
-            receiverViewController.information = self.searchData.sectionArray[indexPath.row]
-            
-            self.present(navigationContoller, animated: true, completion: nil)
-        }
+        let selected = searchData.sectionArray[indexPath.row]
+        
+        self.performSegue(withIdentifier: Segue.toSearchDetail, sender: selected)
     }
 }

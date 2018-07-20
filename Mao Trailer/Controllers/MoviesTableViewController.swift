@@ -26,7 +26,7 @@ class MoviesTableViewController: UITableViewController {
         
         loadMovieListData()
     }
-    
+        
     override func prepare(for segue: UIStoryboardSegue, sender: Any?) {
         
         if segue.identifier == Segue.toMovieList {
@@ -43,6 +43,15 @@ class MoviesTableViewController: UITableViewController {
             
             toViewController.queryType = .Movie
             toViewController.searchData = SectionData()
+        }
+        
+        if segue.identifier == Segue.toMovieDetail {
+            
+            let toViewController = segue.destination as! TVMovieDetailsViewController
+            
+            toViewController.queryType = .Movie
+            toViewController.information = sender as? Movie
+                    
         }
     }
     
@@ -65,14 +74,14 @@ class MoviesTableViewController: UITableViewController {
     
     func appendMoreMovieItem() {
         
-        self.sectionMovieArray = self.sectionMovieArray.map({ (section)  in
+        self.sectionMovieArray = self.sectionMovieArray.map({ (sectionData)  in
             
-            var _section = section
+            var section = sectionData
             
-            if _section.sectionArray.count > 10 {
-                _section.sectionArray.append(MoreMovie)
+            if section.sectionArray.count > 10 {
+                section.sectionArray.append(MoreMovie)
             }
-            return _section
+            return section
         })
     }
     
@@ -80,8 +89,6 @@ class MoviesTableViewController: UITableViewController {
         
         performSegue(withIdentifier: Segue.toSearchList, sender: nil)
     }
-    
-    
     
 }
 
@@ -122,13 +129,13 @@ extension MoviesTableViewController {
             
             let cell = tableView.dequeueReusableCell(withIdentifier: Storyboard.hotViewCell, for: indexPath) as! HotTableViewCell
             
-            let section = sectionMovieArray[indexPath.section]
+            var section = sectionMovieArray[indexPath.section]
             
             cell.hotMovies = section.sectionArray
             
             cell.didSelectAction = { (indexPath) in
                 
-              self.showMovieDetails(indexPath: indexPath, section: section)
+                self.showMovieDetails(indexPath: indexPath, section: &section)
                 
             }
             
@@ -137,14 +144,13 @@ extension MoviesTableViewController {
         } else {
             let cell = tableView.dequeueReusableCell(withIdentifier: Storyboard.sectionViewCell, for: indexPath) as! SectionTableViewCell
             
-            let section = sectionMovieArray[indexPath.section]
+            var section = sectionMovieArray[indexPath.section]
             
-            cell.sectionTitleLabel.text = section.sectionName
-            cell.sectionMovies = section.sectionArray
+            cell.sectionMovies = section
             
             cell.didSelectAction = { (indexPath) in
                 
-                self.showMovieDetails(indexPath: indexPath, section: section)
+                self.showMovieDetails(indexPath: indexPath, section: &section)
             }
             
             return cell
@@ -153,34 +159,22 @@ extension MoviesTableViewController {
     
     // MARK: - Helper methods
     
-    fileprivate func showMovieDetails(indexPath: IndexPath, section: SectionData) {
+    fileprivate func showMovieDetails(indexPath: IndexPath, section: inout SectionData) {
         
         let movieSelected = section.sectionArray[indexPath.row]
         
         if movieSelected.title == "More" {
             
-            var _section = section
-            _section.sectionArray.removeLast()
-            
-            let data: SectionData = SectionData(page: section.page, total_pages: section.total_pages, sectionName: "\(section.sectionName) list", sectionArray: _section.sectionArray)
+            // Remove more item
+            section.sectionArray.removeLast()
+        
+            let data: SectionData = SectionData(page: section.page, total_pages: section.total_pages, sectionName: "\(section.sectionName) list", sectionArray: section.sectionArray)
             
             self.performSegue(withIdentifier: Segue.toMovieList, sender: data)
             
         } else {
             
-            if let navigationContoller = self.storyboard?.instantiateViewController(withIdentifier: Storyboard.movieDetailsViewController) as? UINavigationController {
-                
-                navigationContoller.modalPresentationStyle = .overFullScreen
-                navigationContoller.modalTransitionStyle = .crossDissolve
-                
-                let receiverViewController = navigationContoller.topViewController as! TVMovieDetailsViewController
-                
-                
-                receiverViewController.queryType = .Movie
-                receiverViewController.information = movieSelected
-                
-                self.present(navigationContoller, animated: true, completion: nil)
-            }
+            self.performSegue(withIdentifier: Segue.toMovieDetail, sender: movieSelected)
         }
     }
 }

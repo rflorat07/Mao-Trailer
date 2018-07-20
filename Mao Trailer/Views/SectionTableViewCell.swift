@@ -13,12 +13,16 @@ class SectionTableViewCell: UITableViewCell {
     @IBOutlet weak var sectionTitleLabel: UILabel!
     @IBOutlet weak var sectionCollectionView: UICollectionView!
 
-    var sectionMovies: [TVMovie]! {
+    var sectionMovies: SectionData! {
         didSet{
+            sectionMovieArray = sectionMovies.sectionArray
+            sectionTitleLabel.text = sectionMovies.sectionName
+            
             sectionCollectionView.reloadData()
         }
     }
-    
+ 
+    var sectionMovieArray: [TVMovie] = [TVMovie]()
     var didSelectAction: (IndexPath) -> Void = { arg in }
     
     override func awakeFromNib() {
@@ -32,14 +36,14 @@ class SectionTableViewCell: UITableViewCell {
 extension SectionTableViewCell: UICollectionViewDelegate, UICollectionViewDataSource {
     
     func collectionView(_ collectionView: UICollectionView, numberOfItemsInSection section: Int) -> Int {
-        return sectionMovies.count
+        return sectionMovieArray.count
     }
     
     func collectionView(_ collectionView: UICollectionView, cellForItemAt indexPath: IndexPath) -> UICollectionViewCell {
         
         let cell = collectionView.dequeueReusableCell(withReuseIdentifier: Storyboard.sectionViewCell, for: indexPath) as! SectionCollectionViewCell
         
-        cell.sectionMovie = sectionMovies[indexPath.row]
+        cell.sectionMovie = sectionMovieArray[indexPath.row]
         
         return cell
         
