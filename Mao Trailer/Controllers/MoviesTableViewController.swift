@@ -119,7 +119,7 @@ extension MoviesTableViewController {
     //Height for each section
     override func tableView(_ tableView: UITableView, heightForRowAt indexPath: IndexPath) -> CGFloat {
         
-        return indexPath.section == 0 ? 180 : 310
+        return indexPath.section == 0 ? 190 : 310
     }
     
     //Deque Tableview cell for rows

@@ -8,16 +8,15 @@
 
 import Foundation
 
-
 struct Movie: Decodable, TVMovie {
     let id: Int
     let title: String
     let overview: String
     let popularity: Double
-    var poster_path: String?
+    var poster_path: String? = "Hola"
     let vote_average: Double
     let release_date: String
-    var backdrop_path: String?
+    var backdrop_path: String? = "Hola"
     let original_title: String
 }
 

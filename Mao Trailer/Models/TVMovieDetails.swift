@@ -19,9 +19,13 @@ struct Details: Decodable {
     }
     
     func getCast() -> [Cast] {
-        
         return self.credits.cast.filter{ $0.profile_path != nil }
     }
+}
+
+
+struct GenreArray: Decodable {
+    let genres: [Genre]
 }
 
 struct Genre: Decodable {

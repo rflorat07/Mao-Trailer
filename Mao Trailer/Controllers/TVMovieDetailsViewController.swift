@@ -46,54 +46,40 @@ class TVMovieDetailsViewController: UIViewController, UIScrollViewDelegate {
         
         imagesCollectionView.delegate = self
         imagesCollectionView.dataSource = self
-        
-        UIApplication.shared.statusBarStyle = .lightContent
-        
+                
         self.updateUI()
-        
-    }
-    
-    override func prepare(for segue: UIStoryboardSegue, sender: Any?) {
-        
-        if segue.identifier == Segue.toImagePreview {
-         
-            let toViewController = segue.destination as! ImagePreviewViewController
-            
-            toViewController.imgArray = images
-            toViewController.indexPath = sender as! IndexPath
-    
-        }
-    }
-    
-    override func viewWillDisappear(_ animated: Bool) {
-        super.viewWillDisappear(animated)
-        
-        UIApplication.shared.statusBarStyle = .default
-        UIApplication.shared.statusBarView?.backgroundColor = Colors.navigationColor
-        
-        self.navigationController?.navigationBar.tintColor = Colors.headerColor
-        self.navigationController?.navigationBar.backgroundColor = Colors.navigationColor
         
     }
     
     override func viewWillAppear(_ animated: Bool) {
         super.viewWillAppear(true)
         
-        let color = UIColor.init(red: 1, green: 1, blue: 1, alpha: 0)
+        self.navigationController?.makeNavigationBarTransparent()
+    }
+    
+    
+    override func viewWillDisappear(_ animated: Bool) {
+        super.viewWillDisappear(animated)
         
-        UIApplication.shared.statusBarView?.backgroundColor = color
-        self.navigationController?.navigationBar.backgroundColor = color
+        self.navigationController?.resetNavigationBar()
+        
+    }
+    
+    override func prepare(for segue: UIStoryboardSegue, sender: Any?) {
+        
+        if segue.identifier == Segue.toImagePreview {
+            
+            let toViewController = segue.destination as! ImagePreviewViewController
+            
+            toViewController.imgArray = images
+            toViewController.indexPath = sender as! IndexPath
+            
+        }
     }
     
     func updateUI() {
         
-        // Navigation Bar
-        self.navigationController?.navigationBar.tintColor = .white
-        self.navigationController?.navigationBar.shadowImage = UIImage()
-        self.navigationController?.navigationBar.setBackgroundImage(UIImage(), for: .default)
-        
         // Stretchy Headers
-        
         originalHeight = coverImageViewHeight.constant
         originalNavBarHeight = self.navigationController?.navigationBar.frame.height
                 
@@ -130,31 +116,22 @@ class TVMovieDetailsViewController: UIViewController, UIScrollViewDelegate {
         {
             UIView.animate(withDuration: 0.2, animations: {
                 offset = min(1,offset)
-                let color = UIColor.init(red: 1, green: 1, blue: 1, alpha: offset)
-                let navigationcolor = UIColor.init(hue: 1, saturation: 0, brightness: 0, alpha: offset)
                 
-                self.navigationController?.navigationBar.tintColor = navigationcolor
-                self.navigationController?.navigationBar.backgroundColor = color
-                UIApplication.shared.statusBarView?.backgroundColor = color
+                let backgroundColor = UIColor.init(red: 1, green: 1, blue: 1, alpha: offset)
+                let tintColor = UIColor.init(hue: 1, saturation: 0, brightness: 0, alpha: offset)
                 
-                UIApplication.shared.statusBarStyle = .default
-                UIView.animate(withDuration: 0.25) {
-                    self.setNeedsStatusBarAppearanceUpdate()
-                }
+                self.navigationController?.updateNavigationBarAppearance(tintColor: tintColor, backgroundColor: backgroundColor, statusBarStyle: .default)
+                
             })
         }
         else
         {
             UIView.animate(withDuration: 0.2, animations: {
-                let color = UIColor.init(red: 1, green: 1, blue: 1, alpha: offset)
-                self.navigationController?.navigationBar.tintColor = UIColor.white
-                self.navigationController?.navigationBar.backgroundColor = color
-                UIApplication.shared.statusBarView?.backgroundColor = color
                 
-                UIApplication.shared.statusBarStyle = .lightContent
-                UIView.animate(withDuration: 0.25) {
-                    self.setNeedsStatusBarAppearanceUpdate()
-                }
+                let tintColor = UIColor.white
+                let backgroundColor = UIColor.init(red: 1, green: 1, blue: 1, alpha: offset)
+                
+                self.navigationController?.updateNavigationBarAppearance(tintColor: tintColor, backgroundColor: backgroundColor, statusBarStyle: .lightContent)
             })
         }
     }
@@ -172,9 +149,7 @@ class TVMovieDetailsViewController: UIViewController, UIScrollViewDelegate {
             }
         }
         
-        
         QueryService.instance.fetchImagesInformation(id: information.id, type: queryType) { (images) in
-            
             if let images = images {
                 self.images = images.backdrops!
                 self.imagesCollectionView.reloadData()
@@ -205,7 +180,7 @@ class TVMovieDetailsViewController: UIViewController, UIScrollViewDelegate {
         coverImageView.downloadedFrom(urlString: information.backdrop_path!)
         
     }
-    
+        
     @IBAction func backButtonTapped(_ sender: UIBarButtonItem) {
         dismiss(animated: true, completion: nil)
     }

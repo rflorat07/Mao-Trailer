@@ -31,7 +31,7 @@ class TVNowCollectionViewCell: UICollectionViewCell {
             rateView.isHidden = true
             titleLabel.text = nowTVShow.title.uppercased()
             
-            coverImageView.downloadedFrom(urlString: nowTVShow.poster_path!)
+            coverImageView.downloadedFrom(urlString: nowTVShow.poster_path ?? nowTVShow.backdrop_path!)
             
         } else {
             titleLabel.text = ""

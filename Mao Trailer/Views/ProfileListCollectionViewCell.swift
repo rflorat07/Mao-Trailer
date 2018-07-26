@@ -25,7 +25,7 @@ class ProfileListCollectionViewCell: UICollectionViewCell {
         
         coverImageView.clipsToBounds = true
         coverImageView.layer.cornerRadius = cornerRadius
-        coverImageView.image = UIImage(named: posterImage)
+        coverImageView.downloadedFrom(urlString: posterImage)
         
         posterView.dropShadow(radius: cornerRadius)
     }

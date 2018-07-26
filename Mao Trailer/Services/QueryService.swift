@@ -12,6 +12,7 @@ enum MediaType: String {
     case TV = "tv"
     case Movie = "movie"
     case Person = "person"
+    case Discover = "discover"
 }
 
 enum EndPointType: String {
@@ -30,6 +31,7 @@ class QueryService {
     
     typealias QueryError         = ()-> Void
     
+    typealias QueryGenres        = (GenreArray?)-> Void
     typealias QueryDetails       = (Details?)-> Void
     typealias QueryDetailsImages = (Images?)-> Void
     
@@ -92,7 +94,7 @@ class QueryService {
                 }
             } else {
                 DispatchQueue.main.async {
-                    self.decodeError(data!, {
+                    self.decodeError(data!, url: queryString, {
                         completion(nil)
                     })
                 }
@@ -115,7 +117,7 @@ class QueryService {
                 })
             } else {
                 DispatchQueue.main.async {
-                    self.decodeError(data!, {
+                    self.decodeError(data!, url: queryString, {
                         completion(nil)
                     })
                 }
@@ -137,7 +139,7 @@ class QueryService {
                 })
             } else {
                 DispatchQueue.main.async {
-                    self.decodeError(data!, {
+                    self.decodeError(data!, url: queryString, {
                         completion(nil)
                     })
                 }
@@ -173,7 +175,48 @@ class QueryService {
         
     }
     
-    // ===========================================
+    // MARK: - Fetch Genres Information
+    func fetchOfficialGenres(type: MediaType, _ completion : @escaping QueryGenres) {
+        
+        let queryString = getUrlGenres(type: type)
+        
+        getDataFromUrl(queryString: queryString) { (data) in
+            
+            if let data = data {
+                self.decodeGenreInformation(data, { (details) in
+                    completion(details)
+                })
+            } else {
+                DispatchQueue.main.async {
+                    self.decodeError(data!, url: queryString, {
+                        completion(nil)
+                    })
+                }
+            }
+        }
+    }
+
+    // MARK: - Discover Movie or TV by Genres
+    func fetchDiscoverSectioByGenres(type: MediaType, genre: Int, page: Int,  _ completion : @escaping QuerySectionResult) {
+    
+        let queryString = getUrlDiscover(type: type, genre: genre, page: page)
+                
+        getDataFromUrl(queryString: queryString) { (data) in
+            if let data = data {
+                self.decodeData(sectionName: "Discover", type: type, data: data, { (sectionData) in
+                    completion(sectionData)
+                })
+            } else {
+                DispatchQueue.main.async {
+                    self.decodeError(data!, url: queryString, {
+                        completion(nil)
+                    })
+                }
+            }
+        }
+    }
+    
+    // ==================== Helper =======================
     
     // MARK: - Get the data from a URL
     
@@ -194,7 +237,7 @@ class QueryService {
                 }
             } else {
                 DispatchQueue.main.async {
-                    self.decodeError(data!, {
+                    self.decodeError(data!, url: queryString, {
                         completion(nil)
                     })
                 }
@@ -239,6 +282,45 @@ class QueryService {
         return urlQuery.string!
         
     }
+    
+    
+    // MARK: - URL Genres
+    
+    fileprivate func getUrlGenres(type: MediaType) -> String {
+        
+        var urlQuery = URLComponents(string: QueryString.baseUrl)!
+        
+        urlQuery.path = "/3/genre/\(type.rawValue)/list"
+        urlQuery.queryItems = [
+            URLQueryItem(name: "api_key", value: QueryString.api_key),
+            URLQueryItem(name: "language", value: QueryString.language)
+        ]
+        
+        return urlQuery.string!
+        
+    }
+    
+     // MARK: - URL Discover
+    fileprivate func getUrlDiscover(type: MediaType, genre: Int, page: Int) -> String {
+        
+        var urlQuery = URLComponents(string: QueryString.baseUrl)!
+        
+        urlQuery.path = "/3/discover/\(type.rawValue)"
+        urlQuery.queryItems = [
+            URLQueryItem(name: "api_key", value: QueryString.api_key),
+            URLQueryItem(name: "language", value: QueryString.language),
+            URLQueryItem(name: "sort_by", value: QueryString.sort_by),
+            URLQueryItem(name: "include_adult", value: "false"),
+            URLQueryItem(name: "include_video", value: "false"),
+            URLQueryItem(name: "region", value: QueryString.region),
+            URLQueryItem(name: "with_genres", value: String(genre)),
+            URLQueryItem(name: "page", value: String(page))
+            
+        ]
+        
+        return urlQuery.string!
+    }
+    
     
     // MARK: - URL Images
     fileprivate func getUrlImages(id: Int,  type: MediaType) -> String {
@@ -326,6 +408,22 @@ class QueryService {
     }
     
     
+    // MARK: - Decode primary information
+    
+    fileprivate func decodeGenreInformation(_ data: Data, _ completion : @escaping QueryGenres) {
+        
+        do {
+            let list = try JSONDecoder().decode(GenreArray.self, from: data)
+            
+            completion(list)
+            
+        } catch let decodeError as NSError {
+            print("Decoder error: \(decodeError.localizedDescription) \n")
+        }
+    }
+    
+    
+    
     // MARK: - Decode images information
     
     fileprivate func decodeImagesInformation(_ data: Data, _ completion : @escaping QueryDetailsImages) {
@@ -342,12 +440,12 @@ class QueryService {
     
     // MARK: - Decode error
     
-    fileprivate func decodeError(_ data: Data, _ completion : @escaping QueryError) {
+    fileprivate func decodeError(_ data: Data, url: String, _ completion : @escaping QueryError) {
         
         do {
             let error = try JSONDecoder().decode(SectionError.self, from: data)
             completion()
-            print("DataTask error status code: \(error.status_code ?? 404)  \(error.status_message ?? "Requested could not be found")")
+            print("DataTask error status code: \(error.status_code ?? 404)  \(error.status_message ?? "Requested could not be found") \n Url \(url)")
             
         } catch let decodeError as NSError {
             completion()

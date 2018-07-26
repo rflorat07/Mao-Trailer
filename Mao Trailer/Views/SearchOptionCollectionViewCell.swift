@@ -1,14 +1,14 @@
 //
-//  SearchListCollectionViewCell.swift
+//  SearchOptionCollectionViewCell.swift
 //  Mao Trailer
 //
-//  Created by Roger Florat on 09/07/18.
+//  Created by Roger Florat on 26/07/18.
 //  Copyright © 2018 Roger Florat. All rights reserved.
 //
 
 import UIKit
 
-class SearchListCollectionViewCell: UICollectionViewCell {
+class SearchOptionCollectionViewCell: UICollectionViewCell {
     
     @IBOutlet weak var posterCoverView: UIView!
     @IBOutlet weak var coverImageView: UIImageView!
@@ -25,7 +25,7 @@ class SearchListCollectionViewCell: UICollectionViewCell {
     }
     
     func updateUI() {
-        
+                
         titleLabel.text = searchTVMovie.title.uppercased()
         rateLabel.text = String(format:"%.1f", searchTVMovie.vote_average)
         

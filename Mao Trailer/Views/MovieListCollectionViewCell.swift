@@ -29,7 +29,7 @@ class MovieListCollectionViewCell: UICollectionViewCell {
         
         coverImageView.clipsToBounds = true
         coverImageView.layer.cornerRadius = Constants.cornerRadius
-        coverImageView.downloadedFrom(urlString: movie.poster_path!)
+        coverImageView.downloadedFrom(urlString: movie.poster_path ?? movie.backdrop_path!)
         
         posterCoverView.dropShadow(radius: Constants.cornerRadius)
     }

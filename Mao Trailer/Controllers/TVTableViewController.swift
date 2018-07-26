@@ -20,6 +20,8 @@ class TVTableViewController: UITableViewController {
     override func viewDidLoad() {
         super.viewDidLoad()
         
+        self.navigationController?.navigationBar.isTranslucent = false
+        
         loadTVShowListData()
         
     }
@@ -84,9 +86,7 @@ class TVTableViewController: UITableViewController {
     @IBAction func searchButtonTapped(_ sender: UIBarButtonItem) {
         
         performSegue(withIdentifier: Segue.toSearchList, sender: nil)
-        
     }
-    
 }
 
 extension TVTableViewController {

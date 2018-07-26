@@ -15,7 +15,11 @@ struct SectionData: Section {
     var page: Int
     var total_pages: Int
     var sectionName: String
-    var sectionArray: [TVMovie]
+    var sectionArray: [TVMovie] {
+        didSet {
+            sectionArray = self.sectionArray.filter{ $0.poster_path != nil && $0.backdrop_path != nil }
+        }
+    }
     
     init() {
         page = 0
@@ -32,7 +36,7 @@ struct SectionData: Section {
     }
 
     func getSectionArray() -> [TVMovie] {
-        return self.sectionArray.filter{ $0.poster_path != nil }
+        return sectionArray.filter{ $0.poster_path != nil && $0.backdrop_path != nil }
     }
 }
 

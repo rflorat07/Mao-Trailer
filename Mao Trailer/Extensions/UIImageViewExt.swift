@@ -8,16 +8,17 @@
 
 import UIKit
 
+let placeholder = Constants.placeholderImage
 let imageCache = NSCache<NSString, UIImage>()
 
 extension UIImageView {
-    
-    func downloadedFrom(urlString: String, contentMode mode: UIViewContentMode = .scaleAspectFill) {
+
+    func downloadedFrom(urlString: String = placeholder, contentMode mode: UIViewContentMode = .scaleAspectFill) {
         
         contentMode = mode
-        image = UIImage(named: Constants.placeholderImage)
+        image = UIImage(named: placeholder)
                 
-        if urlString != Constants.placeholderImage {
+        if urlString != placeholder {
             
             let imagePath = "\(ImageURL.filePath)\(urlString)"
             

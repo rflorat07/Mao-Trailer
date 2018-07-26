@@ -10,14 +10,46 @@ import UIKit
 
 class ProfileCollectionViewController: UICollectionViewController {
     
+    let sectionProfileInfo = [SectionInfo(page: 1, type: .TV, sectionName: "Popular", endPoint: .Popular)]
+    
+    var sectionProfileArray: SectionData = SectionData()
+    
     override func viewDidLoad() {
         super.viewDidLoad()
+        
+        self.navigationController?.navigationBar.isTranslucent = false
+        
+        loadProfileData()
 
     }
 
-    override func didReceiveMemoryWarning() {
-        super.didReceiveMemoryWarning()
+    func loadProfileData() {
+        
+        LoadingIndicatorView.show("Loading")
+        
+        QueryService.instance.fetchAllSection(sectionArray: sectionProfileInfo) { (sectionArray) in
+            
+            if let sectionArray = sectionArray {
+                self.sectionProfileArray = sectionArray[0]
+                self.collectionView?.reloadData()
+            }
+            
+            LoadingIndicatorView.hide()
+        }
     }
+    
+    override func prepare(for segue: UIStoryboardSegue, sender: Any?) {
+        
+        if segue.identifier == Segue.toProfileDetail {
+            
+            let toViewController = segue.destination as! TVMovieDetailsViewController
+            
+            toViewController.queryType = .TV
+            toViewController.information = sender as? TVShow
+            
+        }
+    }
+    
 
     @IBAction func settingButton(_ sender: UIBarButtonItem) {
         
@@ -45,14 +77,16 @@ class ProfileCollectionViewController: UICollectionViewController {
 
     override func collectionView(_ collectionView: UICollectionView, numberOfItemsInSection section: Int) -> Int {
         
-        return ProfileList.count
+        return sectionProfileArray.sectionArray.count
     }
 
     override func collectionView(_ collectionView: UICollectionView, cellForItemAt indexPath: IndexPath) -> UICollectionViewCell {
       
         if  let cell = collectionView.dequeueReusableCell(withReuseIdentifier: Storyboard.profileListViewCell, for: indexPath) as? ProfileListCollectionViewCell {
             
-            cell.posterImage = ProfileList[indexPath.row].poster_path
+            let section = sectionProfileArray.sectionArray
+            
+            cell.posterImage = section[indexPath.row].poster_path
             
             return cell
         }
@@ -62,17 +96,9 @@ class ProfileCollectionViewController: UICollectionViewController {
     
     override func collectionView(_ collectionView: UICollectionView, didSelectItemAt indexPath: IndexPath) {
         
-        if let navigationContoller = self.storyboard?.instantiateViewController(withIdentifier: Storyboard.movieDetailsViewController) as? UINavigationController {
-            
-            navigationContoller.modalPresentationStyle = .overFullScreen
-            navigationContoller.modalTransitionStyle = .crossDissolve
-            
-            let receiverViewController = navigationContoller.topViewController as! TVMovieDetailsViewController
-            
-            receiverViewController.information = ProfileList[indexPath.row]
-            
-            self.present(navigationContoller, animated: true, completion: nil)
-        }
+        let selected = sectionProfileArray.sectionArray[indexPath.row]
+        
+        self.performSegue(withIdentifier: Segue.toProfileDetail, sender: selected)
         
     }
 

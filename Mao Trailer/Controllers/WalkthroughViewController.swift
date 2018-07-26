@@ -39,8 +39,8 @@ class WalkthroughViewController: UIViewController {
         pageControl.currentPage = Int(pageNumber)
     }
     
-    @objc func goToMovieTab() {        
-        performSegue(withIdentifier: Segue.toMovieTab, sender: nil)
+    @objc func goToMovieTab() {
+       performSegue(withIdentifier: Segue.toMovieTab, sender: nil)
     }
     
     @objc func scrollToNextCell(){

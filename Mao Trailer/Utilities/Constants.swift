@@ -8,6 +8,8 @@
 
 import UIKit
 
+typealias CompletionHandler = (_ Success: Bool) -> ()
+
 struct Constants {
     static let cornerRadius : CGFloat = 6.0
     static let numberOfItems: Int = 10
@@ -46,6 +48,8 @@ struct Storyboard {
     static let walkthroughViewCell = "WalkthroughViewCell"
     
     static let searchListViewCell = "SearchListViewCell"
+    static let searchGenreViewCell = "SearchGenreViewCell"
+    static let searchOptionViewCell = "SearchOptionViewCell"
         
 }
 
@@ -61,7 +65,10 @@ struct Segue {
 
     static let toSearchList = "segueToSearchList"
     static let toSearchDetail = "segueSearchToSearchDetail"
+    static let toSearchOption = "segueSearchListToSearchOption"
+    static let toSearchOptionDetail = "segueSearchOptionToDetail"
     
+    static let toProfileDetail = "segueProfileToProfileDetail"
     static let toProfileSetting = "segueToProfileSetting"
     
     static let toImagePreview = "segueToImagePreview"
@@ -76,10 +83,21 @@ struct QueryString {
     static let page = "1"
     static let region = "IT"
     static let language = "it-IT"
+    static let sort_by = "popularity.desc"
     static let api_key = "3b122cc1b16808da5a679c3c1c11cd07"
     static let baseUrl = "https://api.themoviedb.org"
     static let append_to_response = "videos,credits"
 }
+
+struct ImageURL  {
+    static let fileSize = "/w500"
+    static let baseUrl = "https://image.tmdb.org/t/p"
+    static let filePath = "\(baseUrl)\(fileSize)"
+    static let placeholderImage = "placeholder"
+}
+
+
+// ===================== END =========================
 
 struct EndPoint {
     
@@ -119,10 +137,4 @@ struct EndPoint {
     
     // tv_id = 1418
     static let CastAndCrew = "https://api.themoviedb.org/3/tv/1418/credits?api_key=3b122cc1b16808da5a679c3c1c11cd07&language=it-IT"
-}
-
-struct ImageURL  {
-    static let baseUrl = "https://image.tmdb.org/t/p"
-    static let fileSize = "/w500"
-    static let filePath = "\(baseUrl)\(fileSize)"
 }

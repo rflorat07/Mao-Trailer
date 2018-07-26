@@ -22,6 +22,9 @@ class ImagePreviewViewController: UIViewController {
         collectionView.contentInsetAdjustmentBehavior = .never
         
         UIApplication.shared.isStatusBarHidden = true
+        UIView.animate(withDuration: 0.5, animations: {
+            self.setNeedsStatusBarAppearanceUpdate()
+        })
     }
     
     override func viewWillAppear(_ animated: Bool) {
@@ -35,6 +38,9 @@ class ImagePreviewViewController: UIViewController {
         super.viewWillDisappear(animated)
         
         UIApplication.shared.isStatusBarHidden = false
+        UIView.animate(withDuration: 0.5, animations: {
+            self.setNeedsStatusBarAppearanceUpdate()
+        })
     }
     
     

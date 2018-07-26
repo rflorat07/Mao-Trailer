@@ -10,7 +10,6 @@ import UIKit
 
 class HotCollectionViewCell: UICollectionViewCell {
     
-    
     @IBOutlet weak var posterCoverView: UIView!
     @IBOutlet weak var coverImageView: UIImageView!
     
@@ -23,11 +22,11 @@ class HotCollectionViewCell: UICollectionViewCell {
     }
     
     func updateUI(){
-        
+                
         if hotMovie.title == "More" {
            coverImageView.image = UIImage(named: "land-more")
         } else {
-            coverImageView.downloadedFrom(urlString: hotMovie.backdrop_path!)
+            coverImageView.downloadedFrom(urlString: hotMovie.backdrop_path ?? hotMovie.poster_path!)
         }
         
         coverImageView.clipsToBounds = true
