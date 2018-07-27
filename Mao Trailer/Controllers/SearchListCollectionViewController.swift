@@ -33,26 +33,28 @@ class SearchListCollectionViewController: UICollectionViewController {
     
     override func prepare(for segue: UIStoryboardSegue, sender: Any?) {
         
-        if segue.identifier == Segue.toSearchDetail {
-            
-            let toViewController = segue.destination as! TVMovieDetailsViewController
-            
-            toViewController.queryType = queryType
-            
-            switch queryType.rawValue {
-            case "movie":
-                toViewController.information = sender as? Movie
-            default:
-                toViewController.information = sender as? TVShow
-            }
-        }
-        
         if segue.identifier == Segue.toSearchOption {
             
             let toViewController = segue.destination as! SearchOptionCollectionViewController
             
             toViewController.queryType = queryType
             toViewController.genreInfo = sender as? Genre
+        }
+        
+        if segue.identifier == Segue.toSearchDetail {
+            
+            let navigationContoller = segue.destination as! UINavigationController
+            
+            let receiverViewController = navigationContoller.topViewController as! TVMovieDetailsViewController
+            
+            receiverViewController.queryType = queryType
+            
+            switch queryType.rawValue {
+            case "movie":
+                receiverViewController.information = sender as? Movie
+            default:
+                receiverViewController.information = sender as? TVShow
+            }
         }
     }
     

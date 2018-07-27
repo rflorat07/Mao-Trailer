@@ -23,11 +23,8 @@ enum EndPointType: String {
 }
 
 class QueryService {
-    
+   
     static let instance = QueryService()
-    
-    lazy var configuration = URLSessionConfiguration.default
-    lazy var session = URLSession(configuration: configuration)
     
     typealias QueryError         = ()-> Void
     
@@ -41,6 +38,9 @@ class QueryService {
     typealias QuerySectionData   = (Data?)-> Void
     typealias QuerySectionResult = (SectionData?)-> Void
     typealias QuerySectionArray  = ([SectionData]?)-> Void
+    
+    lazy var configuration = URLSessionConfiguration.default
+    lazy var session = URLSession(configuration: configuration)
     
     
     // MARK: - Fetch All Session
@@ -108,6 +108,8 @@ class QueryService {
     func fetchPrimaryInformation(id: Int,  type: MediaType, _ completion : @escaping QueryDetails) {
         
         let queryString = getUrlDetails(id: id, type: type)
+        
+        print(queryString)
         
         getDataFromUrl(queryString: queryString) { (data) in
             

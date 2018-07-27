@@ -21,10 +21,13 @@ class MoviesTableViewController: UITableViewController {
     override func viewDidLoad() {
         super.viewDidLoad()
         
-        // StatusBar Style
-        UIApplication.shared.statusBarStyle = .default
-        
         loadMovieListData()
+    }
+    
+    override func viewWillAppear(_ animated: Bool) {
+        super.viewWillAppear(true)
+        
+        self.navigationController?.changeStatusBarStyle(statusBarStyle: .default)
     }
         
     override func prepare(for segue: UIStoryboardSegue, sender: Any?) {
@@ -47,11 +50,12 @@ class MoviesTableViewController: UITableViewController {
         
         if segue.identifier == Segue.toMovieDetail {
             
-            let toViewController = segue.destination as! TVMovieDetailsViewController
+            let navigationContoller = segue.destination as! UINavigationController
             
-            toViewController.queryType = .Movie
-            toViewController.information = sender as? Movie
-                    
+            let receiverViewController = navigationContoller.topViewController as! TVMovieDetailsViewController
+
+            receiverViewController.queryType = .Movie
+            receiverViewController.information = sender as? Movie
         }
     }
     
@@ -166,9 +170,11 @@ extension MoviesTableViewController {
         if movieSelected.title == "More" {
             
             // Remove more item
-            section.sectionArray.removeLast()
+           var sectionArray =  section.sectionArray
+            
+            sectionArray.removeLast()
         
-            let data: SectionData = SectionData(page: section.page, total_pages: section.total_pages, sectionName: "\(section.sectionName) list", sectionArray: section.sectionArray)
+            let data: SectionData = SectionData(page: section.page, total_pages: section.total_pages, sectionName: "\(section.sectionName) list", sectionArray: sectionArray)
             
             self.performSegue(withIdentifier: Segue.toMovieList, sender: data)
             

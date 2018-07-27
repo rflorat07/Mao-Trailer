@@ -242,7 +242,7 @@
                     <connections>
                         <segue destination="gNV-SY-Zy7" kind="show" identifier="segueToMovieList" id="34l-DW-oXO"/>
                         <segue destination="f8p-aJ-e00" kind="show" identifier="segueToSearchList" animates="NO" id="2JL-8i-Swq"/>
-                        <segue destination="Dfc-Lx-gDU" kind="show" identifier="segueMovieToMovieDetail" id="PKC-VQ-k5Y"/>
+                        <segue destination="AuP-gI-olp" kind="show" identifier="segueMovieToMovieDetail" id="PKC-VQ-k5Y"/>
                     </connections>
                 </tableViewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="YN2-oH-dfY" userLabel="First Responder" sceneMemberID="firstResponder"/>
@@ -381,7 +381,7 @@
                         </connections>
                     </collectionView>
                     <connections>
-                        <segue destination="Dfc-Lx-gDU" kind="show" identifier="segueListToListDetail" animates="NO" id="0vU-Tp-zkX"/>
+                        <segue destination="AuP-gI-olp" kind="show" identifier="segueListToListDetail" id="0vU-Tp-zkX"/>
                     </connections>
                 </collectionViewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="x6I-dW-pA5" userLabel="First Responder" sceneMemberID="firstResponder"/>
@@ -397,7 +397,7 @@
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
                         <subviews>
                             <scrollView multipleTouchEnabled="YES" contentMode="scaleToFill" showsHorizontalScrollIndicator="NO" showsVerticalScrollIndicator="NO" contentInsetAdjustmentBehavior="never" translatesAutoresizingMaskIntoConstraints="NO" id="Mpz-kN-Mvo" userLabel="Movie Detail Scroll View">
-                                <rect key="frame" x="0.0" y="0.0" width="375" height="977"/>
+                                <rect key="frame" x="0.0" y="0.0" width="375" height="1020"/>
                                 <subviews>
                                     <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="Bs7-Mc-h6G" userLabel="Movie Detail View">
                                         <rect key="frame" x="0.0" y="0.0" width="375" height="560"/>
@@ -446,19 +446,19 @@
                                                     <constraint firstAttribute="bottom" secondItem="Tdz-CD-hwS" secondAttribute="bottom" id="vwb-Di-bQF"/>
                                                 </constraints>
                                             </view>
-                                            <stackView opaque="NO" contentMode="scaleToFill" spacing="5" translatesAutoresizingMaskIntoConstraints="NO" id="N4N-dS-a2s" userLabel="People wathing Stack View">
-                                                <rect key="frame" x="155" y="295" width="150" height="18"/>
+                                            <stackView opaque="NO" contentMode="scaleToFill" spacing="10" translatesAutoresizingMaskIntoConstraints="NO" id="N4N-dS-a2s" userLabel="Date Time Stack View">
+                                                <rect key="frame" x="155" y="295" width="161" height="18"/>
                                                 <subviews>
-                                                    <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="3,292" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="PHd-JG-Koa">
-                                                        <rect key="frame" x="0.0" y="0.0" width="41" height="18"/>
-                                                        <fontDescription key="fontDescription" type="system" weight="medium" pointSize="15"/>
-                                                        <color key="textColor" red="0.13333333333333333" green="0.13333333333333333" blue="0.13333333333333333" alpha="1" colorSpace="calibratedRGB"/>
+                                                    <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="17 March 2017" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="XYh-qz-Gpv" userLabel="Date Label">
+                                                        <rect key="frame" x="0.0" y="0.0" width="99.5" height="18"/>
+                                                        <fontDescription key="fontDescription" type="system" pointSize="15"/>
+                                                        <color key="textColor" red="0.1333333333" green="0.1333333333" blue="0.1333333333" alpha="1" colorSpace="custom" customColorSpace="calibratedRGB"/>
                                                         <nil key="highlightedColor"/>
                                                     </label>
-                                                    <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="People wathing" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="XYh-qz-Gpv">
-                                                        <rect key="frame" x="46" y="0.0" width="104" height="18"/>
-                                                        <fontDescription key="fontDescription" type="system" weight="light" pointSize="15"/>
-                                                        <nil key="textColor"/>
+                                                    <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="2h 27m" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="Vwr-WO-TcT" userLabel="Time Label">
+                                                        <rect key="frame" x="109.5" y="0.0" width="51.5" height="18"/>
+                                                        <fontDescription key="fontDescription" type="system" pointSize="15"/>
+                                                        <color key="textColor" red="0.1333333333" green="0.1333333333" blue="0.1333333333" alpha="1" colorSpace="custom" customColorSpace="calibratedRGB"/>
                                                         <nil key="highlightedColor"/>
                                                     </label>
                                                 </subviews>
@@ -466,38 +466,40 @@
                                             <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" textAlignment="justified" lineBreakMode="tailTruncation" numberOfLines="6" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="9rO-tG-LkZ" userLabel="Description Label">
                                                 <rect key="frame" x="20" y="400" width="335" height="140"/>
                                                 <constraints>
-                                                    <constraint firstAttribute="height" constant="140" id="fCh-ef-RhM"/>
+                                                    <constraint firstAttribute="height" relation="lessThanOrEqual" constant="140" id="fCh-ef-RhM"/>
                                                 </constraints>
                                                 <string key="text">Fueled by his restored faith in humanity and inspired by Superman's selfless act, Bruce Wayne enlists the help of his newfound ally, Diana Prince, to face an even greater enemy...</string>
                                                 <fontDescription key="fontDescription" name=".SFNSDisplay" family=".SF NS Display" pointSize="20"/>
                                                 <color key="textColor" red="0.40000000000000002" green="0.40000000000000002" blue="0.40000000000000002" alpha="1" colorSpace="calibratedRGB"/>
                                                 <nil key="highlightedColor"/>
                                             </label>
-                                            <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Azione, Avventura, Animazione" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="QEr-a9-gfg" userLabel="Genre Label">
+                                            <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Azione, Avventura" lineBreakMode="tailTruncation" numberOfLines="2" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="QEr-a9-gfg" userLabel="Genre Label">
                                                 <rect key="frame" x="155" y="323" width="200" height="18"/>
                                                 <constraints>
                                                     <constraint firstAttribute="height" constant="18" id="6dY-g5-wIz"/>
                                                 </constraints>
-                                                <fontDescription key="fontDescription" type="system" weight="light" pointSize="15"/>
+                                                <fontDescription key="fontDescription" type="system" pointSize="15"/>
                                                 <color key="textColor" red="0.1333333333" green="0.1333333333" blue="0.1333333333" alpha="1" colorSpace="calibratedRGB"/>
                                                 <nil key="highlightedColor"/>
                                             </label>
-                                            <stackView opaque="NO" contentMode="scaleToFill" spacing="10" translatesAutoresizingMaskIntoConstraints="NO" id="3LW-b5-WdN" userLabel="Rate Start Stack View">
-                                                <rect key="frame" x="155" y="356" width="147" height="15"/>
+                                            <stackView opaque="NO" contentMode="scaleToFill" alignment="center" spacing="5" translatesAutoresizingMaskIntoConstraints="NO" id="3LW-b5-WdN" userLabel="Rate Start Stack View">
+                                                <rect key="frame" x="155" y="353" width="200" height="15"/>
                                                 <subviews>
+                                                    <imageView userInteractionEnabled="NO" contentMode="scaleToFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" image="icon-star" translatesAutoresizingMaskIntoConstraints="NO" id="d0g-WU-veR">
+                                                        <rect key="frame" x="0.0" y="0.0" width="14" height="15"/>
+                                                    </imageView>
                                                     <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="9.8" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="ufK-xf-l94" userLabel="Rating Value Lavel">
-                                                        <rect key="frame" x="0.0" y="0.0" width="31" height="15"/>
+                                                        <rect key="frame" x="19" y="0.0" width="31" height="15"/>
                                                         <fontDescription key="fontDescription" type="system" weight="medium" pointSize="20"/>
                                                         <color key="textColor" red="0.83921568629999999" green="0.094117647060000004" blue="0.1647058824" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
                                                         <nil key="highlightedColor"/>
                                                     </label>
-                                                    <imageView userInteractionEnabled="NO" contentMode="scaleAspectFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" image="icon-star" translatesAutoresizingMaskIntoConstraints="NO" id="xRa-4s-YwB" userLabel="Star Image View">
-                                                        <rect key="frame" x="41" y="0.0" width="106" height="15"/>
-                                                        <constraints>
-                                                            <constraint firstAttribute="height" constant="15" id="JFC-Ws-I34"/>
-                                                            <constraint firstAttribute="width" constant="106" id="XDc-j2-iZP"/>
-                                                        </constraints>
-                                                    </imageView>
+                                                    <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="(based on 4500 ratings)" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="X6q-aY-cOj" userLabel="Rating Value Lavel">
+                                                        <rect key="frame" x="55" y="0.0" width="145" height="15"/>
+                                                        <fontDescription key="fontDescription" type="system" weight="light" pointSize="13"/>
+                                                        <color key="textColor" red="0.1333333333" green="0.1333333333" blue="0.1333333333" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
+                                                        <nil key="highlightedColor"/>
+                                                    </label>
                                                 </subviews>
                                                 <constraints>
                                                     <constraint firstAttribute="height" constant="15" id="eAF-XI-rjM"/>
@@ -512,7 +514,7 @@
                                             <constraint firstItem="N4N-dS-a2s" firstAttribute="top" secondItem="u04-Dr-iei" secondAttribute="bottom" constant="30" id="9cz-pd-Ocr"/>
                                             <constraint firstItem="u04-Dr-iei" firstAttribute="leading" secondItem="nfr-Wv-EkB" secondAttribute="trailing" constant="15" id="Kdg-HB-Dh1"/>
                                             <constraint firstAttribute="trailing" secondItem="u04-Dr-iei" secondAttribute="trailing" constant="20" id="Qkw-o9-D6x"/>
-                                            <constraint firstItem="3LW-b5-WdN" firstAttribute="top" secondItem="QEr-a9-gfg" secondAttribute="bottom" constant="15" id="Ut2-TI-YQC"/>
+                                            <constraint firstItem="3LW-b5-WdN" firstAttribute="top" secondItem="QEr-a9-gfg" secondAttribute="bottom" constant="12" id="Ut2-TI-YQC"/>
                                             <constraint firstItem="nfr-Wv-EkB" firstAttribute="top" secondItem="Bs7-Mc-h6G" secondAttribute="top" constant="205" id="Xsz-Fv-mih"/>
                                             <constraint firstAttribute="height" constant="560" id="b7N-rd-Xvj"/>
                                             <constraint firstItem="Jl8-5d-xUb" firstAttribute="top" secondItem="Bs7-Mc-h6G" secondAttribute="top" id="cIy-EI-Tuj"/>
@@ -740,13 +742,25 @@
                         <constraints>
                             <constraint firstItem="Mpz-kN-Mvo" firstAttribute="trailing" secondItem="xaH-FZ-GDH" secondAttribute="trailing" id="XkM-UT-ks6"/>
                             <constraint firstItem="Mpz-kN-Mvo" firstAttribute="top" secondItem="ih1-xA-4Os" secondAttribute="top" id="ebi-DI-Bsk"/>
-                            <constraint firstAttribute="bottom" secondItem="Mpz-kN-Mvo" secondAttribute="bottom" constant="83" id="gvi-cv-7JK"/>
+                            <constraint firstAttribute="bottom" secondItem="Mpz-kN-Mvo" secondAttribute="bottom" constant="40" id="gvi-cv-7JK"/>
                             <constraint firstItem="Mpz-kN-Mvo" firstAttribute="leading" secondItem="xaH-FZ-GDH" secondAttribute="leading" id="ugE-xC-oR0"/>
                         </constraints>
                         <viewLayoutGuide key="safeArea" id="xaH-FZ-GDH"/>
                     </view>
                     <navigationItem key="navigationItem" id="Ge4-1e-TGz">
-                        <barButtonItem key="rightBarButtonItem" image="icon-share" id="x66-Qt-lI8"/>
+                        <leftBarButtonItems>
+                            <barButtonItem image="icon-back" id="aF8-NJ-UvX" userLabel="Back Button Item">
+                                <connections>
+                                    <action selector="backButtonTapped:" destination="Dfc-Lx-gDU" id="LmY-Lt-Wtf"/>
+                                </connections>
+                            </barButtonItem>
+                            <barButtonItem title="Back" id="7Jy-0y-7zF" userLabel="Text Back Button Item">
+                                <connections>
+                                    <action selector="backButtonTapped:" destination="Dfc-Lx-gDU" id="FLv-hV-KxS"/>
+                                </connections>
+                            </barButtonItem>
+                        </leftBarButtonItems>
+                        <barButtonItem key="rightBarButtonItem" image="icon-share" id="x66-Qt-lI8" userLabel="Share Button Item"/>
                     </navigationItem>
                     <size key="freeformSize" width="375" height="1060"/>
                     <connections>
@@ -760,14 +774,17 @@
                         <outlet property="posterCoverView" destination="nfr-Wv-EkB" id="nyJ-u3-NMY"/>
                         <outlet property="posterImageView" destination="Tdz-CD-hwS" id="Ddc-Dz-r68"/>
                         <outlet property="ratingValueLabel" destination="ufK-xf-l94" id="k6y-9Y-8tV"/>
+                        <outlet property="releaseDateLabel" destination="XYh-qz-Gpv" id="Qce-VR-jFF"/>
+                        <outlet property="runtimeLabel" destination="Vwr-WO-TcT" id="FAv-5G-zkd"/>
                         <outlet property="scrollView" destination="Mpz-kN-Mvo" id="LmN-CQ-aAH"/>
                         <outlet property="titleLabel" destination="u04-Dr-iei" id="Ffl-Zu-bYP"/>
+                        <outlet property="voteCountLabel" destination="X6q-aY-cOj" id="3Df-gz-Ws2"/>
                         <segue destination="nzz-XX-lQI" kind="presentation" identifier="segueToImagePreview" modalPresentationStyle="overFullScreen" modalTransitionStyle="crossDissolve" id="CRB-zR-DzQ"/>
                     </connections>
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="cnw-qP-z7g" userLabel="First Responder" sceneMemberID="firstResponder"/>
             </objects>
-            <point key="canvasLocation" x="1631" y="1947"/>
+            <point key="canvasLocation" x="2568.8000000000002" y="1946.6266866566718"/>
         </scene>
         <!--Walkthrough View Controller-->
         <scene sceneID="DM0-Rk-CnA">
@@ -1225,7 +1242,7 @@
                     <connections>
                         <segue destination="gNV-SY-Zy7" kind="show" identifier="segueToMovieList" id="Vfq-1Z-68d"/>
                         <segue destination="f8p-aJ-e00" kind="show" identifier="segueToSearchList" animates="NO" id="q8I-r6-MVa"/>
-                        <segue destination="Dfc-Lx-gDU" kind="show" identifier="segueTVToTVDetail" id="MqZ-Fy-x87"/>
+                        <segue destination="AuP-gI-olp" kind="show" identifier="segueTVToTVDetail" id="MqZ-Fy-x87"/>
                     </connections>
                 </tableViewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="YBr-bQ-T4K" userLabel="First Responder" sceneMemberID="firstResponder"/>
@@ -1479,7 +1496,7 @@
                         </barButtonItem>
                     </navigationItem>
                     <connections>
-                        <segue destination="Dfc-Lx-gDU" kind="show" identifier="segueProfileToProfileDetail" id="TqA-j6-LyT"/>
+                        <segue destination="AuP-gI-olp" kind="show" identifier="segueProfileToProfileDetail" id="TqA-j6-LyT"/>
                     </connections>
                 </collectionViewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="Cq0-0Y-ZEX" userLabel="First Responder" sceneMemberID="firstResponder"/>
@@ -1596,7 +1613,7 @@
                     </collectionView>
                     <connections>
                         <outlet property="searchDisplayController" destination="WjI-gm-DRQ" id="cQX-vx-S3Z"/>
-                        <segue destination="Dfc-Lx-gDU" kind="show" identifier="segueSearchToSearchDetail" id="BY2-Up-0Lt"/>
+                        <segue destination="AuP-gI-olp" kind="show" identifier="segueSearchToSearchDetail" id="BY2-Up-0Lt"/>
                         <segue destination="Htu-zC-k4h" kind="show" identifier="segueSearchListToSearchOption" id="5jE-S6-FAk"/>
                     </connections>
                 </collectionViewController>
@@ -1721,7 +1738,7 @@
                         </connections>
                     </collectionView>
                     <connections>
-                        <segue destination="Dfc-Lx-gDU" kind="show" identifier="segueSearchOptionToDetail" id="e2x-BV-Rao"/>
+                        <segue destination="AuP-gI-olp" kind="show" identifier="segueSearchOptionToDetail" id="e2x-BV-Rao"/>
                     </connections>
                 </collectionViewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="ATD-ad-TyQ" userLabel="First Responder" sceneMemberID="firstResponder"/>
@@ -1804,7 +1821,7 @@
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="Gtv-Td-d8U" userLabel="First Responder" sceneMemberID="firstResponder"/>
             </objects>
-            <point key="canvasLocation" x="2582" y="1947"/>
+            <point key="canvasLocation" x="3520.8000000000002" y="1946.176911544228"/>
         </scene>
         <!--Profile Setting View Controller-->
         <scene sceneID="7W1-G4-ZrR">
@@ -2115,6 +2132,24 @@
             </objects>
             <point key="canvasLocation" x="2582" y="-746"/>
         </scene>
+        <!--Navigation Controller-->
+        <scene sceneID="KfC-pc-RzS">
+            <objects>
+                <navigationController automaticallyAdjustsScrollViewInsets="NO" modalTransitionStyle="crossDissolve" modalPresentationStyle="overFullScreen" id="AuP-gI-olp" sceneMemberID="viewController">
+                    <toolbarItems/>
+                    <navigationBar key="navigationBar" contentMode="scaleToFill" insetsLayoutMarginsFromSafeArea="NO" id="q74-wh-dup">
+                        <rect key="frame" x="0.0" y="20" width="375" height="44"/>
+                        <autoresizingMask key="autoresizingMask"/>
+                    </navigationBar>
+                    <nil name="viewControllers"/>
+                    <connections>
+                        <segue destination="Dfc-Lx-gDU" kind="relationship" relationship="rootViewController" id="Mfr-gD-A4D"/>
+                    </connections>
+                </navigationController>
+                <placeholder placeholderIdentifier="IBFirstResponder" id="Wii-nY-Mw1" userLabel="First Responder" sceneMemberID="firstResponder"/>
+            </objects>
+            <point key="canvasLocation" x="1629.5999999999999" y="1946.176911544228"/>
+        </scene>
     </scenes>
     <resources>
         <image name="Arrival-Slide" width="140" height="210"/>
@@ -2127,6 +2162,7 @@
         <image name="ZackSnyder-cast" width="70" height="102"/>
         <image name="avatar" width="127" height="128"/>
         <image name="cover-JL" width="375" height="280"/>
+        <image name="icon-back" width="12" height="21"/>
         <image name="icon-back-right" width="12" height="21"/>
         <image name="icon-close" width="16" height="16"/>
         <image name="icon-next" width="27" height="14"/>
@@ -2134,7 +2170,7 @@
         <image name="icon-search" width="23" height="23"/>
         <image name="icon-setting" width="22" height="22"/>
         <image name="icon-share" width="22" height="21"/>
-        <image name="icon-star" width="106" height="15"/>
+        <image name="icon-star" width="14" height="15"/>
         <image name="mask-button" width="192" height="54"/>
         <image name="rate" width="30" height="30"/>
         <image name="tab-movies-dark" width="25" height="24"/>
@@ -2145,8 +2181,8 @@
         <image name="tab-tv-light" width="26" height="23"/>
     </resources>
     <inferredMetricsTieBreakers>
+        <segue reference="TqA-j6-LyT"/>
         <segue reference="q8I-r6-MVa"/>
-        <segue reference="BY2-Up-0Lt"/>
         <segue reference="Vfq-1Z-68d"/>
     </inferredMetricsTieBreakers>
 </document>

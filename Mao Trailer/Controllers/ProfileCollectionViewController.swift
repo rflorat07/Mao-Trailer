@@ -17,10 +17,7 @@ class ProfileCollectionViewController: UICollectionViewController {
     override func viewDidLoad() {
         super.viewDidLoad()
         
-        self.navigationController?.navigationBar.isTranslucent = false
-        
         loadProfileData()
-
     }
 
     func loadProfileData() {
@@ -42,11 +39,12 @@ class ProfileCollectionViewController: UICollectionViewController {
         
         if segue.identifier == Segue.toProfileDetail {
             
-            let toViewController = segue.destination as! TVMovieDetailsViewController
+            let navigationContoller = segue.destination as! UINavigationController
             
-            toViewController.queryType = .TV
-            toViewController.information = sender as? TVShow
+            let receiverViewController = navigationContoller.topViewController as! TVMovieDetailsViewController
             
+            receiverViewController.queryType = .TV
+            receiverViewController.information = sender as? TVShow
         }
     }
     

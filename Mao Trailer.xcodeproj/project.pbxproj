@@ -24,6 +24,8 @@
 		4F68CD772107108C00190049 /* UINavigationControllerExt.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4F68CD762107108C00190049 /* UINavigationControllerExt.swift */; };
 		4F77BD2320DA44C100A51FE2 /* SectionTableViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4F77BD2220DA44C100A51FE2 /* SectionTableViewCell.swift */; };
 		4F77BD2520DA44E000A51FE2 /* SectionCollectionViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4F77BD2420DA44E000A51FE2 /* SectionCollectionViewCell.swift */; };
+		4F810B99210B2846008A3654 /* UIImageExt.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4F810B98210B2845008A3654 /* UIImageExt.swift */; };
+		4F810B9B210B53AA008A3654 /* DateExt.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4F810B9A210B53AA008A3654 /* DateExt.swift */; };
 		4F892A5620DD2958005C8E19 /* MovieListSectionHeaderCollectionReusableView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4F892A5520DD2958005C8E19 /* MovieListSectionHeaderCollectionReusableView.swift */; };
 		4F92BBF720FCE63700C5E7C9 /* DetailImagesCollectionViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4F92BBF620FCE63700C5E7C9 /* DetailImagesCollectionViewCell.swift */; };
 		4F963D1620EF77C600A318CF /* LoadingIndicatorView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4F963D1520EF77C500A318CF /* LoadingIndicatorView.swift */; };
@@ -74,6 +76,8 @@
 		4F68CD762107108C00190049 /* UINavigationControllerExt.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = UINavigationControllerExt.swift; sourceTree = "<group>"; };
 		4F77BD2220DA44C100A51FE2 /* SectionTableViewCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SectionTableViewCell.swift; sourceTree = "<group>"; };
 		4F77BD2420DA44E000A51FE2 /* SectionCollectionViewCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SectionCollectionViewCell.swift; sourceTree = "<group>"; };
+		4F810B98210B2845008A3654 /* UIImageExt.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = UIImageExt.swift; sourceTree = "<group>"; };
+		4F810B9A210B53AA008A3654 /* DateExt.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DateExt.swift; sourceTree = "<group>"; };
 		4F892A5520DD2958005C8E19 /* MovieListSectionHeaderCollectionReusableView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MovieListSectionHeaderCollectionReusableView.swift; sourceTree = "<group>"; };
 		4F92BBF620FCE63700C5E7C9 /* DetailImagesCollectionViewCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DetailImagesCollectionViewCell.swift; sourceTree = "<group>"; };
 		4F963D1520EF77C500A318CF /* LoadingIndicatorView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = LoadingIndicatorView.swift; sourceTree = "<group>"; };
@@ -135,6 +139,8 @@
 				4FEDD5E420ECCDD000E0D4BA /* UIImageViewExt.swift */,
 				4FCB49282101DC4100AEC926 /* UIColorExt.swift */,
 				4F68CD762107108C00190049 /* UINavigationControllerExt.swift */,
+				4F810B98210B2845008A3654 /* UIImageExt.swift */,
+				4F810B9A210B53AA008A3654 /* DateExt.swift */,
 			);
 			path = Extensions;
 			sourceTree = "<group>";
@@ -335,10 +341,12 @@
 				4F526BC220E62C2600EB36EA /* WalkthroughViewController.swift in Sources */,
 				4F0508DC20EE455D00D5B778 /* ModelData.swift in Sources */,
 				4FF628F920DBB7C20002AA13 /* TVNowCollectionViewCell.swift in Sources */,
+				4F810B9B210B53AA008A3654 /* DateExt.swift in Sources */,
 				4FF5E62920D954EA00D088B5 /* HotCollectionViewCell.swift in Sources */,
 				4FF5E60C20D92AB000D088B5 /* AppDelegate.swift in Sources */,
 				4FF6290320DBFE9D0002AA13 /* MovieListCollectionViewCell.swift in Sources */,
 				4FEDD5E720ED136500E0D4BA /* Walkthrough.swift in Sources */,
+				4F810B99210B2846008A3654 /* UIImageExt.swift in Sources */,
 				4F77BD2320DA44C100A51FE2 /* SectionTableViewCell.swift in Sources */,
 				4F195BB720E3DE5D005816F5 /* ProfileHeaderCollectionReusableView.swift in Sources */,
 				4FF5E62320D93A2C00D088B5 /* GradientView.swift in Sources */,

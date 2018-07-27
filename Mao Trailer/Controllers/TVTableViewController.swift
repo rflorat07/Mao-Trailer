@@ -20,10 +20,7 @@ class TVTableViewController: UITableViewController {
     override func viewDidLoad() {
         super.viewDidLoad()
         
-        self.navigationController?.navigationBar.isTranslucent = false
-        
-        loadTVShowListData()
-        
+        self.loadTVShowListData()
     }
     
     override func prepare(for segue: UIStoryboardSegue, sender: Any?) {
@@ -46,11 +43,12 @@ class TVTableViewController: UITableViewController {
         
         if segue.identifier == Segue.toTVDetail {
             
-            let toViewController = segue.destination as! TVMovieDetailsViewController
+            let navigationContoller = segue.destination as! UINavigationController
             
-            toViewController.queryType = .TV
-            toViewController.information = sender as? TVShow
+            let receiverViewController = navigationContoller.topViewController as! TVMovieDetailsViewController
             
+            receiverViewController.queryType = .TV
+            receiverViewController.information = sender as? TVShow
         }
     }
     
@@ -138,7 +136,7 @@ extension TVTableViewController {
                 
                 cell.didSelectAction = { (indexPath) in
                     
-                    self.showTVShowDetails(indexPath: indexPath, section: &section)
+                    self.showTVShowDetails(indexPath: indexPath, section: section)
                     
                 }
                 
@@ -177,25 +175,27 @@ extension TVTableViewController {
         
         if indexPath.section == 2 {
             
-            var section = sectionTVShowArray[indexPath.section - 1]
+            let section = sectionTVShowArray[indexPath.section - 1]
             
-            self.showTVShowDetails(indexPath: indexPath, section: &section)
+            self.showTVShowDetails(indexPath: indexPath, section: section)
             
         }
     }
     
     // MARK: - Helper methods
     
-    fileprivate func showTVShowDetails(indexPath: IndexPath, section: inout SectionData) {
+    fileprivate func showTVShowDetails(indexPath: IndexPath, section: SectionData) {
         
         let tvShowSelected = section.sectionArray[indexPath.row]
         
          if tvShowSelected.title == "More" {
             
             // Remove more item
-            section.sectionArray.removeLast()
+            var sectionArray = section.sectionArray
             
-         let data: SectionData = SectionData(page: section.page, total_pages: section.total_pages, sectionName: "\(section.sectionName) list", sectionArray: section.sectionArray)
+            sectionArray.removeLast()
+            
+         let data: SectionData = SectionData(page: section.page, total_pages: section.total_pages, sectionName: "\(section.sectionName) list", sectionArray: sectionArray)
          
          self.performSegue(withIdentifier: Segue.toMovieList, sender: data)
          

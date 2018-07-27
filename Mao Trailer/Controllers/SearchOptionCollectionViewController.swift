@@ -24,17 +24,21 @@ class SearchOptionCollectionViewController: UICollectionViewController, UICollec
     
     override func prepare(for segue: UIStoryboardSegue, sender: Any?) {
         
+        self.navigationItem.backBarButtonItem = UIBarButtonItem(title: "Back", style: .plain, target: nil, action: nil)
+        
         if segue.identifier == Segue.toSearchOptionDetail {
             
-            let toViewController = segue.destination as! TVMovieDetailsViewController
+            let navigationContoller = segue.destination as! UINavigationController
             
-            toViewController.queryType = queryType
+            let receiverViewController = navigationContoller.topViewController as! TVMovieDetailsViewController
+            
+            receiverViewController.queryType = queryType
             
             switch queryType.rawValue {
             case "movie":
-                toViewController.information = sender as? Movie
+                receiverViewController.information = sender as? Movie
             default:
-                toViewController.information = sender as? TVShow
+                receiverViewController.information = sender as? TVShow
             }
         }
     }

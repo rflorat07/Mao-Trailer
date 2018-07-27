@@ -21,16 +21,18 @@ class TVMovieListCollectionViewController: UICollectionViewController {
     override func prepare(for segue: UIStoryboardSegue, sender: Any?) {
  
         if segue.identifier == Segue.toListDetail {
+        
+            let navigationContoller = segue.destination as! UINavigationController
             
-            let toViewController = segue.destination as! TVMovieDetailsViewController
+            let receiverViewController = navigationContoller.topViewController as! TVMovieDetailsViewController
             
-            toViewController.queryType = queryType
+            receiverViewController.queryType = queryType
             
             switch queryType.rawValue {
             case "movie":
-                toViewController.information = sender as? Movie
+                receiverViewController.information = sender as? Movie
             default:
-                toViewController.information = sender as? TVShow
+                receiverViewController.information = sender as? TVShow
             }
         }
     }

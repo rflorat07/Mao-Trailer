@@ -12,42 +12,32 @@ import UIKit
 
 extension UINavigationController {
     
-    func makeNavigationBarTransparent() {
-        
-        self.navigationBar.tintColor = .white
-        self.navigationBar.backgroundColor = nil
-        
-        self.navigationBar.isTranslucent = true
-        self.navigationBar.shadowImage = UIImage()
-        self.navigationBar.setBackgroundImage(UIImage(), for: .default)
-        
-        changeStatusBarStyle(statusBarStyle: .lightContent)
-    }
-    
-    func resetNavigationBar() {
-        
+    func initNavigationBar() {
         self.navigationBar.tintColor = Colors.titleColor
-        self.navigationBar.backgroundColor = Colors.navigationColor
-        
-        self.navigationBar.isTranslucent = false
+        self.navigationBar.backgroundColor = nil
         self.navigationBar.shadowImage = UIImage()
         self.navigationBar.setBackgroundImage(nil, for: .default)
+        UIApplication.shared.statusBarView?.backgroundColor = .clear
         
-        changeStatusBarStyle(statusBarStyle: .default, backgroundColor: Colors.navigationColor)
     }
     
-    func updateNavigationBarAppearance(tintColor: UIColor, backgroundColor: UIColor,  statusBarStyle: UIStatusBarStyle) {
+    func changeNavigationBarToTransparent() {
+        self.navigationBar.tintColor = .white
+        self.navigationBar.backgroundColor = nil
+        self.navigationBar.shadowImage = UIImage()
+        self.navigationBar.setBackgroundImage(UIImage(), for: .default)
+    }
+    
+    func updateNavigationBarAppearance(tintColor: UIColor, backgroundColor: UIColor) {
+        
         self.navigationBar.tintColor = tintColor
         self.navigationBar.backgroundColor = backgroundColor
-        
-        changeStatusBarStyle(statusBarStyle: statusBarStyle, backgroundColor: backgroundColor)
+        UIApplication.shared.statusBarView?.backgroundColor = backgroundColor
     }
     
-    func changeStatusBarStyle( statusBarStyle: UIStatusBarStyle, backgroundColor: UIColor = UIColor.clear ) {
+    func changeStatusBarStyle( statusBarStyle: UIStatusBarStyle) {
         
         UIApplication.shared.statusBarStyle = statusBarStyle
-        UIApplication.shared.statusBarView?.backgroundColor = backgroundColor
-        
         UIView.animate(withDuration: 0.25) {
             self.setNeedsStatusBarAppearanceUpdate()
         }

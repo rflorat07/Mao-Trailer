@@ -11,6 +11,9 @@ import AVKit
 
 class TVMovieDetailsViewController: UIViewController, UIScrollViewDelegate {
     
+    @IBOutlet weak var voteCountLabel: UILabel!
+    @IBOutlet weak var runtimeLabel: UILabel!
+    @IBOutlet weak var releaseDateLabel: UILabel!
     @IBOutlet weak var titleLabel: UILabel!
     @IBOutlet weak var genreLabel: UILabel!
     @IBOutlet weak var posterCoverView: UIView!
@@ -24,7 +27,8 @@ class TVMovieDetailsViewController: UIViewController, UIScrollViewDelegate {
     @IBOutlet weak var scrollView: UIScrollView!
     @IBOutlet weak var coverImageViewHeight: NSLayoutConstraint!
     @IBOutlet weak var coverImageViewTop: NSLayoutConstraint!
-
+    
+    var originalTop: CGFloat!
     var originalHeight: CGFloat!
     var originalNavBarHeight: CGFloat!
     
@@ -46,23 +50,31 @@ class TVMovieDetailsViewController: UIViewController, UIScrollViewDelegate {
         
         imagesCollectionView.delegate = self
         imagesCollectionView.dataSource = self
-                
-        self.updateUI()
         
+        // Init Stretchy Headers var
+        originalTop = coverImageViewTop.constant
+        originalHeight = coverImageViewHeight.constant
+        originalNavBarHeight = self.navigationController?.navigationBar.frame.height
+        
+        self.loadViewData()
+        self.fetchPrimaryInformation()
     }
     
     override func viewWillAppear(_ animated: Bool) {
         super.viewWillAppear(true)
         
-        self.navigationController?.makeNavigationBarTransparent()
+        // Change navigationBar
+        self.navigationController?.changeNavigationBarToTransparent()
+        self.navigationController?.changeStatusBarStyle(statusBarStyle: .lightContent)
+        
     }
-    
     
     override func viewWillDisappear(_ animated: Bool) {
         super.viewWillDisappear(animated)
         
-        self.navigationController?.resetNavigationBar()
-        
+        // Reset navigationBar
+        self.navigationController?.initNavigationBar()
+        self.navigationController?.changeStatusBarStyle(statusBarStyle: .default)
     }
     
     override func prepare(for segue: UIStoryboardSegue, sender: Any?) {
@@ -77,34 +89,61 @@ class TVMovieDetailsViewController: UIViewController, UIScrollViewDelegate {
         }
     }
     
-    func updateUI() {
+    func loadViewData() {
         
-        // Stretchy Headers
-        originalHeight = coverImageViewHeight.constant
-        originalNavBarHeight = self.navigationController?.navigationBar.frame.height
-                
-        // Information
-        descriptionLabel.text = information.overview
-        titleLabel.text = information.title.uppercased()
-        ratingValueLabel.text = String(format:"%.1f", information.vote_average)
+        self.descriptionLabel.text = self.information.overview
+        self.titleLabel.text = self.information.title.uppercased()
+        self.voteCountLabel.text = "(based on \(self.information.vote_count) ratings)"
+        self.ratingValueLabel.text = String(format:"%.1f", self.information.vote_average)
+        self.releaseDateLabel.text = Date.getFormattedDate(string: self.information.release_date)
         
-        self.fetchPrimaryInformation()
-        self.setBackdropOrPosterPathImage()
+        self.posterImageView.clipsToBounds = true
+        self.posterImageView.layer.cornerRadius = self.cornerRadius
+        self.posterImageView.downloadedFrom(urlString: self.information.poster_path ?? self.information.backdrop_path!)
+        
+        self.posterCoverView.dropShadow(radius: self.cornerRadius)
+        
+        self.coverImageView.downloadedFrom(urlString: self.information.backdrop_path ?? self.information.poster_path!)
     }
     
+    func fetchPrimaryInformation() {
+        
+        QueryService.instance.fetchPrimaryInformation(id: information.id, type: queryType) { (details) in
+            
+            if let details = details {
+                
+                self.cast = details.getCast()
+                self.videoKey = "xoGgcdpIQ3I"
+                self.genreLabel.text = details.getGenre()
+                self.runtimeLabel.text = Date.getFormattedTime(minute: details.runtime ?? 0.0)
+                
+                self.castCollectionView.reloadData()
+            }
+            
+        }
+        
+        QueryService.instance.fetchImagesInformation(id: information.id, type: queryType) { (images) in
+            if let images = images {
+                self.images = images.backdrops!
+                self.imagesCollectionView.reloadData()
+            }
+        }
+        
+    }
     
     func UpdateCoverImageConstant(scrollView: UIScrollView) {
-        let offset = scrollView.contentOffset.y
-        let originalTop  = -originalNavBarHeight
         
-        if offset < originalTop {
+        let imageTop = -originalTop
+        let offset = scrollView.contentOffset.y
+        
+        if offset < imageTop {
             coverImageViewTop.constant = offset
-            coverImageViewHeight.constant = originalHeight + abs(originalTop - offset)
+            coverImageViewHeight.constant = originalHeight + abs(imageTop - offset)
         } else {
-            coverImageViewTop.constant = originalTop
+            coverImageViewTop.constant = imageTop
             coverImageViewHeight.constant = originalHeight
         }
-    
+        
     }
     
     func scrollViewDidScroll(_ scrollView: UIScrollView) {
@@ -120,7 +159,8 @@ class TVMovieDetailsViewController: UIViewController, UIScrollViewDelegate {
                 let backgroundColor = UIColor.init(red: 1, green: 1, blue: 1, alpha: offset)
                 let tintColor = UIColor.init(hue: 1, saturation: 0, brightness: 0, alpha: offset)
                 
-                self.navigationController?.updateNavigationBarAppearance(tintColor: tintColor, backgroundColor: backgroundColor, statusBarStyle: .default)
+                self.navigationController?.updateNavigationBarAppearance(tintColor: tintColor, backgroundColor: backgroundColor)
+                self.navigationController?.changeStatusBarStyle(statusBarStyle: .default)
                 
             })
         }
@@ -131,56 +171,12 @@ class TVMovieDetailsViewController: UIViewController, UIScrollViewDelegate {
                 let tintColor = UIColor.white
                 let backgroundColor = UIColor.init(red: 1, green: 1, blue: 1, alpha: offset)
                 
-                self.navigationController?.updateNavigationBarAppearance(tintColor: tintColor, backgroundColor: backgroundColor, statusBarStyle: .lightContent)
+                self.navigationController?.updateNavigationBarAppearance(tintColor: tintColor, backgroundColor: backgroundColor)
+                self.navigationController?.changeStatusBarStyle(statusBarStyle: .lightContent)
             })
         }
     }
     
-    func fetchPrimaryInformation() {
-        
-        QueryService.instance.fetchPrimaryInformation(id: information.id, type: queryType) { (details) in
-            
-            if let details = details {
-                self.cast = details.getCast()
-                self.videoKey = "xoGgcdpIQ3I"
-                self.genreLabel.text = details.getGenre()
-                
-                self.castCollectionView.reloadData()
-            }
-        }
-        
-        QueryService.instance.fetchImagesInformation(id: information.id, type: queryType) { (images) in
-            if let images = images {
-                self.images = images.backdrops!
-                self.imagesCollectionView.reloadData()
-            }
-        }
-        
-    }
-    
-    func setBackdropOrPosterPathImage() {
-        
-        if information.backdrop_path == nil && information.poster_path != nil {
-            information.backdrop_path = information.poster_path
-            
-        } else if information.backdrop_path != nil && information.poster_path == nil {
-            information.poster_path = information.backdrop_path
-            
-        } else if information.backdrop_path == nil && information.poster_path == nil {
-            information.poster_path = "placeholder"
-            information.backdrop_path = "placeholder"
-        }
-        
-        posterImageView.clipsToBounds = true
-        posterImageView.layer.cornerRadius = cornerRadius
-        posterImageView.downloadedFrom(urlString: information.poster_path!)
-        
-        posterCoverView.dropShadow(radius: cornerRadius)
-        
-        coverImageView.downloadedFrom(urlString: information.backdrop_path!)
-        
-    }
-        
     @IBAction func backButtonTapped(_ sender: UIBarButtonItem) {
         dismiss(animated: true, completion: nil)
     }
