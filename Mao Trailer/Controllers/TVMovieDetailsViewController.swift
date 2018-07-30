@@ -91,6 +91,8 @@ class TVMovieDetailsViewController: UIViewController, UIScrollViewDelegate {
     
     func loadViewData() {
         
+        self.genreLabel.text = ""
+        self.runtimeLabel.text = ""
         self.descriptionLabel.text = self.information.overview
         self.titleLabel.text = self.information.title.uppercased()
         self.voteCountLabel.text = "(based on \(self.information.vote_count) ratings)"

@@ -428,7 +428,7 @@
                                             <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="nfr-Wv-EkB" userLabel="Poster Cover View">
                                                 <rect key="frame" x="20" y="205" width="120" height="180"/>
                                                 <subviews>
-                                                    <imageView userInteractionEnabled="NO" contentMode="scaleAspectFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" image="JusticeLeague-Slide" translatesAutoresizingMaskIntoConstraints="NO" id="Tdz-CD-hwS" userLabel="Poster Image View">
+                                                    <imageView clipsSubviews="YES" userInteractionEnabled="NO" contentMode="scaleAspectFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" image="JusticeLeague-Slide" translatesAutoresizingMaskIntoConstraints="NO" id="Tdz-CD-hwS" userLabel="Poster Image View">
                                                         <rect key="frame" x="0.0" y="0.0" width="120" height="180"/>
                                                         <constraints>
                                                             <constraint firstAttribute="width" constant="120" id="bLV-y0-Myc"/>
@@ -447,7 +447,7 @@
                                                 </constraints>
                                             </view>
                                             <stackView opaque="NO" contentMode="scaleToFill" spacing="10" translatesAutoresizingMaskIntoConstraints="NO" id="N4N-dS-a2s" userLabel="Date Time Stack View">
-                                                <rect key="frame" x="155" y="295" width="161" height="18"/>
+                                                <rect key="frame" x="155" y="295" width="126.5" height="18"/>
                                                 <subviews>
                                                     <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="17 March 2017" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="XYh-qz-Gpv" userLabel="Date Label">
                                                         <rect key="frame" x="0.0" y="0.0" width="99.5" height="18"/>
@@ -455,8 +455,8 @@
                                                         <color key="textColor" red="0.1333333333" green="0.1333333333" blue="0.1333333333" alpha="1" colorSpace="custom" customColorSpace="calibratedRGB"/>
                                                         <nil key="highlightedColor"/>
                                                     </label>
-                                                    <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="2h 27m" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="Vwr-WO-TcT" userLabel="Time Label">
-                                                        <rect key="frame" x="109.5" y="0.0" width="51.5" height="18"/>
+                                                    <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="0s" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="Vwr-WO-TcT" userLabel="Time Label">
+                                                        <rect key="frame" x="109.5" y="0.0" width="17" height="18"/>
                                                         <fontDescription key="fontDescription" type="system" pointSize="15"/>
                                                         <color key="textColor" red="0.1333333333" green="0.1333333333" blue="0.1333333333" alpha="1" colorSpace="custom" customColorSpace="calibratedRGB"/>
                                                         <nil key="highlightedColor"/>
@@ -473,7 +473,7 @@
                                                 <color key="textColor" red="0.40000000000000002" green="0.40000000000000002" blue="0.40000000000000002" alpha="1" colorSpace="calibratedRGB"/>
                                                 <nil key="highlightedColor"/>
                                             </label>
-                                            <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Azione, Avventura" lineBreakMode="tailTruncation" numberOfLines="2" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="QEr-a9-gfg" userLabel="Genre Label">
+                                            <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Action" lineBreakMode="tailTruncation" numberOfLines="2" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="QEr-a9-gfg" userLabel="Genre Label">
                                                 <rect key="frame" x="155" y="323" width="200" height="18"/>
                                                 <constraints>
                                                     <constraint firstAttribute="height" constant="18" id="6dY-g5-wIz"/>
@@ -483,19 +483,19 @@
                                                 <nil key="highlightedColor"/>
                                             </label>
                                             <stackView opaque="NO" contentMode="scaleToFill" alignment="center" spacing="5" translatesAutoresizingMaskIntoConstraints="NO" id="3LW-b5-WdN" userLabel="Rate Start Stack View">
-                                                <rect key="frame" x="155" y="353" width="200" height="15"/>
+                                                <rect key="frame" x="155" y="353" width="176" height="15"/>
                                                 <subviews>
                                                     <imageView userInteractionEnabled="NO" contentMode="scaleToFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" image="icon-star" translatesAutoresizingMaskIntoConstraints="NO" id="d0g-WU-veR">
                                                         <rect key="frame" x="0.0" y="0.0" width="14" height="15"/>
                                                     </imageView>
-                                                    <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="9.8" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="ufK-xf-l94" userLabel="Rating Value Lavel">
+                                                    <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="0.0" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="ufK-xf-l94" userLabel="Rating Value Lavel">
                                                         <rect key="frame" x="19" y="0.0" width="31" height="15"/>
                                                         <fontDescription key="fontDescription" type="system" weight="medium" pointSize="20"/>
                                                         <color key="textColor" red="0.83921568629999999" green="0.094117647060000004" blue="0.1647058824" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
                                                         <nil key="highlightedColor"/>
                                                     </label>
-                                                    <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="(based on 4500 ratings)" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="X6q-aY-cOj" userLabel="Rating Value Lavel">
-                                                        <rect key="frame" x="55" y="0.0" width="145" height="15"/>
+                                                    <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="(based on 0 ratings)" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="X6q-aY-cOj" userLabel="Rating Value Lavel">
+                                                        <rect key="frame" x="55" y="0.0" width="121" height="15"/>
                                                         <fontDescription key="fontDescription" type="system" weight="light" pointSize="13"/>
                                                         <color key="textColor" red="0.1333333333" green="0.1333333333" blue="0.1333333333" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
                                                         <nil key="highlightedColor"/>
@@ -573,7 +573,7 @@
                                                                 <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="725-Qz-WTm" userLabel="Cover Cast View">
                                                                     <rect key="frame" x="0.0" y="0.0" width="70" height="102"/>
                                                                     <subviews>
-                                                                        <imageView userInteractionEnabled="NO" contentMode="scaleAspectFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" image="ZackSnyder-cast" translatesAutoresizingMaskIntoConstraints="NO" id="mu4-S2-j08">
+                                                                        <imageView clipsSubviews="YES" userInteractionEnabled="NO" contentMode="scaleAspectFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" image="ZackSnyder-cast" translatesAutoresizingMaskIntoConstraints="NO" id="mu4-S2-j08">
                                                                             <rect key="frame" x="0.0" y="0.0" width="70" height="102"/>
                                                                         </imageView>
                                                                     </subviews>
@@ -1770,7 +1770,7 @@
                                             <rect key="frame" x="0.0" y="0.0" width="369" height="628"/>
                                             <autoresizingMask key="autoresizingMask"/>
                                             <subviews>
-                                                <imageView userInteractionEnabled="NO" contentMode="scaleAspectFit" horizontalHuggingPriority="251" verticalHuggingPriority="251" image="Video-show" translatesAutoresizingMaskIntoConstraints="NO" id="h1s-X6-WSj" userLabel="Image View">
+                                                <imageView clipsSubviews="YES" userInteractionEnabled="NO" contentMode="scaleAspectFit" horizontalHuggingPriority="251" verticalHuggingPriority="251" image="cover-JL" translatesAutoresizingMaskIntoConstraints="NO" id="h1s-X6-WSj" userLabel="Image View">
                                                     <rect key="frame" x="0.0" y="0.0" width="369" height="628"/>
                                                 </imageView>
                                             </subviews>
@@ -2157,7 +2157,6 @@
         <image name="JusticeLeague-Slide" width="140" height="210"/>
         <image name="Narcos-Slide" width="140" height="210"/>
         <image name="StrangerThings-Slide" width="335" height="160"/>
-        <image name="Video-show" width="375" height="280"/>
         <image name="Walkthrough-1" width="750" height="1624"/>
         <image name="ZackSnyder-cast" width="70" height="102"/>
         <image name="avatar" width="127" height="128"/>
@@ -2181,8 +2180,8 @@
         <image name="tab-tv-light" width="26" height="23"/>
     </resources>
     <inferredMetricsTieBreakers>
-        <segue reference="TqA-j6-LyT"/>
-        <segue reference="q8I-r6-MVa"/>
-        <segue reference="Vfq-1Z-68d"/>
+        <segue reference="PKC-VQ-k5Y"/>
+        <segue reference="2JL-8i-Swq"/>
+        <segue reference="34l-DW-oXO"/>
     </inferredMetricsTieBreakers>
 </document>

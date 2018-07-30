@@ -48,6 +48,8 @@ class TVPopularTableViewCell: UITableViewCell {
     }
     
     override func prepareForReuse() {
+        titleLabel.text = ""
+        rateLabel.text = "0.0"
         coverImageView.image = nil
     }
     

@@ -23,7 +23,7 @@ enum EndPointType: String {
 }
 
 class QueryService {
-   
+    
     static let instance = QueryService()
     
     typealias QueryError         = ()-> Void
@@ -34,7 +34,7 @@ class QueryService {
     
     typealias QuerySectionTV     = (SectionTVArray?)-> Void
     typealias QuerySectionMovie  = (SectionMovieArray?)-> Void
-
+    
     typealias QuerySectionData   = (Data?)-> Void
     typealias QuerySectionResult = (SectionData?)-> Void
     typealias QuerySectionArray  = ([SectionData]?)-> Void
@@ -109,12 +109,12 @@ class QueryService {
         
         let queryString = getUrlDetails(id: id, type: type)
         
-        print(queryString)
-        
         getDataFromUrl(queryString: queryString) { (data) in
             
             if let data = data {
-                self.decodePrimaryInformation(data, { (details) in
+                
+                self.decodeInformation(Details.self, from: data, completion: { (details: Details?) in
+                    
                     completion(details)
                 })
             } else {
@@ -136,9 +136,12 @@ class QueryService {
         getDataFromUrl(queryString: queryString) { (data) in
             
             if let data = data {
-                self.decodeImagesInformation(data, { (details) in
+                
+                self.decodeInformation(Images.self, from: data, completion: { (details: Images?) in
+                    
                     completion(details)
                 })
+                
             } else {
                 DispatchQueue.main.async {
                     self.decodeError(data!, url: queryString, {
@@ -152,7 +155,7 @@ class QueryService {
     
     // MARK: - Search
     func search(searchText: String, page: Int, type: MediaType, _ completion : @escaping QuerySectionResult) {
-     
+        
         var urlQuery = URLComponents(string: QueryString.baseUrl)!
         
         urlQuery.path = "/3/search/\(type.rawValue)"
@@ -185,9 +188,12 @@ class QueryService {
         getDataFromUrl(queryString: queryString) { (data) in
             
             if let data = data {
-                self.decodeGenreInformation(data, { (details) in
+                
+                self.decodeInformation(GenreArray.self, from: data, completion: { (details: GenreArray? ) in
+                    
                     completion(details)
                 })
+                
             } else {
                 DispatchQueue.main.async {
                     self.decodeError(data!, url: queryString, {
@@ -197,12 +203,12 @@ class QueryService {
             }
         }
     }
-
+    
     // MARK: - Discover Movie or TV by Genres
     func fetchDiscoverSectioByGenres(type: MediaType, genre: Int, page: Int,  _ completion : @escaping QuerySectionResult) {
-    
+        
         let queryString = getUrlDiscover(type: type, genre: genre, page: page)
-                
+        
         getDataFromUrl(queryString: queryString) { (data) in
             if let data = data {
                 self.decodeData(sectionName: "Discover", type: type, data: data, { (sectionData) in
@@ -249,7 +255,7 @@ class QueryService {
         dataTask.resume()
     }
     
-    // MARK: - URL section
+    // MARK: - URL Section
     
     fileprivate func getUrlSection(page: Int, type: MediaType, endPoint: EndPointType) -> String {
         
@@ -267,13 +273,14 @@ class QueryService {
         return urlQuery.string!
     }
     
-    // MARK: - URL details
+    // MARK: - URL Details
     
     fileprivate func getUrlDetails(id: Int,  type: MediaType) -> String {
         
         var urlQuery = URLComponents(string: QueryString.baseUrl)!
         
         urlQuery.path = "/3/\(type.rawValue)/\(id)"
+        
         urlQuery.queryItems = [
             URLQueryItem(name: "api_key", value: QueryString.api_key),
             URLQueryItem(name: "language", value: QueryString.language),
@@ -285,7 +292,6 @@ class QueryService {
         
     }
     
-    
     // MARK: - URL Genres
     
     fileprivate func getUrlGenres(type: MediaType) -> String {
@@ -293,6 +299,7 @@ class QueryService {
         var urlQuery = URLComponents(string: QueryString.baseUrl)!
         
         urlQuery.path = "/3/genre/\(type.rawValue)/list"
+        
         urlQuery.queryItems = [
             URLQueryItem(name: "api_key", value: QueryString.api_key),
             URLQueryItem(name: "language", value: QueryString.language)
@@ -302,12 +309,13 @@ class QueryService {
         
     }
     
-     // MARK: - URL Discover
+    // MARK: - URL Discover
     fileprivate func getUrlDiscover(type: MediaType, genre: Int, page: Int) -> String {
         
         var urlQuery = URLComponents(string: QueryString.baseUrl)!
         
         urlQuery.path = "/3/discover/\(type.rawValue)"
+        
         urlQuery.queryItems = [
             URLQueryItem(name: "api_key", value: QueryString.api_key),
             URLQueryItem(name: "language", value: QueryString.language),
@@ -330,10 +338,11 @@ class QueryService {
         var urlQuery = URLComponents(string: QueryString.baseUrl)!
         
         urlQuery.path = "/3/\(type.rawValue)/\(id)/images"
+        
         urlQuery.queryItems = [
-            URLQueryItem(name: "api_key", value: QueryString.api_key),
+            URLQueryItem(name: "api_key", value: QueryString.api_key)
         ]
-
+        
         return urlQuery.string!
     }
     
@@ -344,7 +353,7 @@ class QueryService {
         switch type {
         case .Movie:
             
-            decodeMovieList(data) { ( dataResult) in
+            decodeInformation(SectionMovieArray.self, from: data) { (dataResult: SectionMovieArray?) in
                 
                 let sectionResult: SectionData = SectionData(page: dataResult!.page, total_pages: dataResult!.total_pages, sectionName: sectionName, sectionArray: dataResult!.results)
                 
@@ -353,7 +362,7 @@ class QueryService {
             
         case .TV:
             
-            decodeTVList(data) { ( dataResult) in
+            decodeInformation(SectionTVArray.self, from: data) { (dataResult: SectionTVArray?) in
                 
                 let sectionResult: SectionData = SectionData(page: dataResult!.page, total_pages: dataResult!.total_pages, sectionName: sectionName, sectionArray: dataResult!.results)
                 
@@ -363,79 +372,20 @@ class QueryService {
         default:
             print("Query Session : \(sectionName) \n")
         }
-        
     }
     
-    // MARK: - Decode Movie List
     
-    fileprivate func decodeMovieList(_ data: Data, _ completion : @escaping QuerySectionMovie) {
+    // MARK: - Get Information
+    
+    fileprivate func decodeInformation<T>(_ type: T.Type,from data: Data, completion : @escaping (T?) -> Void) where T : Decodable {
         
         do {
-            let list = try JSONDecoder().decode(SectionMovieArray.self, from: data)
+            let list = try JSONDecoder().decode(type, from: data)
             
             completion(list)
             
         } catch let decodeError as NSError {
             
-            print("Decoder error: \(decodeError.localizedDescription) \n")
-        }
-    }
-    
-    // MARK: - Decode TV List
-    
-    fileprivate func decodeTVList(_ data: Data, _ completion : @escaping QuerySectionTV) {
-        
-        do {
-            let list = try JSONDecoder().decode(SectionTVArray.self, from: data)
-            
-            completion(list)
-            
-        } catch let decodeError as NSError {
-            print("Decoder error: \(decodeError.localizedDescription) \n")
-        }
-    }
-    
-    // MARK: - Decode primary information
-    
-    fileprivate func decodePrimaryInformation(_ data: Data, _ completion : @escaping QueryDetails) {
-        
-        do {
-            let list = try JSONDecoder().decode(Details.self, from: data)
-            
-            completion(list)
-            
-        } catch let decodeError as NSError {
-            print("Decoder error: \(decodeError.localizedDescription) \n")
-        }
-    }
-    
-    
-    // MARK: - Decode primary information
-    
-    fileprivate func decodeGenreInformation(_ data: Data, _ completion : @escaping QueryGenres) {
-        
-        do {
-            let list = try JSONDecoder().decode(GenreArray.self, from: data)
-            
-            completion(list)
-            
-        } catch let decodeError as NSError {
-            print("Decoder error: \(decodeError.localizedDescription) \n")
-        }
-    }
-    
-    
-    
-    // MARK: - Decode images information
-    
-    fileprivate func decodeImagesInformation(_ data: Data, _ completion : @escaping QueryDetailsImages) {
-        
-        do {
-            let list = try JSONDecoder().decode(Images.self, from: data)
-            
-            completion(list)
-            
-        } catch let decodeError as NSError {
             print("Decoder error: \(decodeError.localizedDescription) \n")
         }
     }

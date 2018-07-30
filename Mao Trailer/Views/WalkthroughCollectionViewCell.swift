@@ -45,6 +45,8 @@ class WalkthroughCollectionViewCell: UICollectionViewCell {
     }
     
     override func prepareForReuse() {
+        infoLabel.text = ""
+        titleLabel.text = ""
         imageView.image = nil
     }
     

@@ -36,4 +36,10 @@ class DetailFullCastCollectionViewCell: UICollectionViewCell {
         
     }
     
+    override func prepareForReuse() {
+        nameLabel.text = ""
+        creditLabel.text = ""
+        coverImageView.image = nil
+    }
+    
 }
