@@ -9,7 +9,9 @@
 import Foundation
 
 extension Date {
+    
     static func getFormattedDate(string: String , formatter:String = "dd MMMM yyyy" ) -> String {
+        
         let dateFormatterGet = DateFormatter()
         dateFormatterGet.dateFormat = "yyyy-MM-dd" // This formate is input formated
         
@@ -32,5 +34,23 @@ extension Date {
         guard let formattedString = formatter.string(from: second) else { return "" }
         
         return formattedString
+    }
+    
+    static func compareDates(_ first: String, _ second: String) -> Bool {
+        
+        let formatter = DateFormatter()
+        formatter.dateFormat = "yyyy-MM-dd"
+        
+        if !first.isEmpty && !second.isEmpty {
+            
+            let firstDate = formatter.date(from: first)
+            let secondDate = formatter.date(from: second)
+            
+            if firstDate?.compare(secondDate!) == .orderedDescending {
+                return true
+            }
+        }
+        
+        return false
     }
 }

@@ -1,5 +1,5 @@
 //
-//  TVMovieDetailsViewController.swift
+//  DetailsViewController.swift
 //  Mao Trailer
 //
 //  Created by Roger Florat on 27/06/18.
@@ -9,7 +9,7 @@
 import UIKit
 import AVKit
 
-class TVMovieDetailsViewController: UIViewController, UIScrollViewDelegate {
+class DetailsViewController: UIViewController, UIScrollViewDelegate {
     
     @IBOutlet weak var voteCountLabel: UILabel!
     @IBOutlet weak var runtimeLabel: UILabel!
@@ -87,6 +87,14 @@ class TVMovieDetailsViewController: UIViewController, UIScrollViewDelegate {
             toViewController.indexPath = sender as! IndexPath
             
         }
+        
+        if segue.identifier == Segue.toCastDetails {
+           
+            let index = sender as! IndexPath
+            let toViewController = segue.destination as! PersonDetailsTableViewController
+            
+            toViewController.person = self.cast[index.row]
+        }
     }
     
     func loadViewData() {
@@ -97,7 +105,7 @@ class TVMovieDetailsViewController: UIViewController, UIScrollViewDelegate {
         self.titleLabel.text = self.information.title.uppercased()
         self.voteCountLabel.text = "(based on \(self.information.vote_count) ratings)"
         self.ratingValueLabel.text = String(format:"%.1f", self.information.vote_average)
-        self.releaseDateLabel.text = Date.getFormattedDate(string: self.information.release_date)
+        self.releaseDateLabel.text = Date.getFormattedDate(string: self.information.release_date!)
         
         self.posterImageView.clipsToBounds = true
         self.posterImageView.layer.cornerRadius = self.cornerRadius
@@ -149,6 +157,7 @@ class TVMovieDetailsViewController: UIViewController, UIScrollViewDelegate {
     }
     
     func scrollViewDidScroll(_ scrollView: UIScrollView) {
+        
         self.UpdateCoverImageConstant(scrollView: scrollView)
         
         var offset = scrollView.contentOffset.y / 150
@@ -196,7 +205,7 @@ class TVMovieDetailsViewController: UIViewController, UIScrollViewDelegate {
     }
 }
 
-extension TVMovieDetailsViewController: UICollectionViewDelegate, UICollectionViewDataSource {
+extension DetailsViewController: UICollectionViewDelegate, UICollectionViewDataSource {
     
     
     func collectionView(_ collectionView: UICollectionView, numberOfItemsInSection section: Int) -> Int {
@@ -235,6 +244,10 @@ extension TVMovieDetailsViewController: UICollectionViewDelegate, UICollectionVi
         
         if collectionView == self.imagesCollectionView {
             performSegue(withIdentifier: Segue.toImagePreview, sender: indexPath)
+        }
+        
+        if collectionView == self.castCollectionView {
+            performSegue(withIdentifier: Segue.toCastDetails, sender: indexPath)
         }
     }
 }

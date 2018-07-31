@@ -1,5 +1,5 @@
 //
-//  Details.swift
+//  TVMovieDetails.swift
 //  Mao Trailer
 //
 //  Created by Roger Florat on 04/07/18.

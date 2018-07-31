@@ -34,7 +34,7 @@ class MoviesTableViewController: UITableViewController {
         
         if segue.identifier == Segue.toMovieList {
             
-            let toViewController = segue.destination as! TVMovieListCollectionViewController
+            let toViewController = segue.destination as! ListCollectionViewController
             
             toViewController.queryType = .Movie
             toViewController.sectionData = sender as! SectionData
@@ -52,7 +52,7 @@ class MoviesTableViewController: UITableViewController {
             
             let navigationContoller = segue.destination as! UINavigationController
             
-            let receiverViewController = navigationContoller.topViewController as! TVMovieDetailsViewController
+            let receiverViewController = navigationContoller.topViewController as! DetailsViewController
 
             receiverViewController.queryType = .Movie
             receiverViewController.information = sender as? Movie

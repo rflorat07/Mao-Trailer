@@ -252,7 +252,7 @@
         <!--Movie List Collection View Controller-->
         <scene sceneID="9DP-dn-gyd">
             <objects>
-                <collectionViewController storyboardIdentifier="MovieListCollectionView" id="gNV-SY-Zy7" userLabel="Movie List Collection View Controller" customClass="TVMovieListCollectionViewController" customModule="Mao_Trailer" customModuleProvider="target" sceneMemberID="viewController">
+                <collectionViewController storyboardIdentifier="MovieListCollectionView" id="gNV-SY-Zy7" userLabel="Movie List Collection View Controller" customClass="ListCollectionViewController" customModule="Mao_Trailer" customModuleProvider="target" sceneMemberID="viewController">
                     <collectionView key="view" multipleTouchEnabled="YES" contentMode="scaleToFill" dataMode="prototypes" id="k5o-Pm-5j8" userLabel="Movie List Collection View">
                         <rect key="frame" x="0.0" y="0.0" width="375" height="667"/>
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
@@ -391,7 +391,7 @@
         <!--Movie Detail View Controller-->
         <scene sceneID="86d-Rb-0dM">
             <objects>
-                <viewController id="Dfc-Lx-gDU" userLabel="Movie Detail View Controller" customClass="TVMovieDetailsViewController" customModule="Mao_Trailer" customModuleProvider="target" sceneMemberID="viewController">
+                <viewController id="Dfc-Lx-gDU" userLabel="Movie Detail View Controller" customClass="DetailsViewController" customModule="Mao_Trailer" customModuleProvider="target" sceneMemberID="viewController">
                     <view key="view" contentMode="scaleToFill" id="ih1-xA-4Os" userLabel="Movie Detail View">
                         <rect key="frame" x="0.0" y="0.0" width="375" height="1060"/>
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
@@ -780,11 +780,12 @@
                         <outlet property="titleLabel" destination="u04-Dr-iei" id="Ffl-Zu-bYP"/>
                         <outlet property="voteCountLabel" destination="X6q-aY-cOj" id="3Df-gz-Ws2"/>
                         <segue destination="nzz-XX-lQI" kind="presentation" identifier="segueToImagePreview" modalPresentationStyle="overFullScreen" modalTransitionStyle="crossDissolve" id="CRB-zR-DzQ"/>
+                        <segue destination="5oz-5Z-Lef" kind="show" identifier="segueDetailsToCastDetails" id="GjO-2b-CPj"/>
                     </connections>
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="cnw-qP-z7g" userLabel="First Responder" sceneMemberID="firstResponder"/>
             </objects>
-            <point key="canvasLocation" x="2568.8000000000002" y="1946.6266866566718"/>
+            <point key="canvasLocation" x="2582" y="2088"/>
         </scene>
         <!--Walkthrough View Controller-->
         <scene sceneID="DM0-Rk-CnA">
@@ -1821,7 +1822,7 @@
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="Gtv-Td-d8U" userLabel="First Responder" sceneMemberID="firstResponder"/>
             </objects>
-            <point key="canvasLocation" x="3520.8000000000002" y="1946.176911544228"/>
+            <point key="canvasLocation" x="3481" y="2088"/>
         </scene>
         <!--Profile Setting View Controller-->
         <scene sceneID="7W1-G4-ZrR">
@@ -2148,7 +2149,224 @@
                 </navigationController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="Wii-nY-Mw1" userLabel="First Responder" sceneMemberID="firstResponder"/>
             </objects>
-            <point key="canvasLocation" x="1629.5999999999999" y="1946.176911544228"/>
+            <point key="canvasLocation" x="1660" y="2088"/>
+        </scene>
+        <!--PersonDetails Table View Controller-->
+        <scene sceneID="9zM-xz-Dta">
+            <objects>
+                <tableViewController id="5oz-5Z-Lef" userLabel="PersonDetails Table View Controller" customClass="PersonDetailsTableViewController" customModule="Mao_Trailer" customModuleProvider="target" sceneMemberID="viewController">
+                    <tableView key="view" clipsSubviews="YES" contentMode="scaleToFill" alwaysBounceVertical="YES" dataMode="prototypes" style="plain" separatorStyle="none" rowHeight="-1" estimatedRowHeight="-1" sectionHeaderHeight="28" sectionFooterHeight="28" id="f0h-KD-pMl" userLabel="PersonDetails Table View">
+                        <rect key="frame" x="0.0" y="0.0" width="375" height="800"/>
+                        <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
+                        <color key="backgroundColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
+                        <prototypes>
+                            <tableViewCell clipsSubviews="YES" contentMode="scaleToFill" preservesSuperviewLayoutMargins="YES" selectionStyle="none" indentationWidth="10" reuseIdentifier="HeaderPersonDetailsViewCell" rowHeight="375" id="C7H-ct-6ez" userLabel="Header Person Details Table View Cell" customClass="HeaderPersonDetailsTableViewCell" customModule="Mao_Trailer" customModuleProvider="target">
+                                <rect key="frame" x="0.0" y="28" width="375" height="375"/>
+                                <autoresizingMask key="autoresizingMask"/>
+                                <tableViewCellContentView key="contentView" opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center" preservesSuperviewLayoutMargins="YES" insetsLayoutMarginsFromSafeArea="NO" tableViewCell="C7H-ct-6ez" id="mtv-gF-hqm" userLabel="Header  Details View">
+                                    <rect key="frame" x="0.0" y="0.0" width="375" height="375"/>
+                                    <autoresizingMask key="autoresizingMask"/>
+                                    <subviews>
+                                        <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="eYI-5m-oy2" userLabel="Poster Cover View">
+                                            <rect key="frame" x="36" y="31" width="120" height="180"/>
+                                            <subviews>
+                                                <imageView clipsSubviews="YES" userInteractionEnabled="NO" contentMode="scaleAspectFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" image="WonderWoman-Slide" translatesAutoresizingMaskIntoConstraints="NO" id="tvG-Wc-cdd" userLabel="Poster Image View">
+                                                    <rect key="frame" x="0.0" y="0.0" width="120" height="180"/>
+                                                    <constraints>
+                                                        <constraint firstAttribute="width" constant="120" id="Y92-th-AQv"/>
+                                                        <constraint firstAttribute="height" constant="180" id="gc4-dA-DL4"/>
+                                                    </constraints>
+                                                </imageView>
+                                            </subviews>
+                                            <color key="backgroundColor" white="0.0" alpha="0.0" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
+                                            <constraints>
+                                                <constraint firstItem="tvG-Wc-cdd" firstAttribute="top" secondItem="eYI-5m-oy2" secondAttribute="top" id="4vq-z4-CGx"/>
+                                                <constraint firstAttribute="bottom" secondItem="tvG-Wc-cdd" secondAttribute="bottom" id="6ce-8O-YY1"/>
+                                                <constraint firstItem="tvG-Wc-cdd" firstAttribute="leading" secondItem="eYI-5m-oy2" secondAttribute="leading" id="HSY-Ov-fqQ"/>
+                                                <constraint firstAttribute="trailing" secondItem="tvG-Wc-cdd" secondAttribute="trailing" id="IxY-wo-V8A"/>
+                                                <constraint firstAttribute="height" constant="180" id="Nh6-g2-70E"/>
+                                                <constraint firstAttribute="width" constant="120" id="kIT-P6-c11"/>
+                                            </constraints>
+                                        </view>
+                                        <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="GAL GADOT" textAlignment="natural" lineBreakMode="tailTruncation" numberOfLines="2" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="Gxp-DQ-NwH" userLabel="Name Label">
+                                            <rect key="frame" x="171" y="31" width="184" height="19.5"/>
+                                            <fontDescription key="fontDescription" type="boldSystem" pointSize="16"/>
+                                            <color key="textColor" red="0.1333333333" green="0.1333333333" blue="0.1333333333" alpha="1" colorSpace="custom" customColorSpace="calibratedRGB"/>
+                                            <nil key="highlightedColor"/>
+                                        </label>
+                                        <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Actress, Producer" lineBreakMode="tailTruncation" numberOfLines="2" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="EEX-L0-AhY" userLabel="Categories Label">
+                                            <rect key="frame" x="171" y="55.5" width="184" height="18"/>
+                                            <fontDescription key="fontDescription" type="system" pointSize="15"/>
+                                            <color key="textColor" red="0.1333333333" green="0.1333333333" blue="0.1333333333" alpha="1" colorSpace="custom" customColorSpace="calibratedRGB"/>
+                                            <nil key="highlightedColor"/>
+                                        </label>
+                                        <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" textAlignment="justified" lineBreakMode="tailTruncation" numberOfLines="7" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="Wzy-sK-ObX" userLabel="Biography Label">
+                                            <rect key="frame" x="20" y="221" width="335" height="147"/>
+                                            <string key="text">Gal Gadot is an Israeli actress and model. She was born in Rosh Ha'ayin, Israel, to an Ashkenazi Jewish family (from Poland, Austria, Germany, and Czechoslovakia). She served in the IDF for two years, and won the Miss Israel title in 2004. </string>
+                                            <fontDescription key="fontDescription" name=".SFNSDisplay" family=".SF NS Display" pointSize="18"/>
+                                            <color key="textColor" red="0.40000000000000002" green="0.40000000000000002" blue="0.40000000000000002" alpha="1" colorSpace="calibratedRGB"/>
+                                            <nil key="highlightedColor"/>
+                                        </label>
+                                        <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Known for Wonder Woman (2017), Batman v Superman: Dawn of Justice (2016),Fast &amp; Furious 6 (2013)" textAlignment="justified" lineBreakMode="tailTruncation" numberOfLines="4" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="MhV-Ll-jER" userLabel="KnownFor Label">
+                                            <rect key="frame" x="171" y="119.5" width="184" height="72"/>
+                                            <fontDescription key="fontDescription" type="system" pointSize="15"/>
+                                            <color key="textColor" red="0.1333333333" green="0.1333333333" blue="0.1333333333" alpha="1" colorSpace="custom" customColorSpace="calibratedRGB"/>
+                                            <nil key="highlightedColor"/>
+                                        </label>
+                                        <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="April 30, 1985 in Rosh Ha'ayin, Israel" lineBreakMode="tailTruncation" numberOfLines="3" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="XUf-5y-Eb4" userLabel="Birthday Label">
+                                            <rect key="frame" x="171" y="78.5" width="184" height="36"/>
+                                            <fontDescription key="fontDescription" type="system" pointSize="15"/>
+                                            <color key="textColor" red="0.1333333333" green="0.1333333333" blue="0.1333333333" alpha="1" colorSpace="custom" customColorSpace="calibratedRGB"/>
+                                            <nil key="highlightedColor"/>
+                                        </label>
+                                    </subviews>
+                                    <color key="backgroundColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
+                                    <constraints>
+                                        <constraint firstAttribute="trailing" secondItem="Gxp-DQ-NwH" secondAttribute="trailing" constant="20" id="9WB-Gz-pdj"/>
+                                        <constraint firstItem="MhV-Ll-jER" firstAttribute="leading" secondItem="eYI-5m-oy2" secondAttribute="trailing" constant="15" id="Bmr-g8-71Z"/>
+                                        <constraint firstAttribute="trailing" secondItem="Wzy-sK-ObX" secondAttribute="trailing" constant="20" id="Jwd-Iq-6Ux"/>
+                                        <constraint firstItem="Gxp-DQ-NwH" firstAttribute="leading" secondItem="eYI-5m-oy2" secondAttribute="trailing" constant="15" id="L8y-pU-F9d"/>
+                                        <constraint firstItem="XUf-5y-Eb4" firstAttribute="top" secondItem="EEX-L0-AhY" secondAttribute="bottom" constant="5" id="Mo9-T8-dUa"/>
+                                        <constraint firstItem="eYI-5m-oy2" firstAttribute="leading" secondItem="mtv-gF-hqm" secondAttribute="leadingMargin" constant="20" id="P7U-7s-bzH"/>
+                                        <constraint firstItem="EEX-L0-AhY" firstAttribute="leading" secondItem="eYI-5m-oy2" secondAttribute="trailing" constant="15" id="Xdl-lc-OsX"/>
+                                        <constraint firstItem="MhV-Ll-jER" firstAttribute="top" secondItem="XUf-5y-Eb4" secondAttribute="bottom" constant="5" id="XtU-fn-oMw"/>
+                                        <constraint firstAttribute="trailing" secondItem="XUf-5y-Eb4" secondAttribute="trailing" constant="20" id="cad-q5-pnV"/>
+                                        <constraint firstAttribute="trailing" secondItem="MhV-Ll-jER" secondAttribute="trailing" constant="20" id="dFj-a5-Xiw"/>
+                                        <constraint firstItem="XUf-5y-Eb4" firstAttribute="leading" secondItem="eYI-5m-oy2" secondAttribute="trailing" constant="15" id="ecn-qY-siJ"/>
+                                        <constraint firstItem="Gxp-DQ-NwH" firstAttribute="top" secondItem="mtv-gF-hqm" secondAttribute="topMargin" constant="20" id="fI3-Y9-uCk"/>
+                                        <constraint firstItem="EEX-L0-AhY" firstAttribute="top" secondItem="Gxp-DQ-NwH" secondAttribute="bottom" constant="5" id="iiH-SL-fD1"/>
+                                        <constraint firstItem="eYI-5m-oy2" firstAttribute="top" secondItem="mtv-gF-hqm" secondAttribute="topMargin" constant="20" id="kj2-kJ-6le"/>
+                                        <constraint firstAttribute="trailing" secondItem="EEX-L0-AhY" secondAttribute="trailing" constant="20" id="tOl-Kk-s95"/>
+                                        <constraint firstItem="Wzy-sK-ObX" firstAttribute="top" secondItem="eYI-5m-oy2" secondAttribute="bottom" constant="10" id="usp-B6-poP"/>
+                                        <constraint firstItem="Wzy-sK-ObX" firstAttribute="leading" secondItem="mtv-gF-hqm" secondAttribute="leading" constant="20" id="z3I-h3-Slb"/>
+                                    </constraints>
+                                </tableViewCellContentView>
+                                <color key="backgroundColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
+                                <connections>
+                                    <outlet property="biographyLabel" destination="Wzy-sK-ObX" id="AbF-Jt-e0x"/>
+                                    <outlet property="birthdayLabel" destination="XUf-5y-Eb4" id="Fq0-DU-YFw"/>
+                                    <outlet property="categoriesLabel" destination="EEX-L0-AhY" id="leL-1X-hqx"/>
+                                    <outlet property="knownForLabel" destination="MhV-Ll-jER" id="dPr-Xo-grD"/>
+                                    <outlet property="nameLabel" destination="Gxp-DQ-NwH" id="fVE-0n-p0u"/>
+                                    <outlet property="posterCoverView" destination="eYI-5m-oy2" id="LF2-ic-POn"/>
+                                    <outlet property="posterImageView" destination="tvG-Wc-cdd" id="5Cb-AB-hOe"/>
+                                </connections>
+                            </tableViewCell>
+                            <tableViewCell contentMode="scaleToFill" preservesSuperviewLayoutMargins="YES" selectionStyle="none" indentationWidth="10" reuseIdentifier="FilmographyTableViewCell" rowHeight="275" id="O8C-lq-c0A" userLabel="Filmography Table View Cell" customClass="FilmographyTableViewCell" customModule="Mao_Trailer" customModuleProvider="target">
+                                <rect key="frame" x="0.0" y="403" width="375" height="275"/>
+                                <autoresizingMask key="autoresizingMask"/>
+                                <tableViewCellContentView key="contentView" opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center" preservesSuperviewLayoutMargins="YES" insetsLayoutMarginsFromSafeArea="NO" tableViewCell="O8C-lq-c0A" id="aiP-Cv-0FA" userLabel="Filmography Content View">
+                                    <rect key="frame" x="0.0" y="0.0" width="375" height="275"/>
+                                    <autoresizingMask key="autoresizingMask"/>
+                                    <subviews>
+                                        <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="6rT-nn-WHV" userLabel="Background View">
+                                            <rect key="frame" x="0.0" y="0.0" width="375" height="48"/>
+                                            <subviews>
+                                                <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Filmography" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="uF2-aX-zvU" userLabel="Filmography Label">
+                                                    <rect key="frame" x="20" y="15" width="335" height="18"/>
+                                                    <fontDescription key="fontDescription" type="system" weight="semibold" pointSize="15"/>
+                                                    <color key="textColor" red="0.40000000000000002" green="0.40000000000000002" blue="0.40000000000000002" alpha="1" colorSpace="custom" customColorSpace="calibratedRGB"/>
+                                                    <nil key="highlightedColor"/>
+                                                </label>
+                                            </subviews>
+                                            <color key="backgroundColor" red="0.97254901960784312" green="0.97254901960784312" blue="0.97254901960784312" alpha="1" colorSpace="calibratedRGB"/>
+                                            <constraints>
+                                                <constraint firstItem="uF2-aX-zvU" firstAttribute="centerY" secondItem="6rT-nn-WHV" secondAttribute="centerY" id="6aI-k5-UYj"/>
+                                                <constraint firstAttribute="height" constant="48" id="DEN-PK-EoN"/>
+                                                <constraint firstItem="uF2-aX-zvU" firstAttribute="leading" secondItem="6rT-nn-WHV" secondAttribute="leading" constant="20" id="L1b-yI-Gd6"/>
+                                                <constraint firstItem="uF2-aX-zvU" firstAttribute="centerX" secondItem="6rT-nn-WHV" secondAttribute="centerX" id="X49-mv-Zlq"/>
+                                            </constraints>
+                                        </view>
+                                        <collectionView clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="scaleToFill" showsHorizontalScrollIndicator="NO" showsVerticalScrollIndicator="NO" dataMode="prototypes" translatesAutoresizingMaskIntoConstraints="NO" id="5um-jE-Sb1" userLabel="Filmography Collection View">
+                                            <rect key="frame" x="0.0" y="58" width="375" height="217"/>
+                                            <color key="backgroundColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
+                                            <collectionViewFlowLayout key="collectionViewLayout" scrollDirection="horizontal" minimumLineSpacing="10" minimumInteritemSpacing="0.0" id="5cO-Pk-262">
+                                                <size key="itemSize" width="110" height="202"/>
+                                                <size key="headerReferenceSize" width="0.0" height="0.0"/>
+                                                <size key="footerReferenceSize" width="0.0" height="0.0"/>
+                                                <inset key="sectionInset" minX="20" minY="0.0" maxX="20" maxY="0.0"/>
+                                            </collectionViewFlowLayout>
+                                            <cells>
+                                                <collectionViewCell opaque="NO" multipleTouchEnabled="YES" contentMode="center" reuseIdentifier="FilmographyCollectionViewCell" id="cRI-SP-Oto" userLabel="Filmography Collection View Cell" customClass="FilmographyCollectionViewCell" customModule="Mao_Trailer" customModuleProvider="target">
+                                                    <rect key="frame" x="20" y="6" width="110" height="205"/>
+                                                    <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
+                                                    <view key="contentView" opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center" insetsLayoutMarginsFromSafeArea="NO">
+                                                        <rect key="frame" x="0.0" y="0.0" width="110" height="205"/>
+                                                        <autoresizingMask key="autoresizingMask"/>
+                                                        <subviews>
+                                                            <view clipsSubviews="YES" contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="izE-pq-t1P" userLabel="Cover Image View">
+                                                                <rect key="frame" x="0.0" y="0.0" width="110" height="168"/>
+                                                                <subviews>
+                                                                    <imageView clipsSubviews="YES" userInteractionEnabled="NO" contentMode="scaleAspectFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" image="WonderWoman-Slide" translatesAutoresizingMaskIntoConstraints="NO" id="P8j-wu-N7a" userLabel="Poster Image View">
+                                                                        <rect key="frame" x="0.0" y="0.0" width="110" height="168"/>
+                                                                    </imageView>
+                                                                </subviews>
+                                                                <color key="backgroundColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
+                                                                <constraints>
+                                                                    <constraint firstAttribute="width" constant="110" id="7xc-9e-Gjd"/>
+                                                                    <constraint firstAttribute="trailing" secondItem="P8j-wu-N7a" secondAttribute="trailing" id="BX6-6h-U4H"/>
+                                                                    <constraint firstItem="P8j-wu-N7a" firstAttribute="leading" secondItem="izE-pq-t1P" secondAttribute="leading" id="Ial-uU-S8p"/>
+                                                                    <constraint firstItem="P8j-wu-N7a" firstAttribute="top" secondItem="izE-pq-t1P" secondAttribute="top" id="ODv-fk-85F"/>
+                                                                    <constraint firstAttribute="height" constant="168" id="bve-VB-gfi"/>
+                                                                    <constraint firstAttribute="bottom" secondItem="P8j-wu-N7a" secondAttribute="bottom" id="jN0-Xh-d8r"/>
+                                                                </constraints>
+                                                            </view>
+                                                            <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Wonder Woman" textAlignment="center" lineBreakMode="tailTruncation" numberOfLines="2" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="2fW-nB-TyX" userLabel="Title Label">
+                                                                <rect key="frame" x="0.0" y="178" width="110" height="13.5"/>
+                                                                <fontDescription key="fontDescription" type="boldSystem" pointSize="11"/>
+                                                                <color key="textColor" cocoaTouchSystemColor="darkTextColor"/>
+                                                                <nil key="highlightedColor"/>
+                                                            </label>
+                                                        </subviews>
+                                                    </view>
+                                                    <constraints>
+                                                        <constraint firstItem="izE-pq-t1P" firstAttribute="leading" secondItem="cRI-SP-Oto" secondAttribute="leading" id="JiT-xo-5rd"/>
+                                                        <constraint firstItem="2fW-nB-TyX" firstAttribute="leading" secondItem="cRI-SP-Oto" secondAttribute="leading" id="M5f-YU-ylU"/>
+                                                        <constraint firstItem="izE-pq-t1P" firstAttribute="top" secondItem="cRI-SP-Oto" secondAttribute="top" id="Uiy-sJ-eIS"/>
+                                                        <constraint firstItem="2fW-nB-TyX" firstAttribute="top" secondItem="izE-pq-t1P" secondAttribute="bottom" constant="10" id="cEl-wV-LXZ"/>
+                                                        <constraint firstAttribute="trailing" secondItem="2fW-nB-TyX" secondAttribute="trailing" id="iIr-tZ-Gfo"/>
+                                                        <constraint firstAttribute="trailing" secondItem="izE-pq-t1P" secondAttribute="trailing" id="lZ1-SO-Xfg"/>
+                                                    </constraints>
+                                                    <size key="customSize" width="110" height="205"/>
+                                                    <connections>
+                                                        <outlet property="coverImageView" destination="izE-pq-t1P" id="cha-aE-tNJ"/>
+                                                        <outlet property="posterImageView" destination="P8j-wu-N7a" id="jUv-B5-fQP"/>
+                                                        <outlet property="titleLabel" destination="2fW-nB-TyX" id="Pfk-SK-eDY"/>
+                                                    </connections>
+                                                </collectionViewCell>
+                                            </cells>
+                                        </collectionView>
+                                    </subviews>
+                                    <color key="backgroundColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
+                                    <constraints>
+                                        <constraint firstItem="5um-jE-Sb1" firstAttribute="top" secondItem="6rT-nn-WHV" secondAttribute="bottom" constant="10" id="9QK-Zu-bXg"/>
+                                        <constraint firstAttribute="trailing" secondItem="6rT-nn-WHV" secondAttribute="trailing" id="Avc-9I-ZSt"/>
+                                        <constraint firstItem="5um-jE-Sb1" firstAttribute="leading" secondItem="aiP-Cv-0FA" secondAttribute="leading" id="Udp-2i-5ZB"/>
+                                        <constraint firstItem="6rT-nn-WHV" firstAttribute="leading" secondItem="aiP-Cv-0FA" secondAttribute="leading" id="dYR-KN-GEQ"/>
+                                        <constraint firstItem="6rT-nn-WHV" firstAttribute="top" secondItem="aiP-Cv-0FA" secondAttribute="top" id="j3m-Zt-mc6"/>
+                                        <constraint firstAttribute="trailing" secondItem="5um-jE-Sb1" secondAttribute="trailing" id="sDD-1i-NSG"/>
+                                        <constraint firstAttribute="bottom" secondItem="5um-jE-Sb1" secondAttribute="bottom" id="u63-nh-cIv"/>
+                                    </constraints>
+                                </tableViewCellContentView>
+                                <color key="backgroundColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
+                                <connections>
+                                    <outlet property="filmographyCollectionView" destination="5um-jE-Sb1" id="HYP-HI-Oyo"/>
+                                </connections>
+                            </tableViewCell>
+                        </prototypes>
+                        <connections>
+                            <outlet property="dataSource" destination="5oz-5Z-Lef" id="R5P-Js-lEf"/>
+                            <outlet property="delegate" destination="5oz-5Z-Lef" id="eAN-Ib-fFm"/>
+                        </connections>
+                    </tableView>
+                    <size key="freeformSize" width="375" height="800"/>
+                    <connections>
+                        <segue destination="AuP-gI-olp" kind="show" identifier="seguePersonDetailsToDetails" id="7Oe-GR-IWM"/>
+                    </connections>
+                </tableViewController>
+                <placeholder placeholderIdentifier="IBFirstResponder" id="m3g-UF-ctC" userLabel="First Responder" sceneMemberID="firstResponder"/>
+            </objects>
+            <point key="canvasLocation" x="2582" y="3136"/>
         </scene>
     </scenes>
     <resources>
@@ -2158,6 +2376,7 @@
         <image name="Narcos-Slide" width="140" height="210"/>
         <image name="StrangerThings-Slide" width="335" height="160"/>
         <image name="Walkthrough-1" width="750" height="1624"/>
+        <image name="WonderWoman-Slide" width="140" height="210"/>
         <image name="ZackSnyder-cast" width="70" height="102"/>
         <image name="avatar" width="127" height="128"/>
         <image name="cover-JL" width="375" height="280"/>
@@ -2180,7 +2399,7 @@
         <image name="tab-tv-light" width="26" height="23"/>
     </resources>
     <inferredMetricsTieBreakers>
-        <segue reference="PKC-VQ-k5Y"/>
+        <segue reference="7Oe-GR-IWM"/>
         <segue reference="2JL-8i-Swq"/>
         <segue reference="34l-DW-oXO"/>
     </inferredMetricsTieBreakers>

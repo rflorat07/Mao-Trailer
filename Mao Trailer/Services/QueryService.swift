@@ -39,6 +39,8 @@ class QueryService {
     typealias QuerySectionResult = (SectionData?)-> Void
     typealias QuerySectionArray  = ([SectionData]?)-> Void
     
+    typealias QueryPersonDetails  = (PersonDetails?)-> Void
+    
     lazy var configuration = URLSessionConfiguration.default
     lazy var session = URLSession(configuration: configuration)
     
@@ -88,13 +90,13 @@ class QueryService {
                 response.statusCode == 200 {
                 
                 DispatchQueue.main.async {
-                    self.decodeData(sectionName: sectionName, type: type, data: data, { (sectionResult) in
+                    self.decodeData(sectionName: sectionName, type: type, data: data, urlQuery: queryString, { (sectionResult) in
                         completion(sectionResult)
                     })
                 }
             } else {
                 DispatchQueue.main.async {
-                    self.decodeError(data!, url: queryString, {
+                    self.decodeError(data!, queryString, {
                         completion(nil)
                     })
                 }
@@ -113,13 +115,13 @@ class QueryService {
             
             if let data = data {
                 
-                self.decodeInformation(Details.self, from: data, completion: { (details: Details?) in
+                self.decodeInformation(Details.self, from: data, with: queryString, completion: { (details: Details?) in
                     
                     completion(details)
                 })
             } else {
                 DispatchQueue.main.async {
-                    self.decodeError(data!, url: queryString, {
+                    self.decodeError(data!, queryString, {
                         completion(nil)
                     })
                 }
@@ -137,14 +139,14 @@ class QueryService {
             
             if let data = data {
                 
-                self.decodeInformation(Images.self, from: data, completion: { (details: Images?) in
+                self.decodeInformation(Images.self, from: data, with: queryString, completion: { (details: Images?) in
                     
                     completion(details)
                 })
                 
             } else {
                 DispatchQueue.main.async {
-                    self.decodeError(data!, url: queryString, {
+                    self.decodeError(data!, queryString, {
                         completion(nil)
                     })
                 }
@@ -171,7 +173,7 @@ class QueryService {
         getDataFromUrl(queryString: urlQuery.string!) { (data) in
             if let data = data {
                 DispatchQueue.main.async {
-                    self.decodeData(sectionName: "Search", type: type, data: data, { (sectiondata) in
+                    self.decodeData(sectionName: "Search", type: type, data: data, urlQuery: urlQuery.string!, { (sectiondata) in
                         completion(sectiondata)
                     })
                 }
@@ -189,14 +191,14 @@ class QueryService {
             
             if let data = data {
                 
-                self.decodeInformation(GenreArray.self, from: data, completion: { (details: GenreArray? ) in
+                self.decodeInformation(GenreArray.self, from: data, with: queryString, completion: { (details: GenreArray? ) in
                     
                     completion(details)
                 })
                 
             } else {
                 DispatchQueue.main.async {
-                    self.decodeError(data!, url: queryString, {
+                    self.decodeError(data!, queryString, {
                         completion(nil)
                     })
                 }
@@ -211,12 +213,36 @@ class QueryService {
         
         getDataFromUrl(queryString: queryString) { (data) in
             if let data = data {
-                self.decodeData(sectionName: "Discover", type: type, data: data, { (sectionData) in
+                self.decodeData(sectionName: "Discover", type: type, data: data, urlQuery: queryString, { (sectionData) in
                     completion(sectionData)
                 })
             } else {
                 DispatchQueue.main.async {
-                    self.decodeError(data!, url: queryString, {
+                    self.decodeError(data!, queryString, {
+                        completion(nil)
+                    })
+                }
+            }
+        }
+    }
+    
+    // MARK: - Fetch person Information
+    func fetchPersonInformation(personId: Int, _ completion : @escaping QueryPersonDetails) {
+        
+        let queryString = getUrlPersonInformation(personId: personId, type: .Person)
+        
+        getDataFromUrl(queryString: queryString) { (data) in
+            
+            if let data = data {
+                
+                self.decodeInformation(PersonDetails.self, from: data, with: queryString, completion: { (details: PersonDetails? ) in
+                    
+                    completion(details)
+                })
+                
+            } else {
+                DispatchQueue.main.async {
+                    self.decodeError(data!, queryString, {
                         completion(nil)
                     })
                 }
@@ -245,7 +271,7 @@ class QueryService {
                 }
             } else {
                 DispatchQueue.main.async {
-                    self.decodeError(data!, url: queryString, {
+                    self.decodeError(data!, queryString, {
                         completion(nil)
                     })
                 }
@@ -290,6 +316,22 @@ class QueryService {
         
         return urlQuery.string!
         
+    }
+    
+    // MARK: - URL Person Information
+    func getUrlPersonInformation(personId: Int,  type: MediaType) -> String {
+        
+        var urlQuery = URLComponents(string: QueryString.baseUrl)!
+        
+        urlQuery.path = "/3/\(type.rawValue)/\(personId)"
+        
+        urlQuery.queryItems = [
+            URLQueryItem(name: "api_key", value: QueryString.api_key),
+            URLQueryItem(name: "language", value: QueryString.language),
+            URLQueryItem(name: "append_to_response", value: QueryString.personDetails)
+        ]
+        
+        return urlQuery.string!
     }
     
     // MARK: - URL Genres
@@ -348,12 +390,12 @@ class QueryService {
     
     // MARK: - Decode Data
     
-    fileprivate func decodeData(sectionName: String, type: MediaType ,data: Data, _ completion : @escaping  QuerySectionResult) {
+    fileprivate func decodeData(sectionName: String, type: MediaType ,data: Data, urlQuery: String, _ completion : @escaping  QuerySectionResult) {
         
         switch type {
         case .Movie:
             
-            decodeInformation(SectionMovieArray.self, from: data) { (dataResult: SectionMovieArray?) in
+            decodeInformation(SectionMovieArray.self, from: data, with: urlQuery) { (dataResult: SectionMovieArray?) in
                 
                 let sectionResult: SectionData = SectionData(page: dataResult!.page, total_pages: dataResult!.total_pages, sectionName: sectionName, sectionArray: dataResult!.results)
                 
@@ -362,7 +404,7 @@ class QueryService {
             
         case .TV:
             
-            decodeInformation(SectionTVArray.self, from: data) { (dataResult: SectionTVArray?) in
+            decodeInformation(SectionTVArray.self, from: data, with: urlQuery) { (dataResult: SectionTVArray?) in
                 
                 let sectionResult: SectionData = SectionData(page: dataResult!.page, total_pages: dataResult!.total_pages, sectionName: sectionName, sectionArray: dataResult!.results)
                 
@@ -377,7 +419,7 @@ class QueryService {
     
     // MARK: - Get Information
     
-    fileprivate func decodeInformation<T>(_ type: T.Type,from data: Data, completion : @escaping (T?) -> Void) where T : Decodable {
+    fileprivate func decodeInformation<T>(_ type: T.Type, from data: Data, with url: String, completion : @escaping (T?) -> Void) where T : Decodable {
         
         do {
             let list = try JSONDecoder().decode(type, from: data)
@@ -386,13 +428,15 @@ class QueryService {
             
         } catch let decodeError as NSError {
             
-            print("Decoder error: \(decodeError.localizedDescription) \n")
+            completion(nil)
+
+            print("Decoder error: \(decodeError.localizedDescription) \n \n \(decodeError) \n \n Url: \(url)")
         }
     }
     
     // MARK: - Decode error
     
-    fileprivate func decodeError(_ data: Data, url: String, _ completion : @escaping QueryError) {
+    fileprivate func decodeError(_ data: Data, _ url: String, _ completion : @escaping QueryError) {
         
         do {
             let error = try JSONDecoder().decode(SectionError.self, from: data)
@@ -401,7 +445,7 @@ class QueryService {
             
         } catch let decodeError as NSError {
             completion()
-            print("Decoder error: \(decodeError.localizedDescription) \n")
+            print("Decoder error: \(decodeError.localizedDescription)\n")
         }
         
     }

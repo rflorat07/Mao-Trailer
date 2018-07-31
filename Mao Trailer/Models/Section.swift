@@ -84,7 +84,7 @@ protocol TVMovie {
     var poster_path: String? { get set}
     var vote_count : Double { get }
     var vote_average: Double { get }
-    var release_date: String { get }
+    var release_date: String? { get }
     var backdrop_path : String? { get set}
     var original_title : String { get }
     

@@ -1,5 +1,5 @@
 //
-//  TVMovieListCollectionViewController.swift
+//  ListCollectionViewController.swift
 //  Mao Trailer
 //
 //  Created by Roger Florat on 21/06/18.
@@ -8,7 +8,7 @@
 
 import UIKit
 
-class TVMovieListCollectionViewController: UICollectionViewController {
+class ListCollectionViewController: UICollectionViewController {
     
     var queryType: MediaType!
     var fetchingMore: Bool = false
@@ -24,7 +24,7 @@ class TVMovieListCollectionViewController: UICollectionViewController {
         
             let navigationContoller = segue.destination as! UINavigationController
             
-            let receiverViewController = navigationContoller.topViewController as! TVMovieDetailsViewController
+            let receiverViewController = navigationContoller.topViewController as! DetailsViewController
             
             receiverViewController.queryType = queryType
             

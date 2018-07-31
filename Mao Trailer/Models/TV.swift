@@ -17,7 +17,7 @@ struct TVShow: Decodable, TVMovie {
     var poster_path: String?
     let vote_count : Double
     let vote_average: Double
-    let release_date: String
+    let release_date: String?
     var backdrop_path : String?
     let original_title : String
     

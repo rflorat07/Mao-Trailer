@@ -45,6 +45,11 @@ struct Storyboard {
     
     static let movieDetailsViewController = "MovieDetailsViewController"
     
+    static let headerPersonDetailsViewCell  = "HeaderPersonDetailsViewCell"
+    
+    static let filmographyTableViewCell = "FilmographyTableViewCell"
+    static let filmographyCollectionViewCell = "FilmographyCollectionViewCell"
+    
     static let walkthroughViewCell = "WalkthroughViewCell"
     
     static let searchListViewCell = "SearchListViewCell"
@@ -62,6 +67,8 @@ struct Segue {
     static let toTVDetail = "segueTVToTVDetail"
     
     static let toListDetail = "segueListToListDetail"
+    
+    static let toCastDetails = "segueDetailsToCastDetails"
 
     static let toSearchList = "segueToSearchList"
     static let toSearchDetail = "segueSearchToSearchDetail"
@@ -70,6 +77,8 @@ struct Segue {
     
     static let toProfileDetail = "segueProfileToProfileDetail"
     static let toProfileSetting = "segueToProfileSetting"
+    
+    static let fromPersonDetailsToDetails = "seguePersonDetailsToDetails"
     
     static let toImagePreview = "segueToImagePreview"
 }
@@ -87,6 +96,7 @@ struct QueryString {
     static let api_key = "3b122cc1b16808da5a679c3c1c11cd07"
     static let baseUrl = "https://api.themoviedb.org"
     static let append_to_response = "videos,credits"
+    static let personDetails = "images,movie_credits"
 }
 
 struct ImageURL  {

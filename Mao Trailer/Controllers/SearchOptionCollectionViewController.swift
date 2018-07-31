@@ -30,7 +30,7 @@ class SearchOptionCollectionViewController: UICollectionViewController, UICollec
             
             let navigationContoller = segue.destination as! UINavigationController
             
-            let receiverViewController = navigationContoller.topViewController as! TVMovieDetailsViewController
+            let receiverViewController = navigationContoller.topViewController as! DetailsViewController
             
             receiverViewController.queryType = queryType
             
