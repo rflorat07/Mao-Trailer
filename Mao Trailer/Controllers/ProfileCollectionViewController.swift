@@ -37,11 +37,11 @@ class ProfileCollectionViewController: UICollectionViewController {
     
     override func prepare(for segue: UIStoryboardSegue, sender: Any?) {
         
-        if segue.identifier == Segue.toProfileDetail {
+        if segue.identifier == Segue.fromProfileToDetail {
             
             let navigationContoller = segue.destination as! UINavigationController
             
-            let receiverViewController = navigationContoller.topViewController as! DetailsViewController
+            let receiverViewController = navigationContoller.topViewController as! DetailsTableViewController
             
             receiverViewController.queryType = .TV
             receiverViewController.information = sender as? TVShow
@@ -51,7 +51,7 @@ class ProfileCollectionViewController: UICollectionViewController {
 
     @IBAction func settingButton(_ sender: UIBarButtonItem) {
         
-        performSegue(withIdentifier: Segue.toProfileSetting, sender: nil)
+        performSegue(withIdentifier: Segue.fromProfileToProfileSetting, sender: nil)
     }
         
    
@@ -96,7 +96,7 @@ class ProfileCollectionViewController: UICollectionViewController {
         
         let selected = sectionProfileArray.sectionArray[indexPath.row]
         
-        self.performSegue(withIdentifier: Segue.toProfileDetail, sender: selected)
+        self.performSegue(withIdentifier: Segue.fromProfileToDetail, sender: selected)
         
     }
 

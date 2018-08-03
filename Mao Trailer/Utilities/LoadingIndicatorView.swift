@@ -51,7 +51,7 @@ class LoadingIndicatorView {
         overlay.alpha = 0
         overlay.backgroundColor = UIColor.white
         overlayTarget.addSubview(overlay)
-        overlayTarget.bringSubview(toFront: overlay)
+        overlayTarget.superview?.bringSubview(toFront: overlay)
         
         // Create and animate the activity indicator
         let indicator = UIActivityIndicatorView(activityIndicatorStyle: UIActivityIndicatorViewStyle.gray)

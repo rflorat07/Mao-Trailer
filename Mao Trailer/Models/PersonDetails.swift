@@ -14,7 +14,8 @@ struct PersonDetails: Decodable {
     let birthday: String?
     let biography: String
     let images: Profiles?
-    var movie_credits: Credits?
+    let tv_credits: TVCredits?
+    var movie_credits: MovieCredits?
     let profile_path: String?
     let place_of_birth: String?
     let known_for_department: String
@@ -25,7 +26,8 @@ struct PersonDetails: Decodable {
         birthday = ""
         biography = ""
         images = Profiles()
-        movie_credits = Credits()
+        tv_credits = TVCredits()
+        movie_credits = MovieCredits()
         profile_path = ""
         place_of_birth = ""
         known_for_department = ""
@@ -33,20 +35,42 @@ struct PersonDetails: Decodable {
     
     func getFilmography() -> [Movie] {
         
-        let credits = (movie_credits?.cast.filter{ $0.poster_path != nil && $0.backdrop_path != nil })!
+        let credits = (movie_credits?.cast.filter{ $0.poster_path != nil || $0.backdrop_path != nil })!
+    
+        return credits.sorted { $0.vote_count > $1.vote_count }
+    }
+    
+    func getTVShows() -> [TVShow] {
         
-        return credits.sorted { Date.compareDates($0.release_date! , $1.release_date! )}
+        let credits = (tv_credits?.cast.filter{ $0.poster_path != nil || $0.backdrop_path != nil })!
+                
+        return credits
     }
     
     func getBirthdayAndPlace() -> String {
         
-        let birthday = self.birthday != nil ?   Date.getFormattedDate(string: self.birthday!) : ""
+        let birthday = self.birthday != nil ? Date.getFormattedDate(string: self.birthday!) : ""
         
         let place = self.place_of_birth != nil ? "in \(self.place_of_birth!)" : ""
         
-        return " \(birthday) \(place)"
+        return "\(birthday) \(place)"
     }
-
+    
+    func knownForFilmography() -> String {
+        
+        let credits = getFilmography().prefix(3)
+        
+        var knownFor = (credits.count) > 0 ? "Known for:" : ""
+        
+        for item in credits {
+            
+            let string = " \(item.title) (\(Date.getFormattedDate(string: item.release_date!,formatter: "yyyy"))),"
+            
+            knownFor.append(contentsOf: string )
+        }
+        
+        return knownFor
+    }
 }
 
 struct Profiles: Decodable {
@@ -58,7 +82,18 @@ struct Profiles: Decodable {
     }
 }
 
-struct Credits: Decodable {
+struct TVCredits: Decodable {
+    
+    var cast: [TVShow]
+    
+    init() {
+        cast = []
+    }
+}
+
+
+
+struct MovieCredits: Decodable {
     
     var cast: [Movie]
     

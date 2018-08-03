@@ -1,5 +1,5 @@
 //
-//  HeaderPersonDetailsTableViewCell.swift
+//  PersonDetailsHeaderTableViewCell.swift
 //  Mao Trailer
 //
 //  Created by Roger Florat on 30/07/18.
@@ -8,7 +8,7 @@
 
 import UIKit
 
-class HeaderPersonDetailsTableViewCell: UITableViewCell {
+class PersonDetailsHeaderTableViewCell: UITableViewCell {
     
     @IBOutlet weak var posterCoverView: UIView!
     @IBOutlet weak var posterImageView: UIImageView!
@@ -25,11 +25,12 @@ class HeaderPersonDetailsTableViewCell: UITableViewCell {
             updateUI()
         }
     }
-    
+        
     func updateUI(){
-        knownForLabel.text = ""
+
         nameLabel.text = details.name.uppercased()
         biographyLabel.text = details.biography
+        knownForLabel.text = details.knownForFilmography()
         categoriesLabel.text = details.known_for_department
         birthdayLabel.text = details.getBirthdayAndPlace()
         

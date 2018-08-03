@@ -25,7 +25,7 @@ class TVTableViewController: UITableViewController {
     
     override func prepare(for segue: UIStoryboardSegue, sender: Any?) {
         
-        if segue.identifier == Segue.toMovieList {
+        if segue.identifier == Segue.fromTVToList {
             
             let toViewController = segue.destination as! ListCollectionViewController
             
@@ -33,7 +33,7 @@ class TVTableViewController: UITableViewController {
             toViewController.sectionData = sender as! SectionData
         }
         
-        if segue.identifier == Segue.toSearchList {
+        if segue.identifier == Segue.fromTVToSearchList {
             
             let toViewController = segue.destination as! SearchListCollectionViewController
             
@@ -41,11 +41,11 @@ class TVTableViewController: UITableViewController {
             toViewController.searchData = SectionData()
         }
         
-        if segue.identifier == Segue.toTVDetail {
+        if segue.identifier == Segue.fromTVToDetail {
             
             let navigationContoller = segue.destination as! UINavigationController
             
-            let receiverViewController = navigationContoller.topViewController as! DetailsViewController
+            let receiverViewController = navigationContoller.topViewController as! DetailsTableViewController
             
             receiverViewController.queryType = .TV
             receiverViewController.information = sender as? TVShow
@@ -80,10 +80,11 @@ class TVTableViewController: UITableViewController {
             return section
         })
     }
+
     
     @IBAction func searchButtonTapped(_ sender: UIBarButtonItem) {
         
-        performSegue(withIdentifier: Segue.toSearchList, sender: nil)
+        performSegue(withIdentifier: Segue.fromTVToSearchList, sender: nil)
     }
 }
 
@@ -97,7 +98,7 @@ extension TVTableViewController {
         // Section 2 - SectionLabel
         // Section 3 - Popular [TVShow]
         
-        return sectionTVShowArray.count != 0 ? 3 : 0
+        return sectionTVShowArray.count > 0 ? 3 : 0
         
     }
     
@@ -197,11 +198,11 @@ extension TVTableViewController {
             
          let data: SectionData = SectionData(page: section.page, total_pages: section.total_pages, sectionName: "\(section.sectionName) list", sectionArray: sectionArray)
          
-         self.performSegue(withIdentifier: Segue.toMovieList, sender: data)
+         self.performSegue(withIdentifier: Segue.fromTVToList, sender: data)
          
          } else {
             
-           self.performSegue(withIdentifier: Segue.toTVDetail, sender: tvShowSelected)
+           self.performSegue(withIdentifier: Segue.fromTVToDetail, sender: tvShowSelected)
         }
     }
 }

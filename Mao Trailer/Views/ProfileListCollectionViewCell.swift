@@ -31,6 +31,8 @@ class ProfileListCollectionViewCell: UICollectionViewCell {
     }
     
     override func prepareForReuse() {
+        super.prepareForReuse()
+        
         coverImageView.image = nil
     }
 }

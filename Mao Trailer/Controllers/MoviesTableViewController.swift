@@ -32,7 +32,7 @@ class MoviesTableViewController: UITableViewController {
         
     override func prepare(for segue: UIStoryboardSegue, sender: Any?) {
         
-        if segue.identifier == Segue.toMovieList {
+        if segue.identifier == Segue.fromMovieToList {
             
             let toViewController = segue.destination as! ListCollectionViewController
             
@@ -40,7 +40,7 @@ class MoviesTableViewController: UITableViewController {
             toViewController.sectionData = sender as! SectionData
         }
         
-        if segue.identifier == Segue.toSearchList {
+        if segue.identifier == Segue.fromMovieToSearchList {
             
             let toViewController = segue.destination as! SearchListCollectionViewController
             
@@ -48,11 +48,11 @@ class MoviesTableViewController: UITableViewController {
             toViewController.searchData = SectionData()
         }
         
-        if segue.identifier == Segue.toMovieDetail {
+        if segue.identifier == Segue.fromMovieToDetail {
             
             let navigationContoller = segue.destination as! UINavigationController
             
-            let receiverViewController = navigationContoller.topViewController as! DetailsViewController
+            let receiverViewController = navigationContoller.topViewController as! DetailsTableViewController
 
             receiverViewController.queryType = .Movie
             receiverViewController.information = sender as? Movie
@@ -91,7 +91,7 @@ class MoviesTableViewController: UITableViewController {
     
     @IBAction func searchButtonTapped(_ sender: UIBarButtonItem) {
         
-        performSegue(withIdentifier: Segue.toSearchList, sender: nil)
+        performSegue(withIdentifier: Segue.fromMovieToSearchList, sender: nil)
     }
     
 }
@@ -107,10 +107,9 @@ extension MoviesTableViewController {
         // Section 2 - Now      [Section]
         // Section 3 - Popular  [Section]
         
-        return sectionMovieArray.count
+        return sectionMovieArray.count > 0 ? sectionMovieArray.count : 0
     }
     
-    //Number of rows in section
     override func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
         
         // Section 1 - Upcoming [Section]
@@ -176,11 +175,11 @@ extension MoviesTableViewController {
         
             let data: SectionData = SectionData(page: section.page, total_pages: section.total_pages, sectionName: "\(section.sectionName) list", sectionArray: sectionArray)
             
-            self.performSegue(withIdentifier: Segue.toMovieList, sender: data)
+            self.performSegue(withIdentifier: Segue.fromMovieToList, sender: data)
             
         } else {
             
-            self.performSegue(withIdentifier: Segue.toMovieDetail, sender: movieSelected)
+            self.performSegue(withIdentifier: Segue.fromMovieToDetail, sender: movieSelected)
         }
     }
 }

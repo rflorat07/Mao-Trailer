@@ -47,6 +47,8 @@ class TVNowCollectionViewCell: UICollectionViewCell {
     }
     
     override func prepareForReuse() {
+        super.prepareForReuse()
+        
         titleLabel.text = ""
         rateLabel.text = "0.0"
         coverImageView.image = nil

@@ -31,7 +31,7 @@ class TVPopularTableViewCell: UITableViewCell {
             
             titleLabel.text = tvShow.title.uppercased()
             rateLabel.text = String(format: "%.1f", tvShow.vote_average)
-            coverImageView.downloadedFrom(urlString: tvShow.backdrop_path!)
+            coverImageView.downloadedFrom(urlString: tvShow.backdrop_path!, size: ImageSize.medium)
             
         } else {
             

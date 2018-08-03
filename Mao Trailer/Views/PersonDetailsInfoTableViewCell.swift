@@ -1,5 +1,5 @@
 //
-//  FilmographyTableViewCell.swift
+//  PersonDetailsInfoTableViewCell.swift
 //  Mao Trailer
 //
 //  Created by Roger Florat on 31/07/18.
@@ -8,7 +8,7 @@
 
 import UIKit
 
-class FilmographyTableViewCell: UITableViewCell {
+class PersonDetailsInfoTableViewCell: UITableViewCell {
     
     @IBOutlet weak var filmographyCollectionView: UICollectionView!
     
@@ -28,16 +28,17 @@ class FilmographyTableViewCell: UITableViewCell {
     }
 }
 
-extension FilmographyTableViewCell: UICollectionViewDelegate, UICollectionViewDataSource {
+extension PersonDetailsInfoTableViewCell: UICollectionViewDelegate, UICollectionViewDataSource {
     
     
     func collectionView(_ collectionView: UICollectionView, numberOfItemsInSection section: Int) -> Int {
+            
         return filmography.count
     }
     
     func collectionView(_ collectionView: UICollectionView, cellForItemAt indexPath: IndexPath) -> UICollectionViewCell {
         
-        let cell = collectionView.dequeueReusableCell(withReuseIdentifier: Storyboard.filmographyCollectionViewCell, for: indexPath) as! FilmographyCollectionViewCell
+        let cell = collectionView.dequeueReusableCell(withReuseIdentifier: Storyboard.filmographyCollectionViewCell, for: indexPath) as! PersonDetailsInfoCollectionViewCell
         
         cell.filmography = filmography[indexPath.row]
         

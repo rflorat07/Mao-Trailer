@@ -40,7 +40,7 @@ class WalkthroughViewController: UIViewController {
     }
     
     @objc func goToMovieTab() {
-       performSegue(withIdentifier: Segue.toMovieTab, sender: nil)
+       performSegue(withIdentifier: Segue.fromWalkthroughToTab, sender: nil)
     }
     
     @objc func scrollToNextCell(){

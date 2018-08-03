@@ -28,18 +28,20 @@ class QueryService {
     
     typealias QueryError         = ()-> Void
     
-    typealias QueryGenres        = (GenreArray?)-> Void
-    typealias QueryDetails       = (Details?)-> Void
-    typealias QueryDetailsImages = (Images?)-> Void
     
-    typealias QuerySectionTV     = (SectionTVArray?)-> Void
-    typealias QuerySectionMovie  = (SectionMovieArray?)-> Void
+    typealias QueryGenres        = (GenreArray?) -> Void
+    typealias QueryDetails       = (Details?) -> Void
+    typealias QueryDetailsImages = (ImageArray?) -> Void
     
-    typealias QuerySectionData   = (Data?)-> Void
-    typealias QuerySectionResult = (SectionData?)-> Void
-    typealias QuerySectionArray  = ([SectionData]?)-> Void
+    typealias QuerySectionTV     = (SectionTVArray?) -> Void
+    typealias QuerySectionMovie  = (SectionMovieArray?) -> Void
+    typealias QuerySectionPeople = (People?) -> Void
     
-    typealias QueryPersonDetails  = (PersonDetails?)-> Void
+    typealias QuerySectionData   = (Data?) -> Void
+    typealias QuerySectionResult = (SectionData?) -> Void
+    typealias QuerySectionArray  = ([SectionData]?) -> Void
+    
+    typealias QueryPersonDetails  = (PersonDetails?) -> Void
     
     lazy var configuration = URLSessionConfiguration.default
     lazy var session = URLSession(configuration: configuration)
@@ -106,6 +108,31 @@ class QueryService {
         dataTask.resume()
     }
     
+    // MARK: - Fetch popular people
+    func fetchPopularPeople(page: Int, _ completion : @escaping QuerySectionPeople) {
+        
+        let queryString = getUrlPopularPeople(page: page, type: .Person , endPoint: .Popular)
+        
+        getDataFromUrl(queryString: queryString) { (data) in
+            
+            if let data = data {
+                DispatchQueue.main.async {
+                    self.decodeInformation(People.self, from: data, with: queryString, completion: { (popular: People?) in
+                        
+                        completion(popular)
+                    })
+                }
+            } else {
+                DispatchQueue.main.async {
+                    self.decodeError(data!, queryString, {
+                        completion(nil)
+                    })
+                }
+            }
+        }
+        
+    }
+    
     // MARK: - Fetch primary information
     func fetchPrimaryInformation(id: Int,  type: MediaType, _ completion : @escaping QueryDetails) {
         
@@ -139,7 +166,7 @@ class QueryService {
             
             if let data = data {
                 
-                self.decodeInformation(Images.self, from: data, with: queryString, completion: { (details: Images?) in
+                self.decodeInformation(ImageArray.self, from: data, with: queryString, completion: { (details: ImageArray?) in
                     
                     completion(details)
                 })
@@ -299,6 +326,22 @@ class QueryService {
         return urlQuery.string!
     }
     
+    // MARK: - URL Popular People
+    fileprivate func getUrlPopularPeople(page: Int, type: MediaType, endPoint: EndPointType) -> String {
+        
+        var urlQuery = URLComponents(string: QueryString.baseUrl)!
+        
+        urlQuery.path = "/3/\(type.rawValue)/\(endPoint.rawValue)"
+        
+        urlQuery.queryItems = [
+            URLQueryItem(name: "api_key", value: QueryString.api_key),
+            URLQueryItem(name: "language", value: QueryString.language),
+            URLQueryItem(name: "page", value: "\(page)")
+        ]
+        
+        return urlQuery.string!
+    }
+    
     // MARK: - URL Details
     
     fileprivate func getUrlDetails(id: Int,  type: MediaType) -> String {
@@ -309,8 +352,8 @@ class QueryService {
         
         urlQuery.queryItems = [
             URLQueryItem(name: "api_key", value: QueryString.api_key),
-            URLQueryItem(name: "language", value: QueryString.language),
-            URLQueryItem(name: "append_to_response", value: QueryString.append_to_response)
+           // URLQueryItem(name: "language", value: QueryString.language),
+            URLQueryItem(name: "append_to_response", value: QueryString.informationDetails)
         ]
         urlQuery.percentEncodedQuery = urlQuery.percentEncodedQuery?.replacingOccurrences(of: ",", with: "%2C")
         
@@ -412,7 +455,7 @@ class QueryService {
             }
             
         default:
-            print("Query Session : \(sectionName) \n")
+            print("Query Type : \(type.rawValue) \n")
         }
     }
     

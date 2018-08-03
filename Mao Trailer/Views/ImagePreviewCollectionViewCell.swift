@@ -19,10 +19,12 @@ class ImagePreviewCollectionViewCell: UICollectionViewCell {
     }
     
     func updateUI() {
-        imageView.downloadedFrom(urlString: image.file_path, contentMode: .scaleAspectFit)
+        imageView.downloadedFrom(urlString: image.file_path!, contentMode: .scaleAspectFit, size: ImageSize.large)
     }
     
     override func prepareForReuse() {
+        super.prepareForReuse()
+        
         imageView.image = nil
     }
 }

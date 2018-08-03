@@ -26,11 +26,11 @@ class SearchOptionCollectionViewController: UICollectionViewController, UICollec
         
         self.navigationItem.backBarButtonItem = UIBarButtonItem(title: "Back", style: .plain, target: nil, action: nil)
         
-        if segue.identifier == Segue.toSearchOptionDetail {
+        if segue.identifier == Segue.fromSearchOptionToDetail {
             
             let navigationContoller = segue.destination as! UINavigationController
             
-            let receiverViewController = navigationContoller.topViewController as! DetailsViewController
+            let receiverViewController = navigationContoller.topViewController as! DetailsTableViewController
             
             receiverViewController.queryType = queryType
             
@@ -122,6 +122,6 @@ class SearchOptionCollectionViewController: UICollectionViewController, UICollec
         
         let selected = searchData.sectionArray[indexPath.row]
         
-        self.performSegue(withIdentifier: Segue.toSearchOptionDetail, sender: selected)
+        self.performSegue(withIdentifier: Segue.fromSearchOptionToDetail, sender: selected)
     }
 }

@@ -1,5 +1,5 @@
 //
-//  FilmographyCollectionViewCell.swift
+//  PersonDetailsInfoCollectionViewCell.swift
 //  Mao Trailer
 //
 //  Created by Roger Florat on 31/07/18.
@@ -8,7 +8,7 @@
 
 import UIKit
 
-class FilmographyCollectionViewCell: UICollectionViewCell {
+class PersonDetailsInfoCollectionViewCell: UICollectionViewCell {
     
     @IBOutlet weak var coverImageView: UIView!
     @IBOutlet weak var posterImageView: UIImageView!
@@ -28,12 +28,14 @@ class FilmographyCollectionViewCell: UICollectionViewCell {
                 
         posterImageView.clipsToBounds = true
         posterImageView.layer.cornerRadius = Constants.cornerRadius
-        posterImageView.downloadedFrom(urlString: filmography.backdrop_path ?? filmography.poster_path!)
+        posterImageView.downloadedFrom(urlString: filmography.poster_path ?? filmography.backdrop_path!)
         
         coverImageView.dropShadow(radius: Constants.cornerRadius)
     }
     
     override func prepareForReuse() {
+        super.prepareForReuse()
+        
         titleLabel.text = ""
         posterImageView.image = nil
     }

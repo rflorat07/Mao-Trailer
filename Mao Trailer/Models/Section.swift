@@ -77,17 +77,23 @@ protocol Section  {
 }
 
 protocol TVMovie {
+    
     var id: Int { get }
     var title: String { get }
-    var overview: String { get }
+    var overview: String? { get }
     var popularity: Double { get }
-    var poster_path: String? { get set}
+    var poster_path: String? { get }
     var vote_count : Double { get }
     var vote_average: Double { get }
     var release_date: String? { get }
-    var backdrop_path : String? { get set}
+    var backdrop_path : String? { get }
     var original_title : String { get }
+        
+    func getVoteCount() -> String
     
+    func getReleaseDate() -> String
+    
+    func getRatingValue() -> String
 }
 
 

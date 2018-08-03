@@ -12,20 +12,22 @@ let placeholder = Constants.placeholderImage
 let imageCache = NSCache<NSString, UIImage>()
 
 extension UIImageView {
-
-    func downloadedFrom(urlString: String = placeholder, contentMode mode: UIViewContentMode = .scaleAspectFill) {
+    
+    func downloadedFrom(urlString: String = placeholder, contentMode mode: UIViewContentMode = .scaleAspectFill, size: String = ImageSize.medium) {
         
         contentMode = mode
         image = UIImage(named: placeholder)
-                
+        
         if urlString != placeholder {
             
-            let imagePath = "\(ImageURL.filePath)\(urlString)"
+            let imagePath = "\(ImageSize.baseUrl)\(size)\(urlString)"
             
             guard let url = URL(string: imagePath) else { return }
             
             if let imageFromCache = imageCache.object(forKey: urlString as NSString) {
-                self.image = imageFromCache
+                DispatchQueue.main.async() {
+                    self.image = imageFromCache
+                }
                 return
             }
             
@@ -39,7 +41,7 @@ extension UIImageView {
                     self.image = imageToCache
                     imageCache.setObject(imageToCache, forKey: urlString as NSString)
                 }
-            }.resume()
+                }.resume()
         }
     }
 }

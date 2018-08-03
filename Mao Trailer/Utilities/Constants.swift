@@ -26,6 +26,9 @@ struct Colors {
 }
 
 struct Storyboard {
+    
+    static let walkthroughViewCell = "WalkthroughViewCell"
+    
     static let hotViewCell = "HotViewCell"
     static let sectionViewCell = "SectionViewCell"
     static let imagesCollectionViewCell = "ImagesCollectionViewCell"
@@ -47,10 +50,18 @@ struct Storyboard {
     
     static let headerPersonDetailsViewCell  = "HeaderPersonDetailsViewCell"
     
+    static let tvShowsTableViewCell = "TVShowsTableViewCell"
     static let filmographyTableViewCell = "FilmographyTableViewCell"
     static let filmographyCollectionViewCell = "FilmographyCollectionViewCell"
     
-    static let walkthroughViewCell = "WalkthroughViewCell"
+    static let detailInfoTableViewCell = "DetailInfoTableViewCell"
+    static let detailCastTableViewCell = "DetailCastTableViewCell"
+    static let detailImagesTableViewCell = "DetailImagesTableViewCell"
+    
+    static let detailCastCollectionViewCell = "DetailCastCollectionViewCell"
+    static let detailImagesCollectionViewCell = "DetailImagesCollectionViewCell"
+    
+    static let peopleCollectionViewCell = "PeopleCollectionViewCell"
     
     static let searchListViewCell = "SearchListViewCell"
     static let searchGenreViewCell = "SearchGenreViewCell"
@@ -59,28 +70,39 @@ struct Storyboard {
 }
 
 struct Segue {
-    static let toMovieTab = "segueToMovieTab"
-    static let toMovieList = "segueToMovieList"
-    static let toMovieDetail = "segueMovieToMovieDetail"
     
-    static let toTVList = "segueTVToTVList"
-    static let toTVDetail = "segueTVToTVDetail"
+    static let fromWalkthroughToTab = "segueWalkthroughToTab"
     
-    static let toListDetail = "segueListToListDetail"
+    static let fromMovieToList = "segueMovieToList"
     
-    static let toCastDetails = "segueDetailsToCastDetails"
-
-    static let toSearchList = "segueToSearchList"
-    static let toSearchDetail = "segueSearchToSearchDetail"
-    static let toSearchOption = "segueSearchListToSearchOption"
-    static let toSearchOptionDetail = "segueSearchOptionToDetail"
+    static let fromMovieToSearchList = "segueMovieToSearchList"
     
-    static let toProfileDetail = "segueProfileToProfileDetail"
-    static let toProfileSetting = "segueToProfileSetting"
+    static let fromTVToList = "segueTVToList"
+    
+    static let fromTVToSearchList = "segueTVToSearchList"
     
     static let fromPersonDetailsToDetails = "seguePersonDetailsToDetails"
+    static let fromDetailsToPersonDetails = "segueDetailsToPersonDetails"
     
-    static let toImagePreview = "segueToImagePreview"
+    static let fromDetailsToImagePreview = "segueDetailsToImagePreview"
+    
+    static let fromListToDetail = "segueListToDetail"
+    
+    static let fromMovieToDetail = "segueMovieToDetail"
+    
+    static let fromTVToDetail = "segueTVToDetail"
+    
+    static let fromProfileToDetail = "segueProfileToDetail"
+    
+    static let fromSearchListToDetail = "segueSearchListToDetail"
+    
+    static let fromSearchOptionToDetail = "segueSearchOptionToDetail"
+    
+    static let fromProfileToProfileSetting = "segueProfileToProfileSetting"
+    
+    static let fromSearchListToSearchOption = "segueSearchListToSearchOption"
+    
+    static let fromPeopleToPersonDetails = "seguePeopleToPersonDetails"
 }
 
 struct StructType {
@@ -95,56 +117,16 @@ struct QueryString {
     static let sort_by = "popularity.desc"
     static let api_key = "3b122cc1b16808da5a679c3c1c11cd07"
     static let baseUrl = "https://api.themoviedb.org"
-    static let append_to_response = "videos,credits"
-    static let personDetails = "images,movie_credits"
+    static let informationDetails = "images,videos,credits"
+    static let personDetails = "images,movie_credits,tv_credits"
 }
 
-struct ImageURL  {
-    static let fileSize = "/w500"
-    static let baseUrl = "https://image.tmdb.org/t/p"
-    static let filePath = "\(baseUrl)\(fileSize)"
+struct ImageSize {
+    static let large = "/w500"
+    static let medium = "/w400"
+    static let thumbnails = "/w200"
+    static let original = "original"
     static let placeholderImage = "placeholder"
-}
-
-
-// ===================== END =========================
-
-struct EndPoint {
+    static let baseUrl = "https://image.tmdb.org/t/p"
     
-    // The Movie Database API - https://developers.themoviedb.org/3/movies/get-movie-details
-    
-    static let  MovieDetails = "https://api.themoviedb.org/3/movie/351286?api_key=3b122cc1b16808da5a679c3c1c11cd07&language=it-IT&append_to_response=videos%2Ccredits"
-    
-    static let NowMovies = "https://api.themoviedb.org/3/movie/now_playing?api_key=3b122cc1b16808da5a679c3c1c11cd07&language=it-IT&region=IT&page=1"
-    
-    static let PopularMovies = "https://api.themoviedb.org/3/movie/popular?api_key=3b122cc1b16808da5a679c3c1c11cd07&language=it-IT&region=IT&page=1"
-    
-    static let UpcomingMovies = "https://api.themoviedb.org/3/movie/upcoming?api_key=3b122cc1b16808da5a679c3c1c11cd07&language=it-IT&region=IT&page=1"
-    
-    static let SearchMovie = "https://api.themoviedb.org/3/search/movie?api_key=3b122cc1b16808da5a679c3c1c11cd07&language=it-IT&query=mario&include_adult=false&region=IT&page=1"
-
-    // The TV Database API - https://developers.themoviedb.org/3/tv/get-tv-details
-    
-    static let TVShowDetails = "https://api.themoviedb.org/3/tv/1418?api_key=3b122cc1b16808da5a679c3c1c11cd07&language=it-IT&append_to_response=videos%2Ccredits"
-    
-    static let NowTVShows = "https://api.themoviedb.org/3/tv/on_the_air?api_key=3b122cc1b16808da5a679c3c1c11cd07&language=it-IT&page=1"
-    
-    static let PopularTVShows = "https://api.themoviedb.org/3/tv/popular?api_key=3b122cc1b16808da5a679c3c1c11cd07&language=it-IT&page=1"
-    
-    static let AiringTodayTVShows = "https://api.themoviedb.org/3/tv/airing_today?api_key=3b122cc1b16808da5a679c3c1c11cd07&language=it-IT&page=1"
-    
-    static let SearchTVShows = "https://api.themoviedb.org/3/search/tv?api_key=3b122cc1b16808da5a679c3c1c11cd07&language=it-IT&query=Mario&page=1"
-    
-    // The Genre Database API - https://developers.themoviedb.org/3/genres/get-movie-list
-    
-    static let GenreMovieList = "https://api.themoviedb.org/3/genre/movie/list?api_key=3b122cc1b16808da5a679c3c1c11cd07&language=it-IT"
-    
-    static let GenreTvList = "https://api.themoviedb.org/3/genre/tv/list?api_key=3b122cc1b16808da5a679c3c1c11cd07&language=it-IT"
-    
-
-    // movie_id = 351286
-    static let CastAndCrewMovie = "https://api.themoviedb.org/3/movie/351286/credits?api_key=3b122cc1b16808da5a679c3c1c11cd07"
-    
-    // tv_id = 1418
-    static let CastAndCrew = "https://api.themoviedb.org/3/tv/1418/credits?api_key=3b122cc1b16808da5a679c3c1c11cd07&language=it-IT"
 }

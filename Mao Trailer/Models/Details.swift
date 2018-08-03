@@ -9,11 +9,16 @@
 import Foundation
 
 struct Details: Decodable {
-    let id: Int
+    
     let runtime: Double?
     let genres: [Genre]
+    let images: ImageArray
     let videos: VideoArray
     let credits: CastArray
+    
+    func getRuntime() -> String {
+        return Date.getFormattedTime(minute: self.runtime ?? 0.0)
+    }
     
     func getGenre() -> String {
         return self.genres.compactMap { $0.name }.joined(separator: ", ")
@@ -23,7 +28,6 @@ struct Details: Decodable {
         return self.credits.cast.filter{ $0.profile_path != nil }
     }
 }
-
 
 struct GenreArray: Decodable {
     let genres: [Genre]
@@ -65,11 +69,11 @@ struct Crew: Decodable {
     let profile_path: String?
 }
 
-struct Images: Decodable {
+struct ImageArray: Decodable {
     let backdrops: [Image]?
     let posters: [Image]?
 }
 
 struct Image: Decodable {
-    let file_path: String
+    let file_path: String?
 }

@@ -26,7 +26,7 @@ class HotCollectionViewCell: UICollectionViewCell {
         if hotMovie.title == "More" {
            coverImageView.image = UIImage(named: "land-more")
         } else {
-            coverImageView.downloadedFrom(urlString: hotMovie.backdrop_path ?? hotMovie.poster_path!)
+            coverImageView.downloadedFrom(urlString: hotMovie.backdrop_path ?? hotMovie.poster_path!, size: ImageSize.medium)
         }
         
         coverImageView.clipsToBounds = true
@@ -36,6 +36,8 @@ class HotCollectionViewCell: UICollectionViewCell {
     }
     
     override func prepareForReuse() {
+         super.prepareForReuse()
+        
         coverImageView.image = nil
     }
 }

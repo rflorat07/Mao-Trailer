@@ -1,5 +1,5 @@
 //
-//  DetailFullCastCollectionViewCell.swift
+//  DetailCastCollectionViewCell.swift
 //  Mao Trailer
 //
 //  Created by Roger Florat on 26/06/18.
@@ -8,7 +8,7 @@
 
 import UIKit
 
-class DetailFullCastCollectionViewCell: UICollectionViewCell {
+class DetailCastCollectionViewCell: UICollectionViewCell {
     
     @IBOutlet weak var coverCastView: UIView!
     @IBOutlet weak var coverImageView: UIImageView!
@@ -37,6 +37,8 @@ class DetailFullCastCollectionViewCell: UICollectionViewCell {
     }
     
     override func prepareForReuse() {
+        super.prepareForReuse()
+        
         nameLabel.text = ""
         creditLabel.text = ""
         coverImageView.image = nil

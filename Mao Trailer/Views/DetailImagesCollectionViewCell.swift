@@ -25,12 +25,14 @@ class DetailImagesCollectionViewCell: UICollectionViewCell {
         
         coverImageView.clipsToBounds = true
         coverImageView.layer.cornerRadius = cornerRadius
-        coverImageView.downloadedFrom(urlString: backdropImage.file_path)
+        coverImageView.downloadedFrom(urlString: backdropImage.file_path!, size: ImageSize.large)
         
         coverBackdropsView.dropShadow(radius: cornerRadius)
     }
     
     override func prepareForReuse() {
+        super.prepareForReuse()
+        
         coverImageView.image = nil
     }
     

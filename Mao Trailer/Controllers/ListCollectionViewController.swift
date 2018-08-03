@@ -20,11 +20,11 @@ class ListCollectionViewController: UICollectionViewController {
     
     override func prepare(for segue: UIStoryboardSegue, sender: Any?) {
  
-        if segue.identifier == Segue.toListDetail {
+        if segue.identifier == Segue.fromListToDetail {
         
             let navigationContoller = segue.destination as! UINavigationController
             
-            let receiverViewController = navigationContoller.topViewController as! DetailsViewController
+            let receiverViewController = navigationContoller.topViewController as! DetailsTableViewController
             
             receiverViewController.queryType = queryType
             
@@ -106,6 +106,6 @@ class ListCollectionViewController: UICollectionViewController {
         
         let selected = sectionData.sectionArray[indexPath.row]
         
-        self.performSegue(withIdentifier: Segue.toListDetail, sender: selected)
+        self.performSegue(withIdentifier: Segue.fromListToDetail, sender: selected)
     }
 }

@@ -33,7 +33,7 @@ class SearchListCollectionViewController: UICollectionViewController {
     
     override func prepare(for segue: UIStoryboardSegue, sender: Any?) {
         
-        if segue.identifier == Segue.toSearchOption {
+        if segue.identifier == Segue.fromSearchListToSearchOption {
             
             let toViewController = segue.destination as! SearchOptionCollectionViewController
             
@@ -41,11 +41,11 @@ class SearchListCollectionViewController: UICollectionViewController {
             toViewController.genreInfo = sender as? Genre
         }
         
-        if segue.identifier == Segue.toSearchDetail {
+        if segue.identifier == Segue.fromSearchListToDetail {
             
             let navigationContoller = segue.destination as! UINavigationController
             
-            let receiverViewController = navigationContoller.topViewController as! DetailsViewController
+            let receiverViewController = navigationContoller.topViewController as! DetailsTableViewController
             
             receiverViewController.queryType = queryType
             
@@ -173,12 +173,12 @@ class SearchListCollectionViewController: UICollectionViewController {
             
             let gendeInfo = officialGenresTemp[indexPath.row]
             
-            self.performSegue(withIdentifier: Segue.toSearchOption, sender: gendeInfo)
+            self.performSegue(withIdentifier: Segue.fromSearchListToSearchOption, sender: gendeInfo)
             
         } else {
             let selected = searchData.sectionArray[indexPath.row]
             
-            self.performSegue(withIdentifier: Segue.toSearchDetail, sender: selected)
+            self.performSegue(withIdentifier: Segue.fromSearchListToDetail, sender: selected)
         }
     }
 }
