@@ -1216,7 +1216,7 @@
                     <connections>
                         <outlet property="searchDisplayController" destination="WjI-gm-DRQ" id="cQX-vx-S3Z"/>
                         <segue destination="Htu-zC-k4h" kind="show" identifier="segueSearchListToSearchOption" id="5jE-S6-FAk"/>
-                        <segue destination="xce-wA-rV3" kind="show" identifier="segueSearchToDetail" id="PmJ-kj-IYH"/>
+                        <segue destination="xce-wA-rV3" kind="show" identifier="segueSearchListToDetail" id="PmJ-kj-IYH"/>
                     </connections>
                 </collectionViewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="nTr-f3-eif" userLabel="First Responder" sceneMemberID="firstResponder"/>
@@ -1229,7 +1229,7 @@
                     </connections>
                 </searchDisplayController>
             </objects>
-            <point key="canvasLocation" x="2633" y="1173"/>
+            <point key="canvasLocation" x="2679" y="1173"/>
         </scene>
         <!--Search Option Collection View Controller-->
         <scene sceneID="Wom-Ui-uGz">
@@ -2449,7 +2449,7 @@
                 </tableViewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="m3g-UF-ctC" userLabel="First Responder" sceneMemberID="firstResponder"/>
             </objects>
-            <point key="canvasLocation" x="2633" y="4290"/>
+            <point key="canvasLocation" x="2650" y="4459"/>
         </scene>
         <!--Navigation Controller-->
         <scene sceneID="pi7-76-Pix">
@@ -2491,7 +2491,7 @@
                 </navigationController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="DKG-GH-5y4" userLabel="First Responder" sceneMemberID="firstResponder"/>
             </objects>
-            <point key="canvasLocation" x="2633" y="3241"/>
+            <point key="canvasLocation" x="2649" y="3416"/>
         </scene>
         <!--PEOPLE-->
         <scene sceneID="A2T-cU-yTl">
@@ -2585,9 +2585,14 @@
                         </connections>
                     </collectionView>
                     <navigationItem key="navigationItem" title="PEOPLE" id="Qco-Nj-tAJ">
-                        <barButtonItem key="rightBarButtonItem" image="icon-search" id="Piv-e3-tfp"/>
+                        <barButtonItem key="rightBarButtonItem" image="icon-search" id="Piv-e3-tfp">
+                            <connections>
+                                <action selector="searchButtonTapped:" destination="cPP-9s-ew8" id="W6M-Mb-tPa"/>
+                            </connections>
+                        </barButtonItem>
                     </navigationItem>
                     <connections>
+                        <outlet property="searchButtonItem" destination="Piv-e3-tfp" id="81s-Ub-2Nu"/>
                         <segue destination="Apd-1l-YiK" kind="show" identifier="seguePeopleToPersonDetails" id="wLT-WA-3da"/>
                     </connections>
                 </collectionViewController>
@@ -2630,7 +2635,7 @@
     </resources>
     <inferredMetricsTieBreakers>
         <segue reference="wLT-WA-3da"/>
-        <segue reference="Uhj-1J-Xqh"/>
+        <segue reference="PmJ-kj-IYH"/>
         <segue reference="q8I-r6-MVa"/>
         <segue reference="Vfq-1Z-68d"/>
     </inferredMetricsTieBreakers>

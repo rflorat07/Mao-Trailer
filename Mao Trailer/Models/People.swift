@@ -10,9 +10,13 @@ import Foundation
 
 struct People: Decodable  {
     var page: Int
-    let total_pages: Int
-    let total_results: Int
+    var total_pages: Int
+    var total_results: Int
     var results: [Popular]
+    
+    func getPopularArray() -> [Popular] {
+        return self.results.filter{ $0.profile_path != nil }
+    }
 
 }
 

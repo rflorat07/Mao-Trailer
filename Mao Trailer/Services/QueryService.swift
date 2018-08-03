@@ -91,17 +91,14 @@ class QueryService {
                 let response = response as? HTTPURLResponse,
                 response.statusCode == 200 {
                 
-                DispatchQueue.main.async {
                     self.decodeData(sectionName: sectionName, type: type, data: data, urlQuery: queryString, { (sectionResult) in
                         completion(sectionResult)
                     })
-                }
             } else {
-                DispatchQueue.main.async {
-                    self.decodeError(data!, queryString, {
-                        completion(nil)
-                    })
-                }
+                
+                self.decodeError(data!, queryString, {
+                    completion(nil)
+                })
             }
         }
         
@@ -116,18 +113,15 @@ class QueryService {
         getDataFromUrl(queryString: queryString) { (data) in
             
             if let data = data {
-                DispatchQueue.main.async {
-                    self.decodeInformation(People.self, from: data, with: queryString, completion: { (popular: People?) in
-                        
-                        completion(popular)
-                    })
-                }
+                
+                self.decodeInformation(People.self, from: data, with: queryString, completion: { (popular: People?) in
+                    completion(popular)
+                })
+                
             } else {
-                DispatchQueue.main.async {
-                    self.decodeError(data!, queryString, {
-                        completion(nil)
-                    })
-                }
+                self.decodeError(data!, queryString, {
+                    completion(nil)
+                })
             }
         }
         
@@ -147,11 +141,9 @@ class QueryService {
                     completion(details)
                 })
             } else {
-                DispatchQueue.main.async {
-                    self.decodeError(data!, queryString, {
-                        completion(nil)
-                    })
-                }
+                self.decodeError(data!, queryString, {
+                    completion(nil)
+                })
             }
         }
     }
@@ -172,17 +164,15 @@ class QueryService {
                 })
                 
             } else {
-                DispatchQueue.main.async {
                     self.decodeError(data!, queryString, {
                         completion(nil)
                     })
-                }
             }
         }
     }
     
     
-    // MARK: - Search
+    // MARK: - Search Movie and TV
     func search(searchText: String, page: Int, type: MediaType, _ completion : @escaping QuerySectionResult) {
         
         var urlQuery = URLComponents(string: QueryString.baseUrl)!
@@ -199,14 +189,31 @@ class QueryService {
         
         getDataFromUrl(queryString: urlQuery.string!) { (data) in
             if let data = data {
-                DispatchQueue.main.async {
-                    self.decodeData(sectionName: "Search", type: type, data: data, urlQuery: urlQuery.string!, { (sectiondata) in
-                        completion(sectiondata)
-                    })
-                }
+                self.decodeData(sectionName: "Search", type: type, data: data, urlQuery: urlQuery.string!, { (sectiondata) in
+                    completion(sectiondata)
+                })
             }
         }
         
+    }
+    
+    // MARK: - Search People
+    func searchForPeople(searchText: String, page: Int? = 1,type: MediaType, _ completion : @escaping QuerySectionPeople) {
+        
+        let queryString = getURLSearch(searchText: searchText, page: page!, type: type)
+        
+        getDataFromUrl(queryString: queryString) { (data) in
+            if let data = data {
+                self.decodeInformation(People.self, from: data, with: queryString, completion: { (search: People?) in
+                    
+                    completion(search)
+                })
+            } else {
+                self.decodeError(data!, queryString, {
+                    completion(nil)
+                })
+            }
+        }
     }
     
     // MARK: - Fetch Genres Information
@@ -224,11 +231,9 @@ class QueryService {
                 })
                 
             } else {
-                DispatchQueue.main.async {
-                    self.decodeError(data!, queryString, {
-                        completion(nil)
-                    })
-                }
+                self.decodeError(data!, queryString, {
+                    completion(nil)
+                })
             }
         }
     }
@@ -244,11 +249,9 @@ class QueryService {
                     completion(sectionData)
                 })
             } else {
-                DispatchQueue.main.async {
                     self.decodeError(data!, queryString, {
                         completion(nil)
                     })
-                }
             }
         }
     }
@@ -268,11 +271,9 @@ class QueryService {
                 })
                 
             } else {
-                DispatchQueue.main.async {
                     self.decodeError(data!, queryString, {
                         completion(nil)
                     })
-                }
             }
         }
     }
@@ -293,15 +294,11 @@ class QueryService {
                 let data = data,
                 let response = response as? HTTPURLResponse,
                 response.statusCode == 200 {
-                DispatchQueue.main.async {
                     completion(data)
-                }
             } else {
-                DispatchQueue.main.async {
-                    self.decodeError(data!, queryString, {
-                        completion(nil)
-                    })
-                }
+                self.decodeError(data!, queryString, {
+                    completion(nil)
+                })
             }
         }
         
@@ -374,6 +371,24 @@ class QueryService {
             URLQueryItem(name: "append_to_response", value: QueryString.personDetails)
         ]
         
+        return urlQuery.string!
+    }
+    
+     // MARK: - URL search
+    func getURLSearch(searchText: String, page: Int, type: MediaType) -> String {
+        
+        var urlQuery = URLComponents(string: QueryString.baseUrl)!
+        
+        urlQuery.path = "/3/search/\(type.rawValue)"
+        urlQuery.queryItems = [
+            URLQueryItem(name: "api_key", value: QueryString.api_key),
+            URLQueryItem(name: "language", value: QueryString.language),
+            URLQueryItem(name: "query", value: searchText),
+            URLQueryItem(name: "include_adult", value: "false"),
+            URLQueryItem(name: "region", value: QueryString.region),
+            URLQueryItem(name: "page", value: String(page))
+        ]
+    
         return urlQuery.string!
     }
     
@@ -464,32 +479,35 @@ class QueryService {
     
     fileprivate func decodeInformation<T>(_ type: T.Type, from data: Data, with url: String, completion : @escaping (T?) -> Void) where T : Decodable {
         
-        do {
-            let list = try JSONDecoder().decode(type, from: data)
+        DispatchQueue.main.async {
             
-            completion(list)
-            
-        } catch let decodeError as NSError {
-            
-            completion(nil)
-
-            print("Decoder error: \(decodeError.localizedDescription) \n \n \(decodeError) \n \n Url: \(url)")
+            do {
+                let list = try JSONDecoder().decode(type, from: data)
+                
+                completion(list)
+                
+            } catch let decodeError as NSError {
+                
+                completion(nil)
+                
+                print("Decoder error: \(decodeError.localizedDescription) \n \n \(decodeError) \n \n Url: \(url)")
+            }
         }
     }
     
     // MARK: - Decode error
     
     fileprivate func decodeError(_ data: Data, _ url: String, _ completion : @escaping QueryError) {
-        
-        do {
-            let error = try JSONDecoder().decode(SectionError.self, from: data)
-            completion()
-            print("DataTask error status code: \(error.status_code ?? 404)  \(error.status_message ?? "Requested could not be found") \n Url \(url)")
-            
-        } catch let decodeError as NSError {
-            completion()
-            print("Decoder error: \(decodeError.localizedDescription)\n")
+        DispatchQueue.main.async {
+            do {
+                let error = try JSONDecoder().decode(SectionError.self, from: data)
+                completion()
+                print("DataTask error status code: \(error.status_code ?? 404)  \(error.status_message ?? "Requested could not be found") \n Url \(url)")
+                
+            } catch let decodeError as NSError {
+                completion()
+                print("Decoder error: \(decodeError.localizedDescription)\n")
+            }
         }
-        
     }
 }
