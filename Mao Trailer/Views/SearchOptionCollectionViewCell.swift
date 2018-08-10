@@ -30,8 +30,8 @@ class SearchOptionCollectionViewCell: UICollectionViewCell {
         rateLabel.text = String(format:"%.1f", searchTVMovie.vote_average)
         
         coverImageView.clipsToBounds = true
-        coverImageView.downloadedFrom(urlString: searchTVMovie.poster_path ?? searchTVMovie.backdrop_path!)
         coverImageView.layer.cornerRadius = cornerRadius
+        coverImageView.downloadedFrom(urlString: searchTVMovie.poster_path ?? searchTVMovie.backdrop_path!)
         
         posterCoverView.dropShadow(radius: cornerRadius)
     }

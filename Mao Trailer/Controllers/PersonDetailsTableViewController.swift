@@ -37,7 +37,7 @@ class PersonDetailsTableViewController: UITableViewController {
         }
 
     }
-    
+        
     override func prepare(for segue: UIStoryboardSegue, sender: Any?) {
         
         if segue.identifier == Segue.fromPersonDetailsToDetails {
@@ -58,7 +58,7 @@ class PersonDetailsTableViewController: UITableViewController {
     }
     
     @IBAction func backButtonTapped(_ sender: UIBarButtonItem) {
-        dismiss(animated: true, completion: nil)
+       // dismiss(animated: true, completion: nil)
     }
 
     override func numberOfSections(in tableView: UITableView) -> Int {

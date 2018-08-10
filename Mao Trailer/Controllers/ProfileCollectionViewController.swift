@@ -11,28 +11,16 @@ import UIKit
 class ProfileCollectionViewController: UICollectionViewController {
     
     let sectionProfileInfo = [SectionInfo(page: 1, type: .TV, sectionName: "Popular", endPoint: .Popular)]
-    
-    var sectionProfileArray: SectionData = SectionData()
-    
+
+    var accountDetails: AccountDetails!
+    var sectionProfileArray: SectionData!
+        
     override func viewDidLoad() {
         super.viewDidLoad()
         
-        loadProfileData()
-    }
-
-    func loadProfileData() {
+        navigationItem.hidesBackButton = true
         
-        LoadingIndicatorView.show("Loading")
-        
-        QueryService.instance.fetchAllSection(sectionArray: sectionProfileInfo) { (sectionArray) in
-            
-            if let sectionArray = sectionArray {
-                self.sectionProfileArray = sectionArray[0]
-                self.collectionView?.reloadData()
-            }
-            
-            LoadingIndicatorView.hide()
-        }
+        self.loadProfileData()
     }
     
     override func prepare(for segue: UIStoryboardSegue, sender: Any?) {
@@ -46,20 +34,55 @@ class ProfileCollectionViewController: UICollectionViewController {
             receiverViewController.queryType = .TV
             receiverViewController.information = sender as? TVShow
         }
+                
+        if segue.identifier == Segue.fromProfileToProfileSetting {
+            
+            let toViewController = segue.destination as? ProfileSettingViewController
+            
+            toViewController?.callback = { (response) in
+                self.accountDetails = nil
+                self.sectionProfileArray = nil
+                self.collectionView?.reloadData()
+            }
+        }
+    }
+    
+    
+    func loadProfileData() {
+        
+        LoadingIndicatorView.show("Loading")
+        
+        QueryService.instance.fetchAllSection(sectionArray: sectionProfileInfo) { (sectionArray) in
+            
+            if let sectionArray = sectionArray {
+                self.sectionProfileArray = sectionArray[0]
+                self.collectionView?.reloadData()
+            }
+            
+            LoadingIndicatorView.hide()
+        }
+        
+        AuthenticationService.instance.fetchAccountDetails { (details) in
+            if let details = details {
+                self.accountDetails = details
+                self.collectionView?.reloadData()
+            }
+        }
     }
     
 
     @IBAction func settingButton(_ sender: UIBarButtonItem) {
         
-        performSegue(withIdentifier: Segue.fromProfileToProfileSetting, sender: nil)
+        performSegue(withIdentifier: Segue.fromProfileToProfileSetting, sender: self)
     }
-        
-   
+    
     override func collectionView(_ collectionView: UICollectionView, viewForSupplementaryElementOfKind kind: String, at indexPath: IndexPath) -> UICollectionReusableView {
     
         if let sectionHeader = collectionView.dequeueReusableSupplementaryView(ofKind: kind, withReuseIdentifier: Storyboard.profileHeaderReusableView, for: indexPath) as? ProfileHeaderCollectionReusableView {
             
-            sectionHeader.avatarImage = "avatar"
+            if let accountDetails = accountDetails {
+                sectionHeader.profile = accountDetails
+            }
             
             return sectionHeader
         }
@@ -70,7 +93,7 @@ class ProfileCollectionViewController: UICollectionViewController {
     
     override func numberOfSections(in collectionView: UICollectionView) -> Int {
         
-        return 1
+        return sectionProfileArray != nil ? 1 : 0
     }
 
     override func collectionView(_ collectionView: UICollectionView, numberOfItemsInSection section: Int) -> Int {
@@ -99,6 +122,6 @@ class ProfileCollectionViewController: UICollectionViewController {
         self.performSegue(withIdentifier: Segue.fromProfileToDetail, sender: selected)
         
     }
-
 }
+
 

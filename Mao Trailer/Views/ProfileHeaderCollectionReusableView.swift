@@ -19,7 +19,7 @@ class ProfileHeaderCollectionReusableView: UICollectionReusableView {
     
     let cornerRadius: CGFloat = 55.0
     
-    var avatarImage: String! {
+    var profile: AccountDetails! {
         didSet {
             self.updateUI()
         }
@@ -27,11 +27,20 @@ class ProfileHeaderCollectionReusableView: UICollectionReusableView {
     
     func updateUI() {
         
+        nameLabel.text = profile.name.uppercased()
+        
         avatarImageView.clipsToBounds = true
         avatarImageView.layer.borderWidth = 3
         avatarImageView.layer.cornerRadius = cornerRadius
-        avatarImageView.image = UIImage(named: avatarImage)
+        avatarImageView.downloadedAvatarFrom(urlString: profile.getImageAvatar())
         avatarImageView.layer.borderColor = UIColor.white.cgColor
 
+    }
+    
+    override func prepareForReuse() {
+        super.prepareForReuse()
+        
+        nameLabel.text = ""
+        avatarImageView.image = nil
     }
 }

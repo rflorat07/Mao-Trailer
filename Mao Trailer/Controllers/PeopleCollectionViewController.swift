@@ -51,12 +51,14 @@ class PeopleCollectionViewController: UICollectionViewController {
             
             QueryService.instance.fetchPopularPeople(page: page) { (morePopular) in
                 
-                self.fetchingMore = false
-                
-                if let morePopular = morePopular {
-                    self.peopleData.page = morePopular.page
-                    self.peopleData.results.append(contentsOf: morePopular.results)
-                    self.collectionView?.reloadData()
+                DispatchQueue.main.async {
+                    self.fetchingMore = false
+                    
+                    if let morePopular = morePopular {
+                        self.peopleData.page = morePopular.page
+                        self.peopleData.results.append(contentsOf: morePopular.results)
+                        self.collectionView?.reloadData()
+                    }
                 }
             }
         }, completion: nil)
@@ -68,11 +70,9 @@ class PeopleCollectionViewController: UICollectionViewController {
         
         if segue.identifier == Segue.fromPeopleToPersonDetails {
             
-            let navigationContoller = segue.destination as! UINavigationController
+            let toViewController = segue.destination as! PersonDetailsTableViewController
             
-            let receiverViewController = navigationContoller.topViewController as! PersonDetailsTableViewController
-            
-            receiverViewController.personId = sender as? Int
+            toViewController.personId = sender as? Int
         }
     }
     
@@ -95,7 +95,7 @@ class PeopleCollectionViewController: UICollectionViewController {
     
     override func collectionView(_ collectionView: UICollectionView, cellForItemAt indexPath: IndexPath) -> UICollectionViewCell {
         let cell = collectionView.dequeueReusableCell(withReuseIdentifier: Storyboard.peopleCollectionViewCell, for: indexPath) as! PeopleCollectionViewCell
-        
+    
         cell.people = peopleData.getPopularArray()[indexPath.row]
         
         return cell

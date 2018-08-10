@@ -32,14 +32,5 @@ class PeopleCollectionViewCell: UICollectionViewCell {
         profileImageView.downloadedFrom(urlString: people.profile_path ?? "placeholder")
         
         coverImageView.dropShadow(radius: cornerRadius)
-        
     }
-    
-    override func prepareForReuse() {
-        super.prepareForReuse()
-        
-        nameLabel.text = ""
-        profileImageView.image = nil
-    }
-    
 }

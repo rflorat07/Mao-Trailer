@@ -386,7 +386,7 @@
                 </collectionViewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="x6I-dW-pA5" userLabel="First Responder" sceneMemberID="firstResponder"/>
             </objects>
-            <point key="canvasLocation" x="697" y="1173"/>
+            <point key="canvasLocation" x="697" y="1030"/>
         </scene>
         <!--Walkthrough View Controller-->
         <scene sceneID="DM0-Rk-CnA">
@@ -851,10 +851,10 @@
             </objects>
             <point key="canvasLocation" x="1694" y="57"/>
         </scene>
-        <!--PROFILE-->
+        <!--PROFILE DETAILS-->
         <scene sceneID="h63-8o-JIS">
             <objects>
-                <collectionViewController id="F0F-uf-w1F" customClass="ProfileCollectionViewController" customModule="Mao_Trailer" customModuleProvider="target" sceneMemberID="viewController">
+                <collectionViewController modalTransitionStyle="crossDissolve" modalPresentationStyle="overFullScreen" id="F0F-uf-w1F" userLabel="PROFILE DETAILS" customClass="ProfileCollectionViewController" customModule="Mao_Trailer" customModuleProvider="target" sceneMemberID="viewController">
                     <collectionView key="view" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="scaleToFill" showsHorizontalScrollIndicator="NO" showsVerticalScrollIndicator="NO" dataMode="prototypes" id="o2E-JE-AUl">
                         <rect key="frame" x="0.0" y="0.0" width="375" height="667"/>
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
@@ -929,9 +929,9 @@
                                                 <constraint firstAttribute="width" constant="110" id="qTq-Od-oIe"/>
                                             </constraints>
                                         </view>
-                                        <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Adeline Henderson" textAlignment="center" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="w7Z-51-mBE" userLabel="Name Label">
+                                        <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="ADELINE HENDERSON" textAlignment="center" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="w7Z-51-mBE" userLabel="Name Label">
                                             <rect key="frame" x="20" y="155" width="335" height="20.5"/>
-                                            <fontDescription key="fontDescription" type="system" weight="semibold" pointSize="24"/>
+                                            <fontDescription key="fontDescription" type="system" weight="semibold" pointSize="18"/>
                                             <color key="textColor" red="0.1333333333" green="0.1333333333" blue="0.1333333333" alpha="1" colorSpace="calibratedRGB"/>
                                             <nil key="highlightedColor"/>
                                         </label>
@@ -1103,12 +1103,12 @@
                 </collectionViewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="Cq0-0Y-ZEX" userLabel="First Responder" sceneMemberID="firstResponder"/>
             </objects>
-            <point key="canvasLocation" x="3580" y="57"/>
+            <point key="canvasLocation" x="4422" y="57"/>
         </scene>
         <!--Search Collection View Controller-->
         <scene sceneID="cgb-kb-Glq">
             <objects>
-                <collectionViewController id="f8p-aJ-e00" userLabel="Search Collection View Controller" customClass="SearchListCollectionViewController" customModule="Mao_Trailer" customModuleProvider="target" sceneMemberID="viewController">
+                <collectionViewController modalTransitionStyle="crossDissolve" modalPresentationStyle="overFullScreen" id="f8p-aJ-e00" userLabel="Search Collection View Controller" customClass="SearchListCollectionViewController" customModule="Mao_Trailer" customModuleProvider="target" sceneMemberID="viewController">
                     <collectionView key="view" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="scaleToFill" dataMode="prototypes" id="HGl-TF-F23">
                         <rect key="frame" x="0.0" y="0.0" width="375" height="667"/>
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
@@ -1229,7 +1229,7 @@
                     </connections>
                 </searchDisplayController>
             </objects>
-            <point key="canvasLocation" x="2679" y="1173"/>
+            <point key="canvasLocation" x="2255" y="1030"/>
         </scene>
         <!--Search Option Collection View Controller-->
         <scene sceneID="Wom-Ui-uGz">
@@ -1345,7 +1345,7 @@
                 </collectionViewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="ATD-ad-TyQ" userLabel="First Responder" sceneMemberID="firstResponder"/>
             </objects>
-            <point key="canvasLocation" x="3580" y="1173"/>
+            <point key="canvasLocation" x="3580" y="1030"/>
         </scene>
         <!--Image Preview View Controller-->
         <scene sceneID="Ndd-nR-sro">
@@ -1433,7 +1433,7 @@
                         <rect key="frame" x="0.0" y="0.0" width="375" height="1067"/>
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
                         <color key="backgroundColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
-                        <view key="tableHeaderView" contentMode="scaleToFill" id="3Uo-Y4-fcl" userLabel="Movie Detail View">
+                        <view key="tableHeaderView" contentMode="scaleToFill" misplaced="YES" id="3Uo-Y4-fcl" userLabel="Movie Detail View">
                             <rect key="frame" x="0.0" y="0.0" width="375" height="560"/>
                             <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
                             <subviews>
@@ -1771,6 +1771,7 @@
                         </connections>
                     </tableView>
                     <navigationItem key="navigationItem" id="o3L-az-Zrk">
+                        <barButtonItem key="backBarButtonItem" title=" Back" id="nh6-Bk-m3F"/>
                         <leftBarButtonItems>
                             <barButtonItem image="icon-back" id="jHm-Cd-tCp">
                                 <connections>
@@ -1802,7 +1803,7 @@
                         <outlet property="titleLabel" destination="rVe-lx-hOe" id="VFn-QG-5QF"/>
                         <outlet property="voteCountLabel" destination="97d-Gg-XaO" id="Iwz-RD-CmL"/>
                         <segue destination="nzz-XX-lQI" kind="presentation" identifier="segueDetailsToImagePreview" modalPresentationStyle="overFullScreen" modalTransitionStyle="crossDissolve" id="TJb-19-NVK"/>
-                        <segue destination="Apd-1l-YiK" kind="show" identifier="segueDetailsToPersonDetails" id="adE-Gy-h7g"/>
+                        <segue destination="5oz-5Z-Lef" kind="show" identifier="segueDetailsToPersonDetails" id="OhG-fl-qZN"/>
                     </connections>
                 </tableViewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="1P1-Vn-ty4" userLabel="First Responder" sceneMemberID="firstResponder"/>
@@ -2015,6 +2016,9 @@
                                         <integer key="value" value="25"/>
                                     </userDefinedRuntimeAttribute>
                                 </userDefinedRuntimeAttributes>
+                                <connections>
+                                    <action selector="signoutButtonTapped:" destination="3R2-Sh-twM" eventType="touchUpInside" id="dmj-bF-n7m"/>
+                                </connections>
                             </button>
                         </subviews>
                         <color key="backgroundColor" red="0.97254901960784312" green="0.97254901960784312" blue="0.97254901960784312" alpha="1" colorSpace="calibratedRGB"/>
@@ -2043,7 +2047,7 @@
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="hA0-z5-Eya" userLabel="First Responder" sceneMemberID="firstResponder"/>
             </objects>
-            <point key="canvasLocation" x="4455" y="57"/>
+            <point key="canvasLocation" x="5242" y="55"/>
         </scene>
         <!--Tab Bar Controller-->
         <scene sceneID="ID0-NL-Hl3">
@@ -2112,7 +2116,7 @@
                     </navigationBar>
                     <nil name="viewControllers"/>
                     <connections>
-                        <segue destination="F0F-uf-w1F" kind="relationship" relationship="rootViewController" id="FbK-BU-FE1"/>
+                        <segue destination="oAR-mq-LUk" kind="relationship" relationship="rootViewController" id="oUL-5B-M3H"/>
                     </connections>
                 </navigationController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="6W6-Rl-Mmf" userLabel="First Responder" sceneMemberID="firstResponder"/>
@@ -2428,20 +2432,6 @@
                             <outlet property="delegate" destination="5oz-5Z-Lef" id="eAN-Ib-fFm"/>
                         </connections>
                     </tableView>
-                    <navigationItem key="navigationItem" id="O7W-nt-Xpt">
-                        <leftBarButtonItems>
-                            <barButtonItem image="icon-back" id="feR-g0-XHG">
-                                <connections>
-                                    <action selector="backButtonTapped:" destination="5oz-5Z-Lef" id="3jW-Lu-nRT"/>
-                                </connections>
-                            </barButtonItem>
-                            <barButtonItem title="Back" id="jmw-gK-Ve9">
-                                <connections>
-                                    <action selector="backButtonTapped:" destination="5oz-5Z-Lef" id="XPp-gH-3h8"/>
-                                </connections>
-                            </barButtonItem>
-                        </leftBarButtonItems>
-                    </navigationItem>
                     <size key="freeformSize" width="375" height="1115"/>
                     <connections>
                         <segue destination="xce-wA-rV3" kind="show" identifier="seguePersonDetailsToDetails" id="Uhj-1J-Xqh"/>
@@ -2449,7 +2439,7 @@
                 </tableViewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="m3g-UF-ctC" userLabel="First Responder" sceneMemberID="firstResponder"/>
             </objects>
-            <point key="canvasLocation" x="2650" y="4459"/>
+            <point key="canvasLocation" x="2678" y="3365"/>
         </scene>
         <!--Navigation Controller-->
         <scene sceneID="pi7-76-Pix">
@@ -2469,39 +2459,16 @@
             </objects>
             <point key="canvasLocation" x="1694" y="2230"/>
         </scene>
-        <!--Navigation Controller-->
-        <scene sceneID="3If-3Z-6EJ">
-            <objects>
-                <navigationController automaticallyAdjustsScrollViewInsets="NO" modalTransitionStyle="crossDissolve" modalPresentationStyle="overFullScreen" id="Apd-1l-YiK" sceneMemberID="viewController">
-                    <toolbarItems/>
-                    <navigationBar key="navigationBar" contentMode="scaleToFill" insetsLayoutMarginsFromSafeArea="NO" id="m02-ZV-csp">
-                        <rect key="frame" x="0.0" y="20" width="375" height="44"/>
-                        <autoresizingMask key="autoresizingMask"/>
-                        <color key="tintColor" red="0.12941176470588234" green="0.12941176470588234" blue="0.12941176470588234" alpha="1" colorSpace="custom" customColorSpace="calibratedRGB"/>
-                        <color key="barTintColor" red="0.97254901960784312" green="0.97254901960784312" blue="0.97254901960784312" alpha="1" colorSpace="calibratedRGB"/>
-                        <textAttributes key="titleTextAttributes">
-                            <fontDescription key="fontDescription" type="boldSystem" pointSize="24"/>
-                            <color key="textColor" red="0.12941176470588234" green="0.12941176470588234" blue="0.12941176470588234" alpha="1" colorSpace="custom" customColorSpace="calibratedRGB"/>
-                        </textAttributes>
-                    </navigationBar>
-                    <nil name="viewControllers"/>
-                    <connections>
-                        <segue destination="5oz-5Z-Lef" kind="relationship" relationship="rootViewController" id="Lhp-0U-4bc"/>
-                    </connections>
-                </navigationController>
-                <placeholder placeholderIdentifier="IBFirstResponder" id="DKG-GH-5y4" userLabel="First Responder" sceneMemberID="firstResponder"/>
-            </objects>
-            <point key="canvasLocation" x="2649" y="3416"/>
-        </scene>
         <!--PEOPLE-->
         <scene sceneID="A2T-cU-yTl">
             <objects>
-                <navigationController automaticallyAdjustsScrollViewInsets="NO" id="wHv-Pv-lPQ" sceneMemberID="viewController">
+                <navigationController automaticallyAdjustsScrollViewInsets="NO" modalTransitionStyle="crossDissolve" modalPresentationStyle="overFullScreen" id="wHv-Pv-lPQ" sceneMemberID="viewController">
                     <tabBarItem key="tabBarItem" title="PEOPLE" image="tab-people-light" selectedImage="tab-people-dark" id="deA-XG-jfI"/>
                     <toolbarItems/>
                     <navigationBar key="navigationBar" contentMode="scaleToFill" insetsLayoutMarginsFromSafeArea="NO" id="vAb-O0-LPS">
                         <rect key="frame" x="0.0" y="20" width="375" height="44"/>
                         <autoresizingMask key="autoresizingMask"/>
+                        <color key="tintColor" red="0.12941176470588234" green="0.12941176470588234" blue="0.12941176470588234" alpha="1" colorSpace="custom" customColorSpace="calibratedRGB"/>
                         <color key="barTintColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
                         <textAttributes key="titleTextAttributes">
                             <fontDescription key="fontDescription" type="boldSystem" pointSize="24"/>
@@ -2585,6 +2552,7 @@
                         </connections>
                     </collectionView>
                     <navigationItem key="navigationItem" title="PEOPLE" id="Qco-Nj-tAJ">
+                        <barButtonItem key="backBarButtonItem" title=" Back" id="mF6-7c-c5a"/>
                         <barButtonItem key="rightBarButtonItem" image="icon-search" id="Piv-e3-tfp">
                             <connections>
                                 <action selector="searchButtonTapped:" destination="cPP-9s-ew8" id="W6M-Mb-tPa"/>
@@ -2593,12 +2561,100 @@
                     </navigationItem>
                     <connections>
                         <outlet property="searchButtonItem" destination="Piv-e3-tfp" id="81s-Ub-2Nu"/>
-                        <segue destination="Apd-1l-YiK" kind="show" identifier="seguePeopleToPersonDetails" id="wLT-WA-3da"/>
+                        <segue destination="5oz-5Z-Lef" kind="show" identifier="seguePeopleToPersonDetails" id="VyP-sT-JnW"/>
                     </connections>
                 </collectionViewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="dP3-ny-MeZ" userLabel="First Responder" sceneMemberID="firstResponder"/>
             </objects>
             <point key="canvasLocation" x="2649" y="56"/>
+        </scene>
+        <!--PROFILE LOGIN-->
+        <scene sceneID="727-mF-nbK">
+            <objects>
+                <viewController storyboardIdentifier="ProfileLoginViewController" modalTransitionStyle="crossDissolve" id="oAR-mq-LUk" userLabel="PROFILE LOGIN" customClass="ProfileLoginViewController" customModule="Mao_Trailer" customModuleProvider="target" sceneMemberID="viewController">
+                    <view key="view" contentMode="scaleToFill" id="rJe-vG-xZ4">
+                        <rect key="frame" x="0.0" y="0.0" width="375" height="667"/>
+                        <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
+                        <subviews>
+                            <button opaque="NO" clipsSubviews="YES" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="EyO-Oj-OAS">
+                                <rect key="frame" x="20" y="424" width="335" height="54"/>
+                                <color key="backgroundColor" red="0.87843137250000003" green="0.87843137250000003" blue="0.87843137250000003" alpha="1" colorSpace="calibratedRGB"/>
+                                <constraints>
+                                    <constraint firstAttribute="height" constant="54" id="9RC-Ds-Yxw"/>
+                                </constraints>
+                                <fontDescription key="fontDescription" type="system" weight="medium" pointSize="15"/>
+                                <state key="normal" title="Sign In">
+                                    <color key="titleColor" red="0.40000000000000002" green="0.40000000000000002" blue="0.40000000000000002" alpha="1" colorSpace="calibratedRGB"/>
+                                </state>
+                                <userDefinedRuntimeAttributes>
+                                    <userDefinedRuntimeAttribute type="number" keyPath="cornerRadius">
+                                        <integer key="value" value="25"/>
+                                    </userDefinedRuntimeAttribute>
+                                </userDefinedRuntimeAttributes>
+                                <connections>
+                                    <action selector="signinButtonTapped:" destination="oAR-mq-LUk" eventType="touchUpInside" id="cVU-xq-lqy"/>
+                                </connections>
+                            </button>
+                            <textField opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="left" contentVerticalAlignment="center" placeholder="Username" textAlignment="center" minimumFontSize="17" translatesAutoresizingMaskIntoConstraints="NO" id="0j8-Ca-vnq">
+                                <rect key="frame" x="20" y="264" width="335" height="50"/>
+                                <constraints>
+                                    <constraint firstAttribute="height" constant="50" id="GBx-cT-3j2"/>
+                                </constraints>
+                                <nil key="textColor"/>
+                                <fontDescription key="fontDescription" type="system" pointSize="12"/>
+                                <textInputTraits key="textInputTraits"/>
+                            </textField>
+                            <textField opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="left" contentVerticalAlignment="center" placeholder="Password" textAlignment="center" minimumFontSize="17" translatesAutoresizingMaskIntoConstraints="NO" id="pRX-Ou-cfA">
+                                <rect key="frame" x="20" y="334" width="335" height="50"/>
+                                <constraints>
+                                    <constraint firstAttribute="height" constant="50" id="7Pu-p7-r9F"/>
+                                </constraints>
+                                <nil key="textColor"/>
+                                <fontDescription key="fontDescription" type="system" pointSize="12"/>
+                                <textInputTraits key="textInputTraits" secureTextEntry="YES"/>
+                            </textField>
+                            <imageView userInteractionEnabled="NO" contentMode="scaleAspectFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" image="logo" translatesAutoresizingMaskIntoConstraints="NO" id="OZb-oC-PLs">
+                                <rect key="frame" x="137.5" y="104" width="100" height="100"/>
+                                <constraints>
+                                    <constraint firstAttribute="height" constant="100" id="Nf6-ch-O8g"/>
+                                    <constraint firstAttribute="width" constant="100" id="cs6-l3-tMN"/>
+                                </constraints>
+                            </imageView>
+                            <activityIndicatorView hidden="YES" opaque="NO" contentMode="scaleToFill" horizontalHuggingPriority="750" verticalHuggingPriority="750" style="gray" translatesAutoresizingMaskIntoConstraints="NO" id="tOY-B1-GoP">
+                                <rect key="frame" x="177.5" y="323.5" width="20" height="20"/>
+                            </activityIndicatorView>
+                        </subviews>
+                        <color key="backgroundColor" red="0.97254901960784312" green="0.97254901960784312" blue="0.97254901960784312" alpha="1" colorSpace="calibratedRGB"/>
+                        <constraints>
+                            <constraint firstItem="0j8-Ca-vnq" firstAttribute="top" secondItem="OZb-oC-PLs" secondAttribute="bottom" constant="60" id="1wk-2Q-TZf"/>
+                            <constraint firstItem="EyO-Oj-OAS" firstAttribute="leading" secondItem="7VO-b6-VP3" secondAttribute="leading" constant="20" id="ESX-hN-pHk"/>
+                            <constraint firstItem="OZb-oC-PLs" firstAttribute="top" secondItem="7VO-b6-VP3" secondAttribute="top" constant="40" id="HRY-YF-3Ps"/>
+                            <constraint firstItem="7VO-b6-VP3" firstAttribute="trailing" secondItem="EyO-Oj-OAS" secondAttribute="trailing" constant="20" id="JRc-UA-3Li"/>
+                            <constraint firstItem="pRX-Ou-cfA" firstAttribute="leading" secondItem="7VO-b6-VP3" secondAttribute="leading" constant="20" id="W6Z-0r-QRc"/>
+                            <constraint firstItem="0j8-Ca-vnq" firstAttribute="leading" secondItem="7VO-b6-VP3" secondAttribute="leading" constant="20" id="Wd0-dw-iaN"/>
+                            <constraint firstItem="tOY-B1-GoP" firstAttribute="centerX" secondItem="rJe-vG-xZ4" secondAttribute="centerX" id="YeI-7b-Lqx"/>
+                            <constraint firstItem="tOY-B1-GoP" firstAttribute="centerY" secondItem="rJe-vG-xZ4" secondAttribute="centerY" id="ee1-1r-CgR"/>
+                            <constraint firstItem="OZb-oC-PLs" firstAttribute="centerX" secondItem="rJe-vG-xZ4" secondAttribute="centerX" id="io8-3v-dBW"/>
+                            <constraint firstItem="7VO-b6-VP3" firstAttribute="trailing" secondItem="pRX-Ou-cfA" secondAttribute="trailing" constant="20" id="nOl-sj-7Rw"/>
+                            <constraint firstItem="pRX-Ou-cfA" firstAttribute="top" secondItem="0j8-Ca-vnq" secondAttribute="bottom" constant="20" id="pyG-tj-AIE"/>
+                            <constraint firstItem="EyO-Oj-OAS" firstAttribute="top" secondItem="pRX-Ou-cfA" secondAttribute="bottom" constant="40" id="sGB-kR-9Kx"/>
+                            <constraint firstItem="7VO-b6-VP3" firstAttribute="trailing" secondItem="0j8-Ca-vnq" secondAttribute="trailing" constant="20" id="soa-E6-Kyp"/>
+                        </constraints>
+                        <viewLayoutGuide key="safeArea" id="7VO-b6-VP3"/>
+                    </view>
+                    <navigationItem key="navigationItem" title="PROFILE" id="sfy-nL-dgS">
+                        <barButtonItem key="backBarButtonItem" title=" " id="FrK-2y-dML"/>
+                    </navigationItem>
+                    <connections>
+                        <outlet property="passwordTextField" destination="pRX-Ou-cfA" id="IYI-q3-qbc"/>
+                        <outlet property="spinner" destination="tOY-B1-GoP" id="1mH-dn-r9c"/>
+                        <outlet property="usernameTextField" destination="0j8-Ca-vnq" id="kCi-l5-aoj"/>
+                        <segue destination="F0F-uf-w1F" kind="show" identifier="segueProfileLoginToProfile" animates="NO" id="Wpi-Er-qfn"/>
+                    </connections>
+                </viewController>
+                <placeholder placeholderIdentifier="IBFirstResponder" id="ncv-87-6ck" userLabel="First Responder" sceneMemberID="firstResponder"/>
+            </objects>
+            <point key="canvasLocation" x="3580" y="57"/>
         </scene>
     </scenes>
     <resources>
@@ -2622,6 +2678,7 @@
         <image name="icon-setting" width="22" height="22"/>
         <image name="icon-share" width="22" height="21"/>
         <image name="icon-star" width="14" height="15"/>
+        <image name="logo" width="103" height="130"/>
         <image name="mask-button" width="192" height="54"/>
         <image name="rate" width="30" height="30"/>
         <image name="tab-movies-dark" width="25" height="24"/>
@@ -2634,8 +2691,8 @@
         <image name="tab-tv-light" width="26" height="23"/>
     </resources>
     <inferredMetricsTieBreakers>
-        <segue reference="wLT-WA-3da"/>
-        <segue reference="PmJ-kj-IYH"/>
+        <segue reference="gEf-Ix-RY8"/>
+        <segue reference="OhG-fl-qZN"/>
         <segue reference="q8I-r6-MVa"/>
         <segue reference="Vfq-1Z-68d"/>
     </inferredMetricsTieBreakers>

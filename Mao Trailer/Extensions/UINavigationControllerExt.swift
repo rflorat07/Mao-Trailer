@@ -17,8 +17,7 @@ extension UINavigationController {
         self.navigationBar.backgroundColor = nil
         self.navigationBar.shadowImage = UIImage()
         self.navigationBar.setBackgroundImage(nil, for: .default)
-        UIApplication.shared.statusBarView?.backgroundColor = .clear
-        
+        UIApplication.shared.statusBarView?.backgroundColor = nil
     }
     
     func changeNavigationBarToTransparent() {

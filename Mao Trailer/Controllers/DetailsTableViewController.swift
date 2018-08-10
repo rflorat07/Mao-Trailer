@@ -68,11 +68,12 @@ class DetailsTableViewController: UITableViewController {
         if segue.identifier == Segue.fromDetailsToPersonDetails {
             
             
-            let navigationContoller = segue.destination as! UINavigationController
+            let navigationContoller = segue.destination as! PersonDetailsTableViewController
             
-            let receiverViewController = navigationContoller.topViewController as! PersonDetailsTableViewController
+            navigationContoller.modalTransitionStyle = .crossDissolve
+            navigationContoller.modalPresentationStyle = .overFullScreen
             
-            receiverViewController.personId = sender as? Int
+            navigationContoller.personId = sender as? Int
         }
         
         if segue.identifier == Segue.fromDetailsToImagePreview {
@@ -137,7 +138,7 @@ class DetailsTableViewController: UITableViewController {
         self.coverImageView.downloadedFrom(urlString: self.information.backdrop_path ?? self.information.poster_path!, size: ImageSize.large)
     }
     
-
+    
     override func scrollViewDidScroll(_ scrollView: UIScrollView) {
         
         self.UpdateCoverImageConstant(scrollView: scrollView)
@@ -220,7 +221,7 @@ class DetailsTableViewController: UITableViewController {
             cell.cast = details.getCast()
             
             cell.didSelectAction = { (castSelected) in
-                self.performSegue(withIdentifier: Segue.fromDetailsToPersonDetails, sender: castSelected.id)
+              //  self.performSegue(withIdentifier: Segue.fromDetailsToPersonDetails, sender: castSelected.id)
             }
             
             return cell

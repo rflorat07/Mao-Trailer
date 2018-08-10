@@ -91,9 +91,9 @@ class QueryService {
                 let response = response as? HTTPURLResponse,
                 response.statusCode == 200 {
                 
-                    self.decodeData(sectionName: sectionName, type: type, data: data, urlQuery: queryString, { (sectionResult) in
-                        completion(sectionResult)
-                    })
+                self.decodeData(sectionName: sectionName, type: type, data: data, urlQuery: queryString, { (sectionResult) in
+                    completion(sectionResult)
+                })
             } else {
                 
                 self.decodeError(data!, queryString, {
@@ -164,9 +164,9 @@ class QueryService {
                 })
                 
             } else {
-                    self.decodeError(data!, queryString, {
-                        completion(nil)
-                    })
+                self.decodeError(data!, queryString, {
+                    completion(nil)
+                })
             }
         }
     }
@@ -249,9 +249,9 @@ class QueryService {
                     completion(sectionData)
                 })
             } else {
-                    self.decodeError(data!, queryString, {
-                        completion(nil)
-                    })
+                self.decodeError(data!, queryString, {
+                    completion(nil)
+                })
             }
         }
     }
@@ -271,9 +271,9 @@ class QueryService {
                 })
                 
             } else {
-                    self.decodeError(data!, queryString, {
-                        completion(nil)
-                    })
+                self.decodeError(data!, queryString, {
+                    completion(nil)
+                })
             }
         }
     }
@@ -294,7 +294,7 @@ class QueryService {
                 let data = data,
                 let response = response as? HTTPURLResponse,
                 response.statusCode == 200 {
-                    completion(data)
+                completion(data)
             } else {
                 self.decodeError(data!, queryString, {
                     completion(nil)
@@ -349,7 +349,7 @@ class QueryService {
         
         urlQuery.queryItems = [
             URLQueryItem(name: "api_key", value: QueryString.api_key),
-           // URLQueryItem(name: "language", value: QueryString.language),
+            // URLQueryItem(name: "language", value: QueryString.language),
             URLQueryItem(name: "append_to_response", value: QueryString.informationDetails)
         ]
         urlQuery.percentEncodedQuery = urlQuery.percentEncodedQuery?.replacingOccurrences(of: ",", with: "%2C")
@@ -374,7 +374,7 @@ class QueryService {
         return urlQuery.string!
     }
     
-     // MARK: - URL search
+    // MARK: - URL search
     func getURLSearch(searchText: String, page: Int, type: MediaType) -> String {
         
         var urlQuery = URLComponents(string: QueryString.baseUrl)!
@@ -388,7 +388,7 @@ class QueryService {
             URLQueryItem(name: "region", value: QueryString.region),
             URLQueryItem(name: "page", value: String(page))
         ]
-    
+        
         return urlQuery.string!
     }
     

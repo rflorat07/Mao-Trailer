@@ -94,6 +94,8 @@ struct Segue {
     
     static let fromProfileToDetail = "segueProfileToDetail"
     
+    static let ProfileLoginToProfile = "segueProfileLoginToProfile"
+    
     static let fromSearchListToDetail = "segueSearchListToDetail"
     
     static let fromSearchOptionToDetail = "segueSearchOptionToDetail"
@@ -112,7 +114,7 @@ struct StructType {
 
 struct QueryString {
     static let page = "1"
-    static let region = "US"
+    static let region = ""
     static let language = "en-US"
     static let sort_by = "popularity.desc"
     static let api_key = "3b122cc1b16808da5a679c3c1c11cd07"
@@ -128,5 +130,18 @@ struct ImageSize {
     static let original = "original"
     static let placeholderImage = "placeholder"
     static let baseUrl = "https://image.tmdb.org/t/p"
-    
 }
+
+struct Gravatar {
+    static let thumbnails = ".jpg?s=300"
+    static let baseUrl = "https://secure.gravatar.com/avatar/"
+}
+
+struct UserInfo {
+    static let userEmail = "userEmail"
+    static let loggedInKey = "loggedIn"
+    static let sessionID = "session_id"
+    static let tokenKey = "request_token"
+}
+
+
