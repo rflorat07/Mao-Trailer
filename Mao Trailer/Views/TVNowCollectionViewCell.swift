@@ -7,6 +7,7 @@
 //
 
 import UIKit
+import Kingfisher
 
 class TVNowCollectionViewCell: UICollectionViewCell {
     
@@ -31,9 +32,12 @@ class TVNowCollectionViewCell: UICollectionViewCell {
             rateView.isHidden = true
             titleLabel.text = nowTVShow.title.uppercased()
             
-            coverImageView.downloadedFrom(urlString: nowTVShow.poster_path ?? nowTVShow.backdrop_path!)
+            let imagePath = Helpers.downloadedFrom(urlString: nowTVShow.poster_path ?? nowTVShow.backdrop_path!)
+            
+            coverImageView.kf.setImage(with: URL(string: imagePath), placeholder: Constants.placeholderImage)
             
         } else {
+            
             titleLabel.text = ""
             rateView.isHidden = true
             coverImageView.image = UIImage(named: "port-more")

@@ -44,12 +44,12 @@
 		4FAAD14F210F609800906C55 /* PersonDetailsHeaderTableViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4FAAD14E210F609800906C55 /* PersonDetailsHeaderTableViewCell.swift */; };
 		4FAB0EBC20F3956800C55683 /* SearchListCollectionViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4FAB0EBB20F3956800C55683 /* SearchListCollectionViewCell.swift */; };
 		4FAB0EBE20F3959F00C55683 /* SearchListCollectionViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4FAB0EBD20F3959F00C55683 /* SearchListCollectionViewController.swift */; };
+		4FB4C0F9211DD8FB00217F58 /* Helpers.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4FB4C0F8211DD8FB00217F58 /* Helpers.swift */; };
 		4FBC73062109B3A600D1985A /* SearchOptionCollectionViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4FBC73052109B3A600D1985A /* SearchOptionCollectionViewController.swift */; };
 		4FC297D2211066FD00FCFE3C /* PersonDetailsInfoTableViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4FC297D1211066FD00FCFE3C /* PersonDetailsInfoTableViewCell.swift */; };
 		4FC87E9820E4EFEF00653671 /* ProfileSettingViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4FC87E9720E4EFEF00653671 /* ProfileSettingViewController.swift */; };
 		4FC87E9B20E50A8C00653671 /* UIViewExt.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4FC87E9A20E50A8C00653671 /* UIViewExt.swift */; };
 		4FCB49292101DC4100AEC926 /* UIColorExt.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4FCB49282101DC4100AEC926 /* UIColorExt.swift */; };
-		4FEDD5E520ECCDD000E0D4BA /* UIImageViewExt.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4FEDD5E420ECCDD000E0D4BA /* UIImageViewExt.swift */; };
 		4FEDD5E720ED136500E0D4BA /* Walkthrough.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4FEDD5E620ED136400E0D4BA /* Walkthrough.swift */; };
 		4FEDD5E920ED13CF00E0D4BA /* Details.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4FEDD5E820ED13CF00E0D4BA /* Details.swift */; };
 		4FEFE0F8211C351A00800F43 /* ProfileLoginViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4FEFE0F7211C351A00800F43 /* ProfileLoginViewController.swift */; };
@@ -69,9 +69,12 @@
 		4FF6290120DBDE6B0002AA13 /* Constants.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4FF6290020DBDE6B0002AA13 /* Constants.swift */; };
 		4FF6290320DBFE9D0002AA13 /* MovieListCollectionViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4FF6290220DBFE9D0002AA13 /* MovieListCollectionViewCell.swift */; };
 		4FF6290520DBFFF60002AA13 /* ListCollectionViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4FF6290420DBFFF60002AA13 /* ListCollectionViewController.swift */; };
+		6D100CFAEC113DBC55EDE7EE /* Pods_Mao_Trailer.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 71912306C194A66BD1A1298C /* Pods_Mao_Trailer.framework */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
+		12B94C64CA0D43AFBE19DBA5 /* Pods-Mao Trailer.debug.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-Mao Trailer.debug.xcconfig"; path = "Pods/Target Support Files/Pods-Mao Trailer/Pods-Mao Trailer.debug.xcconfig"; sourceTree = "<group>"; };
+		1F7DEB1F1F303CBABD5BDA81 /* Pods-Mao Trailer.release.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-Mao Trailer.release.xcconfig"; path = "Pods/Target Support Files/Pods-Mao Trailer/Pods-Mao Trailer.release.xcconfig"; sourceTree = "<group>"; };
 		4F0508DB20EE455D00D5B778 /* ModelData.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ModelData.swift; sourceTree = "<group>"; };
 		4F104B0920FE21DF0065545D /* ImagePreviewViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ImagePreviewViewController.swift; sourceTree = "<group>"; };
 		4F104B0B20FE24880065545D /* ImagePreviewCollectionViewCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ImagePreviewCollectionViewCell.swift; sourceTree = "<group>"; };
@@ -109,12 +112,12 @@
 		4FAAD14E210F609800906C55 /* PersonDetailsHeaderTableViewCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PersonDetailsHeaderTableViewCell.swift; sourceTree = "<group>"; };
 		4FAB0EBB20F3956800C55683 /* SearchListCollectionViewCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SearchListCollectionViewCell.swift; sourceTree = "<group>"; };
 		4FAB0EBD20F3959F00C55683 /* SearchListCollectionViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SearchListCollectionViewController.swift; sourceTree = "<group>"; };
+		4FB4C0F8211DD8FB00217F58 /* Helpers.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Helpers.swift; sourceTree = "<group>"; };
 		4FBC73052109B3A600D1985A /* SearchOptionCollectionViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SearchOptionCollectionViewController.swift; sourceTree = "<group>"; };
 		4FC297D1211066FD00FCFE3C /* PersonDetailsInfoTableViewCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PersonDetailsInfoTableViewCell.swift; sourceTree = "<group>"; };
 		4FC87E9720E4EFEF00653671 /* ProfileSettingViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ProfileSettingViewController.swift; sourceTree = "<group>"; };
 		4FC87E9A20E50A8C00653671 /* UIViewExt.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = UIViewExt.swift; sourceTree = "<group>"; };
 		4FCB49282101DC4100AEC926 /* UIColorExt.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = UIColorExt.swift; sourceTree = "<group>"; };
-		4FEDD5E420ECCDD000E0D4BA /* UIImageViewExt.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = UIImageViewExt.swift; sourceTree = "<group>"; };
 		4FEDD5E620ED136400E0D4BA /* Walkthrough.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Walkthrough.swift; sourceTree = "<group>"; };
 		4FEDD5E820ED13CF00E0D4BA /* Details.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Details.swift; sourceTree = "<group>"; };
 		4FEFE0F7211C351A00800F43 /* ProfileLoginViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ProfileLoginViewController.swift; sourceTree = "<group>"; };
@@ -136,6 +139,7 @@
 		4FF6290020DBDE6B0002AA13 /* Constants.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Constants.swift; sourceTree = "<group>"; };
 		4FF6290220DBFE9D0002AA13 /* MovieListCollectionViewCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MovieListCollectionViewCell.swift; sourceTree = "<group>"; };
 		4FF6290420DBFFF60002AA13 /* ListCollectionViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ListCollectionViewController.swift; sourceTree = "<group>"; };
+		71912306C194A66BD1A1298C /* Pods_Mao_Trailer.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; includeInIndex = 0; path = Pods_Mao_Trailer.framework; sourceTree = BUILT_PRODUCTS_DIR; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -143,6 +147,7 @@
 			isa = PBXFrameworksBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				6D100CFAEC113DBC55EDE7EE /* Pods_Mao_Trailer.framework in Frameworks */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -162,7 +167,6 @@
 			isa = PBXGroup;
 			children = (
 				4FC87E9A20E50A8C00653671 /* UIViewExt.swift */,
-				4FEDD5E420ECCDD000E0D4BA /* UIImageViewExt.swift */,
 				4FCB49282101DC4100AEC926 /* UIColorExt.swift */,
 				4F68CD762107108C00190049 /* UINavigationControllerExt.swift */,
 				4F810B98210B2845008A3654 /* UIImageExt.swift */,
@@ -176,6 +180,8 @@
 			children = (
 				4FF5E60A20D92AAF00D088B5 /* Mao Trailer */,
 				4FF5E60920D92AAF00D088B5 /* Products */,
+				B873F4432F5D180FB2A5C249 /* Pods */,
+				BCE7FCA48FF1E8E2FAD2A23D /* Frameworks */,
 			);
 			sourceTree = "<group>";
 		};
@@ -257,6 +263,7 @@
 				4FF5E62220D93A2C00D088B5 /* GradientView.swift */,
 				4FF6290020DBDE6B0002AA13 /* Constants.swift */,
 				4F963D1520EF77C500A318CF /* LoadingIndicatorView.swift */,
+				4FB4C0F8211DD8FB00217F58 /* Helpers.swift */,
 			);
 			path = Utilities;
 			sourceTree = "<group>";
@@ -291,6 +298,23 @@
 			path = Views;
 			sourceTree = "<group>";
 		};
+		B873F4432F5D180FB2A5C249 /* Pods */ = {
+			isa = PBXGroup;
+			children = (
+				12B94C64CA0D43AFBE19DBA5 /* Pods-Mao Trailer.debug.xcconfig */,
+				1F7DEB1F1F303CBABD5BDA81 /* Pods-Mao Trailer.release.xcconfig */,
+			);
+			name = Pods;
+			sourceTree = "<group>";
+		};
+		BCE7FCA48FF1E8E2FAD2A23D /* Frameworks */ = {
+			isa = PBXGroup;
+			children = (
+				71912306C194A66BD1A1298C /* Pods_Mao_Trailer.framework */,
+			);
+			name = Frameworks;
+			sourceTree = "<group>";
+		};
 /* End PBXGroup section */
 
 /* Begin PBXNativeTarget section */
@@ -298,9 +322,11 @@
 			isa = PBXNativeTarget;
 			buildConfigurationList = 4FF5E61A20D92B0300D088B5 /* Build configuration list for PBXNativeTarget "Mao Trailer" */;
 			buildPhases = (
+				AE21A85AEE017C6AADA7DDFB /* [CP] Check Pods Manifest.lock */,
 				4FF5E60420D92AAF00D088B5 /* Sources */,
 				4FF5E60520D92AAF00D088B5 /* Frameworks */,
 				4FF5E60620D92AAF00D088B5 /* Resources */,
+				4920F4774E2391EC757161AA /* [CP] Embed Pods Frameworks */,
 			);
 			buildRules = (
 			);
@@ -358,6 +384,45 @@
 		};
 /* End PBXResourcesBuildPhase section */
 
+/* Begin PBXShellScriptBuildPhase section */
+		4920F4774E2391EC757161AA /* [CP] Embed Pods Frameworks */ = {
+			isa = PBXShellScriptBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+			);
+			inputPaths = (
+				"${SRCROOT}/Pods/Target Support Files/Pods-Mao Trailer/Pods-Mao Trailer-frameworks.sh",
+				"${BUILT_PRODUCTS_DIR}/Kingfisher/Kingfisher.framework",
+			);
+			name = "[CP] Embed Pods Frameworks";
+			outputPaths = (
+				"${TARGET_BUILD_DIR}/${FRAMEWORKS_FOLDER_PATH}/Kingfisher.framework",
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+			shellPath = /bin/sh;
+			shellScript = "\"${SRCROOT}/Pods/Target Support Files/Pods-Mao Trailer/Pods-Mao Trailer-frameworks.sh\"\n";
+			showEnvVarsInLog = 0;
+		};
+		AE21A85AEE017C6AADA7DDFB /* [CP] Check Pods Manifest.lock */ = {
+			isa = PBXShellScriptBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+			);
+			inputPaths = (
+				"${PODS_PODFILE_DIR_PATH}/Podfile.lock",
+				"${PODS_ROOT}/Manifest.lock",
+			);
+			name = "[CP] Check Pods Manifest.lock";
+			outputPaths = (
+				"$(DERIVED_FILE_DIR)/Pods-Mao Trailer-checkManifestLockResult.txt",
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+			shellPath = /bin/sh;
+			shellScript = "diff \"${PODS_PODFILE_DIR_PATH}/Podfile.lock\" \"${PODS_ROOT}/Manifest.lock\" > /dev/null\nif [ $? != 0 ] ; then\n    # print error to STDERR\n    echo \"error: The sandbox is not in sync with the Podfile.lock. Run 'pod install' or update your CocoaPods installation.\" >&2\n    exit 1\nfi\n# This output is used by Xcode 'outputs' to avoid re-running this script phase.\necho \"SUCCESS\" > \"${SCRIPT_OUTPUT_FILE_0}\"\n";
+			showEnvVarsInLog = 0;
+		};
+/* End PBXShellScriptBuildPhase section */
+
 /* Begin PBXSourcesBuildPhase section */
 		4FF5E60420D92AAF00D088B5 /* Sources */ = {
 			isa = PBXSourcesBuildPhase;
@@ -365,7 +430,6 @@
 			files = (
 				4F963D1820EF804F00A318CF /* Section.swift in Sources */,
 				4F8C6BE52111E6880026FB41 /* DetailsTableViewController.swift in Sources */,
-				4FEDD5E520ECCDD000E0D4BA /* UIImageViewExt.swift in Sources */,
 				4FAAD14D210F584500906C55 /* PersonDetails.swift in Sources */,
 				4FF628F720DBB78E0002AA13 /* TVNowTableViewCell.swift in Sources */,
 				4FAB0EBC20F3956800C55683 /* SearchListCollectionViewCell.swift in Sources */,
@@ -416,6 +480,7 @@
 				4FF5E62720D951FB00D088B5 /* HotTableViewCell.swift in Sources */,
 				4F57DA182112036100F95074 /* DetailCastTableViewCell.swift in Sources */,
 				4FF6290120DBDE6B0002AA13 /* Constants.swift in Sources */,
+				4FB4C0F9211DD8FB00217F58 /* Helpers.swift in Sources */,
 				4F104B0C20FE24880065545D /* ImagePreviewCollectionViewCell.swift in Sources */,
 				4FF6290520DBFFF60002AA13 /* ListCollectionViewController.swift in Sources */,
 				4F526BC420E62CBC00EB36EA /* WalkthroughCollectionViewCell.swift in Sources */,
@@ -562,6 +627,7 @@
 		};
 		4FF5E61B20D92B0300D088B5 /* Debug */ = {
 			isa = XCBuildConfiguration;
+			baseConfigurationReference = 12B94C64CA0D43AFBE19DBA5 /* Pods-Mao Trailer.debug.xcconfig */;
 			buildSettings = {
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
 				CODE_SIGN_STYLE = Automatic;
@@ -580,6 +646,7 @@
 		};
 		4FF5E61C20D92B0300D088B5 /* Release */ = {
 			isa = XCBuildConfiguration;
+			baseConfigurationReference = 1F7DEB1F1F303CBABD5BDA81 /* Pods-Mao Trailer.release.xcconfig */;
 			buildSettings = {
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
 				CODE_SIGN_STYLE = Automatic;

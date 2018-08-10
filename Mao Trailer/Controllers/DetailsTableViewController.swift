@@ -7,6 +7,7 @@
 //
 
 import UIKit
+import Kingfisher
 
 class DetailsTableViewController: UITableViewController {
     
@@ -133,11 +134,14 @@ class DetailsTableViewController: UITableViewController {
         self.posterImageView.layer.cornerRadius = self.cornerRadius
         self.posterCoverView.dropShadow(radius: self.cornerRadius)
         
-        self.posterImageView.downloadedFrom(urlString: self.information.poster_path ?? self.information.backdrop_path!)
+        let imagePosterPath = Helpers.downloadedFrom(urlString: self.information.poster_path ?? self.information.backdrop_path!)
         
-        self.coverImageView.downloadedFrom(urlString: self.information.backdrop_path ?? self.information.poster_path!, size: ImageSize.large)
+        self.posterImageView.kf.setImage(with: URL(string: imagePosterPath), placeholder: Constants.placeholderImage)
+        
+        let imageCoverPath = Helpers.downloadedFrom(urlString: self.information.backdrop_path ?? self.information.poster_path!, size: ImageSize.large)
+        
+        self.coverImageView.kf.setImage(with: URL(string: imageCoverPath), placeholder: Constants.placeholderImage)
     }
-    
     
     override func scrollViewDidScroll(_ scrollView: UIScrollView) {
         

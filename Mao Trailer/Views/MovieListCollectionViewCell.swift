@@ -7,6 +7,7 @@
 //
 
 import UIKit
+import Kingfisher
 
 class MovieListCollectionViewCell: UICollectionViewCell {
     
@@ -24,12 +25,14 @@ class MovieListCollectionViewCell: UICollectionViewCell {
     
     func updateUI() {
         
+        let imagePath = Helpers.downloadedFrom(urlString: movie.poster_path ?? movie.backdrop_path!)
+        
         rateView.isHidden = true
         titleLabel.text = movie.title.uppercased()
         
         coverImageView.clipsToBounds = true
         coverImageView.layer.cornerRadius = Constants.cornerRadius
-        coverImageView.downloadedFrom(urlString: movie.poster_path ?? movie.backdrop_path!)
+        coverImageView.kf.setImage(with: URL(string: imagePath), placeholder: Constants.placeholderImage)
         
         posterCoverView.dropShadow(radius: Constants.cornerRadius)
     }

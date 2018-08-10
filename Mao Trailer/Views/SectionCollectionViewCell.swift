@@ -7,6 +7,7 @@
 //
 
 import UIKit
+import Kingfisher
 
 class SectionCollectionViewCell: UICollectionViewCell {
     
@@ -30,8 +31,11 @@ class SectionCollectionViewCell: UICollectionViewCell {
         if sectionMovie.title != "More" {
             
             titleLabel.text = sectionMovie.title.uppercased()
-            coverImageView.downloadedFrom(urlString: sectionMovie.poster_path ?? sectionMovie.backdrop_path!)
             rateLabel.text = String(format:"%.1f", sectionMovie.vote_average)
+            
+            let imagePath = Helpers.downloadedFrom(urlString: sectionMovie.poster_path ?? sectionMovie.backdrop_path!)
+            
+            coverImageView.kf.setImage(with: URL(string: imagePath), placeholder: Constants.placeholderImage)
             
         } else {
             

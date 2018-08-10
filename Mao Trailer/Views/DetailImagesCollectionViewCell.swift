@@ -7,6 +7,7 @@
 //
 
 import UIKit
+import Kingfisher
 
 class DetailImagesCollectionViewCell: UICollectionViewCell {
     
@@ -23,9 +24,11 @@ class DetailImagesCollectionViewCell: UICollectionViewCell {
     
     func updateUI() {
         
+        let imagePath = Helpers.downloadedFrom(urlString: backdropImage.file_path!, size: ImageSize.large)
+        
         coverImageView.clipsToBounds = true
         coverImageView.layer.cornerRadius = cornerRadius
-        coverImageView.downloadedFrom(urlString: backdropImage.file_path!, size: ImageSize.large)
+        coverImageView.kf.setImage(with: URL(string: imagePath), placeholder: Constants.placeholderImage)
         
         coverBackdropsView.dropShadow(radius: cornerRadius)
     }

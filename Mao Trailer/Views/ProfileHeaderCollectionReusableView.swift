@@ -7,6 +7,7 @@
 //
 
 import UIKit
+import Kingfisher
 
 class ProfileHeaderCollectionReusableView: UICollectionReusableView {
     
@@ -27,13 +28,15 @@ class ProfileHeaderCollectionReusableView: UICollectionReusableView {
     
     func updateUI() {
         
+        let imagePath = Helpers.downloadedAvatarFrom(urlString: profile.getImageAvatar())
+        
         nameLabel.text = profile.name.uppercased()
         
         avatarImageView.clipsToBounds = true
         avatarImageView.layer.borderWidth = 3
         avatarImageView.layer.cornerRadius = cornerRadius
-        avatarImageView.downloadedAvatarFrom(urlString: profile.getImageAvatar())
         avatarImageView.layer.borderColor = UIColor.white.cgColor
+        avatarImageView.kf.setImage(with: URL(string: imagePath), placeholder: Constants.placeholderImage)
 
     }
     

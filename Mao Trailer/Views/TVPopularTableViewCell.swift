@@ -7,6 +7,7 @@
 //
 
 import UIKit
+import Kingfisher
 
 class TVPopularTableViewCell: UITableViewCell {
     
@@ -31,7 +32,11 @@ class TVPopularTableViewCell: UITableViewCell {
             
             titleLabel.text = tvShow.title.uppercased()
             rateLabel.text = String(format: "%.1f", tvShow.vote_average)
-            coverImageView.downloadedFrom(urlString: tvShow.backdrop_path!, size: ImageSize.medium)
+            
+            let imagePath = Helpers.downloadedFrom(urlString: tvShow.backdrop_path!, size: ImageSize.medium)
+            
+            coverImageView.kf.setImage(with: URL(string: imagePath), placeholder: Constants.placeholderImage)
+            
             
         } else {
             

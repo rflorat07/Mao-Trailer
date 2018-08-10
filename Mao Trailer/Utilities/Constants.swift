@@ -13,7 +13,7 @@ typealias CompletionHandler = (_ Success: Bool) -> ()
 struct Constants {
     static let cornerRadius : CGFloat = 6.0
     static let numberOfItems: Int = 10
-    static let placeholderImage = "placeholder"
+    static let placeholderImage = UIImage(named: "placeholder")
 }
 
 struct Colors {

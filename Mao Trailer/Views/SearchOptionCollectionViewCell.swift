@@ -7,6 +7,7 @@
 //
 
 import UIKit
+import Kingfisher
 
 class SearchOptionCollectionViewCell: UICollectionViewCell {
     
@@ -25,13 +26,15 @@ class SearchOptionCollectionViewCell: UICollectionViewCell {
     }
     
     func updateUI() {
-                
+        
+        let imagePath = Helpers.downloadedFrom(urlString: searchTVMovie.poster_path ?? searchTVMovie.backdrop_path!)
+        
         titleLabel.text = searchTVMovie.title.uppercased()
         rateLabel.text = String(format:"%.1f", searchTVMovie.vote_average)
         
         coverImageView.clipsToBounds = true
         coverImageView.layer.cornerRadius = cornerRadius
-        coverImageView.downloadedFrom(urlString: searchTVMovie.poster_path ?? searchTVMovie.backdrop_path!)
+        coverImageView.kf.setImage(with: URL(string: imagePath), placeholder: Constants.placeholderImage)
         
         posterCoverView.dropShadow(radius: cornerRadius)
     }

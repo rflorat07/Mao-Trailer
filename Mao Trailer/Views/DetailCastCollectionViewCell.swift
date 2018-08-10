@@ -7,6 +7,7 @@
 //
 
 import UIKit
+import Kingfisher
 
 class DetailCastCollectionViewCell: UICollectionViewCell {
     
@@ -25,12 +26,14 @@ class DetailCastCollectionViewCell: UICollectionViewCell {
     
     func updateUI() {
         
+        let imagePath = Helpers.downloadedFrom(urlString: cast.profile_path!)
+        
         nameLabel.text = cast.name
         creditLabel.text = cast.character
         
         coverImageView.clipsToBounds = true
         coverImageView.layer.cornerRadius = cornerRadius
-        coverImageView.downloadedFrom(urlString: cast.profile_path!)
+        coverImageView.kf.setImage(with: URL(string: imagePath), placeholder: Constants.placeholderImage)
        
         coverCastView.dropShadow(radius: cornerRadius)
         

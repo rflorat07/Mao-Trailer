@@ -7,6 +7,7 @@
 //
 
 import UIKit
+import Kingfisher
 
 class HotCollectionViewCell: UICollectionViewCell {
     
@@ -14,7 +15,7 @@ class HotCollectionViewCell: UICollectionViewCell {
     @IBOutlet weak var coverImageView: UIImageView!
     
     let cornerRadius: CGFloat = Constants.cornerRadius
-    
+   
     var hotMovie: TVMovie! {
         didSet {
             self.updateUI()
@@ -25,8 +26,12 @@ class HotCollectionViewCell: UICollectionViewCell {
                 
         if hotMovie.title == "More" {
            coverImageView.image = UIImage(named: "land-more")
+            
         } else {
-            coverImageView.downloadedFrom(urlString: hotMovie.backdrop_path ?? hotMovie.poster_path!, size: ImageSize.medium)
+            
+           let imagePath = Helpers.downloadedFrom(urlString: hotMovie.backdrop_path ?? hotMovie.poster_path!)
+            
+            coverImageView.kf.setImage(with: URL(string: imagePath), placeholder: Constants.placeholderImage)
         }
         
         coverImageView.clipsToBounds = true

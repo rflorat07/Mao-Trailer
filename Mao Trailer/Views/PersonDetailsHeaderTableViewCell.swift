@@ -7,6 +7,7 @@
 //
 
 import UIKit
+import Kingfisher
 
 class PersonDetailsHeaderTableViewCell: UITableViewCell {
     
@@ -28,6 +29,8 @@ class PersonDetailsHeaderTableViewCell: UITableViewCell {
         
     func updateUI(){
 
+        let imagePath = Helpers.downloadedFrom(urlString: details.profile_path!)
+        
         nameLabel.text = details.name.uppercased()
         biographyLabel.text = details.biography
         knownForLabel.text = details.knownForFilmography()
@@ -36,7 +39,7 @@ class PersonDetailsHeaderTableViewCell: UITableViewCell {
         
         posterImageView.clipsToBounds = true
         posterImageView.layer.cornerRadius = Constants.cornerRadius
-        posterImageView.downloadedFrom(urlString: details.profile_path!)
+        posterImageView.kf.setImage(with: URL(string: imagePath), placeholder: Constants.placeholderImage)
         
         posterCoverView.dropShadow(radius: Constants.cornerRadius)
     }
@@ -50,5 +53,4 @@ class PersonDetailsHeaderTableViewCell: UITableViewCell {
         posterImageView.image = nil
     }
     
-
 }

@@ -7,6 +7,7 @@
 //
 
 import UIKit
+import Kingfisher
 
 class ImagePreviewCollectionViewCell: UICollectionViewCell {
     
@@ -19,7 +20,10 @@ class ImagePreviewCollectionViewCell: UICollectionViewCell {
     }
     
     func updateUI() {
-        imageView.downloadedFrom(urlString: image.file_path!, contentMode: .scaleAspectFit, size: ImageSize.large)
+        
+        let imagePath = Helpers.downloadedFrom(urlString: image.file_path!, size: ImageSize.large)
+        
+        imageView.kf.setImage(with: URL(string: imagePath), placeholder: Constants.placeholderImage)
     }
     
     override func prepareForReuse() {

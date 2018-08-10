@@ -8,6 +8,13 @@
 * Search and find movies from API (TMDb)
 * Save Favorite movie to firebase backend
 
+## Installation Instructions
+
+COCOAPODS - https://cocoapods.org/
+
+1. pod Kingfisher '4.8.0' (https://github.com/onevcat/Kingfisher)
+
+
 ## Credits
 
 - [Aervea Design](https://medium.com/@aervea/movies-app-ui-kit-b789d226953e) (Designer)

@@ -7,6 +7,8 @@
 //
 
 import UIKit
+import Kingfisher
+
 
 class ProfileListCollectionViewCell: UICollectionViewCell {
     
@@ -23,9 +25,11 @@ class ProfileListCollectionViewCell: UICollectionViewCell {
     
     func updateUI() {
         
+        let imagePath = Helpers.downloadedFrom(urlString: posterImage)
+        
         coverImageView.clipsToBounds = true
         coverImageView.layer.cornerRadius = cornerRadius
-        coverImageView.downloadedFrom(urlString: posterImage)
+        coverImageView.kf.setImage(with: URL(string: imagePath), placeholder: Constants.placeholderImage)
         
         posterView.dropShadow(radius: cornerRadius)
     }
