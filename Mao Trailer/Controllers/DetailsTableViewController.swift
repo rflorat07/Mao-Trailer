@@ -90,6 +90,8 @@ class DetailsTableViewController: UITableViewController {
         
         self.clearDataDetails()
         
+        LoadingIndicatorView.show("Loading")
+        
         QueryService.instance.fetchPrimaryInformation(id: information.id, type: queryType) { (details) in
             
             if let details = details {
@@ -97,6 +99,8 @@ class DetailsTableViewController: UITableViewController {
                 self.loadDataDetails()
                 self.tableView.reloadData()
             }
+            
+            LoadingIndicatorView.hide()
         }
     }
     

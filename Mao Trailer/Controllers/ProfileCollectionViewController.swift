@@ -10,11 +10,17 @@ import UIKit
 
 class ProfileCollectionViewController: UICollectionViewController {
     
-    let sectionProfileInfo = [SectionInfo(page: 1, type: .TV, sectionName: "Popular", endPoint: .Popular)]
-
+    var sectionArray: SectionData!
     var accountDetails: AccountDetails!
-    var sectionProfileArray: SectionData!
-        
+    var ratedSectionArray: SectionData!
+    var favoriteSectionArray: SectionData!
+    var watchlistSectionArray: SectionData!
+    
+    let sectionProfileInfo = [
+        SectionInfo(page: 1, type: .Account, sectionName: "Favorite", endPoint: .FavoriteMovies),
+        SectionInfo(page: 1, type: .Account, sectionName: "Watchlist", endPoint: .WatchlistMovies),
+        SectionInfo(page: 1, type: .Account, sectionName: "Ratings", endPoint: .RatedMovies)]
+
     override func viewDidLoad() {
         super.viewDidLoad()
         
@@ -31,8 +37,8 @@ class ProfileCollectionViewController: UICollectionViewController {
             
             let receiverViewController = navigationContoller.topViewController as! DetailsTableViewController
             
-            receiverViewController.queryType = .TV
-            receiverViewController.information = sender as? TVShow
+            receiverViewController.queryType = .Movie
+            receiverViewController.information = sender as? Movie
         }
                 
         if segue.identifier == Segue.fromProfileToProfileSetting {
@@ -41,7 +47,7 @@ class ProfileCollectionViewController: UICollectionViewController {
             
             toViewController?.callback = { (response) in
                 self.accountDetails = nil
-                self.sectionProfileArray = nil
+                self.sectionArray = nil
                 self.collectionView?.reloadData()
             }
         }
@@ -55,14 +61,19 @@ class ProfileCollectionViewController: UICollectionViewController {
         QueryService.instance.fetchAllSection(sectionArray: sectionProfileInfo) { (sectionArray) in
             
             if let sectionArray = sectionArray {
-                self.sectionProfileArray = sectionArray[0]
+                
+                self.sectionArray = sectionArray[0]
+                self.favoriteSectionArray = sectionArray[0]
+                self.watchlistSectionArray = sectionArray[1]
+                self.ratedSectionArray = sectionArray[2]
+                
                 self.collectionView?.reloadData()
             }
             
             LoadingIndicatorView.hide()
         }
         
-        AuthenticationService.instance.fetchAccountDetails { (details) in
+        AccountService.instance.fetchAccountDetails { (details) in
             if let details = details {
                 self.accountDetails = details
                 self.collectionView?.reloadData()
@@ -82,6 +93,28 @@ class ProfileCollectionViewController: UICollectionViewController {
             
             if let accountDetails = accountDetails {
                 sectionHeader.profile = accountDetails
+                sectionHeader.favoritesLabel.text = String(favoriteSectionArray.sectionArray.count)
+                sectionHeader.watchingLabel.text = String(watchlistSectionArray.sectionArray.count)
+                sectionHeader.ratingsLabel.text = String(ratedSectionArray.sectionArray.count)
+            }
+            
+            sectionHeader.didSelectAction = { (selected) in
+                
+                switch selected {
+                    case "Favorites":
+                        
+                        self.sectionArray = self.favoriteSectionArray
+                        self.collectionView?.reloadData()
+                    
+                    case "Watching":
+                       
+                        self.sectionArray = self.watchlistSectionArray
+                        self.collectionView?.reloadData()
+                    
+                    default:
+                        self.sectionArray = self.ratedSectionArray
+                        self.collectionView?.reloadData()
+                }
             }
             
             return sectionHeader
@@ -93,19 +126,19 @@ class ProfileCollectionViewController: UICollectionViewController {
     
     override func numberOfSections(in collectionView: UICollectionView) -> Int {
         
-        return sectionProfileArray != nil ? 1 : 0
+        return sectionArray != nil ? 1 : 0
     }
 
     override func collectionView(_ collectionView: UICollectionView, numberOfItemsInSection section: Int) -> Int {
         
-        return sectionProfileArray.sectionArray.count
+        return sectionArray.sectionArray.count
     }
 
     override func collectionView(_ collectionView: UICollectionView, cellForItemAt indexPath: IndexPath) -> UICollectionViewCell {
       
         if  let cell = collectionView.dequeueReusableCell(withReuseIdentifier: Storyboard.profileListViewCell, for: indexPath) as? ProfileListCollectionViewCell {
             
-            let section = sectionProfileArray.sectionArray
+            let section = sectionArray.sectionArray
             
             cell.posterImage = section[indexPath.row].poster_path
             
@@ -117,7 +150,7 @@ class ProfileCollectionViewController: UICollectionViewController {
     
     override func collectionView(_ collectionView: UICollectionView, didSelectItemAt indexPath: IndexPath) {
         
-        let selected = sectionProfileArray.sectionArray[indexPath.row]
+        let selected = sectionArray.sectionArray[indexPath.row]
         
         self.performSegue(withIdentifier: Segue.fromProfileToDetail, sender: selected)
         

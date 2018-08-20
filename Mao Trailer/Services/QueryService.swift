@@ -12,22 +12,34 @@ enum MediaType: String {
     case TV = "tv"
     case Movie = "movie"
     case Person = "person"
+    case Account = "account"
     case Discover = "discover"
 }
 
 enum EndPointType: String {
     case Popular  = "popular"
     case Upcoming = "upcoming"
+    
     case NowTV    = "on_the_air"
     case NowMovie = "now_playing"
+    
+    case FavoriteTV = "account_id/favorite/tv"
+    case FavoriteMovies = "account_id/favorite/movies"
+    
+    case WatchlistTV = "account_id/watchlist/tv"
+    case WatchlistMovies = "account_id/watchlist/movies"
+    
+    case RatedTV = "account_id/rated/tv"
+    case RatedMovies = "account_id/rated/movies"
 }
 
 class QueryService {
     
     static let instance = QueryService()
     
-    typealias QueryError         = ()-> Void
+    let defaults = UserDefaults.standard
     
+    typealias QueryError         = ()-> Void
     
     typealias QueryGenres        = (GenreArray?) -> Void
     typealias QueryDetails       = (Details?) -> Void
@@ -45,6 +57,13 @@ class QueryService {
     
     lazy var configuration = URLSessionConfiguration.default
     lazy var session = URLSession(configuration: configuration)
+    
+    
+    var sessionID: String {
+        get {
+            return defaults.value(forKey: UserInfo.sessionID) as! String
+        }
+    }
     
     
     // MARK: - Fetch All Session
@@ -320,6 +339,11 @@ class QueryService {
             URLQueryItem(name: "page", value: "\(page)")
         ]
         
+        if type.rawValue == "account" {
+        
+            urlQuery.queryItems?.append(URLQueryItem(name: "session_id", value: sessionID))
+        }
+        
         return urlQuery.string!
     }
     
@@ -468,9 +492,18 @@ class QueryService {
                 
                 completion(sectionResult)
             }
+        
+        case .Account:
+            
+            decodeInformation(SectionMovieArray.self, from: data, with: urlQuery) { (dataResult: SectionMovieArray?) in
+                
+                let sectionResult: SectionData = SectionData(page: dataResult!.page, total_pages: dataResult!.total_pages, sectionName: sectionName, sectionArray: dataResult!.results)
+                
+                completion(sectionResult)
+            }
             
         default:
-            print("Query Type : \(type.rawValue) \n")
+            print("Decode Data query type : \(type.rawValue) \n")
         }
     }
     

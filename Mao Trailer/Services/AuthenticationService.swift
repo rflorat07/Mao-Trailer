@@ -56,23 +56,7 @@ class AuthenticationService {
         defaults.removeObject(forKey: UserInfo.sessionID)
         defaults.removeObject(forKey: UserInfo.loggedInKey)
     }
-    
-    // MARK: - Get account details.
-    func fetchAccountDetails(_ completion : @escaping QueryAccountDetails) {
-        let urlString = "account"
-        let queryString = getUrlSession(endPoint: urlString)
         
-        getDataFromUrl(queryString: queryString) { (data) in
-            if let data = data {
-                self.decodeInformation(AccountDetails.self, with: data, from: queryString, completion: { (details: AccountDetails?) in
-                    completion(details)
-                })
-            }  else {
-                self.decodeError(data!, queryString, {})
-            }
-        }
-    }
-    
     // MARK: - Create a temporary request token
     func  fetchTemporaryRequestToken(_ completion: @escaping  QueryToken) {
         
@@ -261,10 +245,10 @@ class AuthenticationService {
     
     // MARK: - Decode error
     
-    fileprivate func decodeError(_ data: Data, _ url: String, _ completion : @escaping QueryError) {
+    fileprivate func decodeError(_ data: Data?, _ url: String, _ completion : @escaping QueryError) {
         DispatchQueue.main.async {
             do {
-                let error = try JSONDecoder().decode(SectionError.self, from: data)
+                let error = try JSONDecoder().decode(SectionError.self, from: data!)
                 completion()
                 print("DataTask error status code: \(error.status_code ?? 404)  \(error.status_message ?? "Requested could not be found") \n Url \(url)")
                 
