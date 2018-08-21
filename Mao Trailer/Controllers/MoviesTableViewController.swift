@@ -25,11 +25,11 @@ class MoviesTableViewController: UITableViewController {
     }
     
     override func viewWillAppear(_ animated: Bool) {
-        super.viewWillAppear(true)
+        super.viewWillAppear(animated)
         
         self.navigationController?.changeStatusBarStyle(statusBarStyle: .default)
     }
-        
+    
     override func prepare(for segue: UIStoryboardSegue, sender: Any?) {
         
         if segue.identifier == Segue.fromMovieToList {

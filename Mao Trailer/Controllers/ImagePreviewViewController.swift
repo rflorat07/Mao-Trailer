@@ -43,7 +43,6 @@ class ImagePreviewViewController: UIViewController {
         })
     }
     
-    
     @IBAction func closeButtonTapped(_ sender: Any) {
         dismiss(animated: true, completion: nil)
     }

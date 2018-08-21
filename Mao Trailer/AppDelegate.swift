@@ -13,17 +13,11 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
 
     var window: UIWindow?
 
-
     func application(_ application: UIApplication, didFinishLaunchingWithOptions launchOptions: [UIApplicationLaunchOptionsKey: Any]?) -> Bool {
         // Override point for customization after application launch.
         
-        let attrs = [
-            NSAttributedStringKey.font: UIFont.systemFont(ofSize: 24, weight: .bold)
-        ]
-                
-        UINavigationBar.appearance().shadowImage = UIImage()
-        UINavigationBar.appearance().titleTextAttributes = attrs
-        UINavigationBar.appearance().barTintColor = UIColor.white
+        self.changeNavigationBarAppearance()
+        self.switchToMainTabBarController()
         
         return true
     }
@@ -49,12 +43,35 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
     func applicationWillTerminate(_ application: UIApplication) {
         // Called when the application is about to terminate. Save data if appropriate. See also applicationDidEnterBackground:.
     }
+}
 
-
+extension AppDelegate {
+    
+    static var shared: AppDelegate {
+        return UIApplication.shared.delegate as! AppDelegate
+    }
+    
+    func changeNavigationBarAppearance() {
+        let attrs = [
+            NSAttributedStringKey.font: UIFont.systemFont(ofSize: 24, weight: .bold)
+        ]
+        
+        UINavigationBar.appearance().shadowImage = UIImage()
+        UINavigationBar.appearance().titleTextAttributes = attrs
+        UINavigationBar.appearance().barTintColor = UIColor.white
+    }
+    
+    func switchToMainTabBarController() {
+        
+        if UserDefaults.standard.bool(forKey: UserInfo.walkthrough) {
+            let storyBoard = UIStoryboard(name: "Main", bundle: nil)
+            let mainTabBarController = storyBoard.instantiateViewController(withIdentifier: "MainTabBarController")
+            self.window?.rootViewController = mainTabBarController
+        }
+    }
 }
 
 extension UIApplication {
-    
     var statusBarView: UIView? {
         return value(forKey: "statusBar") as? UIView
     }

@@ -51,10 +51,11 @@ class AuthenticationService {
     }
     
     // MARK: - Clear User Data.
-    func clearUserData(){
+    func clearUserData() {
         defaults.removeObject(forKey: UserInfo.tokenKey)
         defaults.removeObject(forKey: UserInfo.sessionID)
         defaults.removeObject(forKey: UserInfo.loggedInKey)
+        defaults.removeObject(forKey: UserInfo.walkthrough)
     }
         
     // MARK: - Create a temporary request token

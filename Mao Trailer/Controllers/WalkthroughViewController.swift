@@ -12,7 +12,7 @@ class WalkthroughViewController: UIViewController {
     
     @IBOutlet weak var collectionView: UICollectionView!
     @IBOutlet weak var pageControl: UIPageControl!
-    
+
     override func viewDidLoad() {
         super.viewDidLoad()
         
@@ -22,8 +22,6 @@ class WalkthroughViewController: UIViewController {
         
         configurePageControl()
         
-        // StatusBar Style
-        UIApplication.shared.statusBarStyle = .lightContent
     }
     
     func configurePageControl() {
@@ -40,7 +38,10 @@ class WalkthroughViewController: UIViewController {
     }
     
     @objc func goToMovieTab() {
-       performSegue(withIdentifier: Segue.fromWalkthroughToTab, sender: nil)
+        
+        UserDefaults.standard.set(true, forKey: UserInfo.walkthrough)
+        AppDelegate.shared.switchToMainTabBarController()
+
     }
     
     @objc func scrollToNextCell(){
