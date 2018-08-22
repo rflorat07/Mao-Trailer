@@ -23,6 +23,7 @@ class DetailsTableViewController: UITableViewController {
     @IBOutlet weak var ratingValueLabel: UILabel!
     @IBOutlet weak var coverImageView: UIImageView!
     @IBOutlet weak var posterImageView: UIImageView!
+    @IBOutlet weak var footerActionView: UIView!
     
     @IBOutlet weak var coverImageViewTop: NSLayoutConstraint!
     @IBOutlet weak var coverImageViewHeight: NSLayoutConstraint!
@@ -40,11 +41,7 @@ class DetailsTableViewController: UITableViewController {
     override func viewDidLoad() {
         super.viewDidLoad()
         
-        // Init Stretchy Headers var
-        originalTop = coverImageViewTop.constant
-        originalHeight = coverImageViewHeight.constant
-        originalNavBarHeight = self.navigationController?.navigationBar.frame.height
-        
+        self.initStretchyHeadersVar()
         self.loadInformationData()
     }
     
@@ -62,6 +59,91 @@ class DetailsTableViewController: UITableViewController {
         // Reset navigationBar
         self.navigationController?.initNavigationBar()
         self.navigationController?.changeStatusBarStyle(statusBarStyle: .default)
+    }
+    
+
+    func loadInformationData() {
+        
+        self.clearDataDetails()
+        
+        LoadingIndicatorView.show("Loading")
+        
+        QueryService.instance.fetchPrimaryInformation(id: information.id, type: queryType) { (details) in
+            
+            if let details = details {
+                self.details = details
+                self.loadDataDetails()
+                self.tableView.reloadData()
+            }
+            
+            LoadingIndicatorView.hide()
+        }
+    }
+    
+    func initStretchyHeadersVar() {
+        
+        originalTop = coverImageViewTop.constant
+        originalHeight = coverImageViewHeight.constant
+        originalNavBarHeight = self.navigationController?.navigationBar.frame.height
+    }
+    
+    func clearDataDetails() {
+        
+        self.titleLabel.text = ""
+        self.genreLabel.text = ""
+        self.runtimeLabel.text = ""
+        self.voteCountLabel.text = ""
+        self.releaseDateLabel.text = ""
+        self.descriptionLabel.text = ""
+        self.ratingValueLabel.text = ""
+        
+        self.coverImageView.image = nil
+        self.posterImageView.image = nil
+        
+        self.playButton.isHidden = true
+        self.startImageView.isHidden = true
+        self.footerActionView.isHidden = true
+    }
+    
+    func loadDataDetails() {
+        
+        self.playButton.isHidden = false
+        self.startImageView.isHidden = false
+        self.footerActionView.isHidden = false
+        
+        self.genreLabel.text = details.getGenre()
+        self.descriptionLabel.text = information.overview
+        self.runtimeLabel.text = details.getRuntime()
+        self.voteCountLabel.text = information.getVoteCount()
+        self.titleLabel.text = information.title.uppercased()
+        self.releaseDateLabel.text = information.getReleaseDate()
+        self.ratingValueLabel.text = information.getRatingValue()
+        
+        self.posterImageView.clipsToBounds = true
+        self.posterImageView.layer.cornerRadius = self.cornerRadius
+        self.posterCoverView.dropShadow(radius: self.cornerRadius)
+        
+        let imagePosterPath = Helpers.downloadedFrom(urlString: self.information.poster_path ?? self.information.backdrop_path!)
+        
+        self.posterImageView.kf.setImage(with: URL(string: imagePosterPath), placeholder: Constants.placeholderImage)
+        
+        let imageCoverPath = Helpers.downloadedFrom(urlString: self.information.backdrop_path ?? self.information.poster_path!, size: ImageSize.large)
+        
+        self.coverImageView.kf.setImage(with: URL(string: imageCoverPath), placeholder: Constants.placeholderImage)
+    }
+    
+    func UpdateCoverImageConstant(scrollView: UIScrollView) {
+        
+        let imageTop = -originalTop
+        let offset = scrollView.contentOffset.y
+        
+        if offset < imageTop {
+            coverImageViewTop.constant = offset
+            coverImageViewHeight.constant = originalHeight + abs(imageTop - offset)
+        } else {
+            coverImageViewTop.constant = imageTop
+            coverImageViewHeight.constant = originalHeight
+        }
     }
     
     override func prepare(for segue: UIStoryboardSegue, sender: Any?) {
@@ -84,67 +166,6 @@ class DetailsTableViewController: UITableViewController {
             toViewController.indexPath = sender as! IndexPath
             toViewController.imgArray = details.images.backdrops!
         }
-    }
-    
-    func loadInformationData() {
-        
-        self.clearDataDetails()
-        
-        LoadingIndicatorView.show("Loading")
-        
-        QueryService.instance.fetchPrimaryInformation(id: information.id, type: queryType) { (details) in
-            
-            if let details = details {
-                self.details = details
-                self.loadDataDetails()
-                self.tableView.reloadData()
-            }
-            
-            LoadingIndicatorView.hide()
-        }
-    }
-    
-    func clearDataDetails() {
-        
-        self.titleLabel.text = ""
-        self.genreLabel.text = ""
-        self.runtimeLabel.text = ""
-        self.voteCountLabel.text = ""
-        self.releaseDateLabel.text = ""
-        self.descriptionLabel.text = ""
-        self.ratingValueLabel.text = ""
-        
-        self.coverImageView.image = nil
-        self.posterImageView.image = nil
-        
-        self.playButton.isHidden = true
-        self.startImageView.isHidden = true
-    }
-    
-    func loadDataDetails() {
-        
-        self.playButton.isHidden = false
-        self.startImageView.isHidden = false
-        
-        self.genreLabel.text = details.getGenre()
-        self.descriptionLabel.text = information.overview
-        self.runtimeLabel.text = details.getRuntime()
-        self.voteCountLabel.text = information.getVoteCount()
-        self.titleLabel.text = information.title.uppercased()
-        self.releaseDateLabel.text = information.getReleaseDate()
-        self.ratingValueLabel.text = information.getRatingValue()
-        
-        self.posterImageView.clipsToBounds = true
-        self.posterImageView.layer.cornerRadius = self.cornerRadius
-        self.posterCoverView.dropShadow(radius: self.cornerRadius)
-        
-        let imagePosterPath = Helpers.downloadedFrom(urlString: self.information.poster_path ?? self.information.backdrop_path!)
-        
-        self.posterImageView.kf.setImage(with: URL(string: imagePosterPath), placeholder: Constants.placeholderImage)
-        
-        let imageCoverPath = Helpers.downloadedFrom(urlString: self.information.backdrop_path ?? self.information.poster_path!, size: ImageSize.large)
-        
-        self.coverImageView.kf.setImage(with: URL(string: imageCoverPath), placeholder: Constants.placeholderImage)
     }
     
     override func scrollViewDidScroll(_ scrollView: UIScrollView) {
@@ -179,23 +200,25 @@ class DetailsTableViewController: UITableViewController {
         }
     }
     
-    func UpdateCoverImageConstant(scrollView: UIScrollView) {
-        
-        let imageTop = -originalTop
-        let offset = scrollView.contentOffset.y
-        
-        if offset < imageTop {
-            coverImageViewTop.constant = offset
-            coverImageViewHeight.constant = originalHeight + abs(imageTop - offset)
-        } else {
-            coverImageViewTop.constant = imageTop
-            coverImageViewHeight.constant = originalHeight
-        }
-    }
-    
+    // MARK: - Action Button
     
     @IBAction func backButtonTapped(_ sender: UIBarButtonItem) {
         dismiss(animated: true, completion: nil)
+    }
+    
+    @IBAction func actionButtonTapped(_ sender: UIButton) {
+        switch sender.tag {
+        case 1:
+            print("Favorite Button Tapped")
+        case 2:
+            print("Watchlist Button Tapped")
+        case 3:
+            print("Rate Button Tapped")
+        default:
+            print("None Button Tapped")
+        }
+     
+        sender.isSelected = !sender.isSelected
     }
     
     // MARK: - Table view data source
@@ -210,7 +233,7 @@ class DetailsTableViewController: UITableViewController {
     
     override func tableView(_ tableView: UITableView, heightForRowAt indexPath: IndexPath) -> CGFloat {
         
-        return indexPath.section == 0 ? 228 : 215
+        return indexPath.section == 0 ? 228 : 195
         
     }
     
@@ -229,7 +252,7 @@ class DetailsTableViewController: UITableViewController {
             cell.cast = details.getCast()
             
             cell.didSelectAction = { (castSelected) in
-              //  self.performSegue(withIdentifier: Segue.fromDetailsToPersonDetails, sender: castSelected.id)
+                self.performSegue(withIdentifier: Segue.fromDetailsToPersonDetails, sender: castSelected.id)
             }
             
             return cell

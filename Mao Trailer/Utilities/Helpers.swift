@@ -6,7 +6,7 @@
 //  Copyright © 2018 Roger Florat. All rights reserved.
 //
 
-import Foundation
+import UIKit
 
 class Helpers {
     
@@ -19,4 +19,23 @@ class Helpers {
         return "\(baseUrl)\(urlString)\(size)"
     }
     
+    static func alertWindow(title: String, message: String) {
+
+        DispatchQueue.main.async {
+            
+            let alertWindow = UIWindow(frame: UIScreen.main.bounds)
+            alertWindow.rootViewController = UIViewController()
+            alertWindow.windowLevel = UIWindowLevelAlert + 1
+            
+            let alert = UIAlertController(title: title, message: message, preferredStyle: .alert)
+            
+            let defaulAction = UIAlertAction(title: "OK", style: .default, handler: nil)
+            
+            alert.addAction(defaulAction)
+            
+            alertWindow.makeKeyAndVisible()
+            
+            alertWindow.rootViewController?.present(alert, animated: true, completion: nil)
+        }
+    }
 }

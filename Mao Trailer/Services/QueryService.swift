@@ -20,7 +20,7 @@ enum EndPointType: String {
     case Popular  = "popular"
     case Upcoming = "upcoming"
     
-    case NowTV    = "on_the_air"
+    case NowTV    = "airing_today"
     case NowMovie = "now_playing"
     
     case FavoriteTV = "account_id/favorite/tv"

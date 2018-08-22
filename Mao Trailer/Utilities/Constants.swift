@@ -114,7 +114,7 @@ struct StructType {
 
 struct QueryString {
     static let page = "1"
-    static let region = ""
+    static let region = "IT"
     static let language = "en-US"
     static let sort_by = "popularity.desc"
     static let api_key = "3b122cc1b16808da5a679c3c1c11cd07"

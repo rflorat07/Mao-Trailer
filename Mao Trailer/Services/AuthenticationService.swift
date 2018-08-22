@@ -14,11 +14,12 @@ class AuthenticationService {
     
     let defaults = UserDefaults.standard
     
-    typealias QueryError       = ()-> Void
-    typealias QueryToken       = (Token?) -> Void
-    typealias QuerySectionData = (Data?) -> Void
-    typealias QuerySessionID   = (NewSession?) -> Void
+    typealias QueryData = (Data?, Error?) -> Void
+    typealias QueryError = (SectionError?)-> Void
+    typealias QueryToken = (Token?, SectionError?) -> Void
     typealias QueryAccountDetails = (AccountDetails?) -> Void
+    typealias QuerySectionData = (Data?, SectionError?) -> Void
+    typealias QuerySessionID = (NewSession?, SectionError?) -> Void
     
     lazy var configuration = URLSessionConfiguration.default
     lazy var session = URLSession(configuration: configuration)
@@ -63,15 +64,17 @@ class AuthenticationService {
         
         let queryString = getUrlAuthentication(endPoint: "authentication/token/new")
         
-        getDataFromUrl(queryString: queryString) { (data) in
+        getDataFromUrl(queryString: queryString) { (data, error)  in
             if let data = data {
                 self.decodeInformation(Token.self, with: data, from: queryString, completion: { (token: Token?) in
                     self.authToken = token!.request_token
-                    completion(token)
+                    completion(token, nil)
                 })
             }  else {
-                completion(nil)
-                self.decodeError(data!, queryString, {})
+                
+                self.decodeError(data!, queryString, { (error) in
+                   completion(nil, error)
+                })
             }
         }
     }
@@ -92,14 +95,14 @@ class AuthenticationService {
         do {
             let postData = try JSONSerialization.data(withJSONObject: parameters, options: .prettyPrinted)
             
-            self.postDataFromUrl(queryString: queryString, headers: headers, postData: postData) { (data) in
+            self.postDataFromUrl(queryString: queryString, headers: headers, postData: postData) { (data, error) in
                 if let data = data {
                     self.decodeInformation(Token.self, with: data, from: queryString, completion: { (token: Token?) in
-                        completion(token)
+                        completion(token, nil)
                         self.isLoggedIn = true
                     })
                 }  else {
-                    completion(nil)
+                    completion(nil, error)
                     self.isLoggedIn = false
                 }
             }
@@ -120,15 +123,14 @@ class AuthenticationService {
         do {
             let postData = try JSONSerialization.data(withJSONObject: parameters, options: .prettyPrinted)
             
-            self.postDataFromUrl(queryString: queryString, headers: headers, postData: postData) { (data) in
+            self.postDataFromUrl(queryString: queryString, headers: headers, postData: postData) { (data, error)  in
                 if let data = data {
                     self.decodeInformation(NewSession.self, with: data, from: queryString, completion: { (session: NewSession?) in
                         self.sessionID = session!.session_id
-                        completion(session)
+                        completion(session, nil)
                     })
                 }  else {
-                    completion(nil)
-                    self.decodeError(data!, queryString, {})
+                    completion(nil, error)
                 }
             }
             
@@ -173,23 +175,21 @@ class AuthenticationService {
     
     // MARK: - GET data from a URL
     
-    fileprivate func getDataFromUrl(queryString: String, _ completion : @escaping QuerySectionData) {
+    fileprivate func getDataFromUrl(queryString: String, _ completion : @escaping QueryData) {
         
         guard let query = URL(string: queryString) else { return }
         
         let dataTask = session.dataTask(with: query) { (data, response, error) in
             
             if let error = error {
-                print("DataTask error: \(error.localizedDescription) \n")
+                completion(nil, error)
+                print("DataTask error: \(error) \n")
+                
             } else if
                 let data = data,
                 let response = response as? HTTPURLResponse,
                 response.statusCode == 200 {
-                completion(data)
-            } else {
-                self.decodeError(data!, queryString, {
-                    completion(nil)
-                })
+                completion(data, nil)
             }
         }
         
@@ -213,10 +213,10 @@ class AuthenticationService {
                 let data = data,
                 let response = response as? HTTPURLResponse,
                 response.statusCode == 200 {
-                completion(data)
+                completion(data, nil)
             } else {
-                self.decodeError(data!, queryString, {
-                    completion(nil)
+                self.decodeError(data!, queryString, { (error) in
+                    completion(nil, error)
                 })
             }
         })
@@ -250,12 +250,12 @@ class AuthenticationService {
         DispatchQueue.main.async {
             do {
                 let error = try JSONDecoder().decode(SectionError.self, from: data!)
-                completion()
+                completion(error)
                 print("DataTask error status code: \(error.status_code ?? 404)  \(error.status_message ?? "Requested could not be found") \n Url \(url)")
                 
-            } catch let decodeError as NSError {
-                completion()
-                print("Decoder error: \(decodeError)\n")
+            } catch let error as NSError {
+                completion(nil)
+                print("Decoder error: \(error)\n")
             }
         }
     }

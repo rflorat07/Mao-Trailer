@@ -8,7 +8,7 @@
 
 import UIKit
 
-class ProfileLoginViewController: UIViewController {
+class ProfileLoginViewController: UIViewController, UITextFieldDelegate {
     
     @IBOutlet weak var usernameTextField: UITextField!
     @IBOutlet weak var passwordTextField: UITextField!
@@ -19,16 +19,19 @@ class ProfileLoginViewController: UIViewController {
     override func viewDidLoad() {
         super.viewDidLoad()
     
-        self.updateUI()
+        self.usernameTextField.delegate = self
+        self.passwordTextField.delegate = self
         
+        self.updateView()
     }
     
     override func viewWillAppear(_ animated: Bool) {
         super.viewWillAppear(false)
+        
         self.isLoggedIn()
     }
     
-    func updateUI() {
+    func updateView() {
         
         spinner.isHidden = true
         spinner.hidesWhenStopped = true
@@ -49,45 +52,62 @@ class ProfileLoginViewController: UIViewController {
         }
     }
     
-    @IBAction func signinButtonTapped(_ sender: UIButton) {
+    func userAuthentication() {
         
         if usernameTextField.text != nil && passwordTextField.text != nil {
             
             self.spinner.isHidden = false
             self.spinner.startAnimating()
             
-            AuthenticationService.instance.fetchTemporaryRequestToken { (token) in
+            AuthenticationService.instance.fetchTemporaryRequestToken { (token, error) in
                 
                 if token != nil && token!.success {
                     
-                    AuthenticationService.instance.validateRequestToken(username: self.usernameTextField.text!, password: self.passwordTextField.text!, { (token) in
+                    AuthenticationService.instance.validateRequestToken(username: self.usernameTextField.text!, password: self.passwordTextField.text!, { (token, error) in
                         
                         if token != nil && token!.success {
-                            AuthenticationService.instance.fetchValidSessionID({ (session) in
+                            AuthenticationService.instance.fetchValidSessionID({ (session, error) in
                                 
                                 if session != nil && session!.success {
                                     
                                     self.usernameTextField.text = nil
                                     self.passwordTextField.text = nil
-                                   
+                                    
                                     self.isLoggedIn()
-                                   
+                                    
                                 } else {
-                                    print("fetchValidSessionID nil")
+                                    Helpers.alertWindow(title: "Error", message: (error?.status_message)!)
                                 }
                             })
                             
                         } else {
-                            print("validateRequestToken: nil")
+                            Helpers.alertWindow(title: "Error", message: (error?.status_message)!)
                         }
                     })
                 } else {
-                    print("fetchTemporaryRequestToken nil")
+                    Helpers.alertWindow(title: "Error", message: (error?.status_message)!)
                 }
                 
                 self.spinner.stopAnimating()
             }
         }
+    }
+    
+    func textFieldShouldReturn(_ textField: UITextField) -> Bool {
+        
+        if textField == usernameTextField {
+            passwordTextField.becomeFirstResponder()
+        } else {
+            self.userAuthentication()
+            self.view.endEditing(true)
+        }
+        
+        return true
+    }
+    
+    @IBAction func signinButtonTapped(_ sender: UIButton) {
+        
+       self.userAuthentication()
     }
 
     override func touchesBegan(_ touches: Set<UITouch>, with event: UIEvent?) {

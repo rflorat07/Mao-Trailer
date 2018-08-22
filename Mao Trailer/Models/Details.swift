@@ -11,13 +11,21 @@ import Foundation
 struct Details: Decodable {
     
     let runtime: Double?
+    let episode_run_time: Array<Double>?
     let genres: [Genre]
     let images: ImageArray
     let videos: VideoArray
     let credits: CastArray
     
     func getRuntime() -> String {
-        return Date.getFormattedTime(minute: self.runtime ?? 0.0)
+        
+        if let runtime = self.runtime {
+            return Date.getFormattedTime(minute: runtime)
+        } else if self.episode_run_time != nil && self.episode_run_time!.count > 0 {
+            return Date.getFormattedTime(minute: self.episode_run_time![0])
+        }
+        
+        return "0.0s"
     }
     
     func getGenre() -> String {
