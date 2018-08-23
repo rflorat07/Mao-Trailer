@@ -10,7 +10,7 @@ import UIKit
 
 class ListCollectionViewController: UICollectionViewController {
     
-    var queryType: MediaType!
+    var queryType: APIRequest!
     var fetchingMore: Bool = false
     var sectionData: SectionData = SectionData()
     

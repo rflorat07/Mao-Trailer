@@ -42,9 +42,9 @@ struct SectionData: Section {
 
 struct SectionInfo {
     var page: Int
-    var type: MediaType
+    var type: APIRequest
     var sectionName: String
-    var endPoint: EndPointType
+    var endPoint: EndpointRequest
 }
 
 struct SectionMovieArray: Decodable {

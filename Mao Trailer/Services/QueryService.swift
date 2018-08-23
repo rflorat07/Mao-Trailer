@@ -8,7 +8,7 @@
 
 import Foundation
 
-enum MediaType: String {
+enum APIRequest: String {
     case TV = "tv"
     case Movie = "movie"
     case Person = "person"
@@ -16,7 +16,7 @@ enum MediaType: String {
     case Discover = "discover"
 }
 
-enum EndPointType: String {
+enum EndpointRequest: String {
     
     case Popular  = "popular"
     case Upcoming = "upcoming"
@@ -45,8 +45,7 @@ class QueryService {
     
     let defaults = UserDefaults.standard
     
-    typealias QueryError         = ()-> Void
-    
+    typealias QueryError         = (SectionError?)-> Void
     typealias QueryGenres        = (GenreArray?) -> Void
     typealias QueryDetails       = (Details?) -> Void
     typealias QueryDetailsImages = (ImageArray?) -> Void
@@ -55,22 +54,14 @@ class QueryService {
     typealias QuerySectionMovie  = (SectionMovieArray?) -> Void
     typealias QuerySectionPeople = (People?) -> Void
     
-    typealias QuerySectionData   = (Data?) -> Void
     typealias QuerySectionResult = (SectionData?) -> Void
     typealias QuerySectionArray  = ([SectionData]?) -> Void
+    typealias QuerySectionData   = (Data?, SectionError?) -> Void
     
-    typealias QueryPersonDetails  = (PersonDetails?) -> Void
+    typealias QueryPersonDetails = (PersonDetails?) -> Void
     
     lazy var configuration = URLSessionConfiguration.default
     lazy var session = URLSession(configuration: configuration)
-    
-    
-    var sessionID: String {
-        get {
-            return defaults.value(forKey: UserInfo.sessionID) as! String
-        }
-    }
-    
     
     // MARK: - Fetch All Session
     
@@ -96,12 +87,11 @@ class QueryService {
         group.notify(queue: DispatchQueue.main, execute: {
             completion(sectionDataArray)
         })
-        
     }
     
     // MARK: - Fetch Section
     
-    func fetchSection( sectionName: String, type: MediaType, endPoint: EndPointType, page: Int, _ completion : @escaping QuerySectionResult) {
+    func fetchSection( sectionName: String, type: APIRequest, endPoint: EndpointRequest, page: Int, _ completion : @escaping QuerySectionResult) {
         
         let queryString = getUrlSection(page: page, type: type, endPoint: endPoint)
         
@@ -121,7 +111,7 @@ class QueryService {
                 })
             } else {
                 
-                self.decodeError(data!, queryString, {
+                self.decodeError(data!, queryString, {_ in
                     completion(nil)
                 })
             }
@@ -135,7 +125,7 @@ class QueryService {
         
         let queryString = getUrlPopularPeople(page: page, type: .Person , endPoint: .Popular)
         
-        getDataFromUrl(queryString: queryString) { (data) in
+        getDataFromUrl(queryString: queryString) { (data, error)  in
             
             if let data = data {
                 
@@ -144,7 +134,7 @@ class QueryService {
                 })
                 
             } else {
-                self.decodeError(data!, queryString, {
+                self.decodeError(data!, queryString, {_ in
                     completion(nil)
                 })
             }
@@ -153,11 +143,11 @@ class QueryService {
     }
     
     // MARK: - Fetch primary information
-    func fetchPrimaryInformation(id: Int,  type: MediaType, _ completion : @escaping QueryDetails) {
+    func fetchPrimaryInformation(id: Int,  type: APIRequest, _ completion : @escaping QueryDetails) {
         
         let queryString = getUrlDetails(id: id, type: type)
         
-        getDataFromUrl(queryString: queryString) { (data) in
+        getDataFromUrl(queryString: queryString) { (data, error) in
             
             if let data = data {
                 
@@ -166,7 +156,7 @@ class QueryService {
                     completion(details)
                 })
             } else {
-                self.decodeError(data!, queryString, {
+                self.decodeError(data!, queryString, {_ in
                     completion(nil)
                 })
             }
@@ -175,11 +165,11 @@ class QueryService {
     
     
     // MARK: - Fetch images information
-    func fetchImagesInformation(id: Int,  type: MediaType, _ completion : @escaping QueryDetailsImages) {
+    func fetchImagesInformation(id: Int,  type: APIRequest, _ completion : @escaping QueryDetailsImages) {
         
         let queryString = getUrlImages(id: id, type: type)
         
-        getDataFromUrl(queryString: queryString) { (data) in
+        getDataFromUrl(queryString: queryString) { (data, error) in
             
             if let data = data {
                 
@@ -189,7 +179,7 @@ class QueryService {
                 })
                 
             } else {
-                self.decodeError(data!, queryString, {
+                self.decodeError(data!, queryString, { (error) in
                     completion(nil)
                 })
             }
@@ -198,7 +188,7 @@ class QueryService {
     
     
     // MARK: - Search Movie and TV
-    func search(searchText: String, page: Int, type: MediaType, _ completion : @escaping QuerySectionResult) {
+    func search(searchText: String, page: Int, type: APIRequest, _ completion : @escaping QuerySectionResult) {
         
         var urlQuery = URLComponents(string: QueryString.baseUrl)!
         
@@ -212,7 +202,7 @@ class QueryService {
             URLQueryItem(name: "page", value: String(page))
         ]
         
-        getDataFromUrl(queryString: urlQuery.string!) { (data) in
+        getDataFromUrl(queryString: urlQuery.string!) { (data, error) in
             if let data = data {
                 self.decodeData(sectionName: "Search", type: type, data: data, urlQuery: urlQuery.string!, { (sectiondata) in
                     completion(sectiondata)
@@ -223,18 +213,18 @@ class QueryService {
     }
     
     // MARK: - Search People
-    func searchForPeople(searchText: String, page: Int? = 1,type: MediaType, _ completion : @escaping QuerySectionPeople) {
+    func searchForPeople(searchText: String, page: Int? = 1,type: APIRequest, _ completion : @escaping QuerySectionPeople) {
         
         let queryString = getURLSearch(searchText: searchText, page: page!, type: type)
         
-        getDataFromUrl(queryString: queryString) { (data) in
+        getDataFromUrl(queryString: queryString) { (data, error) in
             if let data = data {
                 self.decodeInformation(People.self, from: data, with: queryString, completion: { (search: People?) in
                     
                     completion(search)
                 })
             } else {
-                self.decodeError(data!, queryString, {
+                self.decodeError(data!, queryString, { (error) in 
                     completion(nil)
                 })
             }
@@ -242,11 +232,11 @@ class QueryService {
     }
     
     // MARK: - Fetch Genres Information
-    func fetchOfficialGenres(type: MediaType, _ completion : @escaping QueryGenres) {
+    func fetchOfficialGenres(type: APIRequest, _ completion : @escaping QueryGenres) {
         
         let queryString = getUrlGenres(type: type)
         
-        getDataFromUrl(queryString: queryString) { (data) in
+        getDataFromUrl(queryString: queryString) { (data, error) in
             
             if let data = data {
                 
@@ -256,7 +246,7 @@ class QueryService {
                 })
                 
             } else {
-                self.decodeError(data!, queryString, {
+                self.decodeError(data!, queryString, { (error) in
                     completion(nil)
                 })
             }
@@ -264,17 +254,17 @@ class QueryService {
     }
     
     // MARK: - Discover Movie or TV by Genres
-    func fetchDiscoverSectioByGenres(type: MediaType, genre: Int, page: Int,  _ completion : @escaping QuerySectionResult) {
+    func fetchDiscoverSectioByGenres(type: APIRequest, genre: Int, page: Int,  _ completion : @escaping QuerySectionResult) {
         
         let queryString = getUrlDiscover(type: type, genre: genre, page: page)
         
-        getDataFromUrl(queryString: queryString) { (data) in
+        getDataFromUrl(queryString: queryString) { (data, error) in
             if let data = data {
                 self.decodeData(sectionName: "Discover", type: type, data: data, urlQuery: queryString, { (sectionData) in
                     completion(sectionData)
                 })
             } else {
-                self.decodeError(data!, queryString, {
+                self.decodeError(data!, queryString, { (error) in
                     completion(nil)
                 })
             }
@@ -286,7 +276,7 @@ class QueryService {
         
         let queryString = getUrlPersonInformation(personId: personId, type: .Person)
         
-        getDataFromUrl(queryString: queryString) { (data) in
+        getDataFromUrl(queryString: queryString) { (data, error) in
             
             if let data = data {
                 
@@ -296,7 +286,7 @@ class QueryService {
                 })
                 
             } else {
-                self.decodeError(data!, queryString, {
+                self.decodeError(data!, queryString, { (error) in
                     completion(nil)
                 })
             }
@@ -307,7 +297,7 @@ class QueryService {
     
     // MARK: - Get the data from a URL
     
-    fileprivate func getDataFromUrl(queryString: String, _ completion : @escaping QuerySectionData) {
+    func getDataFromUrl(queryString: String, _ completion : @escaping QuerySectionData) {
         
         guard let query = URL(string: queryString) else { return }
         
@@ -319,10 +309,10 @@ class QueryService {
                 let data = data,
                 let response = response as? HTTPURLResponse,
                 response.statusCode == 200 {
-                completion(data)
+                completion(data, nil)
             } else {
-                self.decodeError(data!, queryString, {
-                    completion(nil)
+                self.decodeError(data!, queryString, { (error) in
+                    completion(nil, error)
                 })
             }
         }
@@ -332,7 +322,7 @@ class QueryService {
     
     // MARK: - URL Section
     
-    fileprivate func getUrlSection(page: Int, type: MediaType, endPoint: EndPointType) -> String {
+    fileprivate func getUrlSection(page: Int, type: APIRequest, endPoint: EndpointRequest) -> String {
         
         var urlQuery = URLComponents(string: QueryString.baseUrl)!
         
@@ -347,14 +337,14 @@ class QueryService {
         
         if type.rawValue == "account" {
         
-            urlQuery.queryItems?.append(URLQueryItem(name: "session_id", value: sessionID))
+            urlQuery.queryItems?.append(URLQueryItem(name: "session_id", value: defaults.value(forKey: UserInfo.sessionID) as? String))
         }
         
         return urlQuery.string!
     }
     
     // MARK: - URL Popular People
-    fileprivate func getUrlPopularPeople(page: Int, type: MediaType, endPoint: EndPointType) -> String {
+    fileprivate func getUrlPopularPeople(page: Int, type: APIRequest, endPoint: EndpointRequest) -> String {
         
         var urlQuery = URLComponents(string: QueryString.baseUrl)!
         
@@ -371,7 +361,7 @@ class QueryService {
     
     // MARK: - URL Details
     
-    fileprivate func getUrlDetails(id: Int,  type: MediaType) -> String {
+    fileprivate func getUrlDetails(id: Int,  type: APIRequest) -> String {
         
         var urlQuery = URLComponents(string: QueryString.baseUrl)!
         
@@ -389,7 +379,7 @@ class QueryService {
     }
     
     // MARK: - URL Person Information
-    func getUrlPersonInformation(personId: Int,  type: MediaType) -> String {
+    func getUrlPersonInformation(personId: Int,  type: APIRequest) -> String {
         
         var urlQuery = URLComponents(string: QueryString.baseUrl)!
         
@@ -405,7 +395,7 @@ class QueryService {
     }
     
     // MARK: - URL search
-    func getURLSearch(searchText: String, page: Int, type: MediaType) -> String {
+    func getURLSearch(searchText: String, page: Int, type: APIRequest) -> String {
         
         var urlQuery = URLComponents(string: QueryString.baseUrl)!
         
@@ -424,7 +414,7 @@ class QueryService {
     
     // MARK: - URL Genres
     
-    fileprivate func getUrlGenres(type: MediaType) -> String {
+    fileprivate func getUrlGenres(type: APIRequest) -> String {
         
         var urlQuery = URLComponents(string: QueryString.baseUrl)!
         
@@ -440,7 +430,7 @@ class QueryService {
     }
     
     // MARK: - URL Discover
-    fileprivate func getUrlDiscover(type: MediaType, genre: Int, page: Int) -> String {
+    fileprivate func getUrlDiscover(type: APIRequest, genre: Int, page: Int) -> String {
         
         var urlQuery = URLComponents(string: QueryString.baseUrl)!
         
@@ -463,7 +453,7 @@ class QueryService {
     
     
     // MARK: - URL Images
-    fileprivate func getUrlImages(id: Int,  type: MediaType) -> String {
+    fileprivate func getUrlImages(id: Int,  type: APIRequest) -> String {
         
         var urlQuery = URLComponents(string: QueryString.baseUrl)!
         
@@ -478,7 +468,7 @@ class QueryService {
     
     // MARK: - Decode Data
     
-    fileprivate func decodeData(sectionName: String, type: MediaType ,data: Data, urlQuery: String, _ completion : @escaping  QuerySectionResult) {
+    fileprivate func decodeData(sectionName: String, type: APIRequest ,data: Data, urlQuery: String, _ completion : @escaping  QuerySectionResult) {
         
         switch type {
         case .Movie:
@@ -509,14 +499,14 @@ class QueryService {
             }
             
         default:
-            print("Decode Data query type : \(type.rawValue) \n")
+            print("Decode APIRequest for : \(type.rawValue) \n")
         }
     }
     
     
     // MARK: - Get Information
     
-    fileprivate func decodeInformation<T>(_ type: T.Type, from data: Data, with url: String, completion : @escaping (T?) -> Void) where T : Decodable {
+    func decodeInformation<T>(_ type: T.Type, from data: Data, with url: String, completion : @escaping (T?) -> Void) where T : Decodable {
         
         DispatchQueue.main.async {
             
@@ -529,23 +519,23 @@ class QueryService {
                 
                 completion(nil)
                 
-                print("Decoder error: \(decodeError.localizedDescription) \n \n \(decodeError) \n \n Url: \(url)")
+                print("Decoder error: \(decodeError) \n Url: \(url)")
             }
         }
     }
     
     // MARK: - Decode error
     
-    fileprivate func decodeError(_ data: Data, _ url: String, _ completion : @escaping QueryError) {
+    func decodeError(_ data: Data, _ url: String, _ completion : @escaping QueryError) {
         DispatchQueue.main.async {
             do {
                 let error = try JSONDecoder().decode(SectionError.self, from: data)
-                completion()
-                print("DataTask error status code: \(error.status_code ?? 404)  \(error.status_message ?? "Requested could not be found") \n Url \(url)")
+                completion(error)
+                print("DataTask error status code: \(error.status_code ?? 404)  \(error.status_message ?? "Requested could not be found") \n Url: \(url)")
                 
             } catch let decodeError as NSError {
-                completion()
-                print("Decoder error: \(decodeError.localizedDescription)\n")
+                completion(nil)
+                print("Decoder error: \(decodeError) \n Url: \(url)")
             }
         }
     }

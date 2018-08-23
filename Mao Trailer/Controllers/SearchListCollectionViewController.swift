@@ -14,7 +14,7 @@ class SearchListCollectionViewController: UICollectionViewController {
     var searchText: String = ""
     var fetchingMore: Bool = false
     
-    var queryType: MediaType!
+    var queryType: APIRequest!
     var searchData: SectionData!
     var officialGenres: [Genre] = [Genre]()
     var officialGenresTemp: [Genre] = [Genre]()
@@ -81,7 +81,7 @@ class SearchListCollectionViewController: UICollectionViewController {
     
     // MARK: Search With Text
     
-    func searchMovieOrTVShowWithText(searchText: String, page: Int? = 1, type: MediaType) {
+    func searchMovieOrTVShowWithText(searchText: String, page: Int? = 1, type: APIRequest) {
         
         self.fetchingMore = true
         
@@ -103,7 +103,7 @@ class SearchListCollectionViewController: UICollectionViewController {
     
     // MARK: Discover more Movie or TVShow
     
-    func discoverMoreMovieOrTVShow(page: Int? = 1, type: MediaType, genre: Int) {
+    func discoverMoreMovieOrTVShow(page: Int? = 1, type: APIRequest, genre: Int) {
         
         self.fetchingMore = true
         

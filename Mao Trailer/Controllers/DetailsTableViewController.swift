@@ -33,7 +33,7 @@ class DetailsTableViewController: UITableViewController {
     @IBOutlet weak var coverImageViewHeight: NSLayoutConstraint!
     
     var details: Details!
-    var queryType: MediaType!
+    var queryType: APIRequest!
     var information: TVMovie!
     
     var originalTop: CGFloat!
@@ -80,9 +80,9 @@ class DetailsTableViewController: UITableViewController {
                 self.tableView.reloadData()
             }
             
-            if AuthenticationService.instance.isLoggedIn {
+            if AuthenticationService.instanceAuth.isLoggedIn {
                 
-                AccountService.instance.fetchAccountStates(id: self.information.id, type: self.queryType, endPoint: EndPointType.AccountStates) { (states) in
+                AccountService.instanceAccount.fetchAccountStates(id: self.information.id, type: self.queryType, endPoint: EndpointRequest.AccountStates) { (states) in
                     
                     if let states = states {
                         self.favotiteButton.isSelected = states.favorite!
@@ -235,13 +235,13 @@ class DetailsTableViewController: UITableViewController {
     }
     
     
-    func markAsFavoriteOrAddToWatchlist(_ sender: UIButton, endPoint: EndPointType) {
+    func markAsFavoriteOrAddToWatchlist(_ sender: UIButton, endPoint: EndpointRequest) {
         
-        if AuthenticationService.instance.isLoggedIn {
+        if AuthenticationService.instanceAuth.isLoggedIn {
             
             LoadingIndicatorView.show("Loading")
             
-            AccountService.instance.markAsFavorite(id: self.information.id, type: self.queryType, endPoint: endPoint, mark: !sender.isSelected) { (response) in
+            AccountService.instanceAccount.markAsFavorite(id: self.information.id, type: self.queryType, endPoint: endPoint, mark: !sender.isSelected) { (response) in
                 
                 if let response = response {
                     

@@ -77,7 +77,8 @@ class ProfileCollectionViewController: UICollectionViewController {
             LoadingIndicatorView.hide()
         }
         
-        AccountService.instance.fetchAccountDetails { (details) in
+    
+        AccountService.instanceAccount.fetchAccountDetails { (details) in
             if let details = details {
                 self.accountDetails = details
                 self.collectionView?.reloadData()

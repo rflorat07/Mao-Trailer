@@ -13,7 +13,7 @@ class SearchOptionCollectionViewController: UICollectionViewController, UICollec
     var fetchingMore: Bool = false
     
     var genreInfo: Genre!
-    var queryType: MediaType!
+    var queryType: APIRequest!
     var searchData: SectionData = SectionData()
     
     override func viewDidLoad() {
@@ -59,7 +59,7 @@ class SearchOptionCollectionViewController: UICollectionViewController, UICollec
     
     
     // MARK: Discover more Movie or TVShow
-    func discoverMoreMovieOrTVShow(page: Int? = 1, type: MediaType, genre: Int, completion: @escaping CompletionHandler) {
+    func discoverMoreMovieOrTVShow(page: Int? = 1, type: APIRequest, genre: Int, completion: @escaping CompletionHandler) {
         
         self.fetchingMore = true
         

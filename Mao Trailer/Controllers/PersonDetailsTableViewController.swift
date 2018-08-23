@@ -11,7 +11,7 @@ import UIKit
 class PersonDetailsTableViewController: UITableViewController {
     
     var personId: Int!
-    var mediaType: MediaType!
+    var mediaType: APIRequest!
     var personDetails: PersonDetails!
     
     override func viewDidLoad() {

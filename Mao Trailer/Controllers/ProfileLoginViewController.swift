@@ -47,7 +47,7 @@ class ProfileLoginViewController: UIViewController, UITextFieldDelegate {
     }
     
     func isLoggedIn() {
-        if AuthenticationService.instance.isLoggedIn {
+        if AuthenticationService.instanceAuth.isLoggedIn {
             self.performSegue(withIdentifier: Segue.ProfileLoginToProfile, sender: self)
         }
     }
@@ -59,14 +59,14 @@ class ProfileLoginViewController: UIViewController, UITextFieldDelegate {
             self.spinner.isHidden = false
             self.spinner.startAnimating()
             
-            AuthenticationService.instance.fetchTemporaryRequestToken { (token, error) in
+            AuthenticationService.instanceAuth.fetchTemporaryRequestToken { (token, error) in
                 
                 if token != nil && token!.success {
                     
-                    AuthenticationService.instance.validateRequestToken(username: self.usernameTextField.text!, password: self.passwordTextField.text!, { (token, error) in
+                    AuthenticationService.instanceAuth.validateRequestToken(username: self.usernameTextField.text!, password: self.passwordTextField.text!, { (token, error) in
                         
                         if token != nil && token!.success {
-                            AuthenticationService.instance.fetchValidSessionID({ (session, error) in
+                            AuthenticationService.instanceAuth.fetchValidSessionID({ (session, error) in
                                 
                                 if session != nil && session!.success {
                                     

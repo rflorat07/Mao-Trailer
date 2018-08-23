@@ -17,7 +17,7 @@ class ProfileSettingViewController: UIViewController {
     }
 
     @IBAction func signoutButtonTapped(_ sender: UIButton) {
-        AuthenticationService.instance.clearUserData()
+        AuthenticationService.instanceAuth.clearUserData()
         self.callback(true)
         navigationController?.popToRootViewController(animated: true)
     }
