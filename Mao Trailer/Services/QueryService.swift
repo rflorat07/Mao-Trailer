@@ -17,20 +17,26 @@ enum MediaType: String {
 }
 
 enum EndPointType: String {
+    
     case Popular  = "popular"
     case Upcoming = "upcoming"
     
     case NowTV    = "airing_today"
     case NowMovie = "now_playing"
     
+    case AccountStates = "account_states"
+    
+    case Favorite = "favorite"
     case FavoriteTV = "account_id/favorite/tv"
     case FavoriteMovies = "account_id/favorite/movies"
     
+    case Watchlist = "watchlist"
     case WatchlistTV = "account_id/watchlist/tv"
     case WatchlistMovies = "account_id/watchlist/movies"
     
     case RatedTV = "account_id/rated/tv"
     case RatedMovies = "account_id/rated/movies"
+
 }
 
 class QueryService {

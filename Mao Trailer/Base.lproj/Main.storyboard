@@ -1913,17 +1913,20 @@
                         <outlet property="coverImageViewHeight" destination="pgD-Ai-WWN" id="RQq-sH-bx3"/>
                         <outlet property="coverImageViewTop" destination="w68-rh-uuq" id="Olk-3M-9J1"/>
                         <outlet property="descriptionLabel" destination="Lsg-R2-ydD" id="DBR-i3-jXn"/>
+                        <outlet property="favotiteButton" destination="epQ-Dj-p4f" id="b8X-8b-CdJ"/>
                         <outlet property="footerActionView" destination="FnB-QA-KmO" id="25p-vb-yvW"/>
                         <outlet property="genreLabel" destination="vpN-cZ-xWl" id="aPW-RG-ycb"/>
                         <outlet property="playButton" destination="9lW-uQ-0TH" id="G1L-Sa-PPZ"/>
                         <outlet property="posterCoverView" destination="hSl-SK-8NB" id="EUh-dh-KBd"/>
                         <outlet property="posterImageView" destination="EOA-0a-CeK" id="jyp-DX-6iL"/>
+                        <outlet property="rateButton" destination="tgC-ZS-FDT" id="UC4-d9-Avq"/>
                         <outlet property="ratingValueLabel" destination="u0H-HJ-TpD" id="xHV-g9-mGq"/>
                         <outlet property="releaseDateLabel" destination="hvT-hD-ea6" id="YRm-nM-hhh"/>
                         <outlet property="runtimeLabel" destination="1c3-n4-GGy" id="nie-h9-FDk"/>
                         <outlet property="startImageView" destination="vHc-Tp-nGg" id="ZY3-8j-jhK"/>
                         <outlet property="titleLabel" destination="rVe-lx-hOe" id="VFn-QG-5QF"/>
                         <outlet property="voteCountLabel" destination="97d-Gg-XaO" id="Iwz-RD-CmL"/>
+                        <outlet property="watchlistButton" destination="WKR-jo-XUd" id="8yF-n4-bkZ"/>
                         <segue destination="nzz-XX-lQI" kind="presentation" identifier="segueDetailsToImagePreview" modalPresentationStyle="overFullScreen" modalTransitionStyle="crossDissolve" id="Y0p-h2-Mqt"/>
                         <segue destination="5oz-5Z-Lef" kind="show" identifier="segueDetailsToPersonDetails" id="0ax-a1-6bA"/>
                     </connections>

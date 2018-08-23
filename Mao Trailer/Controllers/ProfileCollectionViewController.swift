@@ -25,6 +25,10 @@ class ProfileCollectionViewController: UICollectionViewController {
         super.viewDidLoad()
         
         navigationItem.hidesBackButton = true
+    }
+    
+    override func viewWillAppear(_ animated: Bool) {
+        super.viewWillAppear(true)
         
         self.loadProfileData()
     }

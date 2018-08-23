@@ -25,6 +25,10 @@ class DetailsTableViewController: UITableViewController {
     @IBOutlet weak var posterImageView: UIImageView!
     @IBOutlet weak var footerActionView: UIView!
     
+    @IBOutlet weak var rateButton: UIButton!
+    @IBOutlet weak var favotiteButton: UIButton!
+    @IBOutlet weak var watchlistButton: UIButton!
+    
     @IBOutlet weak var coverImageViewTop: NSLayoutConstraint!
     @IBOutlet weak var coverImageViewHeight: NSLayoutConstraint!
     
@@ -61,7 +65,7 @@ class DetailsTableViewController: UITableViewController {
         self.navigationController?.changeStatusBarStyle(statusBarStyle: .default)
     }
     
-
+    
     func loadInformationData() {
         
         self.clearDataDetails()
@@ -76,8 +80,21 @@ class DetailsTableViewController: UITableViewController {
                 self.tableView.reloadData()
             }
             
+            if AuthenticationService.instance.isLoggedIn {
+                
+                AccountService.instance.fetchAccountStates(id: self.information.id, type: self.queryType, endPoint: EndPointType.AccountStates) { (states) in
+                    
+                    if let states = states {
+                        self.favotiteButton.isSelected = states.favorite!
+                        self.watchlistButton.isSelected = states.watchlist!
+                        self.rateButton.isSelected = (states.rated?.value)!
+                    }
+                }
+            }
+            
             LoadingIndicatorView.hide()
         }
+        
     }
     
     func initStretchyHeadersVar() {
@@ -209,16 +226,35 @@ class DetailsTableViewController: UITableViewController {
     @IBAction func actionButtonTapped(_ sender: UIButton) {
         switch sender.tag {
         case 1:
-            print("Favorite Button Tapped")
+            self.markAsFavoriteOrAddToWatchlist(sender, endPoint: .Favorite)
         case 2:
-            print("Watchlist Button Tapped")
-        case 3:
-            print("Rate Button Tapped")
+            self.markAsFavoriteOrAddToWatchlist(sender, endPoint: .Watchlist)
         default:
-            print("None Button Tapped")
+            print("Rate Button Tapped")
         }
-     
-        sender.isSelected = !sender.isSelected
+    }
+    
+    
+    func markAsFavoriteOrAddToWatchlist(_ sender: UIButton, endPoint: EndPointType) {
+        
+        if AuthenticationService.instance.isLoggedIn {
+            
+            LoadingIndicatorView.show("Loading")
+            
+            AccountService.instance.markAsFavorite(id: self.information.id, type: self.queryType, endPoint: endPoint, mark: !sender.isSelected) { (response) in
+                
+                if let response = response {
+                    
+                    if response.status_code == 1 {
+                        sender.isSelected = true
+                    } else if response.status_code == 13 {
+                        sender.isSelected = false
+                    }
+                }
+                
+                LoadingIndicatorView.hide()
+            }
+        }
     }
     
     // MARK: - Table view data source

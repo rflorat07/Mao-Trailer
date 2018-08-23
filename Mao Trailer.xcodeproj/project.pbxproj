@@ -52,6 +52,7 @@
 		4FC87E9820E4EFEF00653671 /* ProfileSettingViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4FC87E9720E4EFEF00653671 /* ProfileSettingViewController.swift */; };
 		4FC87E9B20E50A8C00653671 /* UIViewExt.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4FC87E9A20E50A8C00653671 /* UIViewExt.swift */; };
 		4FCB49292101DC4100AEC926 /* UIColorExt.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4FCB49282101DC4100AEC926 /* UIColorExt.swift */; };
+		4FE31795212E993000BCB4F5 /* AccountStates.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4FE31794212E993000BCB4F5 /* AccountStates.swift */; };
 		4FEDD5E720ED136500E0D4BA /* Walkthrough.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4FEDD5E620ED136400E0D4BA /* Walkthrough.swift */; };
 		4FEDD5E920ED13CF00E0D4BA /* Details.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4FEDD5E820ED13CF00E0D4BA /* Details.swift */; };
 		4FEFE0F8211C351A00800F43 /* ProfileLoginViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4FEFE0F7211C351A00800F43 /* ProfileLoginViewController.swift */; };
@@ -121,6 +122,7 @@
 		4FC87E9720E4EFEF00653671 /* ProfileSettingViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ProfileSettingViewController.swift; sourceTree = "<group>"; };
 		4FC87E9A20E50A8C00653671 /* UIViewExt.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = UIViewExt.swift; sourceTree = "<group>"; };
 		4FCB49282101DC4100AEC926 /* UIColorExt.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = UIColorExt.swift; sourceTree = "<group>"; };
+		4FE31794212E993000BCB4F5 /* AccountStates.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AccountStates.swift; sourceTree = "<group>"; };
 		4FEDD5E620ED136400E0D4BA /* Walkthrough.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Walkthrough.swift; sourceTree = "<group>"; };
 		4FEDD5E820ED13CF00E0D4BA /* Details.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Details.swift; sourceTree = "<group>"; };
 		4FEFE0F7211C351A00800F43 /* ProfileLoginViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ProfileLoginViewController.swift; sourceTree = "<group>"; };
@@ -246,6 +248,7 @@
 				4F0508DB20EE455D00D5B778 /* ModelData.swift */,
 				4FAAD14C210F584500906C55 /* PersonDetails.swift */,
 				4F726633211AED870003D879 /* Authentication.swift */,
+				4FE31794212E993000BCB4F5 /* AccountStates.swift */,
 			);
 			path = Models;
 			sourceTree = "<group>";
@@ -462,6 +465,7 @@
 				4F810B99210B2846008A3654 /* UIImageExt.swift in Sources */,
 				4F77BD2320DA44C100A51FE2 /* SectionTableViewCell.swift in Sources */,
 				4F3105A2212AAF2600D2FEC6 /* AccountService.swift in Sources */,
+				4FE31795212E993000BCB4F5 /* AccountStates.swift in Sources */,
 				4F195BB720E3DE5D005816F5 /* ProfileHeaderCollectionReusableView.swift in Sources */,
 				4FF5E62320D93A2C00D088B5 /* GradientView.swift in Sources */,
 				4F2676082109B8ED005CC679 /* SearchOptionCollectionViewCell.swift in Sources */,
