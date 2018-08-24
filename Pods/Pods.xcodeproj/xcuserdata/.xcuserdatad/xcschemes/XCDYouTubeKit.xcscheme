@@ -14,10 +14,10 @@
             buildForArchiving = "YES">
             <BuildableReference
                BuildableIdentifier = "primary"
-               BlueprintIdentifier = "79C5B7B1D44D4C74B1445698DB6BD44A"
-               BlueprintName = "Pods-Mao Trailer"
+               BlueprintIdentifier = "7A8681106A4C79206A9DEB3F632BC91D"
+               BlueprintName = "XCDYouTubeKit"
                ReferencedContainer = "container:Pods.xcodeproj"
-               BuildableName = "Pods-Mao Trailer.framework">
+               BuildableName = "XCDYouTubeKit.framework">
             </BuildableReference>
          </BuildActionEntry>
       </BuildActionEntries>

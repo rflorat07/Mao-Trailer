@@ -9,4 +9,6 @@ target 'Mao Trailer' do
 
   # Pods for Mao Trailer
   pod 'Kingfisher', '~> 4.0'
+  pod "XCDYouTubeKit", "~> 2.5"
+  
 end

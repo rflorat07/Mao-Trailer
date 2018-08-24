@@ -142,6 +142,7 @@ struct UserInfo {
     static let loggedInKey = "loggedIn"
     static let sessionID = "session_id"
     static let tokenKey = "request_token"
+    static let tokenExpiresKey = "expires_at"
     static let walkthrough = "walkthrough"
 }
 

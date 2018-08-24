@@ -23,7 +23,8 @@ class ImagePreviewCollectionViewCell: UICollectionViewCell {
         
         let imagePath = Helpers.downloadedFrom(urlString: image.file_path!, size: ImageSize.large)
         
-        imageView.kf.setImage(with: URL(string: imagePath), placeholder: Constants.placeholderImage)
+        imageView.kf.indicatorType = .activity
+        imageView.kf.setImage(with: URL(string: imagePath))
     }
     
     override func prepareForReuse() {

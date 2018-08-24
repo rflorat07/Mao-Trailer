@@ -14,6 +14,7 @@ class MoviesTableViewController: UITableViewController {
         SectionInfo(page: 1, type: .Movie, sectionName: "Upcoming", endPoint: .Upcoming),
         SectionInfo(page: 1, type: .Movie, sectionName: "Now", endPoint: .NowMovie),
         SectionInfo(page: 1, type: .Movie, sectionName: "Popular", endPoint: .Popular),
+        SectionInfo(page: 1, type: .Movie, sectionName: "Top Rated", endPoint: .TopRated),
         ]
     
     var sectionMovieArray: [SectionData] = [SectionData]()

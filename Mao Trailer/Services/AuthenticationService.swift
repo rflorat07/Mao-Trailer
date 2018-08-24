@@ -35,6 +35,15 @@ class AuthenticationService: QueryService {
         }
     }
     
+    var authTokenExpires: String {
+        get {
+            return defaults.value(forKey: UserInfo.tokenExpiresKey) as! String
+        }
+        set {
+            defaults.set(newValue, forKey: UserInfo.tokenExpiresKey)
+        }
+    }
+    
     var sessionID: String {
         get {
             return defaults.value(forKey: UserInfo.sessionID) as! String
@@ -120,7 +129,9 @@ class AuthenticationService: QueryService {
             self.postDataFromUrl(queryString: queryString, headers: headers, postData: postData) { (data, error)  in
                 if let data = data {
                     self.decodeInformation(NewSession.self, from: data, with: queryString, completion: { (session: NewSession?) in
+                        
                         self.sessionID = session!.session_id
+                        
                         completion(session, nil)
                     })
                 }  else {
@@ -132,6 +143,7 @@ class AuthenticationService: QueryService {
             print("Failed to load: \(error.localizedDescription)")
         }
     }
+    
     
     
     // ==================== Helper =======================

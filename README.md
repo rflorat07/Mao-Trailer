@@ -13,7 +13,7 @@
 COCOAPODS - https://cocoapods.org/
 
 1. pod Kingfisher '4.8.0' (https://github.com/onevcat/Kingfisher)
-
+2. pod "XCDYouTubeKit", "2.5.6" (https://github.com/0xced/XCDYouTubeKit)
 
 ## Credits
 

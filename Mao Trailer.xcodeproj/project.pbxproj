@@ -29,6 +29,7 @@
 		4F72B6A6212D695B0087C77A /* Main.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 4F72B6A4212D695B0087C77A /* Main.storyboard */; };
 		4F77BD2320DA44C100A51FE2 /* SectionTableViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4F77BD2220DA44C100A51FE2 /* SectionTableViewCell.swift */; };
 		4F77BD2520DA44E000A51FE2 /* SectionCollectionViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4F77BD2420DA44E000A51FE2 /* SectionCollectionViewCell.swift */; };
+		4F7905B4212FF1D600CEDDDB /* UserDefaultsExt.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4F7905B3212FF1D600CEDDDB /* UserDefaultsExt.swift */; };
 		4F810B99210B2846008A3654 /* UIImageExt.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4F810B98210B2845008A3654 /* UIImageExt.swift */; };
 		4F810B9B210B53AA008A3654 /* DateExt.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4F810B9A210B53AA008A3654 /* DateExt.swift */; };
 		4F892A5620DD2958005C8E19 /* MovieListSectionHeaderCollectionReusableView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4F892A5520DD2958005C8E19 /* MovieListSectionHeaderCollectionReusableView.swift */; };
@@ -99,6 +100,7 @@
 		4F72B6A5212D695B0087C77A /* Base */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; name = Base; path = Base.lproj/Main.storyboard; sourceTree = "<group>"; };
 		4F77BD2220DA44C100A51FE2 /* SectionTableViewCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SectionTableViewCell.swift; sourceTree = "<group>"; };
 		4F77BD2420DA44E000A51FE2 /* SectionCollectionViewCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SectionCollectionViewCell.swift; sourceTree = "<group>"; };
+		4F7905B3212FF1D600CEDDDB /* UserDefaultsExt.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = UserDefaultsExt.swift; sourceTree = "<group>"; };
 		4F810B98210B2845008A3654 /* UIImageExt.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = UIImageExt.swift; sourceTree = "<group>"; };
 		4F810B9A210B53AA008A3654 /* DateExt.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DateExt.swift; sourceTree = "<group>"; };
 		4F892A5520DD2958005C8E19 /* MovieListSectionHeaderCollectionReusableView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MovieListSectionHeaderCollectionReusableView.swift; sourceTree = "<group>"; };
@@ -175,6 +177,7 @@
 				4F68CD762107108C00190049 /* UINavigationControllerExt.swift */,
 				4F810B98210B2845008A3654 /* UIImageExt.swift */,
 				4F810B9A210B53AA008A3654 /* DateExt.swift */,
+				4F7905B3212FF1D600CEDDDB /* UserDefaultsExt.swift */,
 			);
 			path = Extensions;
 			sourceTree = "<group>";
@@ -399,10 +402,12 @@
 			inputPaths = (
 				"${SRCROOT}/Pods/Target Support Files/Pods-Mao Trailer/Pods-Mao Trailer-frameworks.sh",
 				"${BUILT_PRODUCTS_DIR}/Kingfisher/Kingfisher.framework",
+				"${BUILT_PRODUCTS_DIR}/XCDYouTubeKit/XCDYouTubeKit.framework",
 			);
 			name = "[CP] Embed Pods Frameworks";
 			outputPaths = (
 				"${TARGET_BUILD_DIR}/${FRAMEWORKS_FOLDER_PATH}/Kingfisher.framework",
+				"${TARGET_BUILD_DIR}/${FRAMEWORKS_FOLDER_PATH}/XCDYouTubeKit.framework",
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 			shellPath = /bin/sh;
@@ -476,6 +481,7 @@
 				4F9A551120F7422D00D7BE2C /* QueryService.swift in Sources */,
 				4F92BBF720FCE63700C5E7C9 /* DetailImagesCollectionViewCell.swift in Sources */,
 				4F104B0A20FE21DF0065545D /* ImagePreviewViewController.swift in Sources */,
+				4F7905B4212FF1D600CEDDDB /* UserDefaultsExt.swift in Sources */,
 				4F8DC25221144EFB003219CC /* People.swift in Sources */,
 				4FA40DE22113489400ED83A4 /* PersonDetailsInfoCollectionViewCell.swift in Sources */,
 				4FEDD5E920ED13CF00E0D4BA /* Details.swift in Sources */,

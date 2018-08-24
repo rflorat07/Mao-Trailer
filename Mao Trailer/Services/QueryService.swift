@@ -20,6 +20,7 @@ enum EndpointRequest: String {
     
     case Popular  = "popular"
     case Upcoming = "upcoming"
+    case TopRated = "top_rated"
     
     case NowTV    = "airing_today"
     case NowMovie = "now_playing"

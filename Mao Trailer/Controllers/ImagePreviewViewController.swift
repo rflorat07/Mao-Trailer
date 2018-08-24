@@ -25,6 +25,8 @@ class ImagePreviewViewController: UIViewController {
         UIView.animate(withDuration: 0.5, animations: {
             self.setNeedsStatusBarAppearanceUpdate()
         })
+        
+        self.handleSwipeGesture()
     }
     
     override func viewWillAppear(_ animated: Bool) {
@@ -45,6 +47,25 @@ class ImagePreviewViewController: UIViewController {
     
     @IBAction func closeButtonTapped(_ sender: Any) {
         dismiss(animated: true, completion: nil)
+    }
+    
+    func handleSwipeGesture() {
+        
+        let slideDown = UISwipeGestureRecognizer(target: self, action: #selector(dismissView(gesture:)))
+        slideDown.direction = UISwipeGestureRecognizerDirection.down
+        self.view.addGestureRecognizer(slideDown)
+        
+        let slideUp = UISwipeGestureRecognizer(target: self, action: #selector(dismissView(gesture:)))
+        slideUp.direction = UISwipeGestureRecognizerDirection.up
+        self.view.addGestureRecognizer(slideUp)
+    }
+    
+    
+    @objc func dismissView(gesture: UISwipeGestureRecognizer) {
+        
+        UIView.animate(withDuration: 0.4) {
+            self.dismiss(animated: true, completion: nil)
+        }
     }
     
 }

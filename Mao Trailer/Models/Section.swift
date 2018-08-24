@@ -17,7 +17,7 @@ struct SectionData: Section {
     var sectionName: String
     var sectionArray: [TVMovie] {
         didSet {
-            sectionArray = self.sectionArray.filter{ $0.poster_path != nil && $0.backdrop_path != nil }
+            sectionArray = self.sectionArray.filter{ $0.poster_path != nil || $0.backdrop_path != nil }
         }
     }
     

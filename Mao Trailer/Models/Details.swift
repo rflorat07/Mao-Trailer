@@ -35,6 +35,15 @@ struct Details: Decodable {
     func getCast() -> [Cast] {
         return self.credits.cast.filter{ $0.profile_path != nil }
     }
+    
+    func getVideoKey() -> String {
+        
+        if let firstTrailer = videos.results.first(where: { $0.type == "Trailer" }) {
+            return firstTrailer.key
+        }
+        
+        return "none"
+    }
 }
 
 struct GenreArray: Decodable {

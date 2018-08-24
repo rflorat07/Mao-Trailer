@@ -69,6 +69,7 @@ extension AppDelegate {
             self.window?.rootViewController = mainTabBarController
         }
     }
+    
 }
 
 extension UIApplication {

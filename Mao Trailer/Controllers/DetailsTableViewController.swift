@@ -7,7 +7,9 @@
 //
 
 import UIKit
+import AVKit
 import Kingfisher
+import XCDYouTubeKit
 
 class DetailsTableViewController: UITableViewController {
     
@@ -124,9 +126,9 @@ class DetailsTableViewController: UITableViewController {
     
     func loadDataDetails() {
         
-        self.playButton.isHidden = false
         self.startImageView.isHidden = false
         self.footerActionView.isHidden = false
+        self.playButton.isHidden = self.details.getVideoKey() != "none" ? false : true
         
         self.genreLabel.text = details.getGenre()
         self.descriptionLabel.text = information.overview
@@ -147,6 +149,7 @@ class DetailsTableViewController: UITableViewController {
         let imageCoverPath = Helpers.downloadedFrom(urlString: self.information.backdrop_path ?? self.information.poster_path!, size: ImageSize.large)
         
         self.coverImageView.kf.setImage(with: URL(string: imageCoverPath), placeholder: Constants.placeholderImage)
+    
     }
     
     func UpdateCoverImageConstant(scrollView: UIScrollView) {
@@ -234,6 +237,31 @@ class DetailsTableViewController: UITableViewController {
         }
     }
     
+    @IBAction func playVideoTapped(_ sender: UIButton) {
+        
+        self.playYouTubeVideo(videoIdentifier: self.details.getVideoKey())
+    }
+    
+    struct YouTubeVideoQuality {
+        static let hd720 = NSNumber(value: XCDYouTubeVideoQuality.HD720.rawValue)
+        static let medium360 = NSNumber(value: XCDYouTubeVideoQuality.medium360.rawValue)
+        static let small240 = NSNumber(value: XCDYouTubeVideoQuality.small240.rawValue)
+    }
+    
+    func playYouTubeVideo(videoIdentifier: String?) {
+        
+        let playerViewController = AVPlayerViewController()
+        self.present(playerViewController, animated: true)
+        
+        XCDYouTubeClient.default().getVideoWithIdentifier(videoIdentifier) { [weak playerViewController] (video: XCDYouTubeVideo?, error: Error?) in
+            if let streamURLs = video?.streamURLs, let streamURL = (streamURLs[XCDYouTubeVideoQualityHTTPLiveStreaming] ?? streamURLs[YouTubeVideoQuality.hd720] ?? streamURLs[YouTubeVideoQuality.medium360] ?? streamURLs[YouTubeVideoQuality.small240]) {
+                playerViewController?.player = AVPlayer(url: streamURL)
+                playerViewController?.player?.play()
+            } else {
+                self.dismiss(animated: true, completion: nil)
+            }
+        }
+    }
     
     func markAsFavoriteOrAddToWatchlist(_ sender: UIButton, endPoint: EndpointRequest) {
         
