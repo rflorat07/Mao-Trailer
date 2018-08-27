@@ -1,5 +1,5 @@
 //
-//  MovieListCollectionViewCell.swift
+//  ListCollectionViewCell.swift
 //  Mao Trailer
 //
 //  Created by Roger Florat on 21/06/18.
@@ -9,7 +9,7 @@
 import UIKit
 import Kingfisher
 
-class MovieListCollectionViewCell: UICollectionViewCell {
+class ListCollectionViewCell: UICollectionViewCell {
     
     @IBOutlet weak var posterCoverView: UIView!
     @IBOutlet weak var rateLabel: UILabel!
@@ -27,7 +27,7 @@ class MovieListCollectionViewCell: UICollectionViewCell {
         
         let imagePath = Helpers.downloadedFrom(urlString: movie.poster_path ?? movie.backdrop_path!)
         
-        rateView.isHidden = true
+        rateLabel.text = movie.getRatingValue()
         titleLabel.text = movie.title.uppercased()
         
         coverImageView.clipsToBounds = true

@@ -264,7 +264,7 @@
                             <inset key="sectionInset" minX="20" minY="20" maxX="20" maxY="20"/>
                         </collectionViewFlowLayout>
                         <cells>
-                            <collectionViewCell opaque="NO" multipleTouchEnabled="YES" contentMode="center" reuseIdentifier="MovieListViewCell" id="6uV-2x-Qra" userLabel="List Collection View Cell" customClass="MovieListCollectionViewCell" customModule="Mao_Trailer" customModuleProvider="target">
+                            <collectionViewCell opaque="NO" multipleTouchEnabled="YES" contentMode="center" reuseIdentifier="MovieListViewCell" id="6uV-2x-Qra" userLabel="List Collection View Cell" customClass="ListCollectionViewCell" customModule="Mao_Trailer" customModuleProvider="target">
                                 <rect key="frame" x="20" y="54" width="158" height="283"/>
                                 <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
                                 <view key="contentView" opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center" insetsLayoutMarginsFromSafeArea="NO">
@@ -1481,7 +1481,7 @@
                         <rect key="frame" x="0.0" y="0.0" width="375" height="667"/>
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
                         <color key="backgroundColor" red="0.97254901960784312" green="0.97254901960784312" blue="0.97254901960784312" alpha="1" colorSpace="calibratedRGB"/>
-                        <view key="tableHeaderView" contentMode="scaleToFill" id="3Uo-Y4-fcl" userLabel="Header Detail View">
+                        <view key="tableHeaderView" contentMode="scaleToFill" misplaced="YES" id="3Uo-Y4-fcl" userLabel="Header Detail View">
                             <rect key="frame" x="0.0" y="0.0" width="375" height="515"/>
                             <autoresizingMask key="autoresizingMask"/>
                             <subviews>
@@ -1610,7 +1610,7 @@
                                 <constraint firstItem="1co-iA-PbL" firstAttribute="top" secondItem="3Uo-Y4-fcl" secondAttribute="top" id="w68-rh-uuq"/>
                             </constraints>
                         </view>
-                        <view key="tableFooterView" contentMode="scaleToFill" id="FnB-QA-KmO" userLabel="Footer Action View">
+                        <view key="tableFooterView" contentMode="scaleToFill" misplaced="YES" id="FnB-QA-KmO" userLabel="Footer Action View">
                             <rect key="frame" x="0.0" y="966" width="375" height="115"/>
                             <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
                             <subviews>
@@ -1802,14 +1802,14 @@
                                 <rect key="frame" x="0.0" y="771" width="375" height="195"/>
                                 <autoresizingMask key="autoresizingMask"/>
                                 <tableViewCellContentView key="contentView" opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center" preservesSuperviewLayoutMargins="YES" insetsLayoutMarginsFromSafeArea="NO" tableViewCell="Dfo-rk-5SS" id="y7R-9z-Kh0">
-                                    <rect key="frame" x="0.0" y="0.0" width="375" height="194.5"/>
+                                    <rect key="frame" x="0.0" y="0.0" width="375" height="195"/>
                                     <autoresizingMask key="autoresizingMask"/>
                                     <subviews>
                                         <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="jcY-dc-sDL" userLabel="Section View">
-                                            <rect key="frame" x="0.0" y="0.0" width="375" height="48"/>
+                                            <rect key="frame" x="0.0" y="0.0" width="600" height="48"/>
                                             <subviews>
                                                 <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Images" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="mZf-Yp-GwG" userLabel="Images Label">
-                                                    <rect key="frame" x="20" y="15" width="335" height="18"/>
+                                                    <rect key="frame" x="20" y="15" width="560" height="18"/>
                                                     <fontDescription key="fontDescription" type="system" weight="semibold" pointSize="15"/>
                                                     <color key="textColor" red="0.40000000000000002" green="0.40000000000000002" blue="0.40000000000000002" alpha="1" colorSpace="calibratedRGB"/>
                                                     <color key="highlightedColor" white="0.0" alpha="0.0" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
@@ -1825,7 +1825,7 @@
                                             </constraints>
                                         </view>
                                         <collectionView multipleTouchEnabled="YES" contentMode="scaleToFill" showsHorizontalScrollIndicator="NO" showsVerticalScrollIndicator="NO" dataMode="prototypes" translatesAutoresizingMaskIntoConstraints="NO" id="ge2-oZ-0dQ" userLabel="Images Collection View">
-                                            <rect key="frame" x="0.0" y="68" width="375" height="105"/>
+                                            <rect key="frame" x="0.0" y="68" width="600" height="105"/>
                                             <color key="backgroundColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
                                             <constraints>
                                                 <constraint firstAttribute="height" constant="105" id="xYN-3L-qMC"/>
@@ -2462,10 +2462,10 @@
                                     <autoresizingMask key="autoresizingMask"/>
                                     <subviews>
                                         <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="zlG-v3-na5" userLabel="Background View">
-                                            <rect key="frame" x="0.0" y="0.0" width="375" height="48"/>
+                                            <rect key="frame" x="0.0" y="0.0" width="600" height="48"/>
                                             <subviews>
                                                 <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="TV Shows" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="xgM-xw-3nY" userLabel="TV Shows Label">
-                                                    <rect key="frame" x="20" y="15" width="335" height="18"/>
+                                                    <rect key="frame" x="20" y="15" width="560" height="18"/>
                                                     <fontDescription key="fontDescription" type="system" weight="semibold" pointSize="15"/>
                                                     <color key="textColor" red="0.40000000000000002" green="0.40000000000000002" blue="0.40000000000000002" alpha="1" colorSpace="custom" customColorSpace="calibratedRGB"/>
                                                     <nil key="highlightedColor"/>
@@ -2480,7 +2480,7 @@
                                             </constraints>
                                         </view>
                                         <collectionView clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="scaleToFill" showsHorizontalScrollIndicator="NO" showsVerticalScrollIndicator="NO" dataMode="prototypes" translatesAutoresizingMaskIntoConstraints="NO" id="U5v-5S-OFe" userLabel="TV Shows Collection View">
-                                            <rect key="frame" x="0.0" y="48" width="375" height="246.5"/>
+                                            <rect key="frame" x="0.0" y="48" width="600" height="246.5"/>
                                             <color key="backgroundColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
                                             <collectionViewFlowLayout key="collectionViewLayout" scrollDirection="horizontal" minimumLineSpacing="10" minimumInteritemSpacing="0.0" id="K4u-yl-h9U">
                                                 <size key="itemSize" width="110" height="202"/>

@@ -149,7 +149,7 @@ class DetailsTableViewController: UITableViewController {
         let imageCoverPath = Helpers.downloadedFrom(urlString: self.information.backdrop_path ?? self.information.poster_path!, size: ImageSize.large)
         
         self.coverImageView.kf.setImage(with: URL(string: imageCoverPath), placeholder: Constants.placeholderImage)
-    
+        
     }
     
     func UpdateCoverImageConstant(scrollView: UIScrollView) {
@@ -251,14 +251,17 @@ class DetailsTableViewController: UITableViewController {
     func playYouTubeVideo(videoIdentifier: String?) {
         
         let playerViewController = AVPlayerViewController()
+        
         self.present(playerViewController, animated: true)
         
+        //Get streamURL
         XCDYouTubeClient.default().getVideoWithIdentifier(videoIdentifier) { [weak playerViewController] (video: XCDYouTubeVideo?, error: Error?) in
             if let streamURLs = video?.streamURLs, let streamURL = (streamURLs[XCDYouTubeVideoQualityHTTPLiveStreaming] ?? streamURLs[YouTubeVideoQuality.hd720] ?? streamURLs[YouTubeVideoQuality.medium360] ?? streamURLs[YouTubeVideoQuality.small240]) {
                 playerViewController?.player = AVPlayer(url: streamURL)
                 playerViewController?.player?.play()
+                
             } else {
-                self.dismiss(animated: true, completion: nil)
+                self.dismiss(animated: true)
             }
         }
     }
@@ -284,6 +287,7 @@ class DetailsTableViewController: UITableViewController {
             }
         }
     }
+    
     
     // MARK: - Table view data source
     
