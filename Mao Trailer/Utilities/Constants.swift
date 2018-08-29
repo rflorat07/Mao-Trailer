@@ -148,3 +148,7 @@ struct UserInfo {
 }
 
 
+extension Notification.Name {
+    static let didUserChangedStatus = Notification.Name("didUserChangedStatus")
+}
+

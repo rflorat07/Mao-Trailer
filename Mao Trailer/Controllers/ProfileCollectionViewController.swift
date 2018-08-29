@@ -9,15 +9,17 @@
 import UIKit
 
 class ProfileCollectionViewController: UICollectionViewController {
-    
+
     var sectionArray: SectionData!
     var accountDetails: AccountDetails!
     var ratedSectionArray: SectionData!
     var favoriteSectionArray: SectionData!
     var watchlistSectionArray: SectionData!
     
+    var selectedAction: String = "Favorites"
+    
     let sectionProfileInfo = [
-        SectionInfo(page: 1, type: .Account, sectionName: "Favorite", endPoint: .FavoriteMovies),
+        SectionInfo(page: 1, type: .Account, sectionName: "Favorites", endPoint: .FavoriteMovies),
         SectionInfo(page: 1, type: .Account, sectionName: "Watchlist", endPoint: .WatchlistMovies),
         SectionInfo(page: 1, type: .Account, sectionName: "Ratings", endPoint: .RatedMovies)]
     
@@ -25,11 +27,10 @@ class ProfileCollectionViewController: UICollectionViewController {
     override func viewDidLoad() {
         super.viewDidLoad()
         
-        if AuthenticationService.instanceAuth.isLoggedIn {
-            self.loadProfileData()
-        }
+        self.loadInitData()
     }
     
+
     override func viewDidAppear(_ animated: Bool) {
         super.viewDidAppear(animated)
         
@@ -46,7 +47,7 @@ class ProfileCollectionViewController: UICollectionViewController {
             
             toViewController?.callback = { (response) in
                 if response {
-                    self.loadProfileData()
+                    self.loadInitData()
                 }
             }
         }
@@ -60,23 +61,21 @@ class ProfileCollectionViewController: UICollectionViewController {
             receiverViewController.queryType = .Movie
             receiverViewController.information = sender as? Movie
         }
-        
-        if segue.identifier == Segue.fromProfileToProfileSetting {
-            
-            let toViewController = segue.destination as? ProfileSettingViewController
-            
-            toViewController?.callback = { (response) in
-                self.accountDetails = nil
-                self.sectionArray = nil
-                self.collectionView?.reloadData()
-            }
-        }
     }
     
     
-    func loadProfileData() {
+    func loadInitData() {
         
-        LoadingIndicatorView.show("Loading")
+        if AuthenticationService.instanceAuth.isLoggedIn {
+            
+            self.loadAccountDetails()
+            self.loadSectionData()
+            
+            NotificationCenter.default.addObserver(self, selector: #selector(didUserChangedStatus), name: .didUserChangedStatus, object: nil)
+        }
+    }
+    
+    func loadSectionData() {
         
         QueryService.instance.fetchAllSection(sectionArray: sectionProfileInfo) { (sectionArray) in
             
@@ -89,17 +88,26 @@ class ProfileCollectionViewController: UICollectionViewController {
                 
                 self.collectionView?.reloadData()
             }
-            
-            LoadingIndicatorView.hide()
         }
+    }
+    
+    func loadAccountDetails() {
         
+        LoadingIndicatorView.show("Loading")
         
         AccountService.instanceAccount.fetchAccountDetails { (details) in
             if let details = details {
                 self.accountDetails = details
                 self.collectionView?.reloadData()
             }
+            
+            LoadingIndicatorView.hide()
         }
+    }
+    
+    @objc func didUserChangedStatus() {
+        self.loadSectionData()
+        self.selectedAction = "Favorites"
     }
     
     
@@ -113,29 +121,17 @@ class ProfileCollectionViewController: UICollectionViewController {
         if let sectionHeader = collectionView.dequeueReusableSupplementaryView(ofKind: kind, withReuseIdentifier: Storyboard.profileHeaderReusableView, for: indexPath) as? ProfileHeaderCollectionReusableView {
             
             if let accountDetails = accountDetails {
+                
                 sectionHeader.profile = accountDetails
                 sectionHeader.favoritesLabel.text = String(favoriteSectionArray.sectionArray.count)
                 sectionHeader.watchingLabel.text = String(watchlistSectionArray.sectionArray.count)
                 sectionHeader.ratingsLabel.text = String(ratedSectionArray.sectionArray.count)
+            
+                sectionHeader.activeLabel = self.selectedAction
             }
             
             sectionHeader.didSelectAction = { (selected) in
-                
-                switch selected {
-                case "Favorites":
-                    
-                    self.sectionArray = self.favoriteSectionArray
-                    self.collectionView?.reloadData()
-                    
-                case "Watching":
-                    
-                    self.sectionArray = self.watchlistSectionArray
-                    self.collectionView?.reloadData()
-                    
-                default:
-                    self.sectionArray = self.ratedSectionArray
-                    self.collectionView?.reloadData()
-                }
+                self.SectionArraySelected(selected)
             }
             
             return sectionHeader
@@ -143,6 +139,24 @@ class ProfileCollectionViewController: UICollectionViewController {
         
         return UICollectionReusableView()
         
+    }
+    
+    func SectionArraySelected(_ selected: String ) {
+        switch selected {
+            case "Favorites":
+                self.sectionArray = self.favoriteSectionArray
+                self.collectionView?.reloadData()
+            
+            case "Watching":
+                self.sectionArray = self.watchlistSectionArray
+                self.collectionView?.reloadData()
+            
+            default:
+                self.sectionArray = self.ratedSectionArray
+                self.collectionView?.reloadData()
+            }
+        
+          self.selectedAction = selected
     }
     
     override func numberOfSections(in collectionView: UICollectionView) -> Int {
@@ -174,7 +188,6 @@ class ProfileCollectionViewController: UICollectionViewController {
         let selected = sectionArray.sectionArray[indexPath.row]
         
         self.performSegue(withIdentifier: Segue.fromProfileToDetail, sender: selected)
-        
     }
 }
 

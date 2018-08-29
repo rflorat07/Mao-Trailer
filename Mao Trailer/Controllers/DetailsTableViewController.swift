@@ -227,13 +227,14 @@ class DetailsTableViewController: UITableViewController {
     }
     
     @IBAction func actionButtonTapped(_ sender: UIButton) {
+        
         switch sender.tag {
-        case 1:
-            self.markAsFavoriteOrAddToWatchlist(sender, endPoint: .Favorite)
-        case 2:
-            self.markAsFavoriteOrAddToWatchlist(sender, endPoint: .Watchlist)
-        default:
-            print("Rate Button Tapped")
+            case 1:
+                self.markAsFavoriteOrAddToWatchlist(sender, endPoint: .Favorite)
+            case 2:
+                self.markAsFavoriteOrAddToWatchlist(sender, endPoint: .Watchlist)
+            default:
+                print("Rate Button Tapped")
         }
     }
     
@@ -277,11 +278,15 @@ class DetailsTableViewController: UITableViewController {
                 if let response = response {
                     
                     if response.status_code == 1 {
+                        
                         sender.isSelected = true
+                        
                     } else if response.status_code == 13 {
                         sender.isSelected = false
                     }
                 }
+                
+                NotificationCenter.default.post(name: .didUserChangedStatus , object: nil)
                 
                 LoadingIndicatorView.hide()
             }

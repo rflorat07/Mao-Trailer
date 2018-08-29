@@ -49,12 +49,14 @@ class LoginViewController: UIViewController, UITextFieldDelegate {
         Helpers.isStatusBarHidden(isHidden: false)
     }
     
+    
     @IBAction func signinButtonTapped(_ sender: UIButton) {
         self.userAuthentication()
     }
     
     
     @IBAction func closeButtonTapped(_ sender: UIButton) {
+        Helpers.isStatusBarHidden(isHidden: false)
         AppDelegate.shared.showMainTabBarController()
     }
     

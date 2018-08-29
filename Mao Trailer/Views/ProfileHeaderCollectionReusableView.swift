@@ -17,6 +17,9 @@ class ProfileHeaderCollectionReusableView: UICollectionReusableView {
     @IBOutlet weak var watchingLabel: UILabel!
     @IBOutlet weak var ratingsLabel: UILabel!
     @IBOutlet weak var coverAvatarView: UIView!
+    @IBOutlet weak var favoritesView: UIView!
+    @IBOutlet weak var watchingView: UIView!
+    @IBOutlet weak var ratingsView: UIView!
     
     let cornerRadius: CGFloat = 55.0
     
@@ -28,27 +31,44 @@ class ProfileHeaderCollectionReusableView: UICollectionReusableView {
         }
     }
     
+    var activeLabel: String! {
+        didSet {
+            self.changeLabel(active: activeLabel)
+        }
+    }
+    
+    override func awakeFromNib() {
+        super.awakeFromNib()
+        
+        nameLabel.text = ""
+        
+        avatarImageView.clipsToBounds = true
+        avatarImageView.layer.borderWidth = 3
+        avatarImageView.layer.cornerRadius = cornerRadius
+        avatarImageView.layer.borderColor = UIColor.white.cgColor
+    }
+    
     func updateUI() {
         
         let imagePath = Helpers.downloadedAvatarFrom(urlString: profile.getImageAvatar())
         
         nameLabel.text = profile.name.uppercased()
         
-        avatarImageView.clipsToBounds = true
-        avatarImageView.layer.borderWidth = 3
-        avatarImageView.layer.cornerRadius = cornerRadius
-        avatarImageView.layer.borderColor = UIColor.white.cgColor
         avatarImageView.kf.setImage(with: URL(string: imagePath), placeholder: Constants.placeholderImage)
-        
     }
     
-    func changeActiveLabel(selected: UILabel) {
+    func changeActiveLabel(selected: UILabel, cover: UIView) {
         
         self.favoritesLabel.textColor = Colors.subtitleColor
         self.watchingLabel.textColor = Colors.subtitleColor
         self.ratingsLabel.textColor = Colors.subtitleColor
         
+        self.favoritesView.layer.shadowOpacity = 0.0
+        self.watchingView.layer.shadowOpacity = 0.0
+        self.ratingsView.layer.shadowOpacity = 0.0
+        
         selected.textColor = Colors.rateColor
+        cover.dropShadow(radius: Constants.cornerRadius)
     }
     
     @IBAction func favoriteButtonTapped(_ sender: UIButton) {
@@ -56,22 +76,25 @@ class ProfileHeaderCollectionReusableView: UICollectionReusableView {
         let active = sender.titleLabel?.text
         
         self.didSelectAction(active!)
-        
-        switch active {
-            
-            case "Favorites":
-                changeActiveLabel(selected: self.favoritesLabel)
-            
-            case "Watching":
-                changeActiveLabel(selected: self.watchingLabel)
-            
-            default:
-                changeActiveLabel(selected: self.ratingsLabel)
-        }
-        
+        self.changeLabel(active: active!)
+
     }
     
     
+    func changeLabel(active: String) {
+        
+        switch active {
+            
+        case "Favorites":
+            changeActiveLabel(selected: self.favoritesLabel, cover: self.favoritesView)
+            
+        case "Watching":
+            changeActiveLabel(selected: self.watchingLabel, cover: self.watchingView)
+            
+        default:
+            changeActiveLabel(selected: self.ratingsLabel, cover: self.ratingsView)
+        }
+    }
     
     override func prepareForReuse() {
         super.prepareForReuse()

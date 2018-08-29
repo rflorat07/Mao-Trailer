@@ -345,6 +345,8 @@ class QueryService {
         case "account":
             urlQuery.queryItems?.append(URLQueryItem(name: "session_id", value: defaults.value(forKey: UserInfo.sessionID) as? String))
             
+            urlQuery.queryItems?.append(URLQueryItem(name: "sort_by", value: "created_at.desc"))
+            
         case "discover":
             urlQuery.queryItems?.append(URLQueryItem(name: "sort_by", value: "release_date.asc"))
             urlQuery.queryItems?.append(URLQueryItem(name: "release_date.gte", value: Date.currentDateAsString(formatter: "yyyy-MM-dd")))
