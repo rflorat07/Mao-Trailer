@@ -12,6 +12,7 @@ class ListCollectionViewController: UICollectionViewController {
     
     var queryType: APIRequest!
     var fetchingMore: Bool = false
+    var endpointRequest: EndpointRequest!
     var sectionData: SectionData = SectionData()
     
     override func viewDidLoad() {
@@ -26,25 +27,25 @@ class ListCollectionViewController: UICollectionViewController {
             
             let receiverViewController = navigationContoller.topViewController as! DetailsTableViewController
             
-            receiverViewController.queryType = queryType
+            receiverViewController.queryType = queryType.rawValue != "discover" ? queryType : .Movie
             
             switch queryType.rawValue {
-            case "movie":
-                receiverViewController.information = sender as? Movie
-            default:
-                receiverViewController.information = sender as? TVShow
+                case "movie", "discover":
+                    receiverViewController.information = sender as? Movie
+                default:
+                    receiverViewController.information = sender as? TVShow
             }
         }
     }
     
     
-    func fetchMoreMovies(page: Int) {
+    func fetchMoreItems(page: Int) {
     
         self.fetchingMore = true
         
         self.collectionView?.performBatchUpdates({
             
-            QueryService.instance.fetchSection(sectionName: sectionData.sectionName, type: queryType, endPoint: .Popular, page: page, { (sectionData) in
+            QueryService.instance.fetchSection(sectionName: sectionData.sectionName, type: queryType, endPoint: endpointRequest, page: page, { (sectionData) in
                 
                 self.fetchingMore = false
                 
@@ -96,11 +97,9 @@ class ListCollectionViewController: UICollectionViewController {
         
         if indexPath.row == sectionData.sectionArray.count - 1 && sectionData.page < sectionData.total_pages && !fetchingMore {
          
-            self.fetchMoreMovies(page: sectionData.page + 1)
+            self.fetchMoreItems(page: sectionData.page + 1)
         }
     }
-    
-
     
     override func collectionView(_ collectionView: UICollectionView, didSelectItemAt indexPath: IndexPath) {
         

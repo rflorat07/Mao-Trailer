@@ -18,14 +18,16 @@ enum APIRequest: String {
 
 enum EndpointRequest: String {
     
+    case Discover = "discover"
     case Popular  = "popular"
     case Upcoming = "upcoming"
     case TopRated = "top_rated"
     
-    case NowTV    = "airing_today"
-    case NowMovie = "now_playing"
+    case TodayTV  = "airing_today"
+    case OnTheAirTV = "on_the_air"
     
-    case AccountStates = "account_states"
+    case DiscoverMovie = "movie"
+    case NowMovie = "now_playing"
     
     case Favorite = "favorite"
     case FavoriteTV = "account_id/favorite/tv"
@@ -37,7 +39,10 @@ enum EndpointRequest: String {
     
     case RatedTV = "account_id/rated/tv"
     case RatedMovies = "account_id/rated/movies"
-
+    
+    case AccountStates = "account_states"
+    
+    case None = ""
 }
 
 class QueryService {
@@ -78,7 +83,6 @@ class QueryService {
             fetchSection(sectionName: element.sectionName, type: element.type, endPoint: element.endPoint, page: element.page) { (sectionData) in
                 
                 if let sectionData = sectionData {
-                    
                     sectionDataArray[index] = sectionData
                 }
                 group.leave()
@@ -336,11 +340,19 @@ class QueryService {
             URLQueryItem(name: "page", value: "\(page)")
         ]
         
-        if type.rawValue == "account" {
-        
+        switch type.rawValue {
+            
+        case "account":
             urlQuery.queryItems?.append(URLQueryItem(name: "session_id", value: defaults.value(forKey: UserInfo.sessionID) as? String))
+            
+        case "discover":
+            urlQuery.queryItems?.append(URLQueryItem(name: "sort_by", value: "release_date.asc"))
+            urlQuery.queryItems?.append(URLQueryItem(name: "release_date.gte", value: Date.currentDateAsString(formatter: "yyyy-MM-dd")))
+            
+        default: break
+            
         }
-        
+    
         return urlQuery.string!
     }
     
@@ -472,6 +484,7 @@ class QueryService {
     fileprivate func decodeData(sectionName: String, type: APIRequest ,data: Data, urlQuery: String, _ completion : @escaping  QuerySectionResult) {
         
         switch type {
+            
         case .Movie:
             
             decodeInformation(SectionMovieArray.self, from: data, with: urlQuery) { (dataResult: SectionMovieArray?) in
@@ -489,7 +502,16 @@ class QueryService {
                 
                 completion(sectionResult)
             }
-        
+            
+        case .Discover:
+            
+            decodeInformation(SectionMovieArray.self, from: data, with: urlQuery) { (dataResult: SectionMovieArray?) in
+                
+                let sectionResult: SectionData = SectionData(page: dataResult!.page, total_pages: dataResult!.total_pages, sectionName: sectionName, sectionArray: dataResult!.results)
+                
+                completion(sectionResult)
+            }
+            
         case .Account:
             
             decodeInformation(SectionMovieArray.self, from: data, with: urlQuery) { (dataResult: SectionMovieArray?) in
@@ -500,6 +522,7 @@ class QueryService {
             }
             
         default:
+            completion(nil)
             print("Decode APIRequest for : \(type.rawValue) \n")
         }
     }
@@ -527,7 +550,7 @@ class QueryService {
     
     // MARK: - Decode error
     
-    func decodeError(_ data: Data, _ url: String, _ completion : @escaping QueryError) {
+    func decodeError(_ data: Data, _ url:   String, _ completion : @escaping QueryError) {
         DispatchQueue.main.async {
             do {
                 let error = try JSONDecoder().decode(SectionError.self, from: data)

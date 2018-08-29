@@ -82,10 +82,14 @@ extension AppDelegate {
     func switchToMainTabBarController() {
         
         if UserDefaults.standard.bool(forKey: UserInfo.walkthrough) {
-            let storyBoard = UIStoryboard(name: "Main", bundle: nil)
-            let mainTabBarController = storyBoard.instantiateViewController(withIdentifier: "MainTabBarController")
-            self.window?.rootViewController = mainTabBarController
+            self.showMainTabBarController()
         }
+    }
+    
+    func showMainTabBarController() {
+        let storyBoard = UIStoryboard(name: "Main", bundle: nil)
+        let mainTabBarController = storyBoard.instantiateViewController(withIdentifier: "MainTabBarController")
+        self.window?.rootViewController = mainTabBarController
     }
     
 }

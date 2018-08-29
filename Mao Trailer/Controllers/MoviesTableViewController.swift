@@ -11,12 +11,13 @@ import UIKit
 class MoviesTableViewController: UITableViewController {
     
     let sectionMovieInfo = [
-        SectionInfo(page: 1, type: .Movie, sectionName: "Upcoming", endPoint: .Upcoming),
+        SectionInfo(page: 1, type: .Discover, sectionName: "Discover", endPoint: .DiscoverMovie),
         SectionInfo(page: 1, type: .Movie, sectionName: "Now", endPoint: .NowMovie),
         SectionInfo(page: 1, type: .Movie, sectionName: "Popular", endPoint: .Popular),
         SectionInfo(page: 1, type: .Movie, sectionName: "Top Rated", endPoint: .TopRated),
         ]
     
+    var endpointRequest: EndpointRequest!
     var sectionMovieArray: [SectionData] = [SectionData]()
     
     override func viewDidLoad() {
@@ -37,8 +38,9 @@ class MoviesTableViewController: UITableViewController {
             
             let toViewController = segue.destination as! ListCollectionViewController
             
-            toViewController.queryType = .Movie
             toViewController.sectionData = sender as! SectionData
+            toViewController.endpointRequest = self.endpointRequest
+            toViewController.queryType = self.endpointRequest.rawValue != "movie" ? .Movie : .Discover
         }
         
         if segue.identifier == Segue.fromMovieToSearchList {
@@ -104,18 +106,20 @@ extension MoviesTableViewController {
     //Number of section
     override func numberOfSections(in tableView: UITableView) -> Int {
         
-        // Section 1 - Upcoming [Section]
-        // Section 2 - Now      [Section]
-        // Section 3 - Popular  [Section]
+        // Section 1 - Upcoming  [Section]
+        // Section 2 - Now       [Section]
+        // Section 3 - Popular   [Section]
+        // Section 4 - Top Rated [Section]
         
         return sectionMovieArray.count > 0 ? sectionMovieArray.count : 0
     }
     
     override func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
         
-        // Section 1 - Upcoming [Section]
-        // Section 2 - Now      [Section]
-        // Section 3 - Popular  [Section]
+        // Section 1 - Upcoming  [Section]
+        // Section 2 - Now       [Section]
+        // Section 3 - Popular   [Section]
+        // Section 4 - Top Rated [Section]
         
         return 1
     }
@@ -134,12 +138,13 @@ extension MoviesTableViewController {
             let cell = tableView.dequeueReusableCell(withIdentifier: Storyboard.hotViewCell, for: indexPath) as! HotTableViewCell
             
             var section = sectionMovieArray[indexPath.section]
+            let endPoint = self.sectionMovieInfo[indexPath.section].endPoint
             
             cell.hotMovies = section.sectionArray
             
             cell.didSelectAction = { (indexPath) in
                 
-                self.showMovieDetails(indexPath: indexPath, section: &section)
+                self.showMovieDetails(indexPath: indexPath, section: &section, endPoint: endPoint)
                 
             }
             
@@ -149,12 +154,13 @@ extension MoviesTableViewController {
             let cell = tableView.dequeueReusableCell(withIdentifier: Storyboard.sectionViewCell, for: indexPath) as! SectionTableViewCell
             
             var section = sectionMovieArray[indexPath.section]
-            
+            let endPoint = self.sectionMovieInfo[indexPath.section].endPoint
+        
             cell.sectionMovies = section
             
             cell.didSelectAction = { (indexPath) in
                 
-                self.showMovieDetails(indexPath: indexPath, section: &section)
+                self.showMovieDetails(indexPath: indexPath, section: &section, endPoint: endPoint)
             }
             
             return cell
@@ -163,8 +169,9 @@ extension MoviesTableViewController {
     
     // MARK: - Helper methods
     
-    fileprivate func showMovieDetails(indexPath: IndexPath, section: inout SectionData) {
+    fileprivate func showMovieDetails(indexPath: IndexPath, section: inout SectionData, endPoint: EndpointRequest) {
         
+        self.endpointRequest = endPoint
         let movieSelected = section.sectionArray[indexPath.row]
         
         if movieSelected.title == "More" {

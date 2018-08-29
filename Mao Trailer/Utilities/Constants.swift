@@ -82,6 +82,7 @@ struct Segue {
     static let fromTVToSearchList = "segueTVToSearchList"
     
     static let fromPersonDetailsToDetails = "seguePersonDetailsToDetails"
+    
     static let fromDetailsToPersonDetails = "segueDetailsToPersonDetails"
     
     static let fromDetailsToImagePreview = "segueDetailsToImagePreview"
@@ -94,7 +95,7 @@ struct Segue {
     
     static let fromProfileToDetail = "segueProfileToDetail"
     
-    static let ProfileLoginToProfile = "segueProfileLoginToProfile"
+    static let fromProfileLoginToProfile = "segueProfileLoginToProfile"
     
     static let fromSearchListToDetail = "segueSearchListToDetail"
     

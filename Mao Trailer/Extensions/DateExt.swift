@@ -36,6 +36,15 @@ extension Date {
         return formattedString
     }
     
+    static func currentDateAsString(formatter:String = "yyyy") -> String {
+        
+        let date = Date()
+        let dateFormatter = DateFormatter()
+        dateFormatter.dateFormat = formatter
+        
+        return dateFormatter.string(from: date)
+    }
+    
     static func compareDates(_ first: String, _ second: String) -> Bool {
         
         let formatter = DateFormatter()

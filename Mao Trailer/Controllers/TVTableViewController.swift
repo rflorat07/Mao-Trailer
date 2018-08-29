@@ -11,10 +11,11 @@ import UIKit
 class TVTableViewController: UITableViewController {
     
     let sectionTVInfo = [
-        SectionInfo(page: 1, type: .TV, sectionName: "Now", endPoint: .NowTV),
-        SectionInfo(page: 1, type: .TV, sectionName: "Popular", endPoint: .Popular)
+        SectionInfo(page: 1, type: .TV, sectionName: "Today", endPoint: .TodayTV),
+        SectionInfo(page: 1, type: .TV, sectionName: "Currently Airing", endPoint: .OnTheAirTV)
     ]
     
+    var endpointRequest: EndpointRequest!
     var sectionTVShowArray: [SectionData] = [SectionData]()
     
     override func viewDidLoad() {
@@ -31,6 +32,7 @@ class TVTableViewController: UITableViewController {
             
             toViewController.queryType = .TV
             toViewController.sectionData = sender as! SectionData
+            toViewController.endpointRequest = self.endpointRequest
         }
         
         if segue.identifier == Segue.fromTVToSearchList {
@@ -130,6 +132,7 @@ extension TVTableViewController {
             if let cell = tableView.dequeueReusableCell(withIdentifier: Storyboard.tvNowViewCell, for: indexPath) as? TVNowTableViewCell {
                 
                 var section = sectionTVShowArray[indexPath.section]
+                let endPoint = sectionTVInfo[indexPath.section].endPoint
                 
                 cell.selectionStyle = .none
                 
@@ -137,7 +140,7 @@ extension TVTableViewController {
                 
                 cell.didSelectAction = { (indexPath) in
                     
-                    self.showTVShowDetails(indexPath: indexPath, section: section)
+                    self.showTVShowDetails(indexPath: indexPath, section: section, endPoint: endPoint)
                     
                 }
                 
@@ -159,7 +162,7 @@ extension TVTableViewController {
             if let cell = tableView.dequeueReusableCell(withIdentifier: Storyboard.tvPopularViewCell, for: indexPath) as? TVPopularTableViewCell {
                 
                 var section = sectionTVShowArray[indexPath.section - 1]
-                
+ 
                 cell.selectionStyle = .none
                 
                 cell.tvShow = (section.sectionArray[indexPath.row] as! TVShow)
@@ -177,16 +180,18 @@ extension TVTableViewController {
         if indexPath.section == 2 {
             
             let section = sectionTVShowArray[indexPath.section - 1]
+            let endPoint = sectionTVInfo[indexPath.section - 1].endPoint
             
-            self.showTVShowDetails(indexPath: indexPath, section: section)
+            self.showTVShowDetails(indexPath: indexPath, section: section, endPoint: endPoint)
             
         }
     }
     
     // MARK: - Helper methods
     
-    fileprivate func showTVShowDetails(indexPath: IndexPath, section: SectionData) {
+    fileprivate func showTVShowDetails(indexPath: IndexPath, section: SectionData, endPoint: EndpointRequest) {
         
+        self.endpointRequest = endPoint
         let tvShowSelected = section.sectionArray[indexPath.row]
         
          if tvShowSelected.title == "More" {
@@ -197,7 +202,7 @@ extension TVTableViewController {
             sectionArray.removeLast()
             
          let data: SectionData = SectionData(page: section.page, total_pages: section.total_pages, sectionName: "\(section.sectionName) list", sectionArray: sectionArray)
-         
+        
          self.performSegue(withIdentifier: Segue.fromTVToList, sender: data)
          
          } else {

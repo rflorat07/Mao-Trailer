@@ -20,20 +20,36 @@ class ProfileCollectionViewController: UICollectionViewController {
         SectionInfo(page: 1, type: .Account, sectionName: "Favorite", endPoint: .FavoriteMovies),
         SectionInfo(page: 1, type: .Account, sectionName: "Watchlist", endPoint: .WatchlistMovies),
         SectionInfo(page: 1, type: .Account, sectionName: "Ratings", endPoint: .RatedMovies)]
-
+    
+    
     override func viewDidLoad() {
         super.viewDidLoad()
         
-        navigationItem.hidesBackButton = true
+        if AuthenticationService.instanceAuth.isLoggedIn {
+            self.loadProfileData()
+        }
     }
     
-    override func viewWillAppear(_ animated: Bool) {
-        super.viewWillAppear(true)
+    override func viewDidAppear(_ animated: Bool) {
+        super.viewDidAppear(animated)
         
-        self.loadProfileData()
+        if !AuthenticationService.instanceAuth.isLoggedIn {
+            self.performSegue(withIdentifier: Segue.fromProfileLoginToProfile, sender: self)
+        }
     }
     
     override func prepare(for segue: UIStoryboardSegue, sender: Any?) {
+        
+        if segue.identifier == Segue.fromProfileLoginToProfile {
+            
+            let toViewController = segue.destination as? LoginViewController
+            
+            toViewController?.callback = { (response) in
+                if response {
+                    self.loadProfileData()
+                }
+            }
+        }
         
         if segue.identifier == Segue.fromProfileToDetail {
             
@@ -44,7 +60,7 @@ class ProfileCollectionViewController: UICollectionViewController {
             receiverViewController.queryType = .Movie
             receiverViewController.information = sender as? Movie
         }
-                
+        
         if segue.identifier == Segue.fromProfileToProfileSetting {
             
             let toViewController = segue.destination as? ProfileSettingViewController
@@ -77,7 +93,7 @@ class ProfileCollectionViewController: UICollectionViewController {
             LoadingIndicatorView.hide()
         }
         
-    
+        
         AccountService.instanceAccount.fetchAccountDetails { (details) in
             if let details = details {
                 self.accountDetails = details
@@ -86,14 +102,14 @@ class ProfileCollectionViewController: UICollectionViewController {
         }
     }
     
-
+    
     @IBAction func settingButton(_ sender: UIBarButtonItem) {
         
         performSegue(withIdentifier: Segue.fromProfileToProfileSetting, sender: self)
     }
     
     override func collectionView(_ collectionView: UICollectionView, viewForSupplementaryElementOfKind kind: String, at indexPath: IndexPath) -> UICollectionReusableView {
-    
+        
         if let sectionHeader = collectionView.dequeueReusableSupplementaryView(ofKind: kind, withReuseIdentifier: Storyboard.profileHeaderReusableView, for: indexPath) as? ProfileHeaderCollectionReusableView {
             
             if let accountDetails = accountDetails {
@@ -106,19 +122,19 @@ class ProfileCollectionViewController: UICollectionViewController {
             sectionHeader.didSelectAction = { (selected) in
                 
                 switch selected {
-                    case "Favorites":
-                        
-                        self.sectionArray = self.favoriteSectionArray
-                        self.collectionView?.reloadData()
+                case "Favorites":
                     
-                    case "Watching":
-                       
-                        self.sectionArray = self.watchlistSectionArray
-                        self.collectionView?.reloadData()
+                    self.sectionArray = self.favoriteSectionArray
+                    self.collectionView?.reloadData()
                     
-                    default:
-                        self.sectionArray = self.ratedSectionArray
-                        self.collectionView?.reloadData()
+                case "Watching":
+                    
+                    self.sectionArray = self.watchlistSectionArray
+                    self.collectionView?.reloadData()
+                    
+                default:
+                    self.sectionArray = self.ratedSectionArray
+                    self.collectionView?.reloadData()
                 }
             }
             
@@ -133,14 +149,14 @@ class ProfileCollectionViewController: UICollectionViewController {
         
         return sectionArray != nil ? 1 : 0
     }
-
+    
     override func collectionView(_ collectionView: UICollectionView, numberOfItemsInSection section: Int) -> Int {
         
         return sectionArray.sectionArray.count
     }
-
+    
     override func collectionView(_ collectionView: UICollectionView, cellForItemAt indexPath: IndexPath) -> UICollectionViewCell {
-      
+        
         if  let cell = collectionView.dequeueReusableCell(withReuseIdentifier: Storyboard.profileListViewCell, for: indexPath) as? ProfileListCollectionViewCell {
             
             let section = sectionArray.sectionArray
@@ -149,7 +165,7 @@ class ProfileCollectionViewController: UICollectionViewController {
             
             return cell
         }
-    
+        
         return UICollectionViewCell()
     }
     

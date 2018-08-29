@@ -19,6 +19,7 @@
 		4F30ED6B2108AC1A00E2B31C /* SearchGenreCollectionViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4F30ED692108AC1A00E2B31C /* SearchGenreCollectionViewCell.swift */; };
 		4F30ED6C2108AC1A00E2B31C /* SearchGenreCollectionViewCell.xib in Resources */ = {isa = PBXBuildFile; fileRef = 4F30ED6A2108AC1A00E2B31C /* SearchGenreCollectionViewCell.xib */; };
 		4F3105A2212AAF2600D2FEC6 /* AccountService.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4F3105A1212AAF2600D2FEC6 /* AccountService.swift */; };
+		4F3B367021359D62001E143A /* LoginViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4F3B366F21359D62001E143A /* LoginViewController.swift */; };
 		4F526BC220E62C2600EB36EA /* WalkthroughViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4F526BC120E62C2600EB36EA /* WalkthroughViewController.swift */; };
 		4F526BC420E62CBC00EB36EA /* WalkthroughCollectionViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4F526BC320E62CBC00EB36EA /* WalkthroughCollectionViewCell.swift */; };
 		4F57DA182112036100F95074 /* DetailCastTableViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4F57DA172112036100F95074 /* DetailCastTableViewCell.swift */; };
@@ -57,7 +58,6 @@
 		4FE31795212E993000BCB4F5 /* AccountStates.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4FE31794212E993000BCB4F5 /* AccountStates.swift */; };
 		4FEDD5E720ED136500E0D4BA /* Walkthrough.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4FEDD5E620ED136400E0D4BA /* Walkthrough.swift */; };
 		4FEDD5E920ED13CF00E0D4BA /* Details.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4FEDD5E820ED13CF00E0D4BA /* Details.swift */; };
-		4FEFE0F8211C351A00800F43 /* ProfileLoginViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4FEFE0F7211C351A00800F43 /* ProfileLoginViewController.swift */; };
 		4FF5E60C20D92AB000D088B5 /* AppDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4FF5E60B20D92AAF00D088B5 /* AppDelegate.swift */; };
 		4FF5E61320D92B0200D088B5 /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = 4FF5E61220D92B0200D088B5 /* Assets.xcassets */; };
 		4FF5E61620D92B0200D088B5 /* LaunchScreen.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 4FF5E61420D92B0200D088B5 /* LaunchScreen.storyboard */; };
@@ -91,6 +91,7 @@
 		4F30ED692108AC1A00E2B31C /* SearchGenreCollectionViewCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SearchGenreCollectionViewCell.swift; sourceTree = "<group>"; };
 		4F30ED6A2108AC1A00E2B31C /* SearchGenreCollectionViewCell.xib */ = {isa = PBXFileReference; lastKnownFileType = file.xib; path = SearchGenreCollectionViewCell.xib; sourceTree = "<group>"; };
 		4F3105A1212AAF2600D2FEC6 /* AccountService.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AccountService.swift; sourceTree = "<group>"; };
+		4F3B366F21359D62001E143A /* LoginViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = LoginViewController.swift; sourceTree = "<group>"; };
 		4F526BC120E62C2600EB36EA /* WalkthroughViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = WalkthroughViewController.swift; sourceTree = "<group>"; };
 		4F526BC320E62CBC00EB36EA /* WalkthroughCollectionViewCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = WalkthroughCollectionViewCell.swift; sourceTree = "<group>"; };
 		4F57DA172112036100F95074 /* DetailCastTableViewCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DetailCastTableViewCell.swift; sourceTree = "<group>"; };
@@ -129,7 +130,6 @@
 		4FE31794212E993000BCB4F5 /* AccountStates.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AccountStates.swift; sourceTree = "<group>"; };
 		4FEDD5E620ED136400E0D4BA /* Walkthrough.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Walkthrough.swift; sourceTree = "<group>"; };
 		4FEDD5E820ED13CF00E0D4BA /* Details.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Details.swift; sourceTree = "<group>"; };
-		4FEFE0F7211C351A00800F43 /* ProfileLoginViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ProfileLoginViewController.swift; sourceTree = "<group>"; };
 		4FF5E60820D92AAF00D088B5 /* Mao Trailer.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = "Mao Trailer.app"; sourceTree = BUILT_PRODUCTS_DIR; };
 		4FF5E60B20D92AAF00D088B5 /* AppDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppDelegate.swift; sourceTree = "<group>"; };
 		4FF5E61220D92B0200D088B5 /* Assets.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; path = Assets.xcassets; sourceTree = "<group>"; };
@@ -228,9 +228,9 @@
 				4F526BC120E62C2600EB36EA /* WalkthroughViewController.swift */,
 				4FF5E62420D9473A00D088B5 /* MoviesTableViewController.swift */,
 				4FF628FA20DBB7DE0002AA13 /* TVTableViewController.swift */,
+				4F3B366F21359D62001E143A /* LoginViewController.swift */,
 				4F8DC25321145885003219CC /* PeopleCollectionViewController.swift */,
 				4F195BB420E3DE0A005816F5 /* ProfileCollectionViewController.swift */,
-				4FEFE0F7211C351A00800F43 /* ProfileLoginViewController.swift */,
 				4FC87E9720E4EFEF00653671 /* ProfileSettingViewController.swift */,
 				4FF6290420DBFFF60002AA13 /* ListCollectionViewController.swift */,
 				4FAB0EBD20F3959F00C55683 /* SearchListCollectionViewController.swift */,
@@ -442,6 +442,7 @@
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				4F3B367021359D62001E143A /* LoginViewController.swift in Sources */,
 				4F963D1820EF804F00A318CF /* Section.swift in Sources */,
 				4F8C6BE52111E6880026FB41 /* DetailsTableViewController.swift in Sources */,
 				4FAAD14D210F584500906C55 /* PersonDetails.swift in Sources */,
@@ -450,7 +451,6 @@
 				4F892A5620DD2958005C8E19 /* MovieListSectionHeaderCollectionReusableView.swift in Sources */,
 				4FE061D72134489900A3058A /* AVPlayerViewControllerExt.swift in Sources */,
 				4FF5E62520D9473A00D088B5 /* MoviesTableViewController.swift in Sources */,
-				4FEFE0F8211C351A00800F43 /* ProfileLoginViewController.swift in Sources */,
 				4FAB0EBE20F3959F00C55683 /* SearchListCollectionViewController.swift in Sources */,
 				4FBC73062109B3A600D1985A /* SearchOptionCollectionViewController.swift in Sources */,
 				4FC87E9820E4EFEF00653671 /* ProfileSettingViewController.swift in Sources */,

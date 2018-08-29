@@ -19,6 +19,11 @@ class Helpers {
         return "\(baseUrl)\(urlString)\(size)"
     }
     
+    static func isStatusBarHidden(isHidden: Bool) {
+        let statusBar: UIView = UIApplication.shared.value(forKey: "statusBar") as! UIView
+        statusBar.isHidden = isHidden
+    }
+    
     static func alertWindow(title: String, message: String) {
 
         DispatchQueue.main.async {
