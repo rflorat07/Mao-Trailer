@@ -58,6 +58,7 @@
 		4FE31795212E993000BCB4F5 /* AccountStates.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4FE31794212E993000BCB4F5 /* AccountStates.swift */; };
 		4FEDD5E720ED136500E0D4BA /* Walkthrough.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4FEDD5E620ED136400E0D4BA /* Walkthrough.swift */; };
 		4FEDD5E920ED13CF00E0D4BA /* Details.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4FEDD5E820ED13CF00E0D4BA /* Details.swift */; };
+		4FEF7EF5213806250051487E /* RatingViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4FEF7EF4213806240051487E /* RatingViewController.swift */; };
 		4FF5E60C20D92AB000D088B5 /* AppDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4FF5E60B20D92AAF00D088B5 /* AppDelegate.swift */; };
 		4FF5E61320D92B0200D088B5 /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = 4FF5E61220D92B0200D088B5 /* Assets.xcassets */; };
 		4FF5E61620D92B0200D088B5 /* LaunchScreen.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 4FF5E61420D92B0200D088B5 /* LaunchScreen.storyboard */; };
@@ -130,6 +131,7 @@
 		4FE31794212E993000BCB4F5 /* AccountStates.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AccountStates.swift; sourceTree = "<group>"; };
 		4FEDD5E620ED136400E0D4BA /* Walkthrough.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Walkthrough.swift; sourceTree = "<group>"; };
 		4FEDD5E820ED13CF00E0D4BA /* Details.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Details.swift; sourceTree = "<group>"; };
+		4FEF7EF4213806240051487E /* RatingViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = RatingViewController.swift; sourceTree = "<group>"; };
 		4FF5E60820D92AAF00D088B5 /* Mao Trailer.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = "Mao Trailer.app"; sourceTree = BUILT_PRODUCTS_DIR; };
 		4FF5E60B20D92AAF00D088B5 /* AppDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppDelegate.swift; sourceTree = "<group>"; };
 		4FF5E61220D92B0200D088B5 /* Assets.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; path = Assets.xcassets; sourceTree = "<group>"; };
@@ -238,6 +240,7 @@
 				4FAAD14A210F3FBB00906C55 /* PersonDetailsTableViewController.swift */,
 				4F8C6BE42111E6870026FB41 /* DetailsTableViewController.swift */,
 				4F104B0920FE21DF0065545D /* ImagePreviewViewController.swift */,
+				4FEF7EF4213806240051487E /* RatingViewController.swift */,
 			);
 			path = Controllers;
 			sourceTree = "<group>";
@@ -448,6 +451,7 @@
 				4FAAD14D210F584500906C55 /* PersonDetails.swift in Sources */,
 				4FF628F720DBB78E0002AA13 /* TVNowTableViewCell.swift in Sources */,
 				4FAB0EBC20F3956800C55683 /* SearchListCollectionViewCell.swift in Sources */,
+				4FEF7EF5213806250051487E /* RatingViewController.swift in Sources */,
 				4F892A5620DD2958005C8E19 /* MovieListSectionHeaderCollectionReusableView.swift in Sources */,
 				4FE061D72134489900A3058A /* AVPlayerViewControllerExt.swift in Sources */,
 				4FF5E62520D9473A00D088B5 /* MoviesTableViewController.swift in Sources */,

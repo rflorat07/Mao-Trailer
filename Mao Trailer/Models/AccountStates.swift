@@ -12,12 +12,13 @@ struct AccountStates: Decodable {
     let id: Int
     let favorite: Bool?
     let watchlist: Bool?
-    let rated: RatedValue?
+    var rated: RatedValue?
 }
 
 struct RatedValue: Decodable {
     
     var value: Bool
+    var ratedValue: Float?
     
     enum CodingKeys: String, CodingKey {
         case value
@@ -26,10 +27,13 @@ struct RatedValue: Decodable {
     init(from decoder: Decoder) throws {
         let container = try? decoder.container(keyedBy: CodingKeys.self)
         
-        if (try container?.decodeIfPresent(Int.self, forKey: .value)) != nil {
+        if let value = (try container?.decodeIfPresent(Float.self, forKey: .value)) {
             self.value = true
+            self.ratedValue = value
+        
         } else {
             self.value = false
+            self.ratedValue = 0.0
         }
         
         return

@@ -87,6 +87,8 @@ struct Segue {
     
     static let fromDetailsToImagePreview = "segueDetailsToImagePreview"
     
+    static let fromDetailsToRating = "segueDetailsToRating"
+    
     static let fromListToDetail = "segueListToDetail"
     
     static let fromMovieToDetail = "segueMovieToDetail"

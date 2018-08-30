@@ -94,6 +94,39 @@ class AccountService: AuthenticationService {
         }
         
     }
+    
+    
+    
+    // MARK: - Rate a movie or TV show.
+    func rateMovieOrTVShow(id: Int, value: Float ,type: APIRequest, endPoint: EndpointRequest, _ completion: @escaping QueryError) {
+        
+        let urlString = "\(type.rawValue)/\(id)/\(endPoint.rawValue)"
+        let queryString = getUrlSession(endPoint: urlString)
+        
+        let headers = ["content-type": "application/json;charset=utf-8"]
+        
+        let parameters: [String : Float] = [ "value": value]
+        
+        do {
+            let postData = try JSONSerialization.data(withJSONObject: parameters, options: .prettyPrinted)
+            
+            self.postDataFromUrl(queryString: queryString, headers: headers, postData: postData) { (data, error) in
+                if let data = data {
+                    self.decodeInformation(SectionError.self, from: data, with: queryString, completion: { (response: SectionError?) in
+                        completion(response)
+                    })
+                }  else {
+                    completion(error)
+                }
+            }
+            
+        } catch let error as NSError {
+            print("Failed to load: \(error) \n URL: \(queryString)")
+        }
+        
+    }
+    
+    
 }
 
 

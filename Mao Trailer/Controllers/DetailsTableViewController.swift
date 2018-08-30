@@ -35,8 +35,10 @@ class DetailsTableViewController: UITableViewController {
     @IBOutlet weak var coverImageViewHeight: NSLayoutConstraint!
     
     var details: Details!
-    var queryType: APIRequest!
     var information: TVMovie!
+    var states: AccountStates!
+    var queryType: APIRequest!
+
     
     var originalTop: CGFloat!
     var originalHeight: CGFloat!
@@ -87,6 +89,9 @@ class DetailsTableViewController: UITableViewController {
                 AccountService.instanceAccount.fetchAccountStates(id: self.information.id, type: self.queryType, endPoint: EndpointRequest.AccountStates) { (states) in
                     
                     if let states = states {
+                        
+                        self.states = states
+                        
                         self.favotiteButton.isSelected = states.favorite!
                         self.watchlistButton.isSelected = states.watchlist!
                         self.rateButton.isSelected = (states.rated?.value)!
@@ -186,6 +191,27 @@ class DetailsTableViewController: UITableViewController {
             toViewController.indexPath = sender as! IndexPath
             toViewController.imgArray = details.images.backdrops!
         }
+        
+        if segue.identifier == Segue.fromDetailsToRating {
+            
+            let toViewController = segue.destination as! RatingViewController
+            
+            let imagePosterPath = Helpers.downloadedFrom(urlString: self.information.poster_path ?? self.information.backdrop_path!)
+            
+            toViewController.id = information.id
+            toViewController.queryType = queryType
+            toViewController.imagePath = imagePosterPath
+            toViewController.ratedValue = states.rated?.ratedValue
+            
+            toViewController.callBack = { (hasChanged, value) in
+                if hasChanged {
+                    self.rateButton.isSelected = true
+                    self.states.rated?.ratedValue = value
+                    NotificationCenter.default.post(name: .didUserChangedStatus , object: nil)
+                }
+            }
+            
+        }
     }
     
     override func scrollViewDidScroll(_ scrollView: UIScrollView) {
@@ -228,13 +254,15 @@ class DetailsTableViewController: UITableViewController {
     
     @IBAction func actionButtonTapped(_ sender: UIButton) {
         
-        switch sender.tag {
+        if AuthenticationService.instanceAuth.isLoggedIn {
+            switch sender.tag {
             case 1:
                 self.markAsFavoriteOrAddToWatchlist(sender, endPoint: .Favorite)
             case 2:
                 self.markAsFavoriteOrAddToWatchlist(sender, endPoint: .Watchlist)
             default:
-                print("Rate Button Tapped")
+                self.performSegue(withIdentifier: Segue.fromDetailsToRating, sender: nil)
+            }
         }
     }
     

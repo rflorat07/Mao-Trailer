@@ -46,6 +46,7 @@ class AuthenticationService: QueryService {
     
     var sessionID: String {
         get {
+        
             return defaults.value(forKey: UserInfo.sessionID) as! String
         }
         
