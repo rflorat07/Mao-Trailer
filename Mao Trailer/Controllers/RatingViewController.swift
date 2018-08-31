@@ -18,6 +18,8 @@ class RatingViewController: UIViewController {
     @IBOutlet weak var posterCoverView: UIView!
     @IBOutlet weak var coverImageView: UIImageView!
     
+    @IBOutlet weak var bgWidthConstraint: NSLayoutConstraint!
+    
     let step: Float = 0.5
     
     var id: Int!
@@ -25,6 +27,15 @@ class RatingViewController: UIViewController {
     var ratedValue: Float!
     var queryType: APIRequest!
     
+    var bgWidth: CGFloat!
+    
+    override func viewDidLoad() {
+        super.viewDidLoad()
+        
+        ratedValue = ratedValue / 2
+        bgWidth = bgWidthConstraint.constant
+        
+    }
     
     var callBack: ((Bool, Float?) -> Void)!
     
@@ -51,6 +62,7 @@ class RatingViewController: UIViewController {
         
         self.minValueLabel.text = String(ratedValue)
         self.slider.setValue(ratedValue, animated: false)
+        self.bgWidthConstraint.constant = bgWidth + CGFloat(ratedValue * 25)
         
         buttonView.layer.cornerRadius = Constants.cornerRadius
         buttonView.layer.maskedCorners = [.layerMinXMaxYCorner, .layerMaxXMaxYCorner]
@@ -65,11 +77,13 @@ class RatingViewController: UIViewController {
         sender.setValue(currentValue, animated: true)
         
         self.minValueLabel.text = "\(currentValue)"
+        
+        self.bgWidthConstraint.constant = bgWidth + CGFloat(currentValue * 25)
     }
     
     @IBAction func submitButtonTapped(_ sender: UIButton) {
         
-        let sliderValue = Float(self.slider.value)
+        let sliderValue = Float(self.slider.value * 2)
         
         AccountService.instanceAccount.rateMovieOrTVShow(id: id, value: sliderValue, type: queryType, endPoint: .Rating) { (response) in
             
