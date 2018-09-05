@@ -7,7 +7,7 @@
 //
 
 import UIKit
-//import Kingfisher
+import Kingfisher
 
 class TodayCollectionViewCell: UICollectionViewCell {
     
@@ -27,19 +27,20 @@ class TodayCollectionViewCell: UICollectionViewCell {
         titleLabel.text = ""
     
         coverImageView.clipsToBounds = true
-        coverImageView.layer.cornerRadius = 6
-        coverImageView.image = UIImage(named: "placeholder")
+        coverImageView.layer.cornerRadius = Constants.cornerRadius
+        coverImageView.image = Constants.placeholderImage
         
-        posterCoverView.dropShadow(radius: 6)
+        posterCoverView.dropShadow(radius: Constants.cornerRadius)
         
     }
     
     func updateUI() {
         
-        print(item)
-      
         titleLabel.text = item.title
-        coverImageView.downloadedFrom(link: Helpers.getImagePath(urlString: item.poster_path ?? item.backdrop_path!))
+    
+        let imagePath = Helpers.getImagePath(urlString: item.poster_path ?? item.backdrop_path!)
+        
+        coverImageView.kf.setImage(with: URL(string: imagePath), placeholder: Constants.placeholderImage)
     }
     
     override func prepareForReuse() {

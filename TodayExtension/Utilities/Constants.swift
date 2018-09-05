@@ -6,7 +6,7 @@
 //  Copyright © 2018 Roger Florat. All rights reserved.
 //
 
-import Foundation
+import UIKit
 
 enum APIRequest: String {
     case TV = "tv"
@@ -20,6 +20,8 @@ enum EndpointRequest: String {
     case Upcoming = "upcoming"
     case TopRated = "top_rated"
 }
+
+// ===========
 
 struct QueryString {
     static let page = "1"
@@ -37,4 +39,11 @@ struct ImageSize {
     static let original = "original"
     static let placeholderImage = "placeholder"
     static let baseUrl = "https://image.tmdb.org/t/p"
+}
+
+// ============
+
+struct Constants {
+    static let cornerRadius : CGFloat = 6.0
+    static let placeholderImage = UIImage(named: "placeholder")
 }
