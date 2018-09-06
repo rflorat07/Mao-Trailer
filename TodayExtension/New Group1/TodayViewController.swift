@@ -85,8 +85,8 @@ class TodayViewController: UIViewController, NCWidgetProviding {
         }, completion: nil)
     }
     
-    func openMaoTrailerApp() {
-        let url = URL(string: "mainAppMaoTrailerUrl://")!
+    func openMaoTrailerApp(url: String) {
+        let url = URL(string: url)!
         self.extensionContext?.open(url, completionHandler: { (success) in
             if (!success) {
                 print("error: failed to open app from Today Extension")
@@ -95,7 +95,7 @@ class TodayViewController: UIViewController, NCWidgetProviding {
     }
     
     @IBAction func seeAllButtonTapped(_ sender: UIButton) {
-        self.openMaoTrailerApp()
+        self.openMaoTrailerApp(url: "mainAppMaoTrailerUrl:details?more=all")
     }
 }
 
@@ -121,7 +121,7 @@ extension TodayViewController: UICollectionViewDelegate, UICollectionViewDataSou
     }
     
     func collectionView(_ collectionView: UICollectionView, didSelectItemAt indexPath: IndexPath) {
-        self.openMaoTrailerApp()
+        self.openMaoTrailerApp(url: "mainAppMaoTrailerUrl:details?index=\(indexPath.row)")
     }
     
 }

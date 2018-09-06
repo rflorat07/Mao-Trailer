@@ -147,6 +147,7 @@ struct UserInfo {
     static let tokenKey = "request_token"
     static let tokenExpiresKey = "expires_at"
     static let walkthrough = "walkthrough"
+    static let todayExtension = "today_extension"
 }
 
 

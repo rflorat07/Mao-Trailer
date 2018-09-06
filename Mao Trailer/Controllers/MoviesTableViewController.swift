@@ -18,17 +18,18 @@ class MoviesTableViewController: UITableViewController {
         ]
     
     var endpointRequest: EndpointRequest!
-    var sectionMovieArray: [SectionData] = [SectionData]()
+    var sectionMovieArray: [SectionData]!
     
     override func viewDidLoad() {
         super.viewDidLoad()
         
-        loadMovieListData()
+        self.loadMovieListData()
+        
     }
     
     override func viewWillAppear(_ animated: Bool) {
         super.viewWillAppear(animated)
-        
+    
         self.navigationController?.changeStatusBarStyle(statusBarStyle: .default)
     }
     
@@ -70,8 +71,8 @@ class MoviesTableViewController: UITableViewController {
             (sectionArray) in
             
             if let sectionArray = sectionArray {
-                self.sectionMovieArray = sectionArray
-                self.appendMoreMovieItem()
+                self.appendMoreMovieItem(sectionArray)
+                self.checkIfTodayExtensionHasValue()
                 self.tableView.reloadData()
             }
             
@@ -79,18 +80,34 @@ class MoviesTableViewController: UITableViewController {
         }
     }
     
-    func appendMoreMovieItem() {
+    func appendMoreMovieItem(_ sectionArray: [SectionData]) {
         
-        self.sectionMovieArray = self.sectionMovieArray.map({ (sectionData)  in
+        self.sectionMovieArray = sectionArray.map({ ( section:  SectionData ) in
             
-            var section = sectionData
+            var _section = section
             
-            if section.sectionArray.count > 10 {
-                section.sectionArray.append(MoreMovie)
+            if _section.sectionArray.count > 10 {
+                _section.sectionArray.append(MoreMovie)
             }
-            return section
+            
+            return _section
         })
     }
+    
+    func checkIfTodayExtensionHasValue() {
+        
+        if let value = QueryService.instance.todayExtension, let sectionArray = sectionMovieArray  {
+            
+            let index = Int(value)!
+            let section = sectionArray[0] // Section Discover
+            let movieSelected = section.sectionArray[index]
+            
+            QueryService.instance.todayExtension = nil
+    
+            self.performSegue(withIdentifier: Segue.fromMovieToDetail, sender: movieSelected)
+        }
+    }
+    
     
     @IBAction func searchButtonTapped(_ sender: UIBarButtonItem) {
         
@@ -111,7 +128,7 @@ extension MoviesTableViewController {
         // Section 3 - Popular   [Section]
         // Section 4 - Top Rated [Section]
         
-        return sectionMovieArray.count > 0 ? sectionMovieArray.count : 0
+        return sectionMovieArray != nil ? sectionMovieArray.count : 0
     }
     
     override func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int {

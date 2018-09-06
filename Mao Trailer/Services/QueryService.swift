@@ -71,6 +71,15 @@ class QueryService {
     lazy var configuration = URLSessionConfiguration.default
     lazy var session = URLSession(configuration: configuration)
     
+    var todayExtension: String? {
+        get {
+            return defaults.string(forKey: UserInfo.todayExtension)
+        }
+        set {
+            defaults.set(newValue, forKey: UserInfo.todayExtension)
+        }
+    }
+    
     // MARK: - Fetch All Session
     
     func fetchAllSection( sectionArray: [SectionInfo] ,_ completion : @escaping QuerySectionArray) {
@@ -338,23 +347,27 @@ class QueryService {
         urlQuery.queryItems = [
             URLQueryItem(name: "api_key", value: QueryString.api_key),
             URLQueryItem(name: "language", value: QueryString.language),
-            URLQueryItem(name: "region", value: QueryString.region),
             URLQueryItem(name: "page", value: "\(page)")
         ]
         
         switch type.rawValue {
             
         case "account":
+            
             urlQuery.queryItems?.append(URLQueryItem(name: "session_id", value: defaults.value(forKey: UserInfo.sessionID) as? String))
             
             urlQuery.queryItems?.append(URLQueryItem(name: "sort_by", value: "created_at.desc"))
             
         case "discover":
+            
             urlQuery.queryItems?.append(URLQueryItem(name: "sort_by", value: "release_date.asc"))
+            urlQuery.queryItems?.append(URLQueryItem(name: "primary_release_year", value: Date.currentDateAsString(formatter: "yyyy")))
+            urlQuery.queryItems?.append(URLQueryItem(name: "primary_release_date.gte", value: Date.currentDateAsString(formatter: "yyyy-MM-dd")))
             urlQuery.queryItems?.append(URLQueryItem(name: "release_date.gte", value: Date.currentDateAsString(formatter: "yyyy-MM-dd")))
             
-        default: break
-            
+        default:
+    
+            urlQuery.queryItems?.append(URLQueryItem(name: "region", value: QueryString.region))
         }
     
         return urlQuery.string!
@@ -454,15 +467,13 @@ class QueryService {
         urlQuery.path = "/3/discover/\(type.rawValue)"
         
         urlQuery.queryItems = [
+            URLQueryItem(name: "page", value: String(page)),
             URLQueryItem(name: "api_key", value: QueryString.api_key),
             URLQueryItem(name: "language", value: QueryString.language),
             URLQueryItem(name: "sort_by", value: QueryString.sort_by),
-            URLQueryItem(name: "include_adult", value: "false"),
-            URLQueryItem(name: "include_video", value: "false"),
-            URLQueryItem(name: "region", value: QueryString.region),
-            URLQueryItem(name: "with_genres", value: String(genre)),
-            URLQueryItem(name: "page", value: String(page))
-            
+            URLQueryItem(name: "primary_release_year", value: Date.currentDateAsString(formatter: "yyyy")),
+            URLQueryItem(name: "primary_release_date.gte", value: Date.currentDateAsString()),
+            URLQueryItem(name: "release_date.gte", value: Date.currentDateAsString())
         ]
         
         return urlQuery.string!

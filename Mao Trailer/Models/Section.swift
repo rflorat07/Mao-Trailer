@@ -36,7 +36,7 @@ struct SectionData: Section {
     }
 
     func getSectionArray() -> [TVMovie] {
-        return sectionArray.filter{ $0.poster_path != nil && $0.backdrop_path != nil }
+        return sectionArray.filter{ $0.poster_path != nil || $0.backdrop_path != nil }
     }
 }
 

@@ -9,7 +9,7 @@
 import Foundation
 
 
-struct SectionData: Decodable{
+struct SectionData: Decodable {
     
     var page: Int
     var total_pages: Int

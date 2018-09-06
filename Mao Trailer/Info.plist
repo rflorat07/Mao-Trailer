@@ -20,7 +20,9 @@
 	<array>
 		<dict>
 			<key>CFBundleTypeRole</key>
-			<string>Editor</string>
+			<string>Viewer</string>
+			<key>CFBundleURLName</key>
+			<string>com.rogerflorat.Mao-Trailer</string>
 			<key>CFBundleURLSchemes</key>
 			<array>
 				<string>mainAppMaoTrailerUrl</string>
