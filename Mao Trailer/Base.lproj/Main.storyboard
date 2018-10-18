@@ -1,11 +1,11 @@
 <?xml version="1.0" encoding="UTF-8"?>
-<document type="com.apple.InterfaceBuilder3.CocoaTouch.Storyboard.XIB" version="3.0" toolsVersion="14295.6" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" useAutolayout="YES" useTraitCollections="YES" useSafeAreas="YES" colorMatched="YES" initialViewController="3dc-Jb-9jV">
+<document type="com.apple.InterfaceBuilder3.CocoaTouch.Storyboard.XIB" version="3.0" toolsVersion="14313.18" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" useAutolayout="YES" useTraitCollections="YES" useSafeAreas="YES" colorMatched="YES" initialViewController="3dc-Jb-9jV">
     <device id="retina4_7" orientation="portrait">
         <adaptation id="fullscreen"/>
     </device>
     <dependencies>
         <deployment identifier="iOS"/>
-        <plugIn identifier="com.apple.InterfaceBuilder.IBCocoaTouchPlugin" version="14270.1"/>
+        <plugIn identifier="com.apple.InterfaceBuilder.IBCocoaTouchPlugin" version="14283.14"/>
         <capability name="Safe area layout guides" minToolsVersion="9.0"/>
         <capability name="documents saved in the Xcode 8 format" minToolsVersion="8.0"/>
     </dependencies>
@@ -3154,7 +3154,7 @@
         <image name="mask-button" width="192" height="54"/>
         <image name="placeholder" width="500" height="427"/>
         <image name="rate" width="30" height="30"/>
-        <image name="star-rate" width="1380" height="256"/>
+        <image name="star-rate" width="331.20001220703125" height="61.439998626708984"/>
         <image name="tab-favorite-dark" width="54" height="54"/>
         <image name="tab-favorite-light" width="54" height="54"/>
         <image name="tab-movies-dark" width="25" height="24"/>
@@ -3171,8 +3171,8 @@
         <image name="tab-watchlist-light" width="54" height="54"/>
     </resources>
     <inferredMetricsTieBreakers>
-        <segue reference="Uhj-1J-Xqh"/>
-        <segue reference="0ax-a1-6bA"/>
+        <segue reference="FoG-vf-OWp"/>
+        <segue reference="VyP-sT-JnW"/>
         <segue reference="q8I-r6-MVa"/>
         <segue reference="Vfq-1Z-68d"/>
     </inferredMetricsTieBreakers>

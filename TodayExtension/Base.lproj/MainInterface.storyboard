@@ -1,11 +1,11 @@
 <?xml version="1.0" encoding="UTF-8"?>
-<document type="com.apple.InterfaceBuilder3.CocoaTouch.Storyboard.XIB" version="3.0" toolsVersion="14295.6" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" useAutolayout="YES" useTraitCollections="YES" useSafeAreas="YES" colorMatched="YES" initialViewController="M4Y-Lb-cyx">
+<document type="com.apple.InterfaceBuilder3.CocoaTouch.Storyboard.XIB" version="3.0" toolsVersion="14313.13.2" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" useAutolayout="YES" useTraitCollections="YES" useSafeAreas="YES" colorMatched="YES" initialViewController="M4Y-Lb-cyx">
     <device id="retina4_7" orientation="portrait">
         <adaptation id="fullscreen"/>
     </device>
     <dependencies>
         <deployment identifier="iOS"/>
-        <plugIn identifier="com.apple.InterfaceBuilder.IBCocoaTouchPlugin" version="14270.1"/>
+        <plugIn identifier="com.apple.InterfaceBuilder.IBCocoaTouchPlugin" version="14283.9"/>
         <capability name="Safe area layout guides" minToolsVersion="9.0"/>
         <capability name="documents saved in the Xcode 8 format" minToolsVersion="8.0"/>
     </dependencies>
@@ -80,7 +80,7 @@
                                 </cells>
                             </collectionView>
                             <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Loading ..." textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="3QP-z8-CUn" userLabel="Loading Label">
-                                <rect key="frame" x="126.5" y="84" width="67" height="17"/>
+                                <rect key="frame" x="126" y="63" width="68" height="17"/>
                                 <fontDescription key="fontDescription" type="system" pointSize="14"/>
                                 <color key="textColor" red="0.13333333333333333" green="0.13333333333333333" blue="0.13333333333333333" alpha="1" colorSpace="calibratedRGB"/>
                                 <nil key="highlightedColor"/>
@@ -129,12 +129,12 @@
                             </view>
                         </subviews>
                         <constraints>
-                            <constraint firstItem="3QP-z8-CUn" firstAttribute="centerX" secondItem="S3S-Oj-5AN" secondAttribute="centerX" id="9iR-yI-WtA"/>
                             <constraint firstItem="Aaq-nL-OJN" firstAttribute="top" secondItem="S3S-Oj-5AN" secondAttribute="top" id="COR-RZ-JML"/>
+                            <constraint firstItem="3QP-z8-CUn" firstAttribute="centerY" secondItem="Aaq-nL-OJN" secondAttribute="centerY" id="FtH-D8-Ovg"/>
                             <constraint firstItem="Aaq-nL-OJN" firstAttribute="leading" secondItem="ssy-KU-ocm" secondAttribute="leading" id="McD-jK-ivv"/>
-                            <constraint firstItem="3QP-z8-CUn" firstAttribute="centerY" secondItem="S3S-Oj-5AN" secondAttribute="centerY" id="Z8N-X1-hv1"/>
                             <constraint firstItem="ssy-KU-ocm" firstAttribute="trailing" secondItem="Aaq-nL-OJN" secondAttribute="trailing" id="gJA-kJ-kqu"/>
                             <constraint firstItem="c9u-tD-SC7" firstAttribute="trailing" secondItem="ssy-KU-ocm" secondAttribute="trailing" id="ozY-P6-aHf"/>
+                            <constraint firstItem="3QP-z8-CUn" firstAttribute="centerX" secondItem="Aaq-nL-OJN" secondAttribute="centerX" id="puZ-8x-prw"/>
                             <constraint firstItem="c9u-tD-SC7" firstAttribute="bottom" secondItem="ssy-KU-ocm" secondAttribute="bottom" id="rYK-LQ-8xc"/>
                             <constraint firstItem="c9u-tD-SC7" firstAttribute="leading" secondItem="ssy-KU-ocm" secondAttribute="leading" id="vWc-bi-Yqt"/>
                         </constraints>

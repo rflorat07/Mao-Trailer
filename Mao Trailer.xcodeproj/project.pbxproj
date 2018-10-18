@@ -63,6 +63,7 @@
 		4FC87E9820E4EFEF00653671 /* ProfileSettingViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4FC87E9720E4EFEF00653671 /* ProfileSettingViewController.swift */; };
 		4FC87E9B20E50A8C00653671 /* UIViewExt.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4FC87E9A20E50A8C00653671 /* UIViewExt.swift */; };
 		4FCB49292101DC4100AEC926 /* UIColorExt.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4FCB49282101DC4100AEC926 /* UIColorExt.swift */; };
+		4FDABFBB2178B7A000B3790D /* Connection.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4FDABFBA2178B7A000B3790D /* Connection.swift */; };
 		4FE061D72134489900A3058A /* AVPlayerViewControllerExt.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4FE061D62134489900A3058A /* AVPlayerViewControllerExt.swift */; };
 		4FE31795212E993000BCB4F5 /* AccountStates.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4FE31794212E993000BCB4F5 /* AccountStates.swift */; };
 		4FEB6FDA213D4A4000A003FF /* NotificationCenter.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 4FEB6FD9213D4A4000A003FF /* NotificationCenter.framework */; };
@@ -174,6 +175,7 @@
 		4FC87E9720E4EFEF00653671 /* ProfileSettingViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ProfileSettingViewController.swift; sourceTree = "<group>"; };
 		4FC87E9A20E50A8C00653671 /* UIViewExt.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = UIViewExt.swift; sourceTree = "<group>"; };
 		4FCB49282101DC4100AEC926 /* UIColorExt.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = UIColorExt.swift; sourceTree = "<group>"; };
+		4FDABFBA2178B7A000B3790D /* Connection.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Connection.swift; sourceTree = "<group>"; };
 		4FE061D62134489900A3058A /* AVPlayerViewControllerExt.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AVPlayerViewControllerExt.swift; sourceTree = "<group>"; };
 		4FE31794212E993000BCB4F5 /* AccountStates.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AccountStates.swift; sourceTree = "<group>"; };
 		4FEB6FD8213D4A4000A003FF /* TodayExtension.appex */ = {isa = PBXFileReference; explicitFileType = "wrapper.app-extension"; includeInIndex = 0; path = TodayExtension.appex; sourceTree = BUILT_PRODUCTS_DIR; };
@@ -410,6 +412,7 @@
 				4F9A551020F7422D00D7BE2C /* QueryService.swift */,
 				4F726631211AE3BB0003D879 /* AuthenticationService.swift */,
 				4F3105A1212AAF2600D2FEC6 /* AccountService.swift */,
+				4FDABFBA2178B7A000B3790D /* Connection.swift */,
 			);
 			path = Services;
 			sourceTree = "<group>";
@@ -587,11 +590,13 @@
 			inputPaths = (
 				"${SRCROOT}/Pods/Target Support Files/Pods-Mao Trailer/Pods-Mao Trailer-frameworks.sh",
 				"${BUILT_PRODUCTS_DIR}/Kingfisher/Kingfisher.framework",
+				"${BUILT_PRODUCTS_DIR}/ReachabilitySwift/Reachability.framework",
 				"${BUILT_PRODUCTS_DIR}/XCDYouTubeKit/XCDYouTubeKit.framework",
 			);
 			name = "[CP] Embed Pods Frameworks";
 			outputPaths = (
 				"${TARGET_BUILD_DIR}/${FRAMEWORKS_FOLDER_PATH}/Kingfisher.framework",
+				"${TARGET_BUILD_DIR}/${FRAMEWORKS_FOLDER_PATH}/Reachability.framework",
 				"${TARGET_BUILD_DIR}/${FRAMEWORKS_FOLDER_PATH}/XCDYouTubeKit.framework",
 			);
 			runOnlyForDeploymentPostprocessing = 0;
@@ -717,6 +722,7 @@
 				4FF6290120DBDE6B0002AA13 /* Constants.swift in Sources */,
 				4FB4C0F9211DD8FB00217F58 /* Helpers.swift in Sources */,
 				4F104B0C20FE24880065545D /* ImagePreviewCollectionViewCell.swift in Sources */,
+				4FDABFBB2178B7A000B3790D /* Connection.swift in Sources */,
 				4FF6290520DBFFF60002AA13 /* ListCollectionViewController.swift in Sources */,
 				4F526BC420E62CBC00EB36EA /* WalkthroughCollectionViewCell.swift in Sources */,
 				4F195BB920E3DF55005816F5 /* ProfileListCollectionViewCell.swift in Sources */,
@@ -780,7 +786,7 @@
 				PRODUCT_BUNDLE_IDENTIFIER = "com.rogerflorat.Mao-Trailer.TodayExtension";
 				PRODUCT_NAME = "$(TARGET_NAME)";
 				SKIP_INSTALL = YES;
-				SWIFT_VERSION = 4.2;
+				SWIFT_VERSION = 4.0;
 				TARGETED_DEVICE_FAMILY = "1,2";
 			};
 			name = Debug;
@@ -802,7 +808,7 @@
 				PRODUCT_BUNDLE_IDENTIFIER = "com.rogerflorat.Mao-Trailer.TodayExtension";
 				PRODUCT_NAME = "$(TARGET_NAME)";
 				SKIP_INSTALL = YES;
-				SWIFT_VERSION = 4.2;
+				SWIFT_VERSION = 4.0;
 				TARGETED_DEVICE_FAMILY = "1,2";
 			};
 			name = Release;

@@ -12,7 +12,7 @@ class WalkthroughViewController: UIViewController {
     
     @IBOutlet weak var collectionView: UICollectionView!
     @IBOutlet weak var pageControl: UIPageControl!
-
+    
     override func viewDidLoad() {
         super.viewDidLoad()
         
@@ -21,7 +21,6 @@ class WalkthroughViewController: UIViewController {
         collectionView.contentInsetAdjustmentBehavior = .never
         
         configurePageControl()
-        
     }
     
     func configurePageControl() {

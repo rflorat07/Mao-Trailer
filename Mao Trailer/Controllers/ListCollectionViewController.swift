@@ -105,6 +105,11 @@ class ListCollectionViewController: UICollectionViewController {
         
         let selected = sectionData.sectionArray[indexPath.row]
         
-        self.performSegue(withIdentifier: Segue.fromListToDetail, sender: selected)
+        if NetworkManager.isConnected() {
+            self.performSegue(withIdentifier: Segue.fromListToDetail, sender: selected)
+        } else {
+            Helpers.alertNoInternetConnection()
+        }
+        
     }
 }

@@ -1,20 +1,24 @@
 PODS:
   - Kingfisher (4.8.0)
+  - ReachabilitySwift (4.3.0)
   - XCDYouTubeKit (2.5.6)
 
 DEPENDENCIES:
   - Kingfisher (~> 4.0)
+  - ReachabilitySwift
   - XCDYouTubeKit (~> 2.5)
 
 SPEC REPOS:
   https://github.com/cocoapods/specs.git:
     - Kingfisher
+    - ReachabilitySwift
     - XCDYouTubeKit
 
 SPEC CHECKSUMS:
   Kingfisher: 976d828df2b24834c6a3f2fc4d82cdbd26552be1
+  ReachabilitySwift: 408477d1b6ed9779dba301953171e017c31241f3
   XCDYouTubeKit: dccfe0c17dd5c5187969ec27e93069573badb08f
 
-PODFILE CHECKSUM: d2e7c4d13fd453669a6ba8866536ba1169350d84
+PODFILE CHECKSUM: 1f86a4d5bee26149bedb5a3d369b5fb4d3d9d0a7
 
 COCOAPODS: 1.5.2

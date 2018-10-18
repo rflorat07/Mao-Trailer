@@ -116,7 +116,9 @@ class QueryService {
         let dataTask = session.dataTask(with: query) { (data, response, error) in
             
             if let error = error {
-                print("DataTask error: \(error.localizedDescription) \n")
+                completion(nil)
+                print("DataTask error: \(error.localizedDescription) \n )")
+                
             } else if
                 let data = data,
                 let response = response as? HTTPURLResponse,
@@ -273,6 +275,8 @@ class QueryService {
     func fetchDiscoverSectioByGenres(type: APIRequest, genre: Int, page: Int,  _ completion : @escaping QuerySectionResult) {
         
         let queryString = getUrlDiscover(type: type, genre: genre, page: page)
+        
+        print(" ====== Url: \n ", queryString)
         
         getDataFromUrl(queryString: queryString) { (data, error) in
             if let data = data {
@@ -433,10 +437,11 @@ class QueryService {
         urlQuery.queryItems = [
             URLQueryItem(name: "api_key", value: QueryString.api_key),
             URLQueryItem(name: "language", value: QueryString.language),
+            URLQueryItem(name: "page", value: String(page)),
             URLQueryItem(name: "query", value: searchText),
             URLQueryItem(name: "include_adult", value: "false"),
             URLQueryItem(name: "region", value: QueryString.region),
-            URLQueryItem(name: "page", value: String(page))
+            
         ]
         
         return urlQuery.string!
@@ -467,13 +472,13 @@ class QueryService {
         urlQuery.path = "/3/discover/\(type.rawValue)"
         
         urlQuery.queryItems = [
-            URLQueryItem(name: "page", value: String(page)),
             URLQueryItem(name: "api_key", value: QueryString.api_key),
             URLQueryItem(name: "language", value: QueryString.language),
-            URLQueryItem(name: "sort_by", value: QueryString.sort_by),
-            URLQueryItem(name: "primary_release_year", value: Date.currentDateAsString(formatter: "yyyy")),
-            URLQueryItem(name: "primary_release_date.gte", value: Date.currentDateAsString()),
-            URLQueryItem(name: "release_date.gte", value: Date.currentDateAsString())
+            URLQueryItem(name: "page", value: String(page)),
+            URLQueryItem(name: "sort_by", value: "release_date.asc"),
+            URLQueryItem(name: "primary_release_year", value: Date.currentDateAsString()),
+            URLQueryItem(name: "primary_release_date.gte", value: Date.currentDateAsString(formatter: "yyyy-MM-dd")),
+            URLQueryItem(name: "release_date.gte", value: Date.currentDateAsString(formatter: "yyyy-MM-dd"))
         ]
         
         return urlQuery.string!

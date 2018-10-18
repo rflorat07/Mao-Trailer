@@ -19,7 +19,7 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
         
         self.changeNavigationBarAppearance()
         self.switchToMainTabBarController()
-        
+            
         return true
     }
     

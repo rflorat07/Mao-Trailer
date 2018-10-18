@@ -40,7 +40,7 @@ extension HotTableViewCell: UICollectionViewDelegate, UICollectionViewDataSource
         let cell = collectionView.dequeueReusableCell(withReuseIdentifier: Storyboard.hotViewCell, for: indexPath) as! HotCollectionViewCell
         
         cell.hotMovie = hotMovies[indexPath.row]
-        
+                
         return cell
     }
     

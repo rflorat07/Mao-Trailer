@@ -61,7 +61,7 @@ struct SectionTVArray: Decodable {
 
 
 struct SectionError: Decodable {
-    var status_code: Int?
+    var status_code: Int? 
     var status_message: String?
 }
 

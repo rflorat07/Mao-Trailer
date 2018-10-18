@@ -14,10 +14,10 @@
             buildForArchiving = "YES">
             <BuildableReference
                BuildableIdentifier = "primary"
-               BlueprintIdentifier = "C5900D4326AEC9716D7A2F499BC31EF4"
-               BlueprintName = "Pods-Mao Trailer"
+               BlueprintIdentifier = "EE81D3FF31C2ED83936E14BBFA363CFB"
+               BlueprintName = "ReachabilitySwift"
                ReferencedContainer = "container:Pods.xcodeproj"
-               BuildableName = "Pods-Mao Trailer.framework">
+               BuildableName = "ReachabilitySwift.framework">
             </BuildableReference>
          </BuildActionEntry>
       </BuildActionEntries>

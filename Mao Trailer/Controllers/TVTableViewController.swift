@@ -15,13 +15,24 @@ class TVTableViewController: UITableViewController {
         SectionInfo(page: 1, type: .TV, sectionName: "Currently Airing", endPoint: .OnTheAirTV)
     ]
     
+    let network = NetworkManager.sharedInstance
+    
     var endpointRequest: EndpointRequest!
     var sectionTVShowArray: [SectionData] = [SectionData]()
     
     override func viewDidLoad() {
         super.viewDidLoad()
         
-        self.loadTVShowListData()
+        if NetworkManager.isConnected() {
+            self.loadTVShowListData()
+        }
+        
+        network.reachability.whenReachable = { _ in
+            if NetworkManager.isConnected() {
+                self.loadTVShowListData()
+            }
+        }
+        
     }
     
     override func prepare(for segue: UIStoryboardSegue, sender: Any?) {
@@ -140,7 +151,11 @@ extension TVTableViewController {
                 
                 cell.didSelectAction = { (indexPath) in
                     
-                    self.showTVShowDetails(indexPath: indexPath, section: section, endPoint: endPoint)
+                    if NetworkManager.isConnected() {
+                        self.showTVShowDetails(indexPath: indexPath, section: section, endPoint: endPoint)
+                    } else {
+                        Helpers.alertNoInternetConnection()
+                    }
                     
                 }
                 
@@ -182,8 +197,11 @@ extension TVTableViewController {
             let section = sectionTVShowArray[indexPath.section - 1]
             let endPoint = sectionTVInfo[indexPath.section - 1].endPoint
             
-            self.showTVShowDetails(indexPath: indexPath, section: section, endPoint: endPoint)
-            
+            if NetworkManager.isConnected() {
+                self.showTVShowDetails(indexPath: indexPath, section: section, endPoint: endPoint)
+            } else {
+                Helpers.alertNoInternetConnection()
+            }
         }
     }
     

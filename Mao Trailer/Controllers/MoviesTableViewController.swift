@@ -17,14 +17,23 @@ class MoviesTableViewController: UITableViewController {
         SectionInfo(page: 1, type: .Movie, sectionName: "Top Rated", endPoint: .TopRated),
         ]
     
+    let network = NetworkManager.sharedInstance
+    
     var endpointRequest: EndpointRequest!
     var sectionMovieArray: [SectionData]!
     
     override func viewDidLoad() {
         super.viewDidLoad()
         
-        self.loadMovieListData()
+        if NetworkManager.isConnected() {
+            self.loadMovieListData()
+        }
         
+        network.reachability.whenReachable = { _ in
+            if NetworkManager.isConnected() {
+                self.loadMovieListData()
+            }
+        }
     }
     
     override func viewWillAppear(_ animated: Bool) {
@@ -123,7 +132,7 @@ extension MoviesTableViewController {
     //Number of section
     override func numberOfSections(in tableView: UITableView) -> Int {
         
-        // Section 1 - Upcoming  [Section]
+        // Section 1 - Discover  [Section]
         // Section 2 - Now       [Section]
         // Section 3 - Popular   [Section]
         // Section 4 - Top Rated [Section]
@@ -133,7 +142,7 @@ extension MoviesTableViewController {
     
     override func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
         
-        // Section 1 - Upcoming  [Section]
+        // Section 1 - Discover  [Section]
         // Section 2 - Now       [Section]
         // Section 3 - Popular   [Section]
         // Section 4 - Top Rated [Section]
@@ -161,7 +170,11 @@ extension MoviesTableViewController {
             
             cell.didSelectAction = { (indexPath) in
                 
-                self.showMovieDetails(indexPath: indexPath, section: &section, endPoint: endPoint)
+                if NetworkManager.isConnected() {
+                    self.showMovieDetails(indexPath: indexPath, section: &section, endPoint: endPoint)
+                } else {
+                    Helpers.alertNoInternetConnection()
+                }
                 
             }
             
@@ -177,7 +190,11 @@ extension MoviesTableViewController {
             
             cell.didSelectAction = { (indexPath) in
                 
-                self.showMovieDetails(indexPath: indexPath, section: &section, endPoint: endPoint)
+                if NetworkManager.isConnected() {
+                    self.showMovieDetails(indexPath: indexPath, section: &section, endPoint: endPoint)
+                } else {
+                    Helpers.alertNoInternetConnection()
+                }
             }
             
             return cell

@@ -97,6 +97,7 @@ class TodayViewController: UIViewController, NCWidgetProviding {
     @IBAction func seeAllButtonTapped(_ sender: UIButton) {
         self.openMaoTrailerApp(url: "mainAppMaoTrailerUrl:details?more=all")
     }
+    
 }
 
 extension TodayViewController: UICollectionViewDelegate, UICollectionViewDataSource {

@@ -14,12 +14,23 @@ class PersonDetailsTableViewController: UITableViewController {
     var mediaType: APIRequest!
     var personDetails: PersonDetails!
     
+    let network = NetworkManager.sharedInstance
+    
     override func viewDidLoad() {
         super.viewDidLoad()
         
         self.navigationController?.changeStatusBarStyle(statusBarStyle: .default)
         
-        self.loadInitialData()
+        if NetworkManager.isConnected() {
+            self.loadInitialData()
+        }
+        
+        network.reachability.whenReachable = { _ in
+            if NetworkManager.isConnected() {
+                self.loadInitialData()
+            }
+        }
+
     }
     
     func loadInitialData() {
@@ -100,7 +111,12 @@ class PersonDetailsTableViewController: UITableViewController {
                 
                 self.mediaType = .Movie
                 
-                self.performSegue(withIdentifier: Segue.fromPersonDetailsToDetails, sender: movieSelected)
+                if NetworkManager.isConnected() {
+                    self.performSegue(withIdentifier: Segue.fromPersonDetailsToDetails, sender: movieSelected)
+                } else {
+                    Helpers.alertNoInternetConnection()
+                }
+                
             }
             
             return cell
@@ -114,7 +130,11 @@ class PersonDetailsTableViewController: UITableViewController {
                 
                 self.mediaType = .TV
                 
-                self.performSegue(withIdentifier: Segue.fromPersonDetailsToDetails, sender: tvShowSelected)
+                if NetworkManager.isConnected() {
+                    self.performSegue(withIdentifier: Segue.fromPersonDetailsToDetails, sender: tvShowSelected)
+                } else {
+                    Helpers.alertNoInternetConnection()
+                }
             }
             
             return cell

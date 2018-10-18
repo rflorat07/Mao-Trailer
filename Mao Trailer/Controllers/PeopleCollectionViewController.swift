@@ -19,13 +19,22 @@ class PeopleCollectionViewController: UICollectionViewController {
     var searchButtonToShow: UIBarButtonItem!
     
     let searchBar = UISearchBar()
+    let network = NetworkManager.sharedInstance
     
     override func viewDidLoad() {
         super.viewDidLoad()
         
         self.searchButtonToShow = self.searchButtonItem
         
-        self.loadPopularData()
+        if NetworkManager.isConnected() {
+            self.loadPopularData()
+        }
+        
+        network.reachability.whenReachable = { _ in
+            if NetworkManager.isConnected() {
+                self.loadPopularData()
+            }
+        }
     }
     
     func loadPopularData() {
@@ -114,7 +123,12 @@ class PeopleCollectionViewController: UICollectionViewController {
         
         let selected = peopleData.getPopularArray()[indexPath.row]
         
-        self.performSegue(withIdentifier: Segue.fromPeopleToPersonDetails, sender: selected.id)
+        if NetworkManager.isConnected() {
+            self.performSegue(withIdentifier: Segue.fromPeopleToPersonDetails, sender: selected.id)
+        } else {
+            Helpers.alertNoInternetConnection()
+        }
+
     }
     
 }

@@ -38,19 +38,31 @@ class DetailsTableViewController: UITableViewController {
     var information: TVMovie!
     var states: AccountStates!
     var queryType: APIRequest!
-
+    
     
     var originalTop: CGFloat!
     var originalHeight: CGFloat!
     var originalNavBarHeight: CGFloat!
     
+    let network = NetworkManager.sharedInstance
     let cornerRadius: CGFloat = Constants.cornerRadius
     
     override func viewDidLoad() {
         super.viewDidLoad()
         
+        self.clearDataDetails()
         self.initStretchyHeadersVar()
-        self.loadInformationData()
+        
+        
+        if NetworkManager.isConnected() {
+            self.loadInformationData()
+        }
+        
+        network.reachability.whenReachable = { _ in
+            if NetworkManager.isConnected() {
+                self.loadInformationData()
+            }
+        }
     }
     
     override func viewWillAppear(_ animated: Bool) {
@@ -72,8 +84,6 @@ class DetailsTableViewController: UITableViewController {
     
     func loadInformationData() {
         
-        self.clearDataDetails()
-        
         LoadingIndicatorView.show("Loading")
         
         QueryService.instance.fetchPrimaryInformation(id: information.id, type: queryType) { (details) in
@@ -82,6 +92,7 @@ class DetailsTableViewController: UITableViewController {
                 self.details = details
                 self.loadDataDetails()
                 self.tableView.reloadData()
+                
             }
             
             if AuthenticationService.instanceAuth.isLoggedIn {
@@ -353,7 +364,12 @@ class DetailsTableViewController: UITableViewController {
             cell.cast = details.getCast()
             
             cell.didSelectAction = { (castSelected) in
-                self.performSegue(withIdentifier: Segue.fromDetailsToPersonDetails, sender: castSelected.id)
+                
+                if NetworkManager.isConnected() {
+                    self.performSegue(withIdentifier: Segue.fromDetailsToPersonDetails, sender: castSelected.id)
+                } else {
+                    Helpers.alertNoInternetConnection()
+                }
             }
             
             return cell
@@ -365,7 +381,13 @@ class DetailsTableViewController: UITableViewController {
             cell.images = details.images.backdrops
             
             cell.didSelectAction = { (indexPath) in
-                self.performSegue(withIdentifier: Segue.fromDetailsToImagePreview, sender: indexPath)
+                
+                if NetworkManager.isConnected() {
+                    self.performSegue(withIdentifier: Segue.fromDetailsToImagePreview, sender: indexPath)
+                } else {
+                    Helpers.alertNoInternetConnection()
+                }
+                
             }
             
             return cell

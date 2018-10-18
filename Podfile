@@ -9,7 +9,8 @@ target 'Mao Trailer' do
 
   # Pods for Mao Trailer
   pod 'Kingfisher', '~> 4.0'
-  pod "XCDYouTubeKit", "~> 2.5"
+  pod 'XCDYouTubeKit', '~> 2.5'
+  pod 'ReachabilitySwift'
   
 end
 
@@ -19,6 +20,7 @@ target 'TodayExtension' do
 
   # Pods for Discover Movies
   pod 'Kingfisher', '~> 4.0'
+  pod 'ReachabilitySwift'
   
 end
 

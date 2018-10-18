@@ -14,7 +14,7 @@
             buildForArchiving = "YES">
             <BuildableReference
                BuildableIdentifier = "primary"
-               BlueprintIdentifier = "7A8681106A4C79206A9DEB3F632BC91D"
+               BlueprintIdentifier = "015637993D6890373947DA91CC27A083"
                BlueprintName = "XCDYouTubeKit"
                ReferencedContainer = "container:Pods.xcodeproj"
                BuildableName = "XCDYouTubeKit.framework">

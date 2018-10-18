@@ -56,9 +56,9 @@ class QueryService {
         urlQuery.path = "/3/discover/\(type.rawValue)"
         
         urlQuery.queryItems = [
-            URLQueryItem(name: "page", value: String(page)),
             URLQueryItem(name: "api_key", value: QueryString.api_key),
             URLQueryItem(name: "language", value: QueryString.language),
+            URLQueryItem(name: "page", value: String(page)),
             URLQueryItem(name: "sort_by", value: QueryString.sort_by),
             URLQueryItem(name: "primary_release_year", value: Date.currentDateAsString(formatter: "yyyy")),
             URLQueryItem(name: "primary_release_date.gte", value: Date.currentDateAsString()),
@@ -70,12 +70,12 @@ class QueryService {
     
     // MARK: - Get the data from a URL
     
-    fileprivate func getDataFromUrl(queryString: String, _ completion : @escaping QuerySectionData) {
+     func getDataFromUrl(queryString: String, _ completion : @escaping QuerySectionData) {
         
         guard let query = URL(string: queryString) else { return }
         
         let dataTask = session.dataTask(with: query) { (data, response, error) in
-            
+                        
             if let error = error {
                 print("DataTask error: \(error.localizedDescription) \n")
             } else if
