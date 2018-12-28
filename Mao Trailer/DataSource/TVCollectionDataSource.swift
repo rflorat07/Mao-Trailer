@@ -13,10 +13,6 @@ class TVCollectionDataSource: NSObject, UICollectionViewDataSource  {
     var tvSection: SectionData!
     var didSelectAction: (IndexPath) -> Void = { arg in }
     
-    override init() {
-        super.init()
-    }
-    
     func update(with section: SectionData) {
         self.tvSection = section
     }
@@ -28,9 +24,9 @@ class TVCollectionDataSource: NSObject, UICollectionViewDataSource  {
     
     func collectionView(_ collectionView: UICollectionView, cellForItemAt indexPath: IndexPath) -> UICollectionViewCell {
         
-        let cell = collectionView.dequeueReusableCell(withReuseIdentifier: Storyboard.filmographyCollectionViewCell, for: indexPath) as! PersonDetailsInfoCollectionViewCell
+        let cell = collectionView.dequeueReusableCell(withReuseIdentifier: Storyboard.tvNowViewCell, for: indexPath) as! TVNowCollectionViewCell
         
-        cell.filmography = tvSection.sectionArray[indexPath.row]
+        cell.nowTVShow = tvSection.sectionArray[indexPath.row]
         
         return cell
     }
