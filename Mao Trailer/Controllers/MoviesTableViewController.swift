@@ -166,7 +166,7 @@ extension MoviesTableViewController {
             var section = sectionMovieArray[indexPath.section]
             let endPoint = self.sectionMovieInfo[indexPath.section].endPoint
             
-            cell.hotMovies = section.sectionArray
+            cell.hotMovies = section
             
             cell.didSelectAction = { (indexPath) in
                 

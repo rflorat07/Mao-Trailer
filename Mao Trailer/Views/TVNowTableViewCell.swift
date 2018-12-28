@@ -8,44 +8,27 @@
 
 import UIKit
 
-class TVNowTableViewCell: UITableViewCell,UICollectionViewDelegate, UICollectionViewDataSource {
+class TVNowTableViewCell: UITableViewCell {
     
     @IBOutlet weak var nowCollectionView: UICollectionView!
     
-    var nowTVShows: [TVMovie]! {
+    let tvCollectionDataSource = TVCollectionDataSource()
+    
+    var nowTVShows: SectionData! {
         didSet{
+            
+            nowCollectionView.delegate = tvCollectionDataSource
+            nowCollectionView.dataSource = tvCollectionDataSource
+            
+            tvCollectionDataSource.update(with: nowTVShows)
+            tvCollectionDataSource.didSelectAction = { (indexPath) in
+                self.didSelectAction(indexPath)
+            }
+            
             nowCollectionView.reloadData()
         }
     }
     
     var didSelectAction: (IndexPath) -> Void = { arg in }
     
-    
-    override func awakeFromNib() {
-        super.awakeFromNib()
-        
-        nowCollectionView.delegate = self
-        nowCollectionView.dataSource = self
-    }
-    
-    
-    func collectionView(_ collectionView: UICollectionView, numberOfItemsInSection section: Int) -> Int {
-        
-        return nowTVShows.count
-    }
-    
-    func collectionView(_ collectionView: UICollectionView, cellForItemAt indexPath: IndexPath) -> UICollectionViewCell {
-        
-        let cell = collectionView.dequeueReusableCell(withReuseIdentifier: Storyboard.tvNowViewCell, for: indexPath) as! TVNowCollectionViewCell
-        
-        cell.nowTVShow = nowTVShows[indexPath.row]
-        
-        return cell
-    }
-    
-    func collectionView(_ collectionView: UICollectionView, didSelectItemAt indexPath: IndexPath) {
-        
-        didSelectAction(indexPath)
-    }
-
 }

@@ -352,7 +352,7 @@
                                 </connections>
                             </collectionViewCell>
                         </cells>
-                        <collectionReusableView key="sectionHeaderView" opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center" misplaced="YES" insetsLayoutMarginsFromSafeArea="NO" reuseIdentifier="MovieListReusableView" id="klO-06-TdP" userLabel="List Header Collection Reusable View" customClass="MovieListSectionHeaderCollectionReusableView" customModule="Mao_Trailer" customModuleProvider="target">
+                        <collectionReusableView key="sectionHeaderView" opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center" insetsLayoutMarginsFromSafeArea="NO" reuseIdentifier="MovieListReusableView" id="klO-06-TdP" userLabel="List Header Collection Reusable View" customClass="MovieListSectionHeaderCollectionReusableView" customModule="Mao_Trailer" customModuleProvider="target">
                             <rect key="frame" x="0.0" y="0.0" width="375" height="34"/>
                             <autoresizingMask key="autoresizingMask"/>
                             <subviews>
@@ -903,7 +903,7 @@
                                 </connections>
                             </collectionViewCell>
                         </cells>
-                        <collectionReusableView key="sectionHeaderView" opaque="NO" multipleTouchEnabled="YES" contentMode="center" misplaced="YES" insetsLayoutMarginsFromSafeArea="NO" reuseIdentifier="ProfileHeaderReusableView" id="tQy-Qw-PB0" userLabel="Header Collection Reusable View" customClass="ProfileHeaderCollectionReusableView" customModule="Mao_Trailer" customModuleProvider="target">
+                        <collectionReusableView key="sectionHeaderView" opaque="NO" multipleTouchEnabled="YES" contentMode="center" insetsLayoutMarginsFromSafeArea="NO" reuseIdentifier="ProfileHeaderReusableView" id="tQy-Qw-PB0" userLabel="Header Collection Reusable View" customClass="ProfileHeaderCollectionReusableView" customModule="Mao_Trailer" customModuleProvider="target">
                             <rect key="frame" x="0.0" y="0.0" width="375" height="286"/>
                             <autoresizingMask key="autoresizingMask"/>
                             <subviews>
@@ -3171,9 +3171,9 @@
         <image name="tab-watchlist-light" width="54" height="54"/>
     </resources>
     <inferredMetricsTieBreakers>
-        <segue reference="gEf-Ix-RY8"/>
+        <segue reference="1WQ-jM-V7A"/>
         <segue reference="VyP-sT-JnW"/>
-        <segue reference="q8I-r6-MVa"/>
-        <segue reference="Vfq-1Z-68d"/>
+        <segue reference="2JL-8i-Swq"/>
+        <segue reference="34l-DW-oXO"/>
     </inferredMetricsTieBreakers>
 </document>

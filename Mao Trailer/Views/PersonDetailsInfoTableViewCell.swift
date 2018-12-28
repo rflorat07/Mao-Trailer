@@ -12,41 +12,26 @@ class PersonDetailsInfoTableViewCell: UITableViewCell {
     
     @IBOutlet weak var filmographyCollectionView: UICollectionView!
     
+    let peopleCollectionDataSource = PeopleCollectionDataSource()
+    
     var filmography: [TVMovie]! {
+        
         didSet{
+            
+            filmographyCollectionView.delegate = peopleCollectionDataSource
+            filmographyCollectionView.dataSource = peopleCollectionDataSource
+            
+            peopleCollectionDataSource.update(with: filmography)
+            peopleCollectionDataSource.didSelectAction = { (movie) in
+                self.didSelectAction(movie)
+            }
+            
             filmographyCollectionView.reloadData()
         }
     }
     
     var didSelectAction: (TVMovie) -> Void = { arg in }
     
-    override func awakeFromNib() {
-        super.awakeFromNib()
-        
-        filmographyCollectionView.delegate = self
-        filmographyCollectionView.dataSource = self
-    }
+    
 }
 
-extension PersonDetailsInfoTableViewCell: UICollectionViewDelegate, UICollectionViewDataSource {
-    
-    
-    func collectionView(_ collectionView: UICollectionView, numberOfItemsInSection section: Int) -> Int {
-            
-        return filmography.count
-    }
-    
-    func collectionView(_ collectionView: UICollectionView, cellForItemAt indexPath: IndexPath) -> UICollectionViewCell {
-        
-        let cell = collectionView.dequeueReusableCell(withReuseIdentifier: Storyboard.filmographyCollectionViewCell, for: indexPath) as! PersonDetailsInfoCollectionViewCell
-        
-        cell.filmography = filmography[indexPath.row]
-        
-        return cell
-    }
-    
-    func collectionView(_ collectionView: UICollectionView, didSelectItemAt indexPath: IndexPath) {
-        didSelectAction(filmography[indexPath.row])
-    }
-    
-}

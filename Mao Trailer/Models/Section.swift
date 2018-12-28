@@ -15,6 +15,7 @@ struct SectionData: Section {
     var page: Int
     var total_pages: Int
     var sectionName: String
+    var endPoint: EndpointRequest?
     var sectionArray: [TVMovie] {
         didSet {
             sectionArray = self.sectionArray.filter{ $0.poster_path != nil || $0.backdrop_path != nil }

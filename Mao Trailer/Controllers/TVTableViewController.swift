@@ -142,12 +142,12 @@ extension TVTableViewController {
             
             if let cell = tableView.dequeueReusableCell(withIdentifier: Storyboard.tvNowViewCell, for: indexPath) as? TVNowTableViewCell {
                 
-                var section = sectionTVShowArray[indexPath.section]
+                let section = sectionTVShowArray[indexPath.section]
                 let endPoint = sectionTVInfo[indexPath.section].endPoint
                 
                 cell.selectionStyle = .none
                 
-                cell.nowTVShows = section.sectionArray
+                cell.nowTVShows = section
                 
                 cell.didSelectAction = { (indexPath) in
                     

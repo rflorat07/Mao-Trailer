@@ -12,44 +12,27 @@ class SectionTableViewCell: UITableViewCell {
     
     @IBOutlet weak var sectionTitleLabel: UILabel!
     @IBOutlet weak var sectionCollectionView: UICollectionView!
-
+    
+    let movieCollectionDataSource = MovieCollectionDataSource()
+    
     var sectionMovies: SectionData! {
+        
         didSet{
-            sectionMovieArray = sectionMovies.sectionArray
             sectionTitleLabel.text = sectionMovies.sectionName
+            
+            sectionCollectionView.delegate = movieCollectionDataSource
+            sectionCollectionView.dataSource = movieCollectionDataSource
+            
+            movieCollectionDataSource.update(with: sectionMovies)
+            movieCollectionDataSource.didSelectAction = { (indexPath) in
+                self.didSelectAction(indexPath)
+            }
+            
             
             sectionCollectionView.reloadData()
         }
     }
- 
-    var sectionMovieArray: [TVMovie] = [TVMovie]()
+    
     var didSelectAction: (IndexPath) -> Void = { arg in }
     
-    override func awakeFromNib() {
-        super.awakeFromNib()
-        
-      sectionCollectionView.delegate = self
-      sectionCollectionView.dataSource = self
-    }
-}
-
-extension SectionTableViewCell: UICollectionViewDelegate, UICollectionViewDataSource {
-    
-    func collectionView(_ collectionView: UICollectionView, numberOfItemsInSection section: Int) -> Int {
-        return sectionMovieArray.count
-    }
-    
-    func collectionView(_ collectionView: UICollectionView, cellForItemAt indexPath: IndexPath) -> UICollectionViewCell {
-        
-        let cell = collectionView.dequeueReusableCell(withReuseIdentifier: Storyboard.sectionViewCell, for: indexPath) as! SectionCollectionViewCell
-        
-        cell.sectionMovie = sectionMovieArray[indexPath.row]
-        
-        return cell
-        
-    }
-    
-    func collectionView(_ collectionView: UICollectionView, didSelectItemAt indexPath: IndexPath) {
-        didSelectAction(indexPath)
-    }
 }
