@@ -46,6 +46,7 @@
 		4F810B9B210B53AA008A3654 /* DateExt.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4F810B9A210B53AA008A3654 /* DateExt.swift */; };
 		4F892A5620DD2958005C8E19 /* MovieListSectionHeaderCollectionReusableView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4F892A5520DD2958005C8E19 /* MovieListSectionHeaderCollectionReusableView.swift */; };
 		4F8C6BE52111E6880026FB41 /* DetailsTableViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4F8C6BE42111E6870026FB41 /* DetailsTableViewController.swift */; };
+		4F8CD15521DD0AD30066AEF1 /* CollectionViewGridLayout.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4F8CD15421DD0AD30066AEF1 /* CollectionViewGridLayout.swift */; };
 		4F8DC25221144EFB003219CC /* People.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4F8DC25121144EFB003219CC /* People.swift */; };
 		4F8DC25421145885003219CC /* PeopleCollectionViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4F8DC25321145885003219CC /* PeopleCollectionViewController.swift */; };
 		4F8DC256211458E1003219CC /* PeopleCollectionViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4F8DC255211458E1003219CC /* PeopleCollectionViewCell.swift */; };
@@ -163,6 +164,7 @@
 		4F810B9A210B53AA008A3654 /* DateExt.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DateExt.swift; sourceTree = "<group>"; };
 		4F892A5520DD2958005C8E19 /* MovieListSectionHeaderCollectionReusableView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MovieListSectionHeaderCollectionReusableView.swift; sourceTree = "<group>"; };
 		4F8C6BE42111E6870026FB41 /* DetailsTableViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DetailsTableViewController.swift; sourceTree = "<group>"; };
+		4F8CD15421DD0AD30066AEF1 /* CollectionViewGridLayout.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CollectionViewGridLayout.swift; sourceTree = "<group>"; };
 		4F8DC25121144EFB003219CC /* People.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = People.swift; sourceTree = "<group>"; };
 		4F8DC25321145885003219CC /* PeopleCollectionViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PeopleCollectionViewController.swift; sourceTree = "<group>"; };
 		4F8DC255211458E1003219CC /* PeopleCollectionViewCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PeopleCollectionViewCell.swift; sourceTree = "<group>"; };
@@ -312,6 +314,14 @@
 			path = DataSource;
 			sourceTree = "<group>";
 		};
+		4F8CD15321DD0ABB0066AEF1 /* FlowLayout */ = {
+			isa = PBXGroup;
+			children = (
+				4F8CD15421DD0AD30066AEF1 /* CollectionViewGridLayout.swift */,
+			);
+			path = FlowLayout;
+			sourceTree = "<group>";
+		};
 		4FC87E9920E50A3C00653671 /* Extensions */ = {
 			isa = PBXGroup;
 			children = (
@@ -382,6 +392,7 @@
 				4FF5E61D20D92E4C00D088B5 /* Controllers */,
 				4FC87E9920E50A3C00653671 /* Extensions */,
 				4F746A1921D51CBF000D3130 /* DataSource */,
+				4F8CD15321DD0ABB0066AEF1 /* FlowLayout */,
 				4FF5E61220D92B0200D088B5 /* Assets.xcassets */,
 				4FF5E61720D92B0200D088B5 /* Info.plist */,
 				4FF5E60B20D92AAF00D088B5 /* AppDelegate.swift */,
@@ -700,6 +711,7 @@
 				4FBC73062109B3A600D1985A /* SearchOptionCollectionViewController.swift in Sources */,
 				4FC87E9820E4EFEF00653671 /* ProfileSettingViewController.swift in Sources */,
 				4F726634211AED870003D879 /* Authentication.swift in Sources */,
+				4F8CD15521DD0AD30066AEF1 /* CollectionViewGridLayout.swift in Sources */,
 				4FAAD14B210F3FBC00906C55 /* PersonDetailsTableViewController.swift in Sources */,
 				4FAAD14F210F609800906C55 /* PersonDetailsHeaderTableViewCell.swift in Sources */,
 				4F77BD2520DA44E000A51FE2 /* SectionCollectionViewCell.swift in Sources */,
