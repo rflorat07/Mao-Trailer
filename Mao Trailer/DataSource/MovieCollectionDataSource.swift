@@ -44,10 +44,7 @@ class MovieCollectionDataSource: NSObject, UICollectionViewDataSource  {
             
             return cell
         }
-        
-        
     }
-    
 }
 
 extension MovieCollectionDataSource: UICollectionViewDelegate {

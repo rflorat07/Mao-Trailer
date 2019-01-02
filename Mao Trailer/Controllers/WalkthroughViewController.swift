@@ -40,7 +40,7 @@ class WalkthroughViewController: UIViewController {
         
         UserDefaults.standard.set(true, forKey: UserInfo.walkthrough)
         AppDelegate.shared.switchToMainTabBarController()
-
+        
     }
     
     @objc func scrollToNextCell(){
@@ -70,7 +70,7 @@ class WalkthroughViewController: UIViewController {
     
 }
 
-extension WalkthroughViewController: UICollectionViewDelegate, UICollectionViewDataSource {
+extension WalkthroughViewController: UICollectionViewDelegate, UICollectionViewDataSource, UICollectionViewDelegateFlowLayout {
     
     func collectionView(_ collectionView: UICollectionView, numberOfItemsInSection section: Int) -> Int {
         
@@ -101,7 +101,10 @@ extension WalkthroughViewController: UICollectionViewDelegate, UICollectionViewD
         return UICollectionViewCell()
     }
     
+    func collectionView(_ collectionView: UICollectionView, layout collectionViewLayout: UICollectionViewLayout, sizeForItemAt indexPath: IndexPath) -> CGSize {
+        
+        return CGSize(width: collectionView.frame.width, height: collectionView.frame.height)
+    }
     
-    
-    
+
 }
