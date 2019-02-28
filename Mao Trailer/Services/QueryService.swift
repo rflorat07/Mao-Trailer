@@ -475,6 +475,7 @@ class QueryService {
             URLQueryItem(name: "api_key", value: QueryString.api_key),
             URLQueryItem(name: "language", value: QueryString.language),
             URLQueryItem(name: "page", value: String(page)),
+            URLQueryItem(name: "with_genres", value: String(genre)),
             URLQueryItem(name: "sort_by", value: "release_date.asc"),
             URLQueryItem(name: "primary_release_year", value: Date.currentDateAsString()),
             URLQueryItem(name: "primary_release_date.gte", value: Date.currentDateAsString(formatter: "yyyy-MM-dd")),

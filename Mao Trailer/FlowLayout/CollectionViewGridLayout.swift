@@ -20,7 +20,7 @@ class CollectionViewGridLayout: UICollectionViewFlowLayout
         super.prepare()
         
         if let collectionView = self.collectionView {
-        
+            
             var newItemSize = itemSize
             let itemsPerRow = CGFloat(max(numberOfItemsPerRow, 1))
             let totalSpacing = minimumInteritemSpacing * (itemsPerRow - 1) + sectionInset.left + sectionInset.right

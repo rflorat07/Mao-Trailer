@@ -263,6 +263,18 @@ class DetailsTableViewController: UITableViewController {
         dismiss(animated: true, completion: nil)
     }
     
+    @IBAction func shareTapped(_ sender: UIBarButtonItem) {
+        
+        guard let posterImage = UIImageJPEGRepresentation(posterImageView.image!, 0.75) else { return }
+        
+        let items: [Any] = [information.title,posterImage]
+        let vc = UIActivityViewController(activityItems: items, applicationActivities: [])
+        
+        present(vc, animated: true)
+    
+    }
+    
+    
     @IBAction func actionButtonTapped(_ sender: UIButton) {
         
         if AuthenticationService.instanceAuth.isLoggedIn {

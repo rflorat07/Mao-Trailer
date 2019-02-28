@@ -63,6 +63,8 @@ class SearchOptionCollectionViewController: UICollectionViewController, UICollec
         
         self.fetchingMore = true
         
+        print("Genre: ----", genreInfo)
+        
         QueryService.instance.fetchDiscoverSectioByGenres(type: queryType, genre: genre, page: page!) { (sectionData) in
             
             if let sectionData = sectionData {
