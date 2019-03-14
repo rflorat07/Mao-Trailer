@@ -26,7 +26,7 @@ struct Movie: Decodable, TVMovie {
     }
     
     func getReleaseDate() -> String {
-        return  Date.getFormattedDate(string: self.release_date!)
+        return  Date.getFormattedDate(string: self.release_date ?? "")
     }
     
     func getRatingValue() -> String {

@@ -47,4 +47,5 @@ class Helpers {
     static func alertNoInternetConnection() {
         Helpers.alertWindow(title: "No Internet Connection", message: "Make sure your device is connected to the internet.")
     }
+
 }

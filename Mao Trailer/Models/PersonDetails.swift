@@ -36,15 +36,15 @@ struct PersonDetails: Decodable {
     func getFilmography() -> [Movie] {
         
         let credits = (movie_credits?.cast.filter{ $0.poster_path != nil || $0.backdrop_path != nil })!
-    
-        return credits.sorted { $0.vote_count > $1.vote_count }
+        
+        return credits.sorted { Date.compareDates( $0.release_date ?? "" , $1.release_date ?? "") }
     }
     
     func getTVShows() -> [TVShow] {
         
         let credits = (tv_credits?.cast.filter{ $0.poster_path != nil || $0.backdrop_path != nil })!
-                
-        return credits
+        
+        return credits.sorted { Date.compareDates( $0.release_date ?? "", $1.release_date ?? "") }
     }
     
     func getBirthdayAndPlace() -> String {
